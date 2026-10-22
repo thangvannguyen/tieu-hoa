@@ -1,0 +1,60 @@
+---
+/** Nút "Lên đầu trang" ở góc dưới bên phải: hiện khi đã cuộn xuống, vòng tròn quanh nút cho biết đã đọc được bao nhiêu phần trang. */
+import Icon from './Icon.astro';
+---
+<button type="button" class="totop no-print" data-totop aria-label="Lên đầu trang" title="Lên đầu trang" hidden>
+  <svg class="totop__ring" viewBox="0 0 56 56" aria-hidden="true">
+    <circle class="totop__track" cx="28" cy="28" r="25"></circle>
+    <circle class="totop__bar" cx="28" cy="28" r="25" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"></circle>
+  </svg>
+  <Icon name="mui-ten-len" size={24} />
+</button>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-totop]')!;
+  const bar = btn.querySelector<SVGCircleElement>('.totop__bar')!;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    btn.hidden = y < Math.min(600, window.innerHeight * 0.8);
+    bar.style.strokeDashoffset = String(100 - (max > 0 ? Math.min(100, (y / max) * 100) : 0));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+  btn.addEventListener('click', () => {
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.dataset.style?.includes('don-gian');
+    window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+    // chuyển focus về đầu trang để người dùng bàn phím / trình đọc màn hình không bị lạc
+    const main = document.getElementById('noi-dung');
+    main?.focus({ preventScroll: true });
+  });
+</script>
+
+<style>
+  .totop {
+    position: fixed; z-index: 40;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+    display: grid; place-items: center; width: 56px; height: 56px; padding: 0;
+    border: 2px solid var(--edge); border-radius: 50%;
+    background: var(--surface); color: var(--ink); cursor: pointer;
+    box-shadow: 0 4px 0 var(--edge-shadow), var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+    animation: totop-in 0.25s ease;
+  }
+  .totop[hidden] { display: none; }
+  .totop:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--edge-shadow), var(--shadow); }
+  .totop:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+  .totop:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .totop :global(.icon) { position: relative; width: 24px; height: 24px; }
+  .totop__ring { position: absolute; inset: -2px; width: calc(100% + 4px); height: calc(100% + 4px); transform: rotate(-90deg); }
+  .totop__track { fill: var(--h-fill); stroke: var(--line); stroke-width: 4; }
+  .totop__bar { fill: none; stroke: var(--h); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.1s linear; }
+  @keyframes totop-in { from { opacity: 0; transform: translateY(8px) scale(0.9); } }
+  @media (max-width: 520px) { .totop { width: 50px; height: 50px; right: max(12px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); } }
+  @media (prefers-reduced-motion: reduce) { .totop { animation: none; transition: none; } }
+  @media print { .totop { display: none !important; } }
+</style>

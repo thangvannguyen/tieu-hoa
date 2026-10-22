@@ -12,6 +12,7 @@ import Header from '~/components/ui/Header.astro';
 import Footer from '~/components/ui/Footer.astro';
 import SearchDialog from '~/components/ui/SearchDialog.astro';
 import SettingsDialog from '~/components/ui/SettingsDialog.astro';
+import ScrollTop from '~/components/ui/ScrollTop.astro';
 import type { Hue } from '~/lib/types';
 import { url } from '~/lib/url';
 
@@ -64,6 +65,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Footer />
     <SearchDialog />
     <SettingsDialog />
+    <ScrollTop />
   </body>
 </html>
 
