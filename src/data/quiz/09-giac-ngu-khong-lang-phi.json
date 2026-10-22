@@ -1,0 +1,81 @@
+{
+  "lesson": "09-giac-ngu-khong-lang-phi",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin, giấc ngủ và hệ tiêu hóa liên kết với nhau thông qua những gì?",
+      "options": [
+        { "id": "a", "text": "Hệ thần kinh, hormone và nhịp sinh học" },
+        { "id": "b", "text": "Chỉ qua bữa ăn buổi tối" },
+        { "id": "c", "text": "Chỉ qua lượng cà phê uống trong ngày" }
+      ],
+      "answer": ["a"],
+      "explain": "Giấc ngủ và hệ tiêu hóa liên kết với nhau thông qua **hệ thần kinh, hormone và nhịp sinh học**. Khi giấc ngủ bị rối loạn, toàn bộ “đồng hồ sinh học” của cơ thể, bao gồm cả hệ tiêu hóa, cũng có thể bị ảnh hưởng.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "giấc ngủ và hệ tiêu hóa liên kết với nhau thông qua hệ thần kinh, hormone và nhịp sinh học" }
+    },
+    {
+      "id": "q2",
+      "type": "dung-sai",
+      "prompt": "“Khi ngủ, não bộ ở trạng thái ‘tắt máy’ và không làm việc gì cả.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Dưới góc nhìn sinh học, **giấc ngủ không phải trạng thái “tắt máy”**. Trong khi bạn ngủ, não bộ tiếp tục sắp xếp và củng cố thông tin, điều chỉnh phản ứng cảm xúc, phục hồi khả năng chú ý và ra quyết định.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "giấc ngủ không phải trạng thái “tắt máy”" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Bản tin ví “áp lực ngủ” giống như điều gì?",
+      "options": [
+        { "id": "a", "text": "Một cục pin cạn dần trong lúc ngủ" },
+        { "id": "b", "text": "Một chiếc bình được làm đầy dần trong ngày, được giải tỏa khi ngủ" },
+        { "id": "c", "text": "Một chiếc đồng hồ báo thức cố định giờ dậy" }
+      ],
+      "answer": ["b"],
+      "explain": "Càng thức lâu, nhu cầu ngủ càng tăng. Có thể hình dung áp lực ngủ giống như **một chiếc bình được làm đầy dần trong ngày**. Khi ngủ, áp lực này được giải tỏa.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Có thể hình dung áp lực ngủ giống như một chiếc bình được làm đầy dần trong ngày" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Vì sao một người có thể rất mệt nhưng vẫn chưa dễ ngủ?",
+      "options": [
+        { "id": "a", "text": "Vì một giấc ngủ trưa ngắn luôn làm mất hết áp lực ngủ buổi tối" },
+        { "id": "b", "text": "Vì ánh sáng buổi sáng khiến não bộ hiểu rằng “ngày vẫn chưa kết thúc”" },
+        { "id": "c", "text": "Vì áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo" }
+      ],
+      "answer": ["c"],
+      "explain": "Đó là lý do một người có thể **rất mệt nhưng vẫn chưa dễ ngủ**: áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo — chẳng hạn khi tiếp xúc nhiều với ánh sáng mạnh vào **buổi tối**.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo" }
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "Những ý nào đúng về ánh sáng và nhịp sinh học theo bản tin?",
+      "options": [
+        { "id": "a", "text": "Ánh sáng là tín hiệu quan trọng nhất giúp đồng hồ sinh học xác định thời gian" },
+        { "id": "b", "text": "Ánh sáng buổi sáng hỗ trợ trạng thái tỉnh táo và giúp ổn định nhịp ngủ – thức" },
+        { "id": "c", "text": "Ánh sáng mạnh buổi tối giúp não bộ biết ngày đã kết thúc, dễ ngủ hơn" }
+      ],
+      "answer": ["a", "b"],
+      "explain": "**Ánh sáng là tín hiệu quan trọng nhất** giúp đồng hồ sinh học xác định thời gian. Ánh sáng buổi sáng hỗ trợ trạng thái tỉnh táo; ngược lại, ánh sáng mạnh vào buổi tối có thể khiến não bộ hiểu rằng “ngày vẫn chưa kết thúc”.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Ánh sáng là tín hiệu quan trọng nhất giúp đồng hồ sinh học xác định thời gian" }
+    },
+    {
+      "id": "q6",
+      "type": "dung-sai",
+      "prompt": "“Thiếu ngủ kéo dài mà mình đã quen với cảm giác mệt, nghĩa là hiệu suất đã trở lại bình thường.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Khi thiếu ngủ kéo dài, con người có thể dần quen với cảm giác mệt và cho rằng mình vẫn hoạt động bình thường. Tuy nhiên, việc **“đã quen với mệt” không có nghĩa là hiệu suất đã trở lại bình thường**.",
+      "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "“đã quen với mệt” không có nghĩa là hiệu suất đã trở lại bình thường" }
+    }
+  ]
+}

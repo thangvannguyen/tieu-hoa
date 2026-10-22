@@ -1,0 +1,51 @@
+---
+/** Bánh xe (bản tin #12, mục 3): các thành phần chương trình CBT-I có thể bao gồm (tùy trường hợp). */
+import Diagram from '../primitives/Diagram.astro';
+import Wheel from '../primitives/Wheel.astro';
+---
+<Diagram
+  title="CBT-I: chương trình có thể bao gồm những gì?"
+  icon="bac-si"
+  hue="lav"
+  interactive
+  caption="Mục tiêu của CBT-I không phải ép người bệnh ngủ bằng ý chí. Mục tiêu là tạo điều kiện để hệ thống điều hòa giấc ngủ hoạt động hiệu quả hơn và giảm “chiến đấu” với giấc ngủ. Đây là chương trình điều trị có cấu trúc được thực hiện bởi chuyên gia."
+  from={['12-khi-nao-can-dieu-tri-giac-ngu']}
+>
+  <Wheel
+    center={{ title: 'CBT-I', icon: 'bac-si' }}
+    prompt="Tùy trường hợp, chương trình có thể bao gồm các phần sau — bấm từng phần để xem."
+    segments={[
+      {
+        title: 'Cơ chế giấc ngủ', icon: 'nao', hue: 'lav',
+        text: 'Tư vấn về cơ chế giấc ngủ.',
+        links: [{ href: '/bai/09-giac-ngu-khong-lang-phi/', label: 'Ôn lại: hai hệ thống điều khiển giấc ngủ (#09)' }],
+      },
+      {
+        title: 'Thời gian nằm trên giường', icon: 'dong-ho', hue: 'bo',
+        text: 'Điều chỉnh thời gian nằm trên giường. Các kỹ thuật liên quan đến giới hạn thời gian nằm trên giường cần được hướng dẫn và cá thể hóa.',
+      },
+      {
+        title: 'Giường và giấc ngủ', icon: 'giuong', hue: 'ngoc',
+        text: 'Tái thiết lập mối liên hệ giữa giường và giấc ngủ.',
+        links: [{ href: '/bai/11-bo-cong-cu-bao-ve-giac-ngu/', label: 'Liên quan: khi không ngủ được, đừng biến giường thành nơi làm việc (#11)' }],
+      },
+      {
+        title: 'Suy nghĩ và nỗi sợ', icon: 'suy-nghi', hue: 'hong',
+        text: 'Làm việc với những suy nghĩ và nỗi sợ liên quan đến mất ngủ.',
+        links: [{ href: '/bai/10-ngu-khong-du-hay-roi-loan/', label: 'Liên quan: dấu hiệu vòng xoắn mất ngủ (#10)' }],
+      },
+      {
+        title: 'Hành vi', icon: 'lap-lai', hue: 'dao',
+        text: 'Điều chỉnh các hành vi không tốt cho giấc ngủ.',
+      },
+      {
+        title: 'Giảm kích hoạt', icon: 'thien', hue: 'sage',
+        text: 'Kỹ thuật giảm kích hoạt thể chất và tinh thần.',
+      },
+      {
+        title: 'Phòng ngừa tái phát', icon: 'khien', hue: 'do',
+        text: 'Lập kế hoạch phòng ngừa tái phát.',
+      },
+    ]}
+  />
+</Diagram>

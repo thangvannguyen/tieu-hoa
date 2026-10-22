@@ -1,0 +1,41 @@
+---
+/** So sánh (bản tin #12, thông điệp kết thúc chuỗi): giấc ngủ khỏe mạnh không có nghĩa là… / là khi… */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Giấc ngủ khỏe mạnh là gì?"
+  icon="trang"
+  hue="lav"
+  kicker="Thông điệp kết thúc chuỗi"
+  caption="Hãy quan tâm đến giấc ngủ trước khi cơ thể buộc bạn phải dừng lại."
+  from={['12-khi-nao-can-dieu-tri-giac-ngu']}
+>
+  <Compare
+    columns={[
+      {
+        title: 'Không có nghĩa là',
+        icon: 'sai',
+        hue: 'dao',
+        items: [
+          'Đêm nào cũng ngủ hoàn hảo',
+          'Không bao giờ thức giấc',
+          'Luôn ngủ đủ một con số cố định',
+          'Phải kiểm soát được mọi yếu tố',
+          'Phải mua thêm một thiết bị hoặc sản phẩm hỗ trợ',
+        ],
+      },
+      {
+        title: 'Là khi',
+        icon: 'dung',
+        hue: 'sage',
+        items: [
+          'Bạn có đủ cơ hội ngủ',
+          'Lịch ngủ tương đối phù hợp',
+          'Giấc ngủ có khả năng phục hồi',
+          'Bạn duy trì được mức tỉnh táo cần thiết cho cuộc sống ban ngày',
+        ],
+      },
+    ]}
+  />
+</Diagram>

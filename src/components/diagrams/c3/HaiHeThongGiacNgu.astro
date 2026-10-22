@@ -1,0 +1,319 @@
+---
+/**
+ * Minh họa định tính (bản tin #09): hai hệ thống điều khiển giấc ngủ.
+ * Trái: "chiếc bình" áp lực ngủ được làm đầy dần trong ngày, vơi đi khi ngủ.
+ * Phải: đồng hồ sinh học gần 24 giờ (nửa trên: ban ngày, nửa dưới: ban đêm) — KHÔNG có số giờ.
+ * Thanh kéo đổi thời điểm (sáng → trưa → tối → đêm); hai lựa chọn: ngủ trưa, ánh sáng mạnh buổi tối.
+ * Mọi câu chữ lấy từ bản tin #09 (và #11 cho ý "giảm ánh sáng mạnh khi gần giờ ngủ", "lên giường khi buồn ngủ").
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Icon from '~/components/ui/Icon.astro';
+
+// trạng thái mặc định khi chưa có JS: buổi tối + ánh sáng mạnh → ý chính "rất mệt nhưng chưa dễ ngủ"
+const C = { x: 262, y: 134 }; // tâm đồng hồ
+const R = 64;
+// giờ (định tính) → góc: nửa đêm ở dưới, trưa ở trên, sáng bên trái, tối bên phải
+const at = (h: number, r = R) => {
+  const a = ((90 + h * 15) * Math.PI) / 180;
+  return { x: +(C.x + r * Math.cos(a)).toFixed(1), y: +(C.y + r * Math.sin(a)).toFixed(1) };
+};
+const marks = [
+  { key: 'sang', h: 7, icon: 'mat-troi' },
+  { key: 'trua', h: 13.5, icon: 'ngu-trua' },
+  { key: 'toi', h: 20, icon: 'bong-den' },
+  { key: 'dem', h: 0, icon: 'trang' },
+].map((m) => ({ ...m, ...at(m.h) }));
+const uid = 'hh-' + Math.random().toString(36).slice(2, 8);
+---
+<Diagram
+  title="Hai hệ thống điều khiển giấc ngủ"
+  icon="dong-ho"
+  hue="lav"
+  kicker="Minh họa"
+  interactive
+  caption="Đó là lý do một người có thể rất mệt nhưng vẫn chưa dễ ngủ: áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo. Hình minh họa định tính — không thể hiện số giờ hay mức đo thật."
+  from={['09-giac-ngu-khong-lang-phi', '11-bo-cong-cu-bao-ve-giac-ngu']}
+>
+  <bev-hai-he-ngu class="hh" data-t="2" data-nap="khong" data-light="on" data-jar="sleepy" data-clock="awake" style="--lv:0.88;--rot:405deg">
+    <div class="hh__stage">
+      <svg class="hh__svg" viewBox="0 0 360 268" role="img" aria-label="Bên trái là chiếc bình áp lực ngủ, được làm đầy dần trong ngày và vơi đi khi ngủ. Bên phải là đồng hồ sinh học gần 24 giờ: nửa trên là ban ngày, nửa dưới là ban đêm, có các mốc ánh sáng buổi sáng, ngủ trưa, ánh sáng mạnh buổi tối và ban đêm.">
+        <!-- ===== chiếc bình áp lực ngủ ===== -->
+        <path class="hh__shadow" transform="translate(4 4)" d="M50 48h60v10c14 4 22 14 22 30v118c0 10-8 18-18 18H46c-10 0-18-8-18-18V88c0-16 8-26 22-30z"></path>
+        <path class="hh__jar" d="M50 48h60v10c14 4 22 14 22 30v118c0 10-8 18-18 18H46c-10 0-18-8-18-18V88c0-16 8-26 22-30z"></path>
+        <rect class="hh__water" x="33" y="92" width="94" height="127"></rect>
+        <path class="hh__jarline" d="M50 48h60v10c14 4 22 14 22 30v118c0 10-8 18-18 18H46c-10 0-18-8-18-18V88c0-16 8-26 22-30z"></path>
+        <rect class="hh__lid" x="42" y="30" width="76" height="20" rx="7"></rect>
+        <path class="hh__ink-line" d="M52 40h56" opacity="0.35"></path>
+        <!-- nhãn dán có mặt cười trên bình -->
+        <rect class="hh__label" x="46" y="122" width="68" height="44" rx="12"></rect>
+        <g class="hh__face hh__face--awake" data-for="jar">
+          <circle class="hh__ink" cx="68" cy="140" r="3.4"></circle>
+          <circle class="hh__ink" cx="92" cy="140" r="3.4"></circle>
+          <path class="hh__ink-line" d="M75 150c3 3 7 3 10 0"></path>
+        </g>
+        <g class="hh__face hh__face--sleepy" data-for="jar">
+          <path class="hh__ink-line" d="M63 140c2.4 2.6 7.6 2.6 10 0M87 140c2.4 2.6 7.6 2.6 10 0"></path>
+          <path class="hh__ink-line" d="M77 152h6"></path>
+          <text x="124" y="42" class="hh__z">z</text>
+          <text x="136" y="28" class="hh__z hh__z--sm">z</text>
+        </g>
+        <ellipse class="hh__blush" cx="58" cy="150" rx="5" ry="3"></ellipse>
+        <ellipse class="hh__blush" cx="102" cy="150" rx="5" ry="3"></ellipse>
+        <!-- vạch đầy / vơi -->
+        <path class="hh__tick" d="M134 96h8M134 214h8"></path>
+        <text x="146" y="101" class="hh__small">đầy</text>
+        <text x="146" y="219" class="hh__small">vơi</text>
+        <text x="80" y="254" class="hh__name" text-anchor="middle">Áp lực ngủ</text>
+
+        <!-- ===== đồng hồ sinh học ===== -->
+        <circle class="hh__shadow" cx={C.x + 4} cy={C.y + 4} r={R}></circle>
+        <path class="hh__day" d={`M${C.x - R} ${C.y}A${R} ${R} 0 0 1 ${C.x + R} ${C.y}Z`}></path>
+        <path class="hh__night" d={`M${C.x + R} ${C.y}A${R} ${R} 0 0 1 ${C.x - R} ${C.y}Z`}></path>
+        <circle class="hh__rim" cx={C.x} cy={C.y} r={R}></circle>
+        <text x={C.x} y={C.y - R - 10} class="hh__small hh__small--b" text-anchor="middle">Trưa</text>
+        <text x={C.x} y={C.y + R + 22} class="hh__small hh__small--b" text-anchor="middle">Đêm</text>
+        <text x={C.x - R - 10} y={C.y + 5} class="hh__small hh__small--b" text-anchor="end">Sáng</text>
+        <text x={C.x + R + 9} y={C.y + 5} class="hh__small hh__small--b">Tối</text>
+        <!-- kim chỉ thời điểm (xoay bằng CSS) -->
+        <g class="hh__hand">
+          <path class="hh__hand-line" d={`M${C.x} ${C.y}H${C.x + R - 20}`}></path>
+          <path class="hh__hand-tip" d={`M${C.x + R - 28} ${C.y - 7}L${C.x + R - 16} ${C.y}L${C.x + R - 28} ${C.y + 7}`}></path>
+        </g>
+        <circle class="hh__hub" cx={C.x} cy={C.y} r="20"></circle>
+        <g class="hh__face hh__face--awake" data-for="clock">
+          <circle class="hh__ink" cx={C.x - 7} cy={C.y - 3} r="2.8"></circle>
+          <circle class="hh__ink" cx={C.x + 7} cy={C.y - 3} r="2.8"></circle>
+          <path class="hh__ink-line hh__ink-line--thin" d={`M${C.x - 4} ${C.y + 5}c2.4 2.4 5.6 2.4 8 0`}></path>
+        </g>
+        <g class="hh__face hh__face--sleepy" data-for="clock">
+          <path class="hh__ink-line hh__ink-line--thin" d={`M${C.x - 11} ${C.y - 3}c2 2.2 6 2.2 8 0M${C.x + 3} ${C.y - 3}c2 2.2 6 2.2 8 0`}></path>
+          <path class="hh__ink-line hh__ink-line--thin" d={`M${C.x - 2} ${C.y + 7}h4`}></path>
+        </g>
+        <!-- các mốc trên vành đồng hồ -->
+        {marks.map((m) => (
+          <g class="hh__mark" data-mark={m.key}>
+            <circle cx={m.x} cy={m.y} r="15" class="hh__mark-bg"></circle>
+            <Icon name={m.icon} size={20} x={m.x - 10} y={m.y - 10} />
+          </g>
+        ))}
+        <text x={C.x} y="254" class="hh__name" text-anchor="middle">Nhịp sinh học</text>
+      </svg>
+
+      <div class="hh__side">
+        <div class="hh__ctrl" hidden>
+          <label class="hh__lbl" for={uid}>Kéo để đổi thời điểm trong ngày</label>
+          <input id={uid} class="hh__range" type="range" min="0" max="3" step="1" value="2" aria-valuetext="Buổi tối" />
+          <div class="hh__ticks" aria-hidden="true"><span>Sáng</span><span>Trưa</span><span>Tối</span><span>Đêm</span></div>
+          <div class="hh__opts">
+            <div class="hh__grp" role="group" aria-label="Ngủ trưa">
+              <span class="hh__grp-t"><Icon name="ngu-trua" size={20} /> Ngủ trưa:</span>
+              <button type="button" class="hh__opt" data-nap="khong" aria-pressed="true">Không</button>
+              <button type="button" class="hh__opt" data-nap="ngan" aria-pressed="false">Ngắn</button>
+              <button type="button" class="hh__opt" data-nap="dai" aria-pressed="false">Quá lâu hoặc quá muộn</button>
+            </div>
+            <div class="hh__grp" role="group" aria-label="Ánh sáng buổi tối">
+              <span class="hh__grp-t"><Icon name="bong-den" size={20} /> Buổi tối:</span>
+              <button type="button" class="hh__opt" data-light-btn aria-pressed="true">Tiếp xúc nhiều ánh sáng mạnh</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hh__panel" aria-live="polite">
+          <p class="hh__when">Buổi tối</p>
+          <p class="hh__row" data-hue="lav"><span class="hh__chip">Áp lực ngủ</span> <strong class="hh__lv">đã cao</strong> <span class="hh__lvx">Càng thức lâu, nhu cầu ngủ càng tăng — chiếc bình đã được làm đầy dần trong ngày.</span></p>
+          <p class="hh__row" data-hue="bo"><span class="hh__chip">Nhịp sinh học</span> <strong class="hh__sig">tín hiệu tỉnh táo</strong> <span class="hh__sigx">Tiếp xúc nhiều với ánh sáng mạnh vào buổi tối có thể khiến não bộ hiểu rằng “ngày vẫn chưa kết thúc”.</span></p>
+          <p class="hh__verdict" data-tone="warn">Rất mệt nhưng vẫn chưa dễ ngủ: áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo.</p>
+        </div>
+      </div>
+    </div>
+    <ul class="hh__legend">
+      <li data-hue="lav"><span class="hh__sw hh__sw--jar"></span><span><strong>Áp lực ngủ</strong> — càng thức lâu, nhu cầu ngủ càng tăng, giống như một chiếc bình được làm đầy dần trong ngày. Khi ngủ, áp lực này được giải tỏa.</span></li>
+      <li data-hue="bo"><span class="hh__sw hh__sw--clock"></span><span><strong>Nhịp sinh học</strong> — hệ thống định giờ gần 24 giờ, điều phối thời điểm tỉnh táo và buồn ngủ. Ánh sáng là tín hiệu quan trọng nhất.</span></li>
+      <li><span class="hh__ic"><Icon name="mat-troi" size={22} /></span><span>Ánh sáng buổi sáng</span></li>
+      <li><span class="hh__ic"><Icon name="ngu-trua" size={22} /></span><span>Ngủ trưa: ngắn, hoặc quá lâu / quá muộn</span></li>
+      <li><span class="hh__ic"><Icon name="bong-den" size={22} /></span><span>Ánh sáng mạnh buổi tối</span></li>
+    </ul>
+  </bev-hai-he-ngu>
+</Diagram>
+
+<script>
+  type Nap = 'khong' | 'ngan' | 'dai';
+  const WHEN = ['Buổi sáng', 'Buổi trưa', 'Buổi tối', 'Ban đêm (ngủ)'];
+  const ROT = [202.5, 285, 405, 480]; // góc kim, tăng dần theo ngày (định tính)
+  const LEVEL: Record<Nap, number[]> = {
+    khong: [0.12, 0.5, 0.88, 0.1],
+    ngan: [0.12, 0.38, 0.8, 0.1],
+    dai: [0.12, 0.22, 0.5, 0.1],
+  };
+
+  class BevHaiHeNgu extends HTMLElement {
+    connectedCallback() {
+      const range = this.querySelector<HTMLInputElement>('.hh__range')!;
+      const ctrl = this.querySelector<HTMLElement>('.hh__ctrl')!;
+      const napBtns = [...this.querySelectorAll<HTMLButtonElement>('[data-nap]')].filter((b) => b.tagName === 'BUTTON');
+      const lightBtn = this.querySelector<HTMLButtonElement>('[data-light-btn]')!;
+      const $ = (s: string) => this.querySelector<HTMLElement>(s)!;
+      ctrl.hidden = false;
+
+      let nap: Nap = 'khong';
+      let light = true;
+
+      const render = () => {
+        const t = Number(range.value);
+        const lv = LEVEL[nap][t];
+        this.style.setProperty('--lv', String(lv));
+        this.style.setProperty('--rot', ROT[t] + 'deg');
+        this.dataset.t = String(t);
+        this.dataset.nap = nap;
+        this.dataset.light = light ? 'on' : 'off';
+        range.setAttribute('aria-valuetext', WHEN[t]);
+        $('.hh__when').textContent = WHEN[t];
+
+        // áp lực ngủ
+        let lvWord: string, lvText: string;
+        if (t === 3) { lvWord = 'đang được giải tỏa'; lvText = 'Khi ngủ, áp lực này được giải tỏa.'; }
+        else if (t === 0) { lvWord = 'thấp'; lvText = 'Sau một đêm ngủ, áp lực ngủ đã được giải tỏa — chiếc bình bắt đầu được làm đầy dần trong ngày.'; }
+        else if (t === 1 && nap === 'ngan') { lvWord = 'vơi bớt'; lvText = 'Một giấc ngủ trưa ngắn có thể giúp giảm bớt buồn ngủ.'; }
+        else if (nap === 'dai') { lvWord = t === 1 ? 'vơi nhiều' : 'chưa đủ cao'; lvText = 'Ngủ trưa quá lâu hoặc quá muộn có thể làm giảm áp lực ngủ vào buổi tối, khiến bạn khó ngủ hơn.'; }
+        else if (t === 1) { lvWord = 'đang tăng dần'; lvText = 'Càng thức lâu, nhu cầu ngủ càng tăng.'; }
+        else { lvWord = 'đã cao'; lvText = 'Càng thức lâu, nhu cầu ngủ càng tăng — chiếc bình đã được làm đầy dần trong ngày.'; }
+        $('.hh__lv').textContent = lvWord;
+        $('.hh__lvx').textContent = lvText;
+
+        // nhịp sinh học
+        let awake: boolean, sigText: string;
+        if (t === 0) { awake = true; sigText = 'Ánh sáng buổi sáng hỗ trợ trạng thái tỉnh táo và giúp ổn định nhịp ngủ – thức.'; }
+        else if (t === 1) { awake = true; sigText = 'Cơ thể có một hệ thống định giờ gần 24 giờ, giúp điều phối thời điểm tỉnh táo và buồn ngủ.'; }
+        else if (t === 2 && light) { awake = true; sigText = 'Tiếp xúc nhiều với ánh sáng mạnh vào buổi tối có thể khiến não bộ hiểu rằng “ngày vẫn chưa kết thúc”.'; }
+        else if (t === 2) { awake = false; sigText = 'Đã giảm ánh sáng mạnh khi gần giờ ngủ — não bộ không còn nhận tín hiệu “ngày vẫn chưa kết thúc”.'; }
+        else { awake = false; sigText = 'Trong đêm, chúng ta luân phiên đi qua các giai đoạn ngủ NREM và REM.'; }
+        $('.hh__sig').textContent = awake ? 'tín hiệu tỉnh táo' : 'thời điểm buồn ngủ';
+        $('.hh__sigx').textContent = sigText;
+        this.dataset.clock = awake ? 'awake' : 'sleepy';
+        this.dataset.jar = lv > 0.65 || t === 3 ? 'sleepy' : 'awake';
+
+        // kết luận
+        let verdict: string, tone = 'ok';
+        if (t === 0) verdict = 'Một ngày mới bắt đầu: tỉnh táo, chiếc bình còn vơi.';
+        else if (t === 1) verdict = nap === 'dai' ? 'Ngủ trưa quá lâu hoặc quá muộn có thể làm giảm áp lực ngủ vào buổi tối.' : nap === 'ngan' ? 'Một giấc ngủ trưa ngắn có thể giúp giảm bớt buồn ngủ.' : 'Càng thức lâu, nhu cầu ngủ càng tăng.';
+        else if (t === 3) verdict = 'Đang ngủ: áp lực ngủ được giải tỏa, não bộ chuẩn bị cho việc học hỏi và xử lý thông tin vào ngày hôm sau.';
+        else if (nap === 'dai' && light) { verdict = 'Áp lực ngủ bị giảm, lại thêm ánh sáng mạnh khiến não bộ hiểu rằng “ngày vẫn chưa kết thúc” — càng khó ngủ hơn.'; tone = 'warn'; }
+        else if (nap === 'dai') { verdict = 'Ngủ trưa quá lâu hoặc quá muộn đã làm giảm áp lực ngủ vào buổi tối, khiến bạn khó ngủ hơn.'; tone = 'warn'; }
+        else if (light) { verdict = 'Rất mệt nhưng vẫn chưa dễ ngủ: áp lực ngủ đã cao, nhưng hệ thống sinh học vẫn đang phát tín hiệu tỉnh táo.'; tone = 'warn'; }
+        else verdict = 'Áp lực ngủ đã cao, ánh sáng đã dịu: lên giường khi buồn ngủ.';
+        const v = $('.hh__verdict');
+        v.textContent = verdict;
+        v.dataset.tone = tone;
+      };
+
+      range.addEventListener('input', render);
+      napBtns.forEach((b) =>
+        b.addEventListener('click', () => {
+          nap = b.dataset.nap as Nap;
+          napBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          if (Number(range.value) === 0 || Number(range.value) === 3) range.value = '1';
+          render();
+        }),
+      );
+      lightBtn.addEventListener('click', () => {
+        light = !light;
+        lightBtn.setAttribute('aria-pressed', String(light));
+        if (Number(range.value) !== 2) range.value = '2';
+        render();
+      });
+      render();
+    }
+  }
+  customElements.define('bev-hai-he-ngu', BevHaiHeNgu);
+</script>
+
+<style>
+  .hh { display: block; }
+  .hh__stage { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 640px) { .hh__stage { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } }
+  .hh__side { display: grid; gap: 0.8rem; }
+  .hh__svg { width: 100%; max-width: 440px; margin: 0 auto; display: block; overflow: visible; color: var(--ink); --ic-fill: var(--h-fill); }
+
+  .hh__shadow { fill: var(--line); stroke: none; }
+  .hh__jar { fill: var(--surface); stroke: none; }
+  .hh__jarline { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+  .hh__water {
+    fill: var(--lav); opacity: 0.85;
+    transform-box: fill-box; transform-origin: 50% 100%;
+    transform: scaleY(var(--lv)); transition: transform 0.7s cubic-bezier(0.3, 1.2, 0.5, 1);
+  }
+  .hh__lid { fill: var(--lav-fill); stroke: var(--ink); stroke-width: 4; }
+  .hh__label { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .hh__ink { fill: var(--ink); }
+  .hh__ink-line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+  .hh__ink-line--thin { stroke-width: 2.6; }
+  .hh__blush { fill: var(--cheek); opacity: 0.8; }
+  .hh__z { font-family: var(--font-head); font-weight: 900; font-size: 18px; fill: var(--lav-ink); }
+  .hh__z--sm { font-size: 14px; }
+  .hh__tick { stroke: var(--ink-3); stroke-width: 2.5; stroke-linecap: round; }
+  .hh__small { font-family: var(--font-head); font-weight: 800; font-size: 14px; fill: var(--ink-2); }
+  .hh__small--b { fill: var(--ink); }
+  .hh__name { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+
+  .hh__day { fill: var(--bo-fill); }
+  .hh__night { fill: var(--lav-fill); }
+  .hh__rim { fill: none; stroke: var(--ink); stroke-width: 4; }
+  .hh__hand { transform-box: view-box; transform-origin: 262px 134px; transform: rotate(var(--rot)); transition: transform 0.7s cubic-bezier(0.3, 1.2, 0.5, 1); }
+  .hh__hand-line { fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+  .hh__hand-tip { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .hh__hub { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .hh__mark-bg { fill: var(--surface); stroke: var(--line-2); stroke-width: 2.5; transition: stroke 0.3s, fill 0.3s; }
+  .hh__mark { opacity: 0.55; transition: opacity 0.3s; }
+
+  /* mặt cười: tỉnh / buồn ngủ */
+  .hh__face { transition: opacity 0.3s; }
+  .hh[data-jar='awake'] [data-for='jar'].hh__face--sleepy,
+  .hh[data-jar='sleepy'] [data-for='jar'].hh__face--awake,
+  .hh[data-clock='awake'] [data-for='clock'].hh__face--sleepy,
+  .hh[data-clock='sleepy'] [data-for='clock'].hh__face--awake { opacity: 0; }
+
+  /* mốc đang được nhắc tới */
+  .hh[data-t='0'] [data-mark='sang'],
+  .hh[data-t='1']:not([data-nap='khong']) [data-mark='trua'],
+  .hh[data-t='2'][data-nap='dai'] [data-mark='trua'],
+  .hh[data-t='2'][data-light='on'] [data-mark='toi'],
+  .hh[data-t='3'] [data-mark='dem'] { opacity: 1; }
+  .hh[data-t='0'] [data-mark='sang'] .hh__mark-bg,
+  .hh[data-t='3'] [data-mark='dem'] .hh__mark-bg,
+  .hh[data-t='1'][data-nap='ngan'] [data-mark='trua'] .hh__mark-bg { stroke: var(--ink); fill: var(--sage-fill); }
+  .hh[data-nap='dai']:is([data-t='1'], [data-t='2']) [data-mark='trua'] .hh__mark-bg,
+  .hh[data-t='2'][data-light='on'] [data-mark='toi'] .hh__mark-bg { stroke: var(--ink); fill: var(--do-fill); }
+
+  .hh__legend { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.4rem; font-size: 0.92rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .hh__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.45rem 0.65rem; border-radius: 12px; background: var(--surface); --ic-fill: var(--lav-fill); }
+  .hh__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--ink); }
+  .hh__sw--jar { background: var(--lav); }
+  .hh__sw--clock { background: linear-gradient(180deg, var(--bo-fill) 50%, var(--lav-fill) 50%); }
+  .hh__ic { width: 22px; display: grid; place-items: center; }
+
+  .hh__ctrl { padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .hh__lbl { display: block; font-family: var(--font-head); font-weight: 900; margin-bottom: 0.35rem; }
+  .hh__range { width: 100%; accent-color: var(--lav-ink); height: 28px; cursor: pointer; }
+  .hh__ticks { position: relative; height: 1.3rem; margin: 0.1rem 11px 0; font-size: 0.85rem; font-weight: 800; color: var(--ink-2); }
+  .hh__ticks span { position: absolute; top: 0; transform: translateX(-50%); }
+  .hh__ticks span:nth-child(1) { left: 0; }
+  .hh__ticks span:nth-child(2) { left: 33.33%; }
+  .hh__ticks span:nth-child(3) { left: 66.67%; }
+  .hh__ticks span:nth-child(4) { left: 100%; }
+  .hh__opts { display: grid; gap: 0.6rem; margin-top: 0.8rem; }
+  .hh__grp { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+  .hh__grp-t { flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 800; font-size: 0.9rem; margin-right: 0.2rem; --ic-fill: var(--lav-fill); }
+  .hh__opt { padding: 0.3rem 0.75rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; line-height: 1.3; }
+  .hh__opt[aria-pressed='true'] { background: var(--lav-fill); border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+  .hh__opt:focus-visible, .hh__range:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .hh__panel { display: grid; gap: 0.45rem; padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px dashed var(--line-2); }
+  .hh__when { font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; color: var(--lav-ink); }
+  .hh__row { font-size: 0.93rem; line-height: 1.5; }
+  .hh__chip { display: inline-block; padding: 0.05em 0.55em; border-radius: 999px; background: var(--h-fill); color: var(--h-ink); font-weight: 800; font-size: 0.8rem; margin-right: 0.15rem; }
+  .hh__row strong { color: var(--ink); }
+  .hh__row strong::after { content: ' —'; font-weight: 400; color: var(--ink-3); }
+  .hh__verdict { margin-top: 0.2rem !important; padding: 0.55rem 0.75rem; border-radius: 12px; font-family: var(--font-head); font-weight: 800; line-height: 1.4; background: var(--sage-fill); color: var(--ink); }
+  .hh__verdict[data-tone='warn'] { background: var(--do-fill); }
+  @media (prefers-reduced-motion: reduce) { .hh__water, .hh__hand { transition: none; } }
+</style>

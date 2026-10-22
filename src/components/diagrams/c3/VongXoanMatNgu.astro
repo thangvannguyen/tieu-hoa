@@ -1,0 +1,23 @@
+---
+/** Sơ đồ (bản tin #10): dấu hiệu vòng xoắn mất ngủ đang hình thành — 5 bước, nguyên văn. */
+import Diagram from '../primitives/Diagram.astro';
+import Cycle from '../primitives/Cycle.astro';
+---
+<Diagram
+  title="Dấu hiệu vòng xoắn mất ngủ đang hình thành"
+  icon="lap-lai"
+  hue="lav"
+  caption="Khi khó ngủ lặp lại, kéo dài và bắt đầu khiến bạn sợ giờ đi ngủ, đó không còn là vấn đề nên chỉ giải quyết bằng vài “mẹo ngủ ngon”."
+  from={['10-ngu-khong-du-hay-roi-loan']}
+>
+  <Cycle
+    center={{ title: 'Càng cố ngủ, càng khó ngủ', icon: 'trang' }}
+    nodes={[
+      { icon: 'may-stress', title: 'Một giai đoạn căng thẳng', text: 'làm bạn ngủ kém.' },
+      { icon: 'suy-nghi', title: 'Bắt đầu lo lắng', text: 'về hậu quả của việc mất ngủ.' },
+      { icon: 'giuong', title: 'Cố ép mình ngủ', text: 'Đi ngủ sớm hơn, nằm trên giường lâu hơn hoặc cố ép mình ngủ.' },
+      { icon: 'lua', title: 'Giường ngủ dần gắn với sự tỉnh táo và căng thẳng' },
+      { icon: 'lap-lai', title: 'Càng cố ngủ, bạn càng khó ngủ' },
+    ]}
+  />
+</Diagram>

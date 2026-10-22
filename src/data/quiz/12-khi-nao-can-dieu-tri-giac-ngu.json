@@ -1,0 +1,82 @@
+{
+  "lesson": "12-khi-nao-can-dieu-tri-giac-ngu",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin, điều trị hiệu quả bắt đầu từ đâu?",
+      "options": [
+        { "id": "a", "text": "Thử ngẫu nhiên thật nhiều phương pháp cùng lúc" },
+        { "id": "b", "text": "Xác định đúng vấn đề" },
+        { "id": "c", "text": "Mua thêm một thiết bị hoặc sản phẩm hỗ trợ" }
+      ],
+      "answer": ["b"],
+      "explain": "Việc thử ngẫu nhiên quá nhiều phương pháp đôi khi làm tăng cảm giác bất lực. **Điều trị hiệu quả bắt đầu từ việc xác định đúng vấn đề** — vì “ngủ kém” không phải là một chẩn đoán duy nhất.",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Điều trị hiệu quả bắt đầu từ việc xác định đúng vấn đề." }
+    },
+    {
+      "id": "q2",
+      "type": "dung-sai",
+      "prompt": "“Với người mất ngủ mạn tính, chỉ cần nhắc ‘đừng dùng điện thoại’, ‘hãy ngủ sớm’ là đủ.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Vệ sinh giấc ngủ là nền tảng tốt, nhưng ở người mất ngủ mạn tính, chỉ nhắc “đừng dùng điện thoại”, “hãy thư giãn” hoặc “hãy ngủ sớm” **thường không đủ**. Cố thực hiện quá nhiều quy tắc cứng nhắc còn có thể tạo thêm áp lực.",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "chỉ nhắc “đừng dùng điện thoại”, “hãy thư giãn” hoặc “hãy ngủ sớm” thường không đủ" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "CBT-I là gì?",
+      "options": [
+        { "id": "a", "text": "Một loại thuốc ngủ thế hệ mới" },
+        { "id": "b", "text": "Liệu pháp nhận thức – hành vi dành cho mất ngủ: chương trình điều trị có cấu trúc do chuyên gia thực hiện" },
+        { "id": "c", "text": "Một buổi tư vấn thư giãn đơn thuần" }
+      ],
+      "answer": ["b"],
+      "explain": "**CBT-I là liệu pháp nhận thức – hành vi dành cho mất ngủ.** Đây là một chương trình điều trị có cấu trúc được thực hiện bởi chuyên gia, không đơn thuần là tư vấn thư giãn.",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "CBT-I là liệu pháp nhận thức – hành vi dành cho mất ngủ." }
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "prompt": "Những điều nào bản tin khuyên KHÔNG nên làm với thuốc ngủ?",
+      "options": [
+        { "id": "a", "text": "Tự tăng liều khi thuốc giảm hiệu quả" },
+        { "id": "b", "text": "Dùng thuốc của người khác" },
+        { "id": "c", "text": "Dùng rượu cùng thuốc gây buồn ngủ" },
+        { "id": "d", "text": "Lập kế hoạch phù hợp khi giảm hoặc ngưng thuốc" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Không tự tăng liều, không kết hợp nhiều thuốc/thực phẩm bổ sung khi chưa được đánh giá, không dùng thuốc của người khác, không dùng rượu cùng thuốc gây buồn ngủ, không tự ngưng đột ngột. Ngược lại, **giảm hoặc ngưng thuốc cần có kế hoạch phù hợp**.",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Tự tăng liều khi thuốc giảm hiệu quả" }
+    },
+    {
+      "id": "q5",
+      "type": "dung-sai",
+      "prompt": "“Người mất ngủ nào cũng cần đo đa ký giấc ngủ mới chẩn đoán được.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Mất ngủ thường được chẩn đoán **chủ yếu dựa trên khai thác bệnh sử và đánh giá lâm sàng**. Đo đa ký giấc ngủ được cân nhắc khi nghi ngờ ngưng thở khi ngủ, có cử động chân tay bất thường, hành vi phức tạp khi ngủ, chẩn đoán chưa rõ…",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Mất ngủ thường được chẩn đoán chủ yếu dựa trên khai thác bệnh sử và đánh giá lâm sàng." }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Tình huống nào bản tin xếp vào nhóm “cần ưu tiên xử lý sớm”?",
+      "options": [
+        { "id": "a", "text": "Buồn ngủ khi lái xe hoặc vận hành máy móc" },
+        { "id": "b", "text": "Một vài đêm khó ngủ trước một cuộc họp quan trọng" },
+        { "id": "c", "text": "Cuối tuần muốn ngủ nướng thêm một chút" }
+      ],
+      "answer": ["a"],
+      "explain": "Cần ưu tiên xử lý sớm khi: **buồn ngủ khi lái xe hoặc vận hành máy móc**, thường xuyên ngủ gật ngoài ý muốn, có cơn nghẹt thở hoặc ngưng thở rõ khi ngủ… Trong những tình huống liên quan an toàn, không nên chờ đến khi công việc bớt bận mới tìm trợ giúp.",
+      "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Buồn ngủ khi lái xe hoặc vận hành máy móc" }
+    }
+  ]
+}

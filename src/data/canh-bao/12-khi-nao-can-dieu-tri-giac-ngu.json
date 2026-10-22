@@ -1,0 +1,32 @@
+[
+  {
+    "group": "giac-ngu",
+    "title": "Giấc ngủ: nên sắp xếp đánh giá chuyên khoa khi",
+    "level": "nen-kham",
+    "items": [
+      { "text": "Khó ngủ kéo dài và ảnh hưởng hoạt động ban ngày", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Khó ngủ kéo dài và ảnh hưởng hoạt động ban ngày" } },
+      { "text": "Phải dùng thuốc hoặc chất hỗ trợ thường xuyên mới ngủ được", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Phải dùng thuốc hoặc chất hỗ trợ thường xuyên mới ngủ được" } },
+      { "text": "Ngủ đủ thời gian nhưng vẫn mệt hoặc buồn ngủ", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Ngủ đủ thời gian nhưng vẫn mệt hoặc buồn ngủ" } },
+      { "text": "Ngáy to, có ngưng thở hoặc thở hổn hển khi ngủ", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Ngáy to, có ngưng thở hoặc thở hổn hển khi ngủ" } },
+      { "text": "Có cảm giác khó chịu ở chân làm cản trở giấc ngủ", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Có cảm giác khó chịu ở chân làm cản trở giấc ngủ" } },
+      { "text": "Lịch ngủ – thức lệch nhiều so với lịch làm việc", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Lịch ngủ – thức lệch nhiều so với lịch làm việc" } },
+      { "text": "Có hành vi bất thường khi ngủ", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Có hành vi bất thường khi ngủ" } },
+      { "text": "Khó ngủ đi kèm lo âu, trầm cảm hoặc suy giảm chất lượng cuộc sống", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Khó ngủ đi kèm lo âu, trầm cảm hoặc suy giảm chất lượng cuộc sống" } }
+    ],
+    "note": "Thông tin càng cụ thể, việc đánh giá càng hiệu quả — xem phần chuẩn bị cho một buổi khám giấc ngủ ở bản tin #12."
+  },
+  {
+    "group": "giac-ngu",
+    "title": "Giấc ngủ: cần ưu tiên xử lý sớm khi",
+    "level": "kham-som",
+    "items": [
+      { "text": "Buồn ngủ khi lái xe hoặc vận hành máy móc", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Buồn ngủ khi lái xe hoặc vận hành máy móc" } },
+      { "text": "Thường xuyên ngủ gật ngoài ý muốn", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Thường xuyên ngủ gật ngoài ý muốn" } },
+      { "text": "Có cơn nghẹt thở hoặc ngưng thở rõ khi ngủ", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Có cơn nghẹt thở hoặc ngưng thở rõ khi ngủ" } },
+      { "text": "Có hành vi gây chấn thương cho bản thân hoặc người ngủ cùng", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Có hành vi gây chấn thương cho bản thân hoặc người ngủ cùng" } },
+      { "text": "Mất ngủ kèm ý nghĩ làm hại bản thân", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Mất ngủ kèm ý nghĩ làm hại bản thân" } },
+      { "text": "Xuất hiện lú lẫn, kích động hoặc thay đổi hành vi rõ rệt", "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Xuất hiện lú lẫn, kích động hoặc thay đổi hành vi rõ rệt" } }
+    ],
+    "note": "Trong những tình huống liên quan an toàn, không nên chờ đến khi công việc bớt bận mới tìm trợ giúp. Không có sức khỏe thì công việc cũng không hiệu quả."
+  }
+]

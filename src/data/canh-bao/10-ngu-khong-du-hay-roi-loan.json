@@ -1,0 +1,21 @@
+[
+  {
+    "group": "giac-ngu",
+    "title": "Giấc ngủ: cần đi khám / cần được đánh giá khi",
+    "level": "nen-kham",
+    "items": [
+      { "text": "Ngáy to, kèm cơn ngưng thở, nghẹt thở hoặc buồn ngủ ban ngày", "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "ngáy to, kèm cơn ngưng thở, nghẹt thở hoặc buồn ngủ ban ngày thì cần đi khám" } },
+      { "text": "Biểu hiện bất thường trong lúc ngủ gây chấn thương, xảy ra thường xuyên hoặc kèm hành vi phức tạp", "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "cần được đánh giá khi gây chấn thương, xảy ra thường xuyên hoặc kèm hành vi phức tạp" } }
+    ],
+    "note": "Tự đánh giá không thay thế cho chẩn đoán chuyên khoa."
+  },
+  {
+    "group": "giac-ngu",
+    "title": "Giấc ngủ: tín hiệu an toàn nghiêm trọng",
+    "level": "kham-som",
+    "items": [
+      { "text": "Buồn ngủ khi lái xe — hãy đi khám khi cơn buồn ngủ khó cưỡng lại", "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Hãy đi khám khi cơn buồn ngủ khó cưỡng lại!" } }
+    ],
+    "note": "Buồn ngủ khi lái xe không nên được xử lý chỉ bằng cách mở nhạc, hạ kính xe hoặc uống thêm cà phê."
+  }
+]

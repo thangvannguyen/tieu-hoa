@@ -1,0 +1,58 @@
+---
+/** Sơ đồ (bản tin #09): một đêm ngủ luân phiên NREM ↔ REM — sơ đồ định tính, không thể hiện thời lượng. */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+import Icon from '~/components/ui/Icon.astro';
+const pills = ['NREM', 'REM', 'NREM', 'REM'].map((t, i) => ({ t, x: 44 + i * 70 }));
+---
+<Diagram
+  title="Một đêm ngủ không phải là một khối đồng nhất"
+  icon="trang"
+  hue="lav"
+  caption="Trong đêm, chúng ta luân phiên đi qua các giai đoạn ngủ NREM và REM. (Sơ đồ chỉ minh họa sự luân phiên, độ dài các ô không thể hiện thời lượng thật.)"
+  from={['09-giac-ngu-khong-lang-phi']}
+>
+  <div class="nr">
+    <svg class="nr__svg" viewBox="0 0 360 84" role="img" aria-label="Từ lúc bắt đầu ngủ đến sáng: các giai đoạn NREM và REM luân phiên nhau trong đêm.">
+      <Icon name="trang" size={30} x={4} y={18} />
+      <Icon name="mat-troi" size={30} x={326} y={18} />
+      <path class="nr__track" d="M40 33H322"></path>
+      {pills.map((p) => (
+        <g>
+          <rect x={p.x} y="16" width="58" height="34" rx="17" class:list={['nr__pill', p.t === 'REM' ? 'nr__pill--rem' : 'nr__pill--nrem']}></rect>
+          <text x={p.x + 29} y="33.5" class="nr__t" text-anchor="middle" dominant-baseline="central">{p.t}</text>
+        </g>
+      ))}
+      <text x="181" y="72" class="nr__note" text-anchor="middle">luân phiên trong đêm …</text>
+    </svg>
+    <Compare
+      columns={[
+        {
+          title: 'Giấc ngủ NREM',
+          sub: 'đặc biệt là giấc ngủ sâu',
+          icon: 'giuong',
+          hue: 'lav',
+          items: ['Phục hồi thể chất', 'Điều hòa miễn dịch', 'Nhiều hoạt động chuyển hóa và củng cố trí nhớ'],
+        },
+        {
+          title: 'Giấc ngủ REM',
+          sub: 'có vai trò quan trọng đối với',
+          icon: 'nao',
+          hue: 'hong',
+          items: ['Cảm xúc', 'Trí nhớ', 'Khả năng tích hợp thông tin'],
+        },
+      ]}
+    />
+  </div>
+</Diagram>
+
+<style>
+  .nr { display: grid; gap: 0.9rem; }
+  .nr__svg { width: 100%; max-width: 520px; margin: 0 auto; display: block; overflow: visible; color: var(--ink); --ic-fill: var(--lav-fill); }
+  .nr__track { fill: none; stroke: var(--line-2); stroke-width: 3; stroke-dasharray: 3 6; stroke-linecap: round; }
+  .nr__pill { stroke: var(--ink); stroke-width: 3; }
+  .nr__pill--nrem { fill: var(--lav-fill); }
+  .nr__pill--rem { fill: var(--hong-fill); stroke-dasharray: none; }
+  .nr__t { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink); }
+  .nr__note { font-family: var(--font-head); font-weight: 800; font-size: 14px; fill: var(--ink-2); }
+</style>

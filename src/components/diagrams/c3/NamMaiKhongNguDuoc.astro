@@ -1,0 +1,55 @@
+---
+/** Cây quyết định (bản tin #11, mục 7): khi nằm mãi không ngủ được — đừng biến giường thành nơi làm việc. */
+import Diagram from '../primitives/Diagram.astro';
+import StepTree from '../primitives/StepTree.astro';
+---
+<Diagram
+  title="Nằm mãi không ngủ được: làm gì tiếp?"
+  icon="giuong"
+  hue="lav"
+  kicker="Thực hành"
+  interactive
+  caption="Mục tiêu là củng cố lại mối liên hệ: giường dành cho ngủ, không phải nơi giải quyết công việc hoặc đấu tranh với giấc ngủ."
+  from={['11-bo-cong-cu-bao-ve-giac-ngu', '10-ngu-khong-du-hay-roi-loan']}
+>
+  <div class="nm">
+  <StepTree
+    start="q1"
+    nodes={{
+      q1: {
+        q: 'Nằm trên giường, bạn nhận thấy mình đã **tỉnh táo, bực bội hoặc cố ngủ** trong một khoảng thời gian đáng kể?',
+        hint: 'Không cần nhìn đồng hồ liên tục để xác định chính xác bao nhiêu phút đã trôi qua. Hãy dựa vào cảm nhận của bản thân.',
+        options: [
+          { label: 'Đúng vậy', to: 'q2' },
+          { label: 'Chưa, mình đang buồn ngủ dần', to: 'rNgu' },
+        ],
+      },
+      q2: {
+        q: 'Bạn định làm gì tiếp?',
+        options: [
+          { label: 'Cố nằm tiếp, ép mình ngủ', to: 'rEp' },
+          { label: 'Mở laptop, điện thoại giải quyết nốt việc', to: 'rViec' },
+          { label: 'Rời khỏi giường', to: 'q3' },
+        ],
+      },
+      q3: {
+        q: 'Sang một không gian an toàn, ánh sáng dịu và thực hiện hoạt động yên tĩnh. Bạn đã buồn ngủ trở lại chưa?',
+        options: [
+          { label: 'Đã buồn ngủ trở lại', to: 'rQuayLai' },
+          { label: 'Vẫn còn tỉnh táo', to: 'rTiepTuc' },
+        ],
+      },
+      rNgu: { result: { tone: 'ok', icon: 'trang', title: 'Giường dành cho ngủ', text: 'Bạn chỉ cần lên giường khi các tín hiệu buồn ngủ đã rõ.' } },
+      rEp: { result: { tone: 'stop', title: 'Càng cố ngủ, bạn càng khó ngủ', text: 'Giường không phải nơi đấu tranh với giấc ngủ. Hãy rời khỏi giường.' } },
+      rViec: { result: { tone: 'stop', title: 'Đừng biến giường thành nơi làm việc', text: 'Giường dành cho ngủ, không phải nơi giải quyết công việc.' } },
+      rQuayLai: { result: { tone: 'ok', icon: 'giuong', title: 'Quay lại giường khi buồn ngủ trở lại' } },
+      rTiepTuc: { result: { tone: 'warn', icon: 'sach', title: 'Tiếp tục hoạt động yên tĩnh bên ngoài giường', text: 'Quay lại giường khi buồn ngủ trở lại — hãy dựa vào cảm nhận của bản thân, không cần nhìn đồng hồ liên tục.' } },
+    }}
+  />
+  </div>
+</Diagram>
+
+<style>
+  /* StepTree: số thứ tự câu hỏi bị co lại khi câu hỏi dài (primitive chưa đặt flex: none) */
+  .nm :global(.st__qt .dg-num) { flex: none; }
+</style>

@@ -1,0 +1,28 @@
+---
+/** Sơ đồ (bản tin #12, mục 1): "ngủ kém" không phải là một chẩn đoán duy nhất — 9 khả năng liên quan. */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+---
+<Diagram
+  title="“Ngủ kém” không phải là một chẩn đoán duy nhất"
+  icon="tim-kiem"
+  hue="lav"
+  caption="Điều trị hiệu quả bắt đầu từ việc xác định đúng vấn đề."
+  from={['12-khi-nao-can-dieu-tri-giac-ngu']}
+>
+  <Branches
+    root={{ icon: 'trang', title: 'Khó ngủ', text: 'có thể liên quan đến:', hue: 'lav' }}
+    branches={[
+      { icon: 'giuong', title: 'Mất ngủ', text: 'Xem [bản tin #10](/bai/10-ngu-khong-du-hay-roi-loan/)' },
+      { icon: 'dong-ho', title: 'Lịch ngủ không phù hợp với nhịp sinh học' },
+      { icon: 'may-stress', title: 'Lo âu, trầm cảm hoặc căng thẳng' },
+      { icon: 'hoi-tho', title: 'Ngưng thở tắc nghẽn khi ngủ' },
+      { icon: 'chan', title: 'Hội chứng chân không yên' },
+      { icon: 'thuc-quan', title: 'Đau, khó thở, trào ngược hoặc bệnh lý khác', text: 'Về trào ngược: [bản tin #13](/bai/13-dinh-duong-trao-nguoc/)' },
+      { icon: 'ca-phe', title: 'Thuốc, caffeine, nicotine, rượu hoặc chất kích thích' },
+      { icon: 'can-bang', title: 'Thay đổi nội tiết' },
+      { icon: 'laptop', title: 'Môi trường và lịch làm việc' },
+    ]}
+    result={{ icon: 'canh-bao', title: 'Vì vậy, cùng một lời khuyên hoặc cùng một loại thuốc không thể phù hợp với tất cả mọi người.', hue: 'bo' }}
+  />
+</Diagram>

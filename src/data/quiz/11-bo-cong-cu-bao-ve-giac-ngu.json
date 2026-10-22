@@ -1,0 +1,83 @@
+{
+  "lesson": "11-bo-cong-cu-bao-ve-giac-ngu",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Sau một đêm ngủ kém, điểm tựa nào được bản tin đánh giá là tốt hơn trong phần lớn trường hợp?",
+      "options": [
+        { "id": "a", "text": "Cố đi ngủ thật sớm dù cơ thể chưa buồn ngủ" },
+        { "id": "b", "text": "Giờ thức dậy tương đối ổn định" },
+        { "id": "c", "text": "Nằm trên giường lâu hơn để bù giấc" }
+      ],
+      "answer": ["b"],
+      "explain": "Nhiều người cố đi ngủ sớm sau một đêm ngủ kém nên nằm trên giường lâu, suy nghĩ nhiều và bắt đầu lo lắng. Trong phần lớn trường hợp, **giờ thức dậy tương đối ổn định là một điểm tựa tốt hơn**.",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "giờ thức dậy tương đối ổn định là một điểm tựa tốt hơn" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "“Đường băng hạ cánh” cho não bộ nên dành khoảng bao lâu trước giờ ngủ dự kiến?",
+      "options": [
+        { "id": "a", "text": "Vài phút là đủ" },
+        { "id": "b", "text": "Khoảng 30–60 phút" },
+        { "id": "c", "text": "Cả buổi tối, với một nghi thức thật cầu kỳ" }
+      ],
+      "answer": ["b"],
+      "explain": "Bạn không thể chuyển trực tiếp từ chế độ xử lý công việc căng thẳng sang ngủ chỉ trong vài phút. Hãy dành khoảng **30–60 phút trước giờ ngủ dự kiến** để giảm dần kích thích — không cần một nghi thức cầu kỳ.",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "Hãy dành khoảng 30–60 phút trước giờ ngủ dự kiến để giảm dần kích thích" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Nhìn chung, nên dùng các thức uống chứa caffeine cách xa giờ ngủ ít nhất bao lâu?",
+      "options": [
+        { "id": "a", "text": "1–2 tiếng" },
+        { "id": "b", "text": "6–8 tiếng" },
+        { "id": "c", "text": "Không cần, nếu vẫn ngủ được sau cà phê tối thì giấc ngủ không bị ảnh hưởng" }
+      ],
+      "answer": ["b"],
+      "explain": "Có người vẫn ngủ được sau cà phê tối nhưng giấc ngủ có thể nông hoặc gián đoạn hơn. Nhìn chung, **nên dùng các thức uống chứa caffeine cách xa giờ ngủ ít nhất 6–8 tiếng.**",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "nên dùng các thức uống chứa caffeine cách xa giờ ngủ ít nhất 6–8 tiếng" }
+    },
+    {
+      "id": "q4",
+      "type": "dung-sai",
+      "prompt": "“Nằm mãi không ngủ được thì cứ ở lại trên giường mở laptop làm nốt việc cho đỡ phí thời gian.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Khi đã tỉnh táo, bực bội hoặc cố ngủ trong một khoảng thời gian đáng kể: rời khỏi giường, sang không gian an toàn, ánh sáng dịu, làm hoạt động yên tĩnh và quay lại khi buồn ngủ trở lại. **Giường dành cho ngủ, không phải nơi giải quyết công việc hoặc đấu tranh với giấc ngủ.**",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "giường dành cho ngủ, không phải nơi giải quyết công việc hoặc đấu tranh với giấc ngủ" }
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "Trong tuần tăng ca, khi không thể thực hiện mọi khuyến nghị, cần bảo vệ những điểm nào?",
+      "options": [
+        { "id": "a", "text": "Giữ giờ thức tương đối ổn định" },
+        { "id": "b", "text": "Không làm việc trên giường" },
+        { "id": "c", "text": "Không lái xe khi buồn ngủ" },
+        { "id": "d", "text": "Uống thêm cà phê buổi tối để làm cho xong việc" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Năm điểm cần bảo vệ: giữ giờ thức tương đối ổn định, tạo khoảng thư giãn trước khi ngủ, không làm việc trên giường, **quản lý thời điểm dùng caffeine** và không lái xe khi buồn ngủ.",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "Không lái xe khi buồn ngủ" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Vì sao nên chuẩn bị hai kịch bản ngủ A/B trước khi giai đoạn bận rộn bắt đầu?",
+      "options": [
+        { "id": "a", "text": "Vì khi đã quá mệt, khả năng lập kế hoạch và tự kiểm soát thường giảm" },
+        { "id": "b", "text": "Vì giai đoạn bận rộn không ảnh hưởng đến giấc ngủ" },
+        { "id": "c", "text": "Vì kịch bản giúp ngủ đủ 8 tiếng mỗi ngày trong mọi hoàn cảnh" }
+      ],
+      "answer": ["a"],
+      "explain": "Hãy chuẩn bị kịch bản **trước khi giai đoạn bận rộn bắt đầu** vì khi đã quá mệt, khả năng lập kế hoạch và tự kiểm soát thường giảm.",
+      "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "khi đã quá mệt, khả năng lập kế hoạch và tự kiểm soát thường giảm" }
+    }
+  ]
+}

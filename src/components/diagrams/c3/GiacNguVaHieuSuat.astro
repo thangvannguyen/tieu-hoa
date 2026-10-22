@@ -1,0 +1,22 @@
+---
+/** Sơ đồ (bản tin #09): ví dụ "làm việc đến 1 giờ sáng" — vòng lặp kéo dài nhiều ngày. */
+import Diagram from '../primitives/Diagram.astro';
+import Cycle from '../primitives/Cycle.astro';
+---
+<Diagram
+  title="Làm việc đến 1 giờ sáng: hiệu quả của cả chu kỳ nhiều ngày"
+  icon="lap-lai"
+  hue="lav"
+  caption="Như vậy, vấn đề không chỉ là năng suất của một buổi tối mà là hiệu quả của cả chu kỳ nhiều ngày."
+  from={['09-giac-ngu-khong-lang-phi']}
+>
+  <Cycle
+    center={{ title: 'Không chỉ là năng suất của một buổi tối', icon: 'dong-ho-cat' }}
+    nodes={[
+      { icon: 'laptop', title: 'Làm việc đến 1 giờ sáng', text: 'có thể hoàn thành thêm một số đầu việc trong đêm' },
+      { icon: 'dong-ho', title: 'Ngày hôm sau chậm hơn', text: 'Mất nhiều thời gian hơn để hoàn thành công việc; phải kiểm tra và sửa lỗi nhiều lần.' },
+      { icon: 'may-stress', title: 'Khó sáng tạo, khó điều chỉnh cảm xúc', text: 'Khó suy nghĩ sáng tạo; khó điều chỉnh cảm xúc khi làm việc nhóm.' },
+      { icon: 'ca-phe', title: 'Dùng nhiều caffeine hơn', text: '…và tiếp tục khó ngủ vào đêm sau.' },
+    ]}
+  />
+</Diagram>

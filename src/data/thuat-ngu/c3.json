@@ -1,0 +1,155 @@
+[
+  {
+    "id": "giac-ngu-nrem",
+    "term": "Giấc ngủ NREM",
+    "aliases": ["NREM", "giấc ngủ sâu"],
+    "short": "Giai đoạn ngủ (đặc biệt là giấc ngủ sâu) liên quan đến phục hồi thể chất, điều hòa miễn dịch, chuyển hóa và củng cố trí nhớ.",
+    "definition": "Trong đêm, chúng ta luân phiên đi qua các giai đoạn ngủ NREM và REM. Giấc ngủ NREM, đặc biệt là giấc ngủ sâu, liên quan đến quá trình phục hồi thể chất, điều hòa miễn dịch và nhiều hoạt động chuyển hóa và củng cố trí nhớ.",
+    "icon": "giuong",
+    "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Giấc ngủ NREM, đặc biệt là giấc ngủ sâu, liên quan đến quá trình phục hồi thể chất, điều hòa miễn dịch và nhiều hoạt động chuyển hóa và củng cố trí nhớ." }
+  },
+  {
+    "id": "giac-ngu-rem",
+    "term": "Giấc ngủ REM",
+    "aliases": ["REM"],
+    "short": "Giai đoạn ngủ có vai trò quan trọng đối với cảm xúc, trí nhớ và khả năng tích hợp thông tin.",
+    "definition": "Một đêm ngủ không phải là một khối đồng nhất: chúng ta luân phiên đi qua các giai đoạn ngủ NREM và REM. Giấc ngủ REM có vai trò quan trọng đối với cảm xúc, trí nhớ và khả năng tích hợp thông tin.",
+    "icon": "nao",
+    "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Giấc ngủ REM có vai trò quan trọng đối với cảm xúc, trí nhớ và khả năng tích hợp thông tin." }
+  },
+  {
+    "id": "ap-luc-ngu",
+    "term": "Áp lực ngủ",
+    "aliases": ["nhu cầu ngủ"],
+    "short": "Nhu cầu ngủ tăng dần theo thời gian thức — như một chiếc bình được làm đầy dần trong ngày, được giải tỏa khi ngủ.",
+    "definition": "Càng thức lâu, nhu cầu ngủ càng tăng. Có thể hình dung áp lực ngủ giống như một chiếc bình được làm đầy dần trong ngày. Khi ngủ, áp lực này được giải tỏa. Ngủ trưa quá lâu hoặc quá muộn có thể làm giảm áp lực ngủ vào buổi tối, khiến bạn khó ngủ hơn.",
+    "icon": "dong-ho-cat",
+    "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Càng thức lâu, nhu cầu ngủ càng tăng." }
+  },
+  {
+    "id": "nhip-sinh-hoc",
+    "term": "Nhịp sinh học",
+    "aliases": ["đồng hồ sinh học"],
+    "short": "Hệ thống định giờ gần 24 giờ của cơ thể, điều phối thời điểm tỉnh táo và buồn ngủ; ánh sáng là tín hiệu quan trọng nhất.",
+    "definition": "Cơ thể có một hệ thống định giờ gần 24 giờ, giúp điều phối thời điểm tỉnh táo và buồn ngủ, thân nhiệt, hormone, tiêu hóa và nhiều chức năng khác. Ánh sáng là tín hiệu quan trọng nhất giúp đồng hồ sinh học xác định thời gian.",
+    "icon": "dong-ho",
+    "source": { "bai": "09-giac-ngu-khong-lang-phi", "trich": "Cơ thể có một hệ thống định giờ gần 24 giờ, giúp điều phối thời điểm tỉnh táo và buồn ngủ, thân nhiệt, hormone, tiêu hóa và nhiều chức năng khác." }
+  },
+  {
+    "id": "mat-ngu",
+    "term": "Mất ngủ",
+    "aliases": ["mất ngủ mạn tính", "khó ngủ"],
+    "short": "Khó bắt đầu giấc ngủ, thức giấc nhiều lần khó ngủ lại hoặc thức dậy quá sớm — kèm hậu quả ban ngày.",
+    "definition": "Mất ngủ có thể biểu hiện dưới nhiều dạng: khó bắt đầu giấc ngủ; thức giấc nhiều lần và khó ngủ lại; thức dậy quá sớm so với mong đợi. Điểm quan trọng là vấn đề ban đêm đi kèm hậu quả ban ngày, chẳng hạn mệt mỏi, giảm tập trung, khó kiểm soát cảm xúc hoặc ảnh hưởng công việc. Không phải một vài đêm khó ngủ đã được xem là mất ngủ mạn tính.",
+    "icon": "trang",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Điểm quan trọng là vấn đề ban đêm đi kèm hậu quả ban ngày, chẳng hạn mệt mỏi, giảm tập trung, khó kiểm soát cảm xúc hoặc ảnh hưởng công việc." }
+  },
+  {
+    "id": "vong-xoan-mat-ngu",
+    "term": "Vòng xoắn mất ngủ",
+    "aliases": [],
+    "short": "Căng thẳng làm ngủ kém → lo lắng → cố ép mình ngủ → giường gắn với tỉnh táo, căng thẳng → càng cố ngủ càng khó ngủ.",
+    "definition": "Dấu hiệu vòng xoắn mất ngủ đang hình thành: một giai đoạn căng thẳng làm bạn ngủ kém; bạn bắt đầu lo lắng về hậu quả của việc mất ngủ; bạn đi ngủ sớm hơn, nằm trên giường lâu hơn hoặc cố ép mình ngủ; giường ngủ dần gắn với sự tỉnh táo và căng thẳng; càng cố ngủ, bạn càng khó ngủ.",
+    "icon": "lap-lai",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Giường ngủ dần gắn với sự tỉnh táo và căng thẳng." }
+  },
+  {
+    "id": "ngung-tho-tac-nghen-khi-ngu",
+    "term": "Ngưng thở tắc nghẽn khi ngủ",
+    "aliases": ["ngưng thở khi ngủ"],
+    "short": "Đường thở trên bị hẹp hoặc tắc lặp đi lặp lại trong lúc ngủ, làm giảm oxy hoặc gây những lần thức giấc rất ngắn.",
+    "definition": "Ngưng thở tắc nghẽn khi ngủ xảy ra khi đường thở trên bị hẹp hoặc tắc lặp đi lặp lại trong lúc ngủ. Mỗi lần như vậy có thể làm giảm oxy hoặc khiến não bộ phải tạo ra những lần thức giấc rất ngắn để mở lại đường thở. Người bệnh thường không nhớ các lần thức giấc này; ngáy chỉ là phần dễ nhận thấy.",
+    "icon": "hoi-tho",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Ngưng thở tắc nghẽn khi ngủ xảy ra khi đường thở trên bị hẹp hoặc tắc lặp đi lặp lại trong lúc ngủ." }
+  },
+  {
+    "id": "buon-ngu",
+    "term": "Buồn ngủ (ban ngày)",
+    "aliases": ["buồn ngủ ban ngày", "ngủ gật"],
+    "short": "Xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích — khác với mệt mỏi.",
+    "definition": "Buồn ngủ là xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích. Dấu hiệu buồn ngủ có thể gồm mí mắt nặng, ngáp, khó giữ mắt mở hoặc đầu gật xuống. Buồn ngủ khi lái xe là một tín hiệu an toàn nghiêm trọng.",
+    "icon": "ngu-trua",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Buồn ngủ là xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích." }
+  },
+  {
+    "id": "met-moi",
+    "term": "Mệt mỏi",
+    "aliases": ["kiệt sức"],
+    "short": "Cảm giác thiếu năng lượng, kiệt sức hoặc không muốn hoạt động, nhưng chưa chắc có thể ngủ được.",
+    "definition": "Mệt mỏi là cảm giác thiếu năng lượng, kiệt sức hoặc không muốn hoạt động, nhưng chưa chắc có thể ngủ được. Mệt mỏi có thể đi kèm căng thẳng, bồn chồn và đầu óc vẫn hoạt động mạnh. Một người mất ngủ có thể cảm thấy rất mệt nhưng không dễ ngủ vào ban ngày.",
+    "icon": "dong-ho-cat",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Mệt mỏi là cảm giác thiếu năng lượng, kiệt sức hoặc không muốn hoạt động, nhưng chưa chắc có thể ngủ được." }
+  },
+  {
+    "id": "roi-loan-nhip-ngu-thuc",
+    "term": "Rối loạn nhịp ngủ – thức",
+    "aliases": ["rối loạn nhịp sinh học"],
+    "short": "Cơ thể muốn ngủ vào một khung giờ khác với khung giờ công việc yêu cầu, dù vẫn có khả năng ngủ.",
+    "definition": "Khi đồng hồ sinh học không phù hợp với lịch sống: bạn có thể không mất khả năng ngủ. Vấn đề là cơ thể muốn ngủ vào một khung giờ khác với khung giờ công việc yêu cầu. Khi được phép ngủ thoải mái theo thói quen, những người này thường vẫn ngủ khá tốt.",
+    "icon": "dong-ho",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Vấn đề là cơ thể muốn ngủ vào một khung giờ khác với khung giờ công việc yêu cầu." }
+  },
+  {
+    "id": "hoi-chung-chan-khong-yen",
+    "term": "Hội chứng chân không yên",
+    "aliases": [],
+    "short": "Khó chịu trong chân kèm thôi thúc cử động, nặng hơn khi nghỉ, giảm khi cử động, rõ hơn vào buổi tối hoặc ban đêm.",
+    "definition": "Hãy nghĩ đến hội chứng chân không yên khi có đủ những đặc điểm: cảm giác khó chịu trong chân kèm thôi thúc phải cử động; xuất hiện hoặc nặng hơn khi ngồi hoặc nằm nghỉ; giảm khi đi lại, duỗi chân hoặc cử động; thường rõ hơn vào buổi tối hoặc ban đêm. Cảm giác có thể được mô tả là kiến bò, bứt rứt, căng tức hoặc rất khó diễn đạt — không đơn thuần là thói quen “rung chân”.",
+    "icon": "chan",
+    "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Cảm giác khó chịu trong chân kèm thôi thúc phải cử động" }
+  },
+  {
+    "id": "tri-hoan-giac-ngu",
+    "term": "Trì hoãn giấc ngủ",
+    "aliases": [],
+    "short": "Cố gắng làm việc hoặc xem điện thoại dù đã buồn ngủ rã rời.",
+    "definition": "Chỉ cần lên giường khi các tín hiệu buồn ngủ đã rõ. Tuy nhiên, tránh trì hoãn giấc ngủ, tức là cố gắng làm việc hoặc xem điện thoại dù đã buồn ngủ rã rời.",
+    "icon": "dien-thoai",
+    "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "tránh trì hoãn giấc ngủ, tức là cố gắng làm việc hoặc xem điện thoại dù đã buồn ngủ rã rời" }
+  },
+  {
+    "id": "duong-bang-ha-canh",
+    "term": "“Đường băng hạ cánh” cho não bộ",
+    "aliases": ["đường băng hạ cánh"],
+    "short": "Khoảng 30–60 phút trước giờ ngủ dự kiến để giảm dần kích thích, theo một trình tự đơn giản.",
+    "definition": "Bạn không thể chuyển trực tiếp từ chế độ xử lý công việc căng thẳng sang ngủ chỉ trong vài phút. Hãy dành khoảng 30–60 phút trước giờ ngủ dự kiến để giảm dần kích thích: kết thúc công việc căng thẳng, viết lại việc còn dang dở, giảm ánh sáng, vệ sinh cá nhân, đọc nhẹ nhàng hoặc nghe âm thanh thư giãn, lên giường khi buồn ngủ.",
+    "icon": "may-bay",
+    "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "Bạn không thể chuyển trực tiếp từ chế độ xử lý công việc căng thẳng sang ngủ chỉ trong vài phút." }
+  },
+  {
+    "id": "dong-cua-ngay-lam-viec",
+    "term": "Kỹ thuật “đóng cửa ngày làm việc”",
+    "aliases": ["đóng cửa ngày làm việc"],
+    "short": "Trước khi ngừng làm việc, viết ba dòng: đã hoàn thành gì, việc dở xử lý khi nào, việc đầu tiên ngày mai.",
+    "definition": "Trước khi ngừng làm việc, hãy thử viết ba dòng: Hôm nay tôi đã hoàn thành điều gì? Việc chưa hoàn thành sẽ được xử lý khi nào? Việc đầu tiên tôi sẽ làm vào ngày mai là gì? Mục tiêu không phải giải quyết mọi vấn đề, mà giúp não bộ không phải liên tục nhắc lại chúng trong đêm.",
+    "icon": "nhat-ky",
+    "source": { "bai": "11-bo-cong-cu-bao-ve-giac-ngu", "trich": "Mục tiêu không phải giải quyết mọi vấn đề, mà giúp não bộ không phải liên tục nhắc lại chúng trong đêm." }
+  },
+  {
+    "id": "ve-sinh-giac-ngu",
+    "term": "Vệ sinh giấc ngủ",
+    "aliases": [],
+    "short": "Các nguyên tắc như giữ lịch ngủ hợp lý, quản lý caffeine, vận động và tạo môi trường ngủ phù hợp — nền tảng tốt nhưng không phải lúc nào cũng đủ.",
+    "definition": "Vệ sinh giấc ngủ bao gồm những nguyên tắc như giữ lịch ngủ hợp lý, quản lý caffeine, vận động và tạo môi trường ngủ phù hợp. Đây là nền tảng tốt cho sức khỏe giấc ngủ. Nhưng ở người mất ngủ mạn tính, chỉ nhắc “đừng dùng điện thoại”, “hãy thư giãn” hoặc “hãy ngủ sớm” thường không đủ.",
+    "icon": "giuong",
+    "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Vệ sinh giấc ngủ bao gồm những nguyên tắc như giữ lịch ngủ hợp lý, quản lý caffeine, vận động và tạo môi trường ngủ phù hợp." }
+  },
+  {
+    "id": "cbt-i",
+    "term": "CBT-I",
+    "aliases": ["liệu pháp nhận thức – hành vi dành cho mất ngủ", "liệu pháp nhận thức hành vi"],
+    "short": "Liệu pháp nhận thức – hành vi dành cho mất ngủ: chương trình điều trị có cấu trúc do chuyên gia thực hiện.",
+    "definition": "CBT-I là liệu pháp nhận thức – hành vi dành cho mất ngủ. Đây là một chương trình điều trị có cấu trúc được thực hiện bởi chuyên gia, không đơn thuần là tư vấn thư giãn. Tùy trường hợp, chương trình có thể bao gồm tư vấn về cơ chế giấc ngủ, điều chỉnh thời gian nằm trên giường, tái thiết lập mối liên hệ giữa giường và giấc ngủ, làm việc với suy nghĩ và nỗi sợ liên quan đến mất ngủ… Mục tiêu không phải ép người bệnh ngủ bằng ý chí.",
+    "icon": "bac-si",
+    "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Đây là một chương trình điều trị có cấu trúc được thực hiện bởi chuyên gia, không đơn thuần là tư vấn thư giãn." }
+  },
+  {
+    "id": "do-da-ky-giac-ngu",
+    "term": "Đo đa ký giấc ngủ",
+    "aliases": ["xét nghiệm giấc ngủ"],
+    "short": "Một “xét nghiệm” giấc ngủ — không phải mất ngủ nào cũng cần; được cân nhắc trong một số tình huống cụ thể.",
+    "definition": "Mất ngủ thường được chẩn đoán chủ yếu dựa trên khai thác bệnh sử và đánh giá lâm sàng. Đo đa ký giấc ngủ có thể được cân nhắc khi: nghi ngờ ngưng thở khi ngủ; có các cử động chân tay bất thường; có hành vi phức tạp hoặc nguy hiểm trong lúc ngủ; chẩn đoán chưa rõ; điều trị phù hợp nhưng không đạt kết quả như dự kiến; cần đánh giá một rối loạn giấc ngủ khác. Một xét nghiệm không thay thế được cho buổi thăm khám lâm sàng đầy đủ.",
+    "icon": "tim-kiem",
+    "source": { "bai": "12-khi-nao-can-dieu-tri-giac-ngu", "trich": "Đo đa ký giấc ngủ có thể được cân nhắc khi:" }
+  }
+]

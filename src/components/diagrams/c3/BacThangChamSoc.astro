@@ -1,0 +1,30 @@
+---
+/**
+ * Sơ đồ (bản tin #12, nối với #11): các bậc chăm sóc giấc ngủ được nhắc trong chuỗi bản tin.
+ * Thứ tự bậc là cách sắp xếp của biên tập (đã ghi trong sổ biên tập c3 để BS xác nhận).
+ * Lưu ý primitive Layers shape="stairs": phần tử đầu tiên hiển thị ở hàng trên cùng (bậc cao nhất),
+ * nên mảng được truyền từ bậc cao xuống nền tảng.
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Layers from '../primitives/Layers.astro';
+---
+<Diagram
+  title="Các bậc chăm sóc giấc ngủ trong chuỗi bản tin"
+  icon="cau-thang"
+  hue="lav"
+  caption="Điều trị hiệu quả bắt đầu từ việc xác định đúng vấn đề. Vệ sinh giấc ngủ là nền tảng tốt cho sức khỏe giấc ngủ; khi vấn đề vượt quá khả năng tự điều chỉnh, tìm trợ giúp không phải là thất bại."
+  from={['12-khi-nao-can-dieu-tri-giac-ngu', '11-bo-cong-cu-bao-ve-giac-ngu']}
+>
+  <Layers
+    shape="stairs"
+    topLabel="Cần được chuyên gia đánh giá, hướng dẫn và cá thể hóa"
+    baseLabel="Nền tảng tốt cho sức khỏe giấc ngủ"
+    layers={[
+      { icon: 'tim-kiem', title: 'Đo đa ký giấc ngủ — chỉ khi được cân nhắc', text: 'Nghi ngờ ngưng thở khi ngủ, cử động chân tay bất thường, hành vi phức tạp khi ngủ, chẩn đoán chưa rõ… Một xét nghiệm không thay thế được cho buổi thăm khám lâm sàng đầy đủ.', hue: 'hong' },
+      { icon: 'vien-thuoc', title: 'Thuốc ngủ — không tuyệt đối hóa theo hướng tốt hoặc xấu', text: 'Có thể có vai trò trong một số trường hợp; giảm hoặc ngưng thuốc cần có kế hoạch phù hợp.', hue: 'dao' },
+      { icon: 'bac-si', title: 'CBT-I — liệu pháp nhận thức – hành vi dành cho mất ngủ', text: 'Chương trình điều trị có cấu trúc được thực hiện bởi chuyên gia.', hue: 'lav' },
+      { icon: 'cong-cu', title: 'Bộ công cụ bảo vệ giấc ngủ (bản tin #11)', text: 'Giờ thức ổn định, “đường băng hạ cánh”, caffeine có chiến lược, ánh sáng, giường chỉ dành cho ngủ.', hue: 'ngoc' },
+      { icon: 'giuong', title: 'Vệ sinh giấc ngủ', text: 'Giữ lịch ngủ hợp lý, quản lý caffeine, vận động và tạo môi trường ngủ phù hợp.', hue: 'sage' },
+    ]}
+  />
+</Diagram>
