@@ -1,0 +1,41 @@
+---
+/** So sánh chất xơ hòa tan và không hòa tan (bản tin #16; ví dụ thực phẩm lấy từ bản tin #14 và #15). */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Hai loại chất xơ: hòa tan và không hòa tan"
+  icon="chat-xo"
+  hue="bo"
+  kicker="So sánh"
+  caption="Có 2 loại chất xơ là loại hòa tan trong nước và loại không tan trong nước. Trong chế độ ăn hằng ngày, nên ăn đa dạng các thực phẩm có đủ hai loại chất xơ hòa tan và không hòa tan. (Ví dụ thực phẩm cho từng loại lấy từ bản tin #14 và #15.)"
+  from={['16-dinh-duong-tao-bon', '14-dinh-duong-viem-loet-da-day-ta-trang', '15-dinh-duong-ibs']}
+>
+  <Compare
+    vs
+    columns={[
+      {
+        title: 'Chất xơ hòa tan',
+        sub: 'hòa tan trong nước',
+        icon: 'nuoc',
+        hue: 'ngoc',
+        items: [
+          { icon: 'nuoc', text: '**Hấp thụ độ ẩm**, giúp phân mềm hơn và dễ đi ngoài hơn' },
+          { icon: 'ruot', text: 'Làm tăng độ nhớt trong thành phần ruột *(bản tin #14)*' },
+          { icon: 'chat-xo', text: 'Có nhiều trong yến mạch, lúa mạch, hạt chia… *(bản tin #15)*' },
+        ],
+      },
+      {
+        title: 'Chất xơ không hòa tan',
+        sub: 'không tan trong nước',
+        icon: 'chat-xo',
+        hue: 'bo',
+        items: [
+          { icon: 'nuoc', text: '**Hút nước, tăng khối lượng chất bã** khiến quá trình thải cặn bã mau hơn' },
+          { icon: 'mui-ten-phai', text: '**Tăng tốc độ di chuyển** thức ăn qua ruột' },
+          { icon: 'trai-cay', text: 'Ngũ cốc nguyên hạt, granola, hạt lanh *(bản tin #14)*; lúa mì, vỏ các loại trái cây như táo, nho, cà chua… *(bản tin #15)*' },
+        ],
+      },
+    ]}
+  />
+</Diagram>

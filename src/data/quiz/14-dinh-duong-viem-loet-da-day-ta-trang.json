@@ -1,0 +1,83 @@
+{
+  "lesson": "14-dinh-duong-viem-loet-da-day-ta-trang",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Trong giai đoạn cấp tính, protein được khuyến nghị lên đến bao nhiêu?",
+      "options": [
+        { "id": "a", "text": "0,5 g/kg/ngày" },
+        { "id": "b", "text": "1,2 g/kg/ngày" },
+        { "id": "c", "text": "2,5 g/kg/ngày" }
+      ],
+      "answer": ["b"],
+      "explain": "Protein **lên đến 1,2 g/kg/ngày** trong giai đoạn cấp tính và **tối đa 1,5 g/kg/ngày** trong giai đoạn phục hồi.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Protein lên đến 1,2 g/kg/ngày trong giai đoạn cấp tính" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Khi mới bước vào điều trị (giai đoạn đầu), người bệnh nên ăn như thế nào?",
+      "options": [
+        { "id": "a", "text": "Thức ăn lỏng (cháo, súp), 6 bữa/ngày, lượng ít (100 ml/bữa), tăng dần theo khả năng dung nạp" },
+        { "id": "b", "text": "Thức ăn thông thường, 3 bữa no mỗi ngày" },
+        { "id": "c", "text": "Cơm nhão và thịt nhiều gân để dạ dày quen dần" }
+      ],
+      "answer": ["a"],
+      "explain": "Giai đoạn đầu nên sử dụng **thức ăn lỏng (cháo, súp)**, **6 bữa/ngày**, lượng ít **100 ml/bữa** và tăng dần; giai đoạn thứ 2 chuyển sang món mềm; giai đoạn thứ 3 mới ăn thức ăn thông thường.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "nên sử dụng thức ăn lỏng (cháo, súp) trong mỗi bữa ăn (6 bữa/ngày)" }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "prompt": "Những thức ăn, đồ uống nào bài khuyên không nên dùng?",
+      "options": [
+        { "id": "a", "text": "Thịt nguội chế biến sẵn như dăm bông, lạp xưởng, xúc xích" },
+        { "id": "b", "text": "Nước có gas, chè, cà phê đậm đặc" },
+        { "id": "c", "text": "Thịt lợn nạc, cá nạc luộc, hấp, kho" },
+        { "id": "d", "text": "Dưa cà muối, hành muối, các loại quả chua" }
+      ],
+      "answer": ["a", "b", "d"],
+      "explain": "Thịt lợn nạc, cá nạc chế biến dạng luộc, hấp, kho là **đạm dễ tiêu nên ăn**; thịt nguội, nước có gas, chè, cà phê đậm đặc, dưa cà muối, quả chua thuộc nhóm **không nên dùng**.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Các loại thịt nguội đã chế biến sẵn như dăm bông, lạp xưởng, xúc xích." }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Nhiệt độ thức ăn thích hợp để dễ tiêu hoá và hấp thu là bao nhiêu?",
+      "options": [
+        { "id": "a", "text": "Ăn thật lạnh, dưới 10 °C" },
+        { "id": "b", "text": "40–50 °C" },
+        { "id": "c", "text": "Càng nóng càng tốt, trên 70 °C" }
+      ],
+      "answer": ["b"],
+      "explain": "Nhiệt độ thức ăn cũng làm ảnh hưởng đến kích thích dạ dày; **nhiệt độ thích hợp để thức ăn dễ tiêu hoá và hấp thu là 40–50 °C**. Người bệnh nên ăn ngay sau khi nấu xong.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "nhiệt độ thích hợp để thức ăn dễ tiêu hoá và hấp thu là 40–50 °C" }
+    },
+    {
+      "id": "q5",
+      "type": "dung-sai",
+      "prompt": "“Bổ sung vitamin A liều càng cao thì vết loét càng mau lành.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Vitamin A có thể được sử dụng như một chất bổ sung, nhưng **liều lượng cao không có tác dụng chữa bệnh và khi uống quá nhiều có thể gây độc**.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "liều lượng cao không có tác dụng chữa bệnh và khi uống quá nhiều có thể gây độc" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Sau khi rà lại thói quen dinh dưỡng, bài gợi ý đặt mục tiêu nhỏ theo cách nào?",
+      "options": [
+        { "id": "a", "text": "Theo FODMAP" },
+        { "id": "b", "text": "Theo SMART" },
+        { "id": "c", "text": "Theo chỉ số BMI" }
+      ],
+      "answer": ["b"],
+      "explain": "Bạn hãy tiếp tục **đặt một mục tiêu nhỏ theo SMART để điều chỉnh một thói quen nhỏ** — bền bỉ điều chỉnh từng chút mỗi ngày.",
+      "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "đặt một mục tiêu nhỏ theo SMART để điều chỉnh một thói quen nhỏ" }
+    }
+  ]
+}

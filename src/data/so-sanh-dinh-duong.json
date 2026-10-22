@@ -1,0 +1,171 @@
+{
+  "lessons": {
+    "13": { "bai": "13-dinh-duong-trao-nguoc", "label": "#13 Trào ngược dạ dày - thực quản" },
+    "14": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "label": "#14 Viêm loét dạ dày - tá tràng" },
+    "15": { "bai": "15-dinh-duong-ibs", "label": "#15 Hội chứng ruột kích thích (IBS)" },
+    "16": { "bai": "16-dinh-duong-tao-bon", "label": "#16 Táo bón" }
+  },
+  "aspects": [
+    {
+      "id": "chat-xo",
+      "label": "Chất xơ",
+      "icon": "chat-xo",
+      "cells": {
+        "13": { "text": "Ăn nhiều chất xơ: nguy cơ trào ngược thấp hơn 30% so với người ăn ít chất xơ.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Ăn nhiều chất xơ làm giảm nguy cơ bệnh trào ngược dạ dày thực quản" } },
+        "14": { "text": "Chế độ giàu chất xơ 20–30 g/ngày (theo WHO); xơ không hòa tan: ngũ cốc nguyên hạt, granola, hạt lanh.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "được khuyến khích 20 đến 30 g/ngày (theo WHO - Tổ chức Y tế Thế giới)" } },
+        "15": { "text": "Tăng từ từ; ưu tiên xơ tan (yến mạch, lúa mạch, hạt chia…); hạn chế xơ không tan (lúa mì, ngũ cốc nguyên hạt, vỏ trái cây).", "source": { "bai": "15-dinh-duong-ibs", "trich": "Nên tăng từ từ lượng chất xơ cho người bệnh" } },
+        "16": { "text": "Ít nhất 20–25 g/người/ngày, ăn đa dạng để có đủ cả xơ hòa tan và không hòa tan.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Nhu cầu chất xơ khuyến nghị cho người Việt Nam ít nhất là 20–25 g/người/ngày" } }
+      }
+    },
+    {
+      "id": "rau-trai-cay",
+      "label": "Rau, trái cây",
+      "icon": "rau",
+      "cells": {
+        "13": { "text": "Thực phẩm có tính kiềm: táo, hạnh nhân, củ cải, bơ, khoai lang, bắp cải, cà rốt…; tăng rau, trái cây.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "(táo, hạnh nhân, củ cải, bơ, khoai lang, bắp cải, cà rốt…)" } },
+        "14": { "text": "Rau củ non, ưu tiên họ cải; không nên: rau già nhiều xơ, quả xanh sống, quả chua.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "chọn các loại rau củ non, ưu tiên họ cải (cải bắp, củ cải, hoặc rau cải)" } },
+        "15": { "text": "Táo, cherry, đào, đậu Hà Lan, bắp cải, bông cải xanh chứa nhiều FODMAPs.", "source": { "bai": "15-dinh-duong-ibs", "trich": "Thực phẩm chứa nhiều FODMAPs: táo, quả cherry, đào" } },
+        "16": { "text": "Giàu chất xơ tốt nhất: bông cải xanh, bắp cải, cà rốt, khoai tây, bí đỏ; quả mọng, đào, mơ, mận, nho khô, dâu tây.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "bông cải xanh, bắp cải, cà rốt, khoai tây, bí đỏ" } }
+      }
+    },
+    {
+      "id": "ca-phe",
+      "label": "Cà phê",
+      "icon": "ca-phe",
+      "cells": {
+        "13": { "text": "Loại bỏ cà phê: làm giảm áp lực cơ thắt thực quản dưới.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Loại bỏ cà phê: Cà phê làm giảm áp lực cơ thắt thực quản dưới" } },
+        "14": { "text": "Không nên dùng chè, cà phê đậm đặc.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "các loại nước có gas, chè, cà phê đậm đặc" } },
+        "15": { "text": "Hạn chế thức uống có caffein (làm tăng nhu động ruột).", "source": { "bai": "15-dinh-duong-ibs", "trich": "Caffein: làm tăng nhu động ruột" } },
+        "16": { "text": "Cà phê có thể làm nặng thêm táo bón.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "rượu bia, cà phê" } }
+      }
+    },
+    {
+      "id": "chat-beo",
+      "label": "Chất béo",
+      "icon": "dau-an",
+      "cells": {
+        "13": { "text": "Hạn chế thức ăn nhiều chất béo: chậm rỗng dạ dày, giảm áp lực cơ thắt thực quản dưới.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Hạn chế thức ăn nhiều chất béo" } },
+        "14": { "text": "Lipid ít chất béo bão hòa (< 7% nhu cầu năng lượng); dùng dầu thực vật từ các loại hạt.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Lipid có ít chất béo bão hòa" } },
+        "15": { "text": "Chất béo thường là tác nhân gây triệu chứng; chọn thực phẩm ít chất béo.", "source": { "bai": "15-dinh-duong-ibs", "trich": "Khuyến khích lựa chọn thực phẩm ít chất béo" } },
+        "16": { "text": "Hạn chế đồ ăn nhiều dầu mỡ.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "đồ ăn nhiều dầu mỡ" } }
+      }
+    },
+    {
+      "id": "ruou-bia-thuoc-la",
+      "label": "Rượu bia / thuốc lá",
+      "icon": "ruou-bia",
+      "cells": {
+        "13": { "text": "Tránh rượu, bia, đồ uống có cồn; ngừng hút thuốc (làm giãn cơ vòng thực quản dưới).", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Tránh rượu, bia và các đồ uống có cồn khác" } },
+        "14": { "text": "Ngừng bia, rượu; bỏ thuốc lá.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Ngừng những loại nước uống có cồn như bia, rượu." } },
+        "15": { "text": "Hạn chế rượu và thức uống có cồn.", "source": { "bai": "15-dinh-duong-ibs", "trich": "nên hạn chế rượu và các thức uống có chứa cồn" } },
+        "16": { "text": "Rượu bia có thể làm nặng thêm táo bón; nghiện chất là một nhóm nguy cơ cần rà soát.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "đồ ăn nhiều dầu mỡ, rượu bia" } }
+      }
+    },
+    {
+      "id": "so-bua",
+      "label": "Số bữa / cách ăn",
+      "icon": "com",
+      "cells": {
+        "13": { "text": "Ăn vừa đủ no, chia nhiều bữa nhỏ; tránh ăn 2–3 giờ trước khi ngủ, tránh ăn khuya.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Ăn vừa đủ no, chia nhiều bữa nhỏ trong ngày." } },
+        "14": { "text": "4–6 bữa/ngày; giai đoạn đầu 6 bữa lỏng, 100 ml/bữa; thức ăn mềm, ăn ngay sau khi nấu.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Ăn từ 4–6 bữa/ngày." } },
+        "15": { "text": "Chia nhỏ bữa (4–6 bữa/ngày), ăn chậm nhai kỹ.", "source": { "bai": "15-dinh-duong-ibs", "trich": "Chia nhỏ bữa (4–6 bữa/ngày), ăn chậm nhai kỹ." } },
+        "16": { "text": "Chế độ ăn phù hợp cân đối; tập thói quen đại tiện hằng ngày theo một khung giờ nhất định.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "người bệnh cần có chế độ ăn phù hợp cân đối" } }
+      }
+    },
+    {
+      "id": "nuoc",
+      "label": "Nước",
+      "icon": "nuoc",
+      "cells": {
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": { "text": "Khoảng 1,5–2 lít/ngày (người trưởng thành); ăn nhiều xơ phải uống nhiều nước.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "nên uống khoảng 1,5–2 lít nước mỗi ngày đối với người trưởng thành" } }
+      }
+    },
+    {
+      "id": "loi-khuan",
+      "label": "Lợi khuẩn",
+      "icon": "loi-khuan",
+      "cells": {
+        "13": null,
+        "14": null,
+        "15": { "text": "Bổ sung Probiotic; cân nhắc Lactobacillus, sữa chua.", "source": { "bai": "15-dinh-duong-ibs", "trich": "cân nhắc bổ sung Lactobacillus, sữa chua" } },
+        "16": { "text": "Bổ sung lợi khuẩn nên đi cùng bổ sung chất xơ.", "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Việc bổ sung lợi khuẩn nên đi cùng với việc bổ sung chất xơ" } }
+      }
+    },
+    {
+      "id": "gia-vi-chua-cay",
+      "label": "Gia vị chua cay",
+      "icon": "ot",
+      "cells": {
+        "13": { "text": "Không dùng thức ăn chua, cay, lên men chua; tránh hành sống, thức ăn mùi thơm vị đậm.", "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "Không dùng thức ăn chua, cay hoặc lên men chua." } },
+        "14": { "text": "Không dùng thức ăn chua, cay, lên men chua; không nên: giấm tỏi, tiêu ớt, dưa cà muối, hành muối.", "source": { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Gia vị, giấm tỏi, tiêu ớt, hoặc các loại dưa cà muối, hành muối" } },
+        "15": null,
+        "16": null
+      }
+    },
+    {
+      "id": "sua",
+      "label": "Sữa",
+      "icon": "sua",
+      "cells": {
+        "13": null,
+        "14": null,
+        "15": { "text": "Thực phẩm nhiều lactose (sữa, kem, phô mai…) chứa nhiều FODMAPs; khuyến khích sữa ít béo.", "source": { "bai": "15-dinh-duong-ibs", "trich": "thực phẩm nhiều lactose, như sữa, kem, phô mai" } },
+        "16": null
+      }
+    }
+  ],
+  "conflicts": [
+    {
+      "title": "Táo, bắp cải, bông cải xanh, đào: nên ăn hay hạn chế?",
+      "text": "Bản tin #13 xếp táo, bắp cải vào nhóm thực phẩm có tính kiềm nên dùng; #14 ưu tiên rau họ cải (cải bắp, củ cải, rau cải); #16 xếp bông cải xanh, bắp cải, đào vào nhóm rau, trái cây giàu chất xơ tốt nhất. Bản tin #15 (IBS) lại xếp táo, đào, bắp cải, bông cải xanh vào nhóm thực phẩm chứa nhiều FODMAPs. Mỗi bài viết cho một bệnh lý khác nhau.",
+      "sources": [
+        { "bai": "13-dinh-duong-trao-nguoc", "trich": "(táo, hạnh nhân, củ cải, bơ, khoai lang, bắp cải, cà rốt…)" },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "ưu tiên họ cải (cải bắp, củ cải, hoặc rau cải)" },
+        { "bai": "15-dinh-duong-ibs", "trich": "Thực phẩm chứa nhiều FODMAPs: táo, quả cherry, đào, một số rau quả xanh như đậu Hà Lan, bắp cải, bông cải xanh" },
+        { "bai": "16-dinh-duong-tao-bon", "trich": "Các loại rau, trái cây giàu chất xơ tốt nhất bao gồm: bông cải xanh, bắp cải, cà rốt, khoai tây, bí đỏ…; các loại quả mọng, đào, mơ, mận" }
+      ]
+    },
+    {
+      "title": "Ngũ cốc nguyên hạt và chất xơ không hòa tan",
+      "text": "Bản tin #13 khuyên tăng tiêu thụ ngũ cốc nguyên hạt; #14 nêu xơ không hòa tan (ngũ cốc nguyên hạt, granola, hạt lanh) giúp đào thải phân dễ dàng và khuyên chế độ ăn giàu ngũ cốc nguyên hạt, đồng thời dặn dùng thức ăn mềm, tránh rau có nhiều xơ; #16 liệt kê ngũ cốc nguyên hạt (yến mạch, gạo lứt, lúa mì nguyên cám…) là nguồn chất xơ. Bản tin #15 (IBS) khuyên hạn chế các loại xơ không tan như lúa mì, ngũ cốc nguyên hạt.",
+      "sources": [
+        { "bai": "13-dinh-duong-trao-nguoc", "trich": "tăng tiêu thụ rau, trái cây, các loại đậu và ngũ cốc nguyên hạt" },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Chất xơ không hòa tan (ngũ cốc nguyên hạt, granola, hạt lanh) làm tăng khối lượng phân" },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "giàu trái cây, rau và ngũ cốc nguyên hạt" },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "Dùng thức ăn mềm." },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "rau có nhiều xơ (rau già, rau cần...)" },
+        { "bai": "15-dinh-duong-ibs", "trich": "Hạn chế các loại xơ không tan như lúa mì, ngũ cốc nguyên hạt" },
+        { "bai": "16-dinh-duong-tao-bon", "trich": "Các loại ngũ cốc nguyên hạt giàu chất xơ bao gồm: yến mạch, gạo lứt, lúa mì nguyên cám" }
+      ]
+    },
+    {
+      "title": "Mục tiêu chất xơ: 20–30 g hay 20–25 g mỗi ngày?",
+      "text": "Bản tin #14 ghi chế độ ăn giàu chất xơ 20 đến 30 g/ngày, theo WHO, cho người viêm loét dạ dày tá tràng. Bản tin #16 ghi nhu cầu chất xơ khuyến nghị cho người Việt Nam ít nhất là 20–25 g/người/ngày. Hai con số đến từ hai nguồn khuyến nghị khác nhau.",
+      "sources": [
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "được khuyến khích 20 đến 30 g/ngày (theo WHO - Tổ chức Y tế Thế giới)" },
+        { "bai": "16-dinh-duong-tao-bon", "trich": "Nhu cầu chất xơ khuyến nghị cho người Việt Nam ít nhất là 20–25 g/người/ngày" }
+      ]
+    },
+    {
+      "title": "Lúa mì và gluten",
+      "text": "Bản tin #15 (IBS) khuyên tránh thực phẩm chứa gluten, nêu lúa mì trong các thực phẩm có thể làm trầm trọng thêm triệu chứng và hạn chế lúa mì như một loại xơ không tan. Bản tin #14 nêu bánh mì là tinh bột ít mùi vị, dễ tiêu; #16 liệt kê lúa mì nguyên cám trong các ngũ cốc nguyên hạt giàu chất xơ.",
+      "sources": [
+        { "bai": "15-dinh-duong-ibs", "trich": "Tránh thực phẩm chứa Gluten." },
+        { "bai": "15-dinh-duong-ibs", "trich": "các loại thực phẩm như sữa, lúa mì, caffein" },
+        { "bai": "14-dinh-duong-viem-loet-da-day-ta-trang", "trich": "tinh bột ít mùi vị và dễ tiêu như là cơm, bánh mì" },
+        { "bai": "16-dinh-duong-tao-bon", "trich": "yến mạch, gạo lứt, lúa mì nguyên cám, hạt quinoa, lúa mạch" }
+      ]
+    },
+    {
+      "title": "“Bơ”: thực phẩm nên dùng hay chất béo cần hạn chế?",
+      "text": "Bản tin #13 liệt kê “bơ” trong nhóm thực phẩm có tính kiềm nên dùng, cùng mục với nguyên tắc hạn chế thức ăn nhiều chất béo. Bản tin #15 nhắc “bơ” cùng dầu, mỡ trong bữa thịnh soạn gây triệu chứng tiêu hoá. Bài không nói rõ “bơ” là quả bơ hay bơ (chất béo).",
+      "sources": [
+        { "bai": "13-dinh-duong-trao-nguoc", "trich": "(táo, hạnh nhân, củ cải, bơ, khoai lang, bắp cải, cà rốt…)" },
+        { "bai": "15-dinh-duong-ibs", "trich": "đặc biệt sau bữa thịnh soạn nhiều dầu, mỡ, bơ" }
+      ]
+    }
+  ]
+}

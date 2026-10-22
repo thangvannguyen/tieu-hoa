@@ -1,0 +1,55 @@
+{
+  "nguon": {
+    "bai": "13-dinh-duong-trao-nguoc",
+    "anh": ["13-dinh-duong-trao-nguoc-1.png", "13-dinh-duong-trao-nguoc-2.png"],
+    "ghi_chu": "Gõ lại nguyên văn từ 2 ảnh chụp bảng trong bản tin #13 (một bảng liền, bị cắt làm 2 ảnh). Chữ đầu dòng tổng bị biểu tượng kéo bảng che mất trong ảnh."
+  },
+  "menus": [
+    {
+      "title": "Thực đơn cơm",
+      "tong": "Năng lượng 1538 Kcal · Đạm 73.5g (19%) · Béo 33.8g (20%) · Đường 235.1g (61%)",
+      "columns": { "bua": "Bữa", "mon": "Món ăn", "thuc_pham": "Thực phẩm", "khoi_luong": "Khối lượng tinh (g)", "ghi_chu": "Ghi chú" },
+      "gtdd": [
+        { "bua": "Sáng", "text": "Năng lượng 245 Kcal, đạm 12.9g, béo 1.5g, đường 45g" },
+        { "bua": "Phụ sáng", "text": "Năng lượng 106 Kcal, đạm 0.6g, béo 0,2g, đường 25.5g" },
+        { "bua": "Trưa", "text": "Năng lượng 512 Kcal, đạm 28.4g, béo 12g, đường 72.6g" },
+        { "bua": "Phụ chiều", "text": "Năng lượng 74 Kcal, đạm 0.8g, béo 0,1g, đường 17.6g" },
+        { "bua": "Chiều", "text": "Năng lượng 601 Kcal, đạm 30.9g, béo 20g, đường 74.5g" }
+      ],
+      "rows": [
+        { "bua": "Sáng", "mon": "Phở bò", "thuc_pham": "Bánh phở", "khoi_luong": "140", "ghi_chu": "1 nửa bát to" },
+        { "bua": "Sáng", "mon": "Phở bò", "thuc_pham": "Thịt bò", "khoi_luong": "40", "ghi_chu": "8-9 miếng" },
+        { "bua": "Sáng", "mon": "Phở bò", "thuc_pham": "Hành lá, rau thơm", "khoi_luong": "", "ghi_chu": "" },
+        { "bua": "Sáng", "mon": "Phở bò", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+
+        { "bua": "Phụ sáng", "mon": "Trái cây", "thuc_pham": "Nho ngọt", "khoi_luong": "150", "ghi_chu": "14-15 quả" },
+
+        { "bua": "Trưa", "mon": "Cơm", "thuc_pham": "Gạo trắng", "khoi_luong": "80", "ghi_chu": "1 bát con cơm" },
+        { "bua": "Trưa", "mon": "Thịt lợn xào hành tây", "thuc_pham": "Thịt lợn", "khoi_luong": "40", "ghi_chu": "7-8 miếng" },
+        { "bua": "Trưa", "mon": "Thịt lợn xào hành tây", "thuc_pham": "Hành tây", "khoi_luong": "50", "ghi_chu": "¼ củ nhỏ" },
+        { "bua": "Trưa", "mon": "Thịt lợn xào hành tây", "thuc_pham": "Dầu ăn", "khoi_luong": "5", "ghi_chu": "1 muỗng cà phê" },
+        { "bua": "Trưa", "mon": "Thịt lợn xào hành tây", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+        { "bua": "Trưa", "mon": "Tôm rang", "thuc_pham": "Tôm biển", "khoi_luong": "30", "ghi_chu": "3 con trung bình" },
+        { "bua": "Trưa", "mon": "Tôm rang", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+        { "bua": "Trưa", "mon": "Rau muống luộc", "thuc_pham": "Rau muống", "khoi_luong": "150", "ghi_chu": "1 bát con đầy" },
+        { "bua": "Trưa", "mon": "Canh rau ngọt", "thuc_pham": "Rau ngọt", "khoi_luong": "30", "ghi_chu": "" },
+        { "bua": "Trưa", "mon": "Canh rau ngọt", "thuc_pham": "Thịt băm", "khoi_luong": "10g", "ghi_chu": "1 thìa 10ml" },
+        { "bua": "Trưa", "mon": "Canh rau ngọt", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+
+        { "bua": "Phụ chiều", "mon": "Trái cây", "thuc_pham": "Táo tây", "khoi_luong": "150g", "ghi_chu": "1/2 quả" },
+
+        { "bua": "Chiều", "mon": "Cơm", "thuc_pham": "Gạo trắng", "khoi_luong": "80", "ghi_chu": "1 bát con cơm" },
+        { "bua": "Chiều", "mon": "Thịt gà om nấm", "thuc_pham": "Thịt gà", "khoi_luong": "40", "ghi_chu": "3 miếng nhỏ (cả xương)" },
+        { "bua": "Chiều", "mon": "Thịt gà om nấm", "thuc_pham": "Nấm", "khoi_luong": "20", "ghi_chu": "" },
+        { "bua": "Chiều", "mon": "Thịt gà om nấm", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+        { "bua": "Chiều", "mon": "Đậu phụ nhồi thịt", "thuc_pham": "Đậu phụ", "khoi_luong": "32", "ghi_chu": "½ bìa đậu" },
+        { "bua": "Chiều", "mon": "Đậu phụ nhồi thịt", "thuc_pham": "Thịt lợn nạc", "khoi_luong": "20", "ghi_chu": "1 thìa đầy 10ml" },
+        { "bua": "Chiều", "mon": "Đậu phụ nhồi thịt", "thuc_pham": "Dầu ăn", "khoi_luong": "10", "ghi_chu": "2 thìa 5ml" },
+        { "bua": "Chiều", "mon": "Đậu phụ nhồi thịt", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" },
+        { "bua": "Chiều", "mon": "Cải thảo luộc", "thuc_pham": "Cải thảo", "khoi_luong": "150", "ghi_chu": "1 miệng bát con" },
+        { "bua": "Chiều", "mon": "Canh mồng tơi", "thuc_pham": "Rau mồng tơi", "khoi_luong": "30g", "ghi_chu": "" },
+        { "bua": "Chiều", "mon": "Canh mồng tơi", "thuc_pham": "Gia vị", "khoi_luong": "", "ghi_chu": "Nêm nếm vừa ăn" }
+      ]
+    }
+  ]
+}

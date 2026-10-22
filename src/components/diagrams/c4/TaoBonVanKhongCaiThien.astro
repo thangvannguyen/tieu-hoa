@@ -1,0 +1,91 @@
+---
+/** Cây hỏi từng bước: đã bổ sung chất xơ mà vẫn táo bón? (theo phần hỏi – đáp của bản tin #16). */
+import Diagram from '../primitives/Diagram.astro';
+import StepTree from '../primitives/StepTree.astro';
+---
+<Diagram
+  title="Đã bổ sung chất xơ mà vẫn táo bón?"
+  icon="suy-nghi"
+  hue="bo"
+  kicker="Thực hành"
+  interactive
+  caption="Một tình trạng táo bón nên được quan sát, theo dõi và rà soát tổng thể để có những can thiệp phù hợp với từng tình trạng."
+  from={['16-dinh-duong-tao-bon']}
+>
+  <StepTree
+    start="xo"
+    nodes={{
+      xo: {
+        q: 'Bạn đã dùng đủ chất xơ chưa?',
+        hint: 'Nhu cầu chất xơ khuyến nghị cho người Việt Nam ít nhất là 20–25 g/người/ngày.',
+        options: [
+          { label: 'Chưa đủ', to: 'r-xo' },
+          { label: 'Đã đủ', to: 'nuoc' },
+        ],
+      },
+      'r-xo': {
+        result: {
+          tone: 'warn',
+          icon: 'chat-xo',
+          title: 'Tăng cường thực phẩm giàu chất xơ',
+          text: 'Rau, trái cây, ngũ cốc nguyên hạt, các loại hạt, các loại đậu… Nên ăn đa dạng các thực phẩm có đủ hai loại chất xơ hòa tan và không hòa tan.',
+        },
+      },
+      nuoc: {
+        q: 'Bạn có uống đủ nước để chất xơ vận hành không?',
+        hint: 'Nên uống khoảng 1,5–2 lít nước mỗi ngày đối với người trưởng thành.',
+        options: [
+          { label: 'Chưa đủ', to: 'r-nuoc' },
+          { label: 'Đã đủ', to: 'vd' },
+        ],
+      },
+      'r-nuoc': {
+        result: {
+          tone: 'warn',
+          icon: 'nuoc',
+          title: 'Uống đủ nước',
+          text: 'Khi tăng cường ăn các loại thực phẩm giàu chất xơ, bạn phải uống nhiều nước — nếu không chất xơ có thể gây tác dụng ngược và gây táo bón.',
+        },
+      },
+      vd: {
+        q: 'Bạn có hay ngồi quá lâu, ít vận động không?',
+        hint: 'Có thể nhu động ruột của bạn không đủ mạnh để cho chất xơ đó phát huy tác dụng.',
+        options: [
+          { label: 'Có', to: 'r-vd' },
+          { label: 'Không', to: 'tl' },
+        ],
+      },
+      'r-vd': {
+        result: {
+          tone: 'warn',
+          icon: 'di-bo',
+          title: 'Vận động thường xuyên',
+          text: 'Khi bạn ngồi quá lâu, ít vận động, nhu động ruột kém — chất xơ khó phát huy tác dụng.',
+        },
+      },
+      tl: {
+        q: 'Bạn có rào cản tâm lý trong việc đi tiêu khi bị táo bón quá lâu không?',
+        options: [
+          { label: 'Có', to: 'r-tl' },
+          { label: 'Không', to: 'r-kham' },
+        ],
+      },
+      'r-tl': {
+        result: {
+          tone: 'warn',
+          icon: 'may-stress',
+          title: 'Gỡ rào cản tâm lý',
+          text: 'Tập thói quen đại tiện hàng ngày theo một khung giờ nhất định, đồng thời loại bỏ các yếu tố tâm lý... gây táo bón.',
+        },
+      },
+      'r-kham': {
+        result: {
+          tone: 'stop',
+          icon: 'bac-si',
+          title: 'Sắp xếp đi khám',
+          text: 'Táo bón cũng có thể là một biểu hiện của một bệnh lý thực thể khác — khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác, hãy đi khám để loại trừ những bệnh tiềm ẩn.',
+        },
+      },
+    }}
+  />
+</Diagram>

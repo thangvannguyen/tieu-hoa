@@ -1,0 +1,159 @@
+---
+/**
+ * Minh họa vẽ tay: chỗ nối thực quản – dạ dày với cơ thắt thực quản dưới (LES) và hai nhóm yếu tố
+ * làm trào ngược dễ xảy ra (theo bản tin #13). Chỉ dùng các ý có trong bài.
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Icon from '~/components/ui/Icon.astro';
+
+/** đường cong bậc 2 từ (x1,y1) qua điểm điều khiển (cx,cy) tới (x2,y2) + đầu mũi tên tại (x2,y2) */
+function arrow(x1: number, y1: number, cx: number, cy: number, x2: number, y2: number, head = 9) {
+  const dx = x2 - cx, dy = y2 - cy;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len, uy = dy / len;
+  const bx = x2 - ux * head, by = y2 - uy * head;
+  const px = -uy * head * 0.62, py = ux * head * 0.62;
+  const r = (n: number) => Math.round(n * 10) / 10;
+  return {
+    line: `M${x1} ${y1}Q${cx} ${cy} ${x2} ${y2}`,
+    head: `M${r(bx + px)} ${r(by + py)}L${x2} ${y2}L${r(bx - px)} ${r(by - py)}`,
+  };
+}
+
+// nhóm 1: làm giảm áp lực / làm giãn cơ thắt thực quản dưới (pill bên trái)
+const lowers = [
+  { label: 'Chất béo', yc: 26, to: [150, 140] },
+  { label: 'Cà phê', yc: 68, to: [150, 145] },
+  { label: 'Rượu bia', yc: 110, to: [150, 150] },
+  { label: 'Hút thuốc', yc: 152, to: [150, 155] },
+].map((f) => ({ ...f, a: arrow(122, f.yc, 144, f.yc, f.to[0], f.to[1]) }));
+
+// nhóm 2: làm tăng áp lực trong dạ dày (pill bên dưới, mũi tên ép vào dạ dày)
+const pushes = [arrow(214, 374, 212, 360, 208, 344), arrow(292, 374, 298, 352, 304, 320)];
+
+const STOMACH =
+  'M162 156C128 160 104 196 108 240C112 292 150 330 205 334C262 338 312 306 314 262C316 228 296 206 268 208C236 210 206 196 198 156Z';
+---
+<Diagram
+  title="Cơ thắt thực quản dưới (LES) và trào ngược"
+  icon="thuc-quan"
+  hue="bo"
+  kicker="Minh họa"
+  caption="Thực phẩm béo có tác dụng làm chậm quá trình rỗng dạ dày và giảm áp lực cơ thắt thực quản dưới (LES – Lower Esophageal Sphincter), do đó kéo dài thời gian tiếp xúc của thực quản với axít dạ dày."
+  from={['13-dinh-duong-trao-nguoc']}
+>
+  <div class="les">
+    <svg viewBox="0 0 360 412" role="img" aria-label="Thực quản đi xuống nối với dạ dày; ở chỗ nối là cơ thắt thực quản dưới (LES). Axít từ dạ dày trào ngược lên thực quản. Bên trái: chất béo, cà phê, rượu bia, hút thuốc làm giảm áp lực hoặc làm giãn cơ thắt thực quản dưới. Bên dưới: thừa cân, béo phì làm tăng áp lực trong dạ dày.">
+      <!-- dạ dày -->
+      <path class="les__shadow" transform="translate(4 4)" d={STOMACH}></path>
+      <!-- thực quản -->
+      <path class="les__shadow" d="M166 4h36v150h-36z"></path>
+      <path class="les__eso" d="M162 0h36v164h-36z"></path>
+      <path class="les__stomach" d={STOMACH}></path>
+      <!-- mặt dạ dày (hơi khó chịu) -->
+      <circle class="les__ink" cx="196" cy="252" r="3.4"></circle>
+      <circle class="les__ink" cx="226" cy="252" r="3.4"></circle>
+      <path class="les__line" d="M203 267q4-4 8 0t8 0"></path>
+      <ellipse class="les__blush" cx="184" cy="262" rx="6" ry="3.5"></ellipse>
+      <ellipse class="les__blush" cx="238" cy="262" rx="6" ry="3.5"></ellipse>
+      <text x="212" y="304" class="les__lbl les__lbl--sm" text-anchor="middle">tăng áp lực</text>
+
+      <!-- cơ thắt thực quản dưới -->
+      <rect class="les__ring" x="154" y="136" width="52" height="26" rx="10"></rect>
+      <path class="les__lead" d="M210 149h12"></path>
+      <text x="226" y="145" class="les__lbl les__lbl--sm">Cơ thắt thực quản</text>
+      <text x="226" y="163" class="les__lbl les__lbl--sm">dưới (LES)</text>
+
+      <!-- axít trào ngược -->
+      <path class="les__acid" d="M180 214C172 199 188 186 180 172S172 142 180 128 188 100 180 86 172 58 180 40"></path>
+      <path class="les__acidhead" d="M171 50l9-14 9 14"></path>
+      <path class="les__drop" d="M180 100c4 5 6 8 6 10.6a6 6 0 0 1-12 0c0-2.6 2-5.6 6-10.6z"></path>
+      <path class="les__drop" d="M180 186c4 5 6 8 6 10.6a6 6 0 0 1-12 0c0-2.6 2-5.6 6-10.6z"></path>
+      <path class="les__lead" d="M192 58l22-12"></path>
+      <text x="218" y="42" class="les__lbl">Axít trào ngược</text>
+      <text x="218" y="61" class="les__lbl les__lbl--sm">lên thực quản</text>
+
+      <!-- nhóm 1: làm giảm áp lực / làm giãn LES -->
+      {lowers.map((f) => (
+        <g>
+          <rect class="les__pill les__pill--lo" x="6" y={f.yc - 16} width="114" height="32" rx="16"></rect>
+          <text x="63" y={f.yc} class="les__lbl les__lbl--pill" text-anchor="middle" dominant-baseline="central">{f.label}</text>
+          <path class="les__arr les__arr--lo" d={f.a.line}></path>
+          <path class="les__arr les__arr--lo" d={f.a.head}></path>
+        </g>
+      ))}
+
+      <!-- nhóm 2: làm tăng áp lực trong dạ dày -->
+      {pushes.map((a) => (
+        <g>
+          <path class="les__arr les__arr--up" d={a.line}></path>
+          <path class="les__arr les__arr--up" d={a.head}></path>
+        </g>
+      ))}
+      <rect class="les__pill les__pill--up" x="150" y="374" width="190" height="34" rx="17"></rect>
+      <text x="245" y="391" class="les__lbl les__lbl--pill" text-anchor="middle" dominant-baseline="central">Thừa cân, béo phì</text>
+    </svg>
+
+    <ul class="les__legend">
+      <li data-hue="bo">
+        <span class="les__sw les__sw--ring"></span>
+        <span><strong>Cơ thắt thực quản dưới</strong> (LES – Lower Esophageal Sphincter)</span>
+      </li>
+      <li data-hue="do">
+        <span class="les__sw les__sw--lo"></span>
+        <span>
+          <strong>Làm giảm áp lực / làm giãn cơ thắt thực quản dưới</strong>
+          <span class="les__items">
+            <span><Icon name="do-chien" size={20} /> <b>Chất béo:</b> làm chậm quá trình rỗng dạ dày và giảm áp lực cơ thắt thực quản dưới</span>
+            <span><Icon name="ca-phe" size={20} /> <b>Cà phê:</b> làm giảm áp lực cơ thắt thực quản dưới</span>
+            <span><Icon name="ruou-bia" size={20} /> <b>Rượu, bia, đồ uống có cồn:</b> làm tăng giãn của cơ thắt dưới thực quản</span>
+            <span><Icon name="thuoc-la" size={20} /> <b>Hút thuốc:</b> làm giãn cơ vòng thực quản dưới</span>
+          </span>
+        </span>
+      </li>
+      <li data-hue="bo">
+        <span class="les__sw les__sw--up"></span>
+        <span><strong>Làm tăng áp lực trong dạ dày:</strong> trọng lượng tăng thêm (thừa cân, béo phì).</span>
+      </li>
+      <li data-hue="do">
+        <span class="les__sw les__sw--acid"></span>
+        <span><strong>Dễ gây trào ngược:</strong> axít từ dạ dày trào ngược lên thực quản; thời gian tiếp xúc của thực quản với axít dạ dày kéo dài.</span>
+      </li>
+    </ul>
+  </div>
+</Diagram>
+
+<style>
+  .les { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .les { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .les > svg { width: 100%; max-width: 400px; margin: 0 auto; display: block; overflow: visible; }
+  .les__shadow { fill: var(--line); stroke: none; }
+  .les__eso { fill: var(--hong-fill); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .les__stomach { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; }
+  .les__ring { fill: var(--bo); stroke: var(--ink); stroke-width: 3; }
+  .les__ink { fill: var(--ink); }
+  .les__line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+  .les__blush { fill: var(--cheek); opacity: 0.8; }
+  .les__lead { fill: none; stroke: var(--ink-3); stroke-width: 2; stroke-linecap: round; }
+  .les__acid { fill: none; stroke: var(--do); stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 3 9; }
+  .les__acidhead { fill: none; stroke: var(--do-ink); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .les__drop { fill: var(--do-fill); stroke: var(--ink); stroke-width: 2.5; }
+  .les__pill { stroke-width: 2.5; }
+  .les__pill--lo { fill: var(--do-fill); stroke: var(--do); }
+  .les__pill--up { fill: var(--bo-fill); stroke: var(--bo); }
+  .les__arr { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .les__arr--lo { stroke: var(--do-ink); }
+  .les__arr--up { stroke: var(--bo-ink); }
+  .les__lbl { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .les__lbl--sm { font-size: 14px; }
+  .les__lbl--pill { font-size: 15px; }
+  .les__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-size: 0.93rem; }
+  .les__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); }
+  .les__items { display: grid; gap: 0.3rem; margin-top: 0.35rem; --ic-fill: var(--h-fill); }
+  .les__items > span { display: block; }
+  .les__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--ink); }
+  .les__sw--ring { background: var(--bo); }
+  .les__sw--lo { background: var(--do-fill); border-color: var(--do-ink); }
+  .les__sw--up { background: var(--bo-fill); border-color: var(--bo-ink); }
+  .les__sw--acid { background: repeating-linear-gradient(90deg, var(--do) 0 4px, transparent 4px 8px); }
+</style>

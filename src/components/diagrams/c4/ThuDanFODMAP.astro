@@ -1,0 +1,23 @@
+---
+/** Cách thăm dò, dùng thử thực phẩm khi theo chế độ ăn thấp FODMAPs (theo bản tin #15). */
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram
+  title="Thăm dò và dùng thử liều lượng"
+  icon="cau-thang"
+  hue="bo"
+  kicker="Thực hành"
+  caption="Nếu vẫn tiếp tục dùng loại thực phẩm đó thì nên từ liều thấp đến liều cao và theo dõi triệu chứng nếu có. Nếu xuất hiện liên tục các triệu chứng ở đường tiêu hoá hoặc trầm trọng nên ngưng dùng và thay thế bằng loại thực phẩm tương tự phù hợp."
+  from={['15-dinh-duong-ibs']}
+>
+  <Flow
+    numbered
+    steps={[
+      { icon: 'tim-kiem', title: 'Thăm dò, dùng thử liều lượng', text: 'với loại thực phẩm bạn vẫn muốn tiếp tục dùng', hue: 'bo' },
+      { icon: 'cau-thang', title: 'Từ liều thấp đến liều cao', hue: 'sage' },
+      { icon: 'nhat-ky', title: 'Theo dõi triệu chứng nếu có', hue: 'lav' },
+      { icon: 'sai', tag: 'Nếu triệu chứng liên tục hoặc trầm trọng', title: 'Ngưng dùng, thay thế bằng loại thực phẩm tương tự phù hợp', hue: 'do' },
+    ]}
+  />
+</Diagram>

@@ -1,0 +1,23 @@
+---
+/** Các mốc cần nhớ quanh bữa ăn và giấc ngủ khi bị trào ngược (mục "Một số lưu ý", bản tin #13). */
+import Diagram from '../primitives/Diagram.astro';
+import Timeline from '../primitives/Timeline.astro';
+---
+<Diagram
+  title="Trước, trong và sau bữa ăn: các mốc cần nhớ"
+  icon="dong-ho"
+  hue="bo"
+  kicker="Thực hành"
+  caption="Giữ tư thế thẳng trong bữa và từ 45 đến 60 phút sau khi ăn (để tránh trào ngược chất trong dạ dày); tránh ăn trong vòng 2 đến 3 giờ trước khi đi ngủ; nâng cao đầu giường khoảng 15 cm khi ngủ."
+  from={['13-dinh-duong-trao-nguoc']}
+>
+  <Timeline
+    items={[
+      { time: 'Trong bữa', icon: 'com', title: 'Ăn vừa đủ no, chia nhiều bữa nhỏ trong ngày', text: 'Giữ tư thế thẳng trong bữa.', hue: 'sage' },
+      { time: '45–60 phút sau khi ăn', icon: 'ghe', title: 'Vẫn giữ tư thế thẳng', text: 'để tránh trào ngược chất trong dạ dày', hue: 'bo' },
+      { time: '2–3 giờ trước khi đi ngủ', icon: 'dong-ho', title: 'Tránh ăn', text: 'Tránh ăn khuya.', hue: 'dao' },
+      { time: 'Khi ngủ', icon: 'giuong', title: 'Nâng cao đầu giường khoảng 15 cm', hue: 'lav' },
+      { time: 'Mỗi ngày', icon: 'can-nang', title: 'Đạt được và duy trì trọng lượng cơ thể khỏe mạnh', text: 'Ngừng hút thuốc; tránh mặc quần áo bó sát vào vùng bụng.', hue: 'ngoc' },
+    ]}
+  />
+</Diagram>
