@@ -121,7 +121,7 @@ const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai
   .deck__opt { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.9rem; }
   .deck__card { all: unset; box-sizing: border-box; display: grid; width: 100%; cursor: pointer; perspective: 1200px; min-height: 15rem; }
   .deck__card:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: var(--radius-lg); }
-  .deck__face { grid-area: 1 / 1; display: grid; align-content: center; justify-items: center; text-align: center; gap: 0.6rem; padding: 1.6rem; border-radius: var(--radius-lg); border: 3px solid var(--ink); box-shadow: 0 6px 0 var(--ink); backface-visibility: hidden; transition: transform 0.55s cubic-bezier(0.3, 1.3, 0.5, 1); }
+  .deck__face { grid-area: 1 / 1; display: grid; align-content: center; justify-items: center; text-align: center; gap: 0.6rem; padding: 1.6rem; border-radius: var(--radius-lg); border: 3px solid var(--edge); box-shadow: 0 6px 0 var(--edge-shadow); backface-visibility: hidden; transition: transform 0.55s cubic-bezier(0.3, 1.3, 0.5, 1); }
   .deck__front { background: var(--bo-fill); }
   .deck__back { background: var(--sage-fill); transform: rotateY(180deg); }
   .deck__card[aria-pressed='true'] .deck__front { transform: rotateY(-180deg); }
@@ -133,7 +133,7 @@ const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai
   .deck__src { font-size: 0.9rem; }
   .deck__nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
   @media (prefers-reduced-motion: reduce) { .deck__face { transition: none; } }
-  .qch { margin: 0 0 1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .qch { margin: 0 0 1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .qch summary { display: flex; gap: 0.8rem; align-items: center; padding: 0.9rem 1rem; cursor: pointer; list-style: none; }
   .qch summary::-webkit-details-marker { display: none; }
   .qch__ic { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 16px; background: var(--surface); --ic-fill: var(--h-fill); }

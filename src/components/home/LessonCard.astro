@@ -14,8 +14,8 @@ const c = chapterOf(lesson);
   <span class="lc__done" aria-hidden="true"><Icon name="dung" size={22} /> Đã học</span>
 </a>
 <style>
-  .lc { position: relative; height: 100%; display: grid; align-content: start; gap: 0.3rem; padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
-  .lc:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--ink); }
+  .lc { position: relative; height: 100%; display: grid; align-content: start; gap: 0.3rem; padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
+  .lc:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
   .lc__ic { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; background: var(--h-fill); --ic-fill: var(--surface); margin-bottom: 0.2rem; }
   .lc__k { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--h-ink); }
   .lc__t { font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; line-height: 1.3; }

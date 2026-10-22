@@ -27,6 +27,8 @@
 
   --link: var(--dao-ink);
   --focus: #424e9e;
+  --edge: var(--ink);
+  --edge-shadow: var(--ink);
 
   --shadow-sm: 0 1px 2px rgb(74 59 53 / 0.06);
   --shadow: 0 1px 0 rgb(74 59 53 / 0.04), 0 10px 28px -14px rgb(74 59 53 / 0.22);
@@ -73,6 +75,8 @@
     --do-fill: #47231f;    --do: #e5786d;    --do-ink: #f6b0a8;
     --link: var(--dao-ink);
     --focus: #c6cdf5;
+    --edge: #9a877a;
+    --edge-shadow: #0b0806;
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
     --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 28px -14px rgb(0 0 0 / 0.6);
     --shadow-lg: 0 2px 0 rgb(0 0 0 / 0.2), 0 22px 48px -22px rgb(0 0 0 / 0.7);
@@ -101,6 +105,8 @@
   --do-fill: #47231f;    --do: #e5786d;    --do-ink: #f6b0a8;
   --link: var(--dao-ink);
   --focus: #c6cdf5;
+  --edge: #9a877a;
+  --edge-shadow: #0b0806;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 28px -14px rgb(0 0 0 / 0.6);
   --shadow-lg: 0 2px 0 rgb(0 0 0 / 0.2), 0 22px 48px -22px rgb(0 0 0 / 0.7);

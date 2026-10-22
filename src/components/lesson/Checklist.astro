@@ -45,7 +45,7 @@ const { id, items, title } = Astro.props;
   label { display: grid; grid-template-columns: auto 1fr; gap: 0.65rem; align-items: start; padding: 0.4rem 0.3rem; border-radius: 10px; cursor: pointer; }
   label:hover { background: var(--surface-2); }
   input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .ck__box { width: 24px; height: 24px; margin-top: 0.15rem; border: 2px solid var(--ink); border-radius: 8px; background: var(--bg); display: grid; place-items: center; }
+  .ck__box { width: 24px; height: 24px; margin-top: 0.15rem; border: 2px solid var(--edge); border-radius: 8px; background: var(--bg); display: grid; place-items: center; }
   input:focus-visible + .ck__box { outline: 3px solid var(--focus); outline-offset: 2px; }
   input:checked + .ck__box { background: var(--sage); }
   input:checked + .ck__box::after { content: ''; width: 10px; height: 6px; border: solid var(--ink); border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }

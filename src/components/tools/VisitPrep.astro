@@ -105,13 +105,13 @@ const substances = ['Thuốc kê toa', 'Thuốc không kê toa/thực phẩm ch�
 </script>
 <style>
   .vp { display: grid; gap: 1rem; }
-  .vp__s { padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); break-inside: avoid; }
+  .vp__s { padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); break-inside: avoid; }
   .vp__s h2 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; margin: 0 0 0.6rem; }
   .vp__grid { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
   .vp__f { display: grid; gap: 0.25rem; margin-top: 0.4rem; }
   .vp__f span { font-weight: 700; font-size: 0.93rem; }
   .vp__f textarea { width: 100%; padding: 0.5rem 0.7rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); resize: vertical; line-height: 1.45; }
-  .vp__f textarea:focus { outline: none; border-color: var(--ink); }
+  .vp__f textarea:focus { outline: none; border-color: var(--edge); }
   .vp__ex, .vp__hint { font-size: 0.88rem; color: var(--ink-2); margin: 0.3rem 0; }
   .vp__checks { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
   .vp__ck { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.7rem; border-radius: 999px; background: var(--h-fill); cursor: pointer; font-size: 0.92rem; }

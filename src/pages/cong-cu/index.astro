@@ -18,7 +18,7 @@ const byId = Object.fromEntries(tools.map((t) => [t.id, t]));
       <div>
         <h1>Công cụ thực hành</h1>
         <p>Mỗi bản tin đều kết thúc bằng một bài <strong>Thực hành</strong>. Ở đây, các bảng kiểm, nhật ký và mẫu kế hoạch đã được dựng lại để bạn điền ngay trên điện thoại hoặc máy tính — không cần tải file Excel, không cần tài khoản.</p>
-        <p class="hero__note"><Icon name="khien" size={20} /> Dữ liệu chỉ lưu trên trình duyệt của bạn. Xem <a href={url('/du-lieu-cua-ban/')}>Dữ liệu của bạn</a> để sao lưu tất cả một lần.</p>
+        <p class="hero__note"><Icon name="khien" size={20} /> <span>Dữ liệu chỉ lưu trên trình duyệt của bạn. Xem <a href={url('/du-lieu-cua-ban/')}>Dữ liệu của bạn</a> để sao lưu tất cả một lần.</span></p>
       </div>
       <BeBung mood="khoe" size={140} />
     </div>
@@ -56,8 +56,8 @@ const byId = Object.fromEntries(tools.map((t) => [t.id, t]));
   .grp { margin-bottom: 2rem; }
   .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
   .cards li { margin: 0; }
-  .card-tool { height: 100%; display: grid; align-content: start; gap: 0.4rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
-  .card-tool:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--ink); }
+  .card-tool { height: 100%; display: grid; align-content: start; gap: 0.4rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
+  .card-tool:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
   .card-tool__ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: var(--h-fill); --ic-fill: var(--surface); }
   .card-tool__t { font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; line-height: 1.3; }
   .card-tool__d { font-size: 0.92rem; color: var(--ink-2); }

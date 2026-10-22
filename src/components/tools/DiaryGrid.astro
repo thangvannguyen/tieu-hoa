@@ -423,7 +423,7 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
   .dy__bar { position: sticky; top: 64px; z-index: 5; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; padding: 0.6rem 0; margin-bottom: 0.8rem; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); }
   .dy__tabs { display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.2rem 0.1rem 0.4rem; scrollbar-width: thin; max-width: 100%; }
   .dy__tab { flex: none; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.8rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.92rem; }
-  .dy__tab[aria-selected='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .dy__tab[aria-selected='true'] { background: var(--ink); color: var(--bg); border-color: var(--edge); }
   .dy__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
   .dy__tab[data-fill='1'] .dy__dot { background: var(--bo); }
   .dy__tab[data-fill='2'] .dy__dot { background: var(--sage); }
@@ -436,8 +436,8 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
   .dy__date input { padding: 0.35rem 0.55rem; border-radius: 10px; border: 2px solid var(--line-2); background: var(--surface); }
   .dy__groups { display: grid; gap: 0.9rem; }
   @media (min-width: 900px) { .dy__groups { grid-template-columns: 1fr 1fr; align-items: start; } }
-  .dy__group { margin: 0; padding: 0.9rem 1rem 1rem; border-radius: var(--radius); border: 2px solid var(--ink); background: var(--h-fill); box-shadow: 0 3px 0 var(--ink); min-width: 0; }
-  .dy__gl { display: flex; align-items: center; gap: 0.45rem; padding: 0.15rem 0.7rem 0.15rem 0.3rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--ink); font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .dy__group { margin: 0; padding: 0.9rem 1rem 1rem; border-radius: var(--radius); border: 2px solid var(--edge); background: var(--h-fill); box-shadow: 0 3px 0 var(--edge-shadow); min-width: 0; }
+  .dy__gl { display: flex; align-items: center; gap: 0.45rem; padding: 0.15rem 0.7rem 0.15rem 0.3rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--edge); font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
   .dy__gi { display: grid; place-items: center; --ic-fill: var(--h-fill); }
   .dy__gh { margin: 0.5rem 0 0; font-size: 0.88rem; color: var(--ink-2); font-style: italic; }
   .dy__field { margin-top: 0.75rem; }
@@ -447,7 +447,7 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
   .dy input[type='text'], .dy input[type='time'], .dy input[type='number'], .dy textarea {
     width: 100%; padding: 0.55rem 0.7rem; border-radius: 12px; border: 2px solid transparent; background: var(--surface); line-height: 1.45; min-height: 44px;
   }
-  .dy input:focus, .dy textarea:focus { outline: none; border-color: var(--ink); }
+  .dy input:focus, .dy textarea:focus { outline: none; border-color: var(--edge); }
   .dy textarea { resize: vertical; }
   .dy__num { display: flex; align-items: center; gap: 0.5rem; }
   .dy__num input { max-width: 8rem; }
@@ -468,7 +468,7 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
   .dy__nav [data-next] { margin-left: auto; }
   .dy__sumhint { color: var(--ink-2); font-size: 0.92rem; }
   .dy__charts, .dy__counts { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); margin: 1rem 0; }
-  .dy__charts :global(.dy__chart), .dy__counts :global(.dy__count-box) { padding: 0.8rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--ink); }
+  .dy__charts :global(.dy__chart), .dy__counts :global(.dy__count-box) { padding: 0.8rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--edge); }
   .dy__charts :global(.dy__ct), .dy__counts :global(.dy__ct) { margin: 0 0 0.3rem; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; }
   .dy__charts :global(.dy__cs) { margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--ink-2); }
   .dy__charts :global(svg) { width: 100%; height: auto; display: block; background: var(--surface); border-radius: 10px; }
@@ -479,7 +479,7 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
   .dy__counts :global(li) { position: relative; padding: 0.3rem 0.6rem; border-radius: 10px; background: var(--surface); overflow: hidden; font-size: 0.88rem; }
   .dy__counts :global(.dy__bar-fill) { position: absolute; inset: 0 auto 0 0; background: var(--h); opacity: 0.45; }
   .dy__counts :global(li > span:last-child) { position: relative; }
-  .dy__reflect { margin-top: 1.5rem; padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); }
+  .dy__reflect { margin-top: 1.5rem; padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--edge); }
   .dy__reflect h3 { margin-top: 0; }
   .dy__rgrid { display: grid; gap: 0.5rem 0.9rem; align-items: start; }
   @media (min-width: 720px) { .dy__rgrid { grid-template-columns: minmax(10rem, 0.7fr) 1fr; } }

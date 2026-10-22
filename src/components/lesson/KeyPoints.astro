@@ -9,7 +9,7 @@ const { points, title = 'Ý chính của bài' } = Astro.props;
   <ul>{points.map((p) => <li><Icon name="dung" size={20} /><span set:html={inline(p)} /></li>)}</ul>
 </section>
 <style>
-  .kp { padding: 1.1rem 1.25rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .kp { padding: 1.1rem 1.25rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); }
   .kp__t { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.6rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
   li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; --ic-fill: var(--h-fill); }

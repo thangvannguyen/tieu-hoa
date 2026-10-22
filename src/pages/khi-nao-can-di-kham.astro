@@ -80,9 +80,9 @@ const merged = groups.map((g) => {
   .grp h2 { display: flex; align-items: center; gap: 0.5rem; --ic-fill: var(--h-fill); }
   .lvls { display: grid; gap: 1rem; }
   @media (min-width: 900px) { .lvls { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); } }
-  .lvl { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .lvl { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); }
   .lvl__k { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.4rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
-  .light { width: 18px; height: 18px; border-radius: 50%; background: var(--h); border: 2px solid var(--ink); box-shadow: 0 0 0 4px var(--surface); }
+  .light { width: 18px; height: 18px; border-radius: 50%; background: var(--h); border: 2px solid var(--edge); box-shadow: 0 0 0 4px var(--surface); }
   .lvl__t { margin: 0 0 0.6rem; font-weight: 700; font-size: 0.95rem; }
   .lvl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
   .lvl li { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; align-items: start; padding: 0.45rem 0.6rem; border-radius: 12px; background: var(--surface); margin: 0; --ic-fill: var(--do-fill); }

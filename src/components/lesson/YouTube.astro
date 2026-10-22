@@ -55,7 +55,7 @@ const watch = meta.shorts ? `https://www.youtube.com/shorts/${id}` : `https://ww
   .yt { display: block; margin: 1.5rem 0; }
   .yt__frame {
     position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden;
-    background: var(--ink); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink);
+    background: var(--ink); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow);
   }
   .yt--shorts .yt__frame { aspect-ratio: 9 / 16; max-width: 320px; }
   .yt__frame :global(img), .yt__frame :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }

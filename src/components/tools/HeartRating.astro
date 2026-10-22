@@ -83,7 +83,7 @@ const { id, habits } = Astro.props;
 </script>
 <style>
   .hr__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
-  .hr__item fieldset { margin: 0; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--surface); padding: 0.7rem 0.9rem; display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.8rem; align-items: center; box-shadow: 0 3px 0 var(--ink); }
+  .hr__item fieldset { margin: 0; border: 2px solid var(--edge); border-radius: var(--radius); background: var(--surface); padding: 0.7rem 0.9rem; display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.8rem; align-items: center; box-shadow: 0 3px 0 var(--edge-shadow); }
   legend { float: left; font-weight: 700; padding: 0; grid-column: 1 / -1; }
   .hr__hearts { display: flex; flex-wrap: wrap; gap: 0.1rem; }
   .hr__h { position: relative; cursor: pointer; display: grid; place-items: center; width: 34px; height: 34px; }
@@ -93,7 +93,7 @@ const { id, habits } = Astro.props;
   .hr__h:hover svg { transform: scale(1.15); }
   .hr__h input:focus-visible + svg { outline: 3px solid var(--focus); border-radius: 6px; }
   .hr__n { font-family: var(--font-head); font-weight: 900; color: var(--dao-ink); }
-  .hr__result { margin: 1.2rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--bo-fill); border: 2px solid var(--ink); }
+  .hr__result { margin: 1.2rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--bo-fill); border: 2px solid var(--edge); }
   .hr__rt { margin: 0; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bo-ink); }
   .hr__rv { margin: 0.2rem 0 0; font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; }
   .hr__note { display: grid; gap: 0.35rem; font-weight: 700; }

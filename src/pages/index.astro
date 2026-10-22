@@ -90,7 +90,7 @@ const hubs = [
     <div>
       <h2>Về chuỗi bản tin</h2>
       <p>Chương trình được thiết kế dành riêng cho nhân viên văn phòng không chỉ đang sống chung với bệnh lý viêm loét dạ dày, viêm dạ dày thực quản trào ngược hoặc rối loạn tiêu hóa mãn tính mà còn dành cho những ai hay bị bệnh lặt vặt do sức đề kháng kém.</p>
-      <p class="about__note"><Icon name="thong-tin" size={20} /> Đây không phải là một chương trình tư vấn, chẩn đoán và điều trị. <a href={url('/gioi-thieu/')}>Đọc thêm về web này</a>.</p>
+      <p class="about__note"><Icon name="thong-tin" size={20} /> <span>Đây không phải là một chương trình tư vấn, chẩn đoán và điều trị. <a href={url('/gioi-thieu/')}>Đọc thêm về web này</a>.</span></p>
     </div>
   </section>
 </BaseLayout>
@@ -134,7 +134,7 @@ const hubs = [
   @keyframes blob { to { border-radius: 56% 44% 40% 60% / 40% 58% 42% 60%; transform: rotate(12deg); } }
   .hero__art :global(.bebung) { position: relative; animation: bob 3.2s ease-in-out infinite; }
   @keyframes bob { 50% { transform: translateY(-8px); } }
-  .hero__st { position: absolute; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); transform: rotate(var(--r)); --ic-fill: var(--h-fill); }
+  .hero__st { position: absolute; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transform: rotate(var(--r)); --ic-fill: var(--h-fill); }
   @media (max-width: 520px) { .hero__st { width: 50px; height: 50px; border-radius: 16px; } .hero__art { min-height: 260px; } }
   @media (prefers-reduced-motion: reduce) { .hero__blob, .hero__art :global(.bebung) { animation: none; } }
   .sec { padding: 3.5rem 0 1rem; }
@@ -144,8 +144,8 @@ const hubs = [
   .sec--wheel { padding-top: 4.5rem; }
   .hubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
   .hubs li { margin: 0; }
-  .hubs a { height: 100%; display: grid; align-content: start; gap: 0.35rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
-  .hubs a:hover { transform: translateY(-3px) rotate(-0.5deg); box-shadow: 0 7px 0 var(--ink); }
+  .hubs a { height: 100%; display: grid; align-content: start; gap: 0.35rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
+  .hubs a:hover { transform: translateY(-3px) rotate(-0.5deg); box-shadow: 0 7px 0 var(--edge-shadow); }
   .hubs__ic { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; background: var(--surface); --ic-fill: var(--h-fill); }
   .hubs__t { font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; }
   .hubs__x { font-size: 0.92rem; color: var(--ink-2); }

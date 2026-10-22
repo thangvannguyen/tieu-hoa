@@ -24,7 +24,7 @@ const { items } = Astro.props;
   .tl li { position: relative; margin: 0; display: grid; grid-template-columns: 44px 1fr; gap: 0.75rem; padding-bottom: 0.9rem; }
   .tl li::before { content: ''; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: repeating-linear-gradient(var(--h) 0 6px, transparent 6px 11px); }
   .tl li:last-child::before { display: none; }
-  .tl__dot { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--h-fill); border: 2px solid var(--ink); --ic-fill: var(--surface); }
+  .tl__dot { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--h-fill); border: 2px solid var(--edge); --ic-fill: var(--surface); }
   .tl__body { display: grid; gap: 0.1rem; padding: 0.55rem 0.8rem; border-radius: 14px; background: var(--surface); border: 2px solid var(--line); }
   .tl__time { justify-self: start; font-family: var(--font-head); font-weight: 900; font-size: 0.85rem; color: var(--h-ink); background: var(--h-fill); padding: 0 0.55rem; border-radius: 999px; }
   .tl__t { font-family: var(--font-head); font-weight: 800; }

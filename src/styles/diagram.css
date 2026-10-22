@@ -12,7 +12,7 @@
 .dg__head { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; }
 .dg__ic {
   display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 14px;
-  background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface);
+  background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); --ic-fill: var(--surface);
 }
 .dg__kicker { display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--h-ink); }
 .dg__title { margin: 0; font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; line-height: 1.25; }
@@ -25,7 +25,7 @@
 .dg-card {
   position: relative; display: grid; gap: 0.3rem; align-content: start;
   padding: 0.75rem 0.85rem; border-radius: 16px;
-  background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+  background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow);
   font-size: 0.95rem; line-height: 1.45;
 }
 .dg-card--soft { border-color: var(--line-2); box-shadow: none; }

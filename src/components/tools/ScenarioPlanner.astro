@@ -165,7 +165,7 @@ const bFields = [
 
 <style>
   .sc { display: grid; gap: 1.2rem; }
-  .sc__card { padding: 1.1rem 1.2rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .sc__card { padding: 1.1rem 1.2rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); }
   .sc__t { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; font-size: 1.3rem; --ic-fill: var(--surface); }
   .sc__grid { display: grid; gap: 1rem; }
   @media (min-width: 900px) { .sc__grid { grid-template-columns: 1fr 1fr; align-items: start; } }
@@ -174,7 +174,7 @@ const bFields = [
   .sc__f { display: grid; gap: 0.25rem; padding: 0.55rem 0.7rem; border-radius: 14px; background: var(--surface); }
   .sc__f span { display: flex; align-items: center; gap: 0.35rem; font-weight: 700; font-size: 0.92rem; --ic-fill: var(--h-fill); }
   .sc__f input, .sc__f textarea { width: 100%; min-height: 40px; padding: 0.4rem 0.6rem; border-radius: 10px; border: 2px solid var(--line); background: var(--bg); }
-  .sc__f input:focus, .sc__f textarea:focus { outline: none; border-color: var(--ink); }
+  .sc__f input:focus, .sc__f textarea:focus { outline: none; border-color: var(--edge); }
   .sc__viz { padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px dashed var(--line-2); }
   .sc__clock { width: 100%; max-width: 320px; display: block; margin: 0 auto; }
   .sc__clock :global(.sc__track) { fill: none; stroke: var(--line); }
@@ -192,7 +192,7 @@ const bFields = [
   .sc__checks { list-style: none; margin: 0.8rem 0 0; padding: 0; display: grid; gap: 0.3rem; font-size: 0.88rem; }
   .sc__checks :global(li) { padding: 0.35rem 0.6rem; border-radius: 10px; background: var(--surface-2); }
   .sc__checks :global(.sc__lg) { padding-left: 1.9rem; position: relative; }
-  .sc__checks :global(.sc__lg::before) { content: ''; position: absolute; left: 0.6rem; top: 0.55rem; width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--ink); }
+  .sc__checks :global(.sc__lg::before) { content: ''; position: absolute; left: 0.6rem; top: 0.55rem; width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--edge); }
   .sc__checks :global(.sc__lg--sleep::before) { background: var(--lav); }
   .sc__checks :global(.sc__lg--runway::before) { background: var(--ngoc); }
   .sc__checks :global(.sc__lg--cut::before) { background: var(--do); }

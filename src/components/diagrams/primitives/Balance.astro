@@ -102,7 +102,7 @@ const rightOn = new Set(right.on ?? []);
   .bal__sides { display: grid; gap: 0.9rem; }
   @container (max-width: 599px) { .bal__status { position: sticky; top: 74px; z-index: 3; box-shadow: 0 0 0 2px var(--line-2), var(--shadow); } }
   @container (min-width: 600px) { .bal__sides { grid-template-columns: 1fr 1fr; } }
-  .bal__side { padding: 0.8rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--ink); }
+  .bal__side { padding: 0.8rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--edge); }
   .bal__title { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.6rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); --ic-fill: var(--surface); }
   .bal__side ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
   .bal__side li { margin: 0; }
@@ -111,7 +111,7 @@ const rightOn = new Set(right.on ?? []);
     padding: 0.45rem 0.6rem; border-radius: 12px; border: 2px solid transparent; background: var(--surface); color: var(--ink-3);
     cursor: pointer; font-size: 0.92rem; line-height: 1.35; --ic-fill: var(--line);
   }
-  .bal__item[aria-pressed='true'] { color: var(--ink); border-color: var(--ink); --ic-fill: var(--h-fill); }
+  .bal__item[aria-pressed='true'] { color: var(--ink); border-color: var(--edge); --ic-fill: var(--h-fill); }
   .bal__chk { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--line-2); }
-  .bal__item[aria-pressed='true'] .bal__chk { background: var(--h); border-color: var(--ink); }
+  .bal__item[aria-pressed='true'] .bal__chk { background: var(--h); border-color: var(--edge); }
 </style>

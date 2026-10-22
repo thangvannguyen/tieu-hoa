@@ -93,14 +93,14 @@ const used = chapters.filter((c) => glossary.some((g) => chapterOfBai(g.source.b
   .head h1 { margin: 0; }
   .lead { margin: 0.3rem 0 0; color: var(--ink-2); max-width: 60ch; }
   .tools { position: sticky; top: 64px; z-index: 4; display: grid; gap: 0.6rem; padding: 0.6rem 0; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); }
-  .search { display: flex; align-items: center; gap: 0.5rem; padding: 0 0.9rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--ink); max-width: 34rem; }
+  .search { display: flex; align-items: center; gap: 0.5rem; padding: 0 0.9rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--edge); max-width: 34rem; }
   .search input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 0.7rem 0; outline: none; }
   .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .chipbtn { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.8rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; color: var(--ink); --ic-fill: var(--h-fill); }
-  .chipbtn[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .chipbtn[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--edge); }
   .count { font-size: 0.88rem; color: var(--ink-3); margin: 0.4rem 0 0.8rem; }
   .list { margin: 0; display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
-  .item { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); scroll-margin-top: 140px; }
+  .item { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); scroll-margin-top: 140px; }
   .item:target { outline: 4px solid var(--h); }
   dt { display: flex; gap: 0.7rem; align-items: center; margin-bottom: 0.4rem; }
   .ic { display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 15px; background: var(--h-fill); --ic-fill: var(--surface); }

@@ -86,7 +86,7 @@ const isActive = (href: string) => path.startsWith(url(href));
   .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); margin-right: auto; }
   .brand__logo {
     display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
-    background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+    background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow);
     transform: rotate(-4deg);
   }
   .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
@@ -106,7 +106,7 @@ const isActive = (href: string) => path.startsWith(url(href));
     display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
     border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; color: var(--ink);
   }
-  .icon-btn:hover { border-color: var(--ink); }
+  .icon-btn:hover { border-color: var(--edge); }
   .t-moon { display: none; }
   :global(:root[data-theme='dark']) .t-sun { display: none; }
   :global(:root[data-theme='dark']) .t-moon { display: contents; }

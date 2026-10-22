@@ -38,7 +38,7 @@ const { lesson, questions, title = 'Chiêm nghiệm' } = Astro.props;
   });
 </script>
 <style>
-  .rf { margin: 2.5rem 0; padding: 1.2rem 1.3rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .rf { margin: 2.5rem 0; padding: 1.2rem 1.3rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); }
   .rf__head { display: flex; gap: 0.8rem; align-items: center; margin-bottom: 0.6rem; }
   .rf__t { margin: 0 !important; padding: 0 !important; }
   .rf__t::before { display: none !important; }
@@ -46,7 +46,7 @@ const { lesson, questions, title = 'Chiêm nghiệm' } = Astro.props;
   ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.9rem; }
   label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
   textarea { width: 100%; padding: 0.6rem 0.8rem; border-radius: 14px; border: 2px solid var(--line-2); background: var(--surface); resize: vertical; line-height: 1.5; }
-  textarea:focus { outline: none; border-color: var(--ink); }
+  textarea:focus { outline: none; border-color: var(--edge); }
   .rf__saved { display: flex; align-items: center; gap: 0.3rem; margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--sage-ink); opacity: 0; transition: opacity 0.3s; }
   .rf__saved.is-on { opacity: 1; }
 </style>

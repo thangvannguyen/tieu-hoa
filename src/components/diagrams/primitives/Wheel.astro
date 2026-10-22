@@ -96,7 +96,7 @@ const segs = segments.map((s, i) => {
   .wh__center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 34%; display: grid; justify-items: center; text-align: center; font-family: var(--font-head); font-weight: 900; font-size: 0.82rem; line-height: 1.2; pointer-events: none; }
   .wh__btns { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
   .wh__btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem 0.35rem 0.45rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; --ic-fill: var(--h-fill); }
-  .wh__btn[aria-pressed='true'] { background: var(--h-fill); border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+  .wh__btn[aria-pressed='true'] { background: var(--h-fill); border-color: var(--edge); box-shadow: 0 2px 0 var(--edge-shadow); }
   .wh__panel { min-height: 6rem; padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px dashed var(--line-2); }
   .wh__prompt { color: var(--ink-2); font-size: 0.95rem; }
   .wh__dt { display: flex; align-items: center; gap: 0.45rem; font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; color: var(--h-ink); margin-bottom: 0.35rem !important; --ic-fill: var(--h-fill); }

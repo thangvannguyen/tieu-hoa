@@ -57,11 +57,11 @@ const stops = chapters.map((c) => ({ ...c, items: lessons.filter((l) => l.data.c
   .jm { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 1.4rem; }
   .jm::before { content: ''; position: absolute; left: 39px; top: 40px; bottom: 40px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(var(--line-2) 0 14px, transparent 14px 24px); }
   .jm__stop { position: relative; display: grid; grid-template-columns: 84px 1fr; gap: 1rem; align-items: start; margin: 0; }
-  .jm__badge { position: relative; z-index: 1; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 28px; background: var(--h-fill); border: 3px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); --ic-fill: var(--surface); transform: rotate(calc(-4deg + var(--i) * 3deg)); transition: transform 0.2s; }
+  .jm__badge { position: relative; z-index: 1; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 28px; background: var(--h-fill); border: 3px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); color: var(--ink); --ic-fill: var(--surface); transform: rotate(calc(-4deg + var(--i) * 3deg)); transition: transform 0.2s; }
   .jm__badge:hover { transform: rotate(0) scale(1.05); }
   .jm__no { position: absolute; top: -10px; right: -10px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 0.95rem; }
   .jm__stop.is-complete .jm__no { background: var(--sage); color: var(--ink); }
-  .jm__card { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); min-width: 0; }
+  .jm__card { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); min-width: 0; }
   .jm__k { margin: 0; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--h-ink); }
   .jm__t { margin: 0.15rem 0 0.35rem; font-size: 1.25rem; }
   .jm__t a { color: var(--ink); text-decoration: none; }
@@ -72,7 +72,7 @@ const stops = chapters.map((c) => ({ ...c, items: lessons.filter((l) => l.data.c
   .jm__lessons a { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; align-items: start; padding: 0.35rem 0.5rem; border-radius: 10px; color: var(--ink); text-decoration: none; font-size: 0.95rem; line-height: 1.4; }
   .jm__lessons a:hover { background: var(--h-fill); }
   .jm__check { width: 18px; height: 18px; margin-top: 0.15rem; border-radius: 6px; border: 2px solid var(--line-2); }
-  .jm__lessons a.is-done .jm__check { background: var(--sage); border-color: var(--ink); position: relative; }
+  .jm__lessons a.is-done .jm__check { background: var(--sage); border-color: var(--edge); position: relative; }
   .jm__lessons a.is-done .jm__check::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid var(--ink); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
   .jm__prog { margin: 0.5rem 0 0; font-size: 0.85rem; font-weight: 700; color: var(--sage-ink); }
   .jm__prog:empty { display: none; }

@@ -21,9 +21,9 @@ if (!t) throw new Error(`Không có công cụ "${tool}" (xem src/data/tools.ts)
   .toollink {
     display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: center; margin: 1.5rem 0;
     padding: 1rem 1.1rem; border-radius: var(--radius); text-decoration: none; color: var(--ink);
-    background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); transition: transform 0.12s, box-shadow 0.12s;
+    background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow); transition: transform 0.12s, box-shadow 0.12s;
   }
-  .toollink:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .toollink:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--edge-shadow); }
   .toollink__ic { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; background: var(--h-fill); --ic-fill: var(--surface); }
   .toollink__tx { display: grid; gap: 0.1rem; }
   .toollink__k { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--h-ink); }

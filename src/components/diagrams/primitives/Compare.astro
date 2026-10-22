@@ -41,7 +41,7 @@ const toneHues: Hue[] = ['sage', 'bo', 'do'];
 <style>
   .cmp { display: grid; gap: 0.9rem; }
   @container (min-width: 560px) { .cmp { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); } }
-  .cmp__col { position: relative; display: grid; align-content: start; gap: 0.6rem; padding: 0.9rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .cmp__col { position: relative; display: grid; align-content: start; gap: 0.6rem; padding: 0.9rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .cmp__head { display: flex; gap: 0.6rem; align-items: center; }
   .cmp__ic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 15px; background: var(--surface); --ic-fill: var(--h-fill); flex: none; }
   .cmp__t { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; line-height: 1.25; color: var(--h-ink); }

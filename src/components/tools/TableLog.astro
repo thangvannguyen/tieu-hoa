@@ -72,15 +72,15 @@ const { id, rows, columns, rowLabel = 'Ngày', examples = [] } = Astro.props;
   .tl__ex ul { margin: 0; padding-left: 1.2rem; }
   .tl__table { display: grid; gap: 0.7rem; }
   .tl__head { display: none !important; }
-  .tl__row { display: grid; gap: 0.5rem; padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .tl__row { display: grid; gap: 0.5rem; padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .tl__rl { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: space-between; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
   .tl__rl input { font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; padding: 0.25rem 0.4rem; border-radius: 8px; border: 2px solid var(--line-2); background: var(--bg); color: var(--ink); }
   .tl__cell { display: grid; gap: 0.2rem; }
   .tl__cl { font-size: 0.85rem; font-weight: 700; color: var(--ink-2); }
   textarea { width: 100%; padding: 0.5rem 0.65rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); resize: vertical; line-height: 1.45; }
-  textarea:focus { outline: none; border-color: var(--ink); }
+  textarea:focus { outline: none; border-color: var(--edge); }
   @media (min-width: 900px) {
-    .tl__table { gap: 0; border: 2px solid var(--ink); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 0 var(--ink); }
+    .tl__table { gap: 0; border: 2px solid var(--edge); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 0 var(--edge-shadow); }
     .tl__head { display: grid !important; background: var(--h-fill); font-family: var(--font-head); font-weight: 900; font-size: 0.9rem; }
     .tl__row { grid-template-columns: 9rem repeat(var(--cols, 4), minmax(0, 1fr)); gap: 0; padding: 0; border: 0; border-bottom: 2px solid var(--line); border-radius: 0; box-shadow: none; }
     .tl__row > * { padding: 0.5rem; }
