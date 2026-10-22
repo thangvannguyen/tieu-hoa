@@ -15,7 +15,7 @@ const { id, mood = 'vui', csv = true } = Astro.props;
 const tool = toolById[id];
 ---
 <BaseLayout title={tool.title} description={tool.short} hue={tool.hue}>
-  <div class="ts" data-hue={tool.hue} data-tool-shell={id}>
+  <div class="ts" data-hue={tool.hue} data-tool-shell={id} data-pagefind-body data-pagefind-meta="kicker:Công cụ thực hành">
     <header class="ts__hero">
       <div class="container ts__in">
         <div>
@@ -34,7 +34,7 @@ const tool = toolById[id];
     <div class="container ts__body">
       <slot name="intro" />
 
-      <div class="ts__notice no-print" role="note">
+      <div class="ts__notice no-print" role="note" data-pagefind-ignore>
         <Icon name="khien" size={24} />
         <p>
           <strong>Dữ liệu chỉ lưu trên trình duyệt của máy này</strong> — không gửi đi đâu. Trình duyệt (nhất là Safari)
@@ -42,11 +42,11 @@ const tool = toolById[id];
           <span class="ts__last" data-last-backup></span>
         </p>
       </div>
-      <p class="ts__warn" data-storage-warn hidden>
+      <p class="ts__warn" data-storage-warn hidden data-pagefind-ignore>
         <Icon name="canh-bao" size={22} /> Trình duyệt đang chặn lưu trữ (ví dụ chế độ ẩn danh nghiêm ngặt) — bạn vẫn dùng được, nhưng dữ liệu sẽ mất khi đóng trang. Hãy xuất CSV hoặc in trước khi rời đi.
       </p>
 
-      <div class="ts__actions no-print" role="toolbar" aria-label="Thao tác với dữ liệu">
+      <div class="ts__actions no-print" role="toolbar" aria-label="Thao tác với dữ liệu" data-pagefind-ignore>
         {csv && <button type="button" class="btn btn--sm" data-act="csv"><Icon name="tai-xuong" size={18} /> Xuất CSV (Excel)</button>}
         <button type="button" class="btn btn--sm" data-act="backup"><Icon name="tai-xuong" size={18} /> Sao lưu (.json)</button>
         <label class="btn btn--sm btn--ghost ts__import"><Icon name="tai-len" size={18} /> Nhập bản sao lưu<input type="file" accept="application/json,.json" data-act="import" /></label>

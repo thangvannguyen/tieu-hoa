@@ -15,7 +15,7 @@ const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/
 const used = chapters.filter((c) => glossary.some((g) => chapterOfBai(g.source.bai) === c.id));
 ---
 <BaseLayout title="Thuật ngữ" description="Giải thích các thuật ngữ trong chuỗi bản tin: probiotic, prebiotic, FODMAP, LES, CBT-I… theo đúng câu chữ của bài.">
-  <section class="container page">
+  <section class="container page" data-pagefind-body data-pagefind-meta="kicker:Thuật ngữ">
     <div class="head">
       <BeBung mood="suy-nghi" size={110} />
       <div>
