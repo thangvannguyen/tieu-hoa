@@ -1,0 +1,145 @@
+---
+/**
+ * Minh họa vẽ tay: một nhãn "Nutrition Facts" mẫu (không phải sản phẩm thật) với 7 chốt số chú thích
+ * đúng những từ bài thêm BT02 giải thích. Giá trị để trống "…", chỉ "250" là ví dụ của bài.
+ */
+import Diagram from '../primitives/Diagram.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+
+interface Pin { n: number; hue: Hue; x: number; y: number; en: string; vi: string; text: string }
+const pins: Pin[] = [
+  { n: 1, hue: 'ngoc', x: 24, y: 50, en: 'Nutrition Facts', vi: 'Bảng Thông tin dinh dưỡng', text: 'lượng năng lượng và các chất dinh dưỡng có trong **mỗi khẩu phần**.' },
+  { n: 2, hue: 'bo', x: 24, y: 89, en: 'Serving size', vi: 'Khẩu phần', text: 'bảng hay tính trên **1 khẩu phần** thôi.' },
+  { n: 3, hue: 'dao', x: 24, y: 134, en: 'Calories', vi: 'Năng lượng', text: 'nhu cầu 1500 kcal mỗi ngày → một gói snack **250 kcal** chiếm khoảng **một phần sáu**.' },
+  { n: 4, hue: 'do', x: 24, y: 203, en: 'Fat', vi: 'Chất béo', text: 'chọn sản phẩm có ít **chất béo bão hòa** (Saturated Fat) và **chất béo chuyển hóa** (Trans Fat).' },
+  { n: 5, hue: 'hong', x: 24, y: 279, en: 'Carbohydrate', vi: 'Đường', text: 'một số sản phẩm “không đường” vẫn có **đường ẩn**. WHO: không quá **50g** mỗi ngày, tốt nhất **dưới 25g**.' },
+  { n: 6, hue: 'lav', x: 24, y: 307, en: 'Sodium', vi: 'Muối (Natri)', text: 'ưu tiên **dưới 140mg** natri mỗi khẩu phần; nhận diện **muối ẩn**.' },
+  { n: 7, hue: 'sage', x: 340, y: 168, en: '%DV', vi: '% giá trị dinh dưỡng hàng ngày', text: '**dưới 5%** là thấp, **trên 20%** là cao.' },
+];
+// các hàng trên nhãn: [nhãn trái, giá trị trái, giá trị %DV, thụt lề?, y]
+const rows: { k: string; v: string; dv: string; sub?: boolean; y: number; hl: Hue; bold?: boolean }[] = [
+  { k: 'Fat', v: '… g', dv: '…%', y: 208, hl: 'do', bold: true },
+  { k: 'Saturated Fat', v: '… g', dv: '…%', sub: true, y: 233, hl: 'do' },
+  { k: 'Trans Fat', v: '… g', dv: '', sub: true, y: 257, hl: 'do' },
+  { k: 'Carbohydrate', v: '… g', dv: '…%', y: 284, hl: 'hong', bold: true },
+  { k: 'Sodium', v: '… mg', dv: '…%', y: 312, hl: 'lav', bold: true },
+];
+---
+<Diagram
+  title="Nhãn dinh dưỡng: 7 chỗ cần nhìn"
+  icon="nhan"
+  hue="bo"
+  kicker="Minh họa"
+  caption="Nhãn mẫu để tập đọc (không phải một sản phẩm thật): giá trị để trống “…”, riêng 250 là ví dụ trong bài. Bạn không rành tiếng Anh thì chỉ cần lưu ý một số từ quan trọng như sau."
+  from={['bt-02-doc-nhan-thuc-pham']}
+>
+  <div class="ndd">
+    <svg viewBox="0 0 360 404" role="img" aria-label="Nhãn Nutrition Facts mẫu với 7 chốt số: 1 tiêu đề Nutrition Facts, 2 Serving size, 3 Calories 250, 4 Fat gồm Saturated Fat và Trans Fat, 5 Carbohydrate, 6 Sodium, 7 cột %DV. Một chiếc kính lúp mặt cười đang soi góc dưới nhãn.">
+      <!-- thẻ nhãn -->
+      <rect class="ndd-shadow" x="48" y="20" width="284" height="344" rx="16"></rect>
+      <rect class="ndd-card" x="42" y="14" width="284" height="344" rx="16"></rect>
+
+      <!-- vệt dạ quang sau các hàng -->
+      <rect class="ndd-hl" data-hue="ngoc" x="54" y="30" width="216" height="36" rx="10"></rect>
+      <rect class="ndd-hl" data-hue="bo" x="54" y="76" width="260" height="26" rx="9"></rect>
+      <rect class="ndd-hl" data-hue="dao" x="54" y="117" width="260" height="34" rx="10"></rect>
+      <rect class="ndd-hl" data-hue="sage" x="262" y="162" width="56" height="24" rx="9"></rect>
+      {rows.map((r) => <rect class="ndd-hl ndd-hl--soft" data-hue={r.hl} x={r.sub ? 72 : 54} y={r.y - 15} width={r.sub ? 196 : 210} height="22" rx="8"></rect>)}
+
+      <text class="ndd-title" x="58" y="58">Nutrition Facts</text>
+      <path class="ndd-rule" d="M56 70 H312"></path>
+      <text class="ndd-row ndd-b" x="58" y="94">Serving size</text>
+      <text class="ndd-row" x="310" y="94" text-anchor="end">…</text>
+      <path class="ndd-rule ndd-rule--xl" d="M56 109 H312"></path>
+      <text class="ndd-cal" x="58" y="143">Calories</text>
+      <text class="ndd-calv" x="310" y="145" text-anchor="end">250</text>
+      <path class="ndd-rule ndd-rule--md" d="M56 157 H312"></path>
+      <text class="ndd-dvh" x="310" y="179" text-anchor="end">%DV</text>
+      <path class="ndd-rule" d="M56 188 H312"></path>
+      {rows.map((r, i) => (
+        <>
+          <text class:list={['ndd-row', r.bold && 'ndd-b']} x={r.sub ? 76 : 58} y={r.y}>{r.k} <tspan class="ndd-val">{r.v}</tspan></text>
+          {r.dv && <text class="ndd-row ndd-b" x="310" y={r.y} text-anchor="end">{r.dv}</text>}
+          {i < rows.length - 1 && <path class="ndd-rule" d={`M${rows[i + 1].sub ? 76 : 56} ${r.y + 9} H312`}></path>}
+        </>
+      ))}
+      <path class="ndd-rule ndd-rule--xl" d="M56 326 H312"></path>
+      <path class="ndd-dots" d="M58 342 H212"></path>
+
+      <!-- chốt số -->
+      {pins.map((p) => (
+        <g data-hue={p.hue}>
+          {p.n !== 7 && <path class="ndd-lead" d={`M${p.x + 12} ${p.y} H52`}></path>}
+          <circle class="ndd-pin" cx={p.x} cy={p.y} r="13"></circle>
+          <text class="ndd-pin__n" x={p.x} y={p.y} text-anchor="middle" dominant-baseline="central">{p.n}</text>
+        </g>
+      ))}
+      <path class="ndd-brace" d="M44 196 q-6 0 -6 6 v50 q0 6 6 6"></path>
+
+      <!-- kính lúp mặt cười -->
+      <g class="ndd-lens">
+        <path class="ndd-handle-o" d="M338 378 L354 396"></path>
+        <path class="ndd-handle" d="M338 378 L354 396"></path>
+        <circle class="ndd-glass" cx="318" cy="360" r="27"></circle>
+        <path class="ndd-shine" d="M302 352 a18 18 0 0 1 11 -11"></path>
+        <circle class="ndd-ink" cx="311" cy="362" r="3"></circle>
+        <circle class="ndd-ink" cx="325" cy="362" r="3"></circle>
+        <path class="ndd-line" d="M314.5 368.5 c2 2.3 5 2.3 7 0"></path>
+        <ellipse class="ndd-blush" cx="305" cy="369" rx="4.2" ry="2.5"></ellipse>
+        <ellipse class="ndd-blush" cx="331" cy="369" rx="4.2" ry="2.5"></ellipse>
+      </g>
+    </svg>
+
+    <ol class="ndd__legend">
+      {pins.map((p) => (
+        <li data-hue={p.hue}>
+          <span class="ndd__n">{p.n}</span>
+          <span>
+            <span class="ndd__en">{p.en}</span> <span class="ndd__vi">{p.vi}</span>
+            <span class="ndd__x" set:html={inline(p.text)} />
+          </span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Diagram>
+
+<style>
+  .ndd { display: grid; gap: 1rem; align-items: start; }
+  @container (min-width: 620px) { .ndd { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .ndd svg { width: 100%; max-width: 400px; margin: 0 auto; display: block; overflow: visible; }
+  .ndd-shadow { fill: var(--line); }
+  .ndd-card { fill: var(--surface); stroke: var(--ink); stroke-width: 4; }
+  .ndd-hl { fill: var(--h-fill); }
+  .ndd-hl--soft { opacity: 0.75; }
+  .ndd-title { font-family: var(--font-head); font-weight: 900; font-size: 29px; fill: var(--ink); letter-spacing: -0.5px; }
+  .ndd-rule { stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  .ndd-rule--md { stroke-width: 5; }
+  .ndd-rule--xl { stroke-width: 9; }
+  .ndd-row { font-family: var(--font-head); font-weight: 600; font-size: 15px; fill: var(--ink); }
+  .ndd-b { font-weight: 900; }
+  .ndd-val { font-weight: 600; fill: var(--ink-2); }
+  .ndd-cal { font-family: var(--font-head); font-weight: 900; font-size: 23px; fill: var(--ink); }
+  .ndd-calv { font-family: var(--font-head); font-weight: 900; font-size: 30px; fill: var(--ink); }
+  .ndd-dvh { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink); }
+  .ndd-dots { stroke: var(--line-2); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 18 10; }
+  .ndd-lead { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1 5; }
+  .ndd-pin { fill: var(--h); stroke: var(--ink); stroke-width: 3; }
+  .ndd-pin__n { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink); }
+  .ndd-brace { fill: none; stroke: var(--do); stroke-width: 3.5; stroke-linecap: round; }
+  .ndd-handle-o { stroke: var(--ink); stroke-width: 15; stroke-linecap: round; }
+  .ndd-handle { stroke: var(--dao); stroke-width: 8; stroke-linecap: round; }
+  .ndd-glass { fill: color-mix(in srgb, var(--ngoc-fill) 80%, transparent); stroke: var(--ink); stroke-width: 4; }
+  .ndd-shine { fill: none; stroke: var(--surface); stroke-width: 4; stroke-linecap: round; }
+  .ndd-ink { fill: var(--ink); }
+  .ndd-line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+  .ndd-blush { fill: var(--cheek); opacity: 0.85; }
+
+  .ndd__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; font-size: 0.9rem; line-height: 1.42; }
+  .ndd__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.42rem 0.65rem; border-radius: 12px; background: var(--surface); border-left: 5px solid var(--h); }
+  .ndd__n { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--h); border: 2px solid var(--ink); font-family: var(--font-head); font-weight: 900; font-size: 0.85rem; color: var(--ink); margin-top: 0.05rem; }
+  .ndd__en { font-family: var(--font-head); font-weight: 900; }
+  .ndd__vi { display: inline-block; padding: 0 0.45em; border-radius: 999px; background: var(--h-fill); color: var(--h-ink); font-size: 0.84rem; font-weight: 700; }
+  .ndd__x { display: block; color: var(--ink-2); }
+</style>

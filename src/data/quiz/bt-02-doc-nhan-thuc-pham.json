@@ -1,0 +1,70 @@
+{
+  "lesson": "bt-02-doc-nhan-thuc-pham",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Trên một gói thực phẩm ghi “4 serving size”. Điều này có nghĩa là gì?",
+      "options": [
+        { "id": "a", "text": "Nguyên gói đó có 4 khẩu phần" },
+        { "id": "b", "text": "Mỗi ngày nên ăn 4 gói" },
+        { "id": "c", "text": "Bảng dinh dưỡng đã tính cho cả 4 gói" }
+      ],
+      "answer": ["a"],
+      "explain": "Ghi 4 serving size có nghĩa là **nguyên gói đó có 4 khẩu phần** — và bảng thành phần dinh dưỡng hay tính trên **1 khẩu phần** thôi.",
+      "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "Nếu trên sản phẩm ghi 4 serving size có nghĩa là nguyên gói đó có 4 khẩu phần" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Nếu nhu cầu năng lượng mỗi ngày là 1500 kcal, một gói snack 250 kcal đã chiếm khoảng bao nhiêu tổng nhu cầu?",
+      "options": [
+        { "id": "a", "text": "Khoảng một phần mười" },
+        { "id": "b", "text": "Khoảng một phần sáu" },
+        { "id": "c", "text": "Khoảng một nửa" }
+      ],
+      "answer": ["b"],
+      "explain": "Ví dụ trong bài: một gói snack 250 kcal đã chiếm **khoảng một phần sáu** tổng nhu cầu 1500 kcal.",
+      "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "một gói snack 250 kcal đã chiếm khoảng một phần sáu tổng nhu cầu" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Sản phẩm ghi ‘không đường’ thì chắc chắn không có chất tạo ngọt hay đường ẩn.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Một số sản phẩm “không đường” **vẫn có chất tạo ngọt nhân tạo hay đường ẩn**.",
+      "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "một số sản phẩm “không đường” vẫn có chất tạo ngọt nhân tạo hay đường ẩn" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Bài khuyên bạn ưu tiên sản phẩm có lượng natri mỗi khẩu phần như thế nào?",
+      "options": [
+        { "id": "a", "text": "Dưới 140mg natri mỗi khẩu phần" },
+        { "id": "b", "text": "Trên 140mg natri mỗi khẩu phần" },
+        { "id": "c", "text": "Không cần để ý natri, chỉ xem hạn sử dụng" }
+      ],
+      "answer": ["a"],
+      "explain": "Việc nhận diện và phát hiện muối ẩn rất quan trọng để giảm thiểu nguy cơ tim mạch — **ưu tiên sản phẩm có dưới 140mg natri mỗi khẩu phần**.",
+      "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "Bạn ưu tiên sản phẩm có dưới 140mg natri mỗi khẩu phần nhé" }
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "Với những chất nào, bạn nên chọn thực phẩm có %DV thấp (dưới 5%)?",
+      "options": [
+        { "id": "a", "text": "Đường" },
+        { "id": "b", "text": "Muối" },
+        { "id": "c", "text": "Chất béo bão hòa" },
+        { "id": "d", "text": "Chất xơ" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "%DV dưới 5% là thấp, trên 20% là cao. Chọn %DV **thấp với những chất nên hạn chế (đường, muối, chất béo bão hòa)** và %DV cao với dưỡng chất có lợi như chất xơ, vitamin, khoáng chất.",
+      "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "thấp với những chất nên hạn chế (đường, muối, chất béo bão hòa)" }
+    }
+  ]
+}
