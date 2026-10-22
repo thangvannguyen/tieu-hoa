@@ -35,14 +35,16 @@ const modes = [
   </fieldset>
 
   <fieldset class="st__group">
-    <legend>Cỡ chữ <span class="st__hint">— áp dụng cho mọi giao diện</span></legend>
+    <legend>Cỡ chữ <span class="st__hint">— áp dụng cho mọi giao diện; mặc định Nhỏ trên điện thoại & máy tính bảng, Vừa trên laptop</span></legend>
     <div class="st__sizes">
       {SIZES.map((z) => (
         <label class="st__size">
           <input type="radio" name="bev-size" value={z.value} />
           <span>
             <span class="st__aa" style={`font-size:${(1.15 * z.scale).toFixed(3)}rem`} aria-hidden="true">Aa</span>
-            {z.label}{z.value === 'vua' && <span class="st__badge">Mặc định</span>}
+            {z.label}
+            {z.value === 'nho' && <span class="st__badge st__badge--mobile">Mặc định</span>}
+            {z.value === 'vua' && <span class="st__badge st__badge--desktop">Mặc định</span>}
           </span>
         </label>
       ))}
@@ -90,7 +92,7 @@ const modes = [
 
 <script>
   import { prefs } from '~/lib/storage';
-  import { applyDisplay, type StyleId, type SizeId } from '~/lib/display';
+  import { applyDisplay, defaultSize, type StyleId, type SizeId } from '~/lib/display';
 
   const dialog = document.querySelector<HTMLDialogElement>('dialog.settings')!;
   const sync = () => {
@@ -99,7 +101,7 @@ const modes = [
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-mode]').forEach((i) => (i.checked = i.value === (p.theme ?? 'auto')));
     dialog.querySelector<HTMLInputElement>('input[name=bev-bottombar]')!.checked = p.bottomBar !== false;
     dialog.querySelector<HTMLInputElement>('input[name=bev-totop]')!.checked = p.totopMobile === true;
-    dialog.querySelectorAll<HTMLInputElement>('input[name=bev-size]').forEach((i) => (i.checked = i.value === (p.size === 'nho' || p.size === 'to' ? p.size : 'vua')));
+    dialog.querySelectorAll<HTMLInputElement>('input[name=bev-size]').forEach((i) => (i.checked = i.value === (p.size ?? defaultSize())));
   };
   document.querySelectorAll('[data-open-settings]').forEach((b) =>
     b.addEventListener('click', () => {
@@ -195,6 +197,11 @@ const modes = [
   .st__size input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
   .st__aa { font-weight: 900; line-height: 1; }
   .st__size .st__badge { position: absolute; top: -9px; right: 10px; }
+  .st__badge--mobile { display: none; }
+  @media (max-width: 1060px), (pointer: coarse) and (max-width: 1366px) {
+    .st__badge--mobile { display: inline-block; }
+    .st__badge--desktop { display: none; }
+  }
   .st__size > span { min-height: 100%; }
   .st__sizes { padding-top: 6px; }
   .st__sample { margin: 0.6rem 0 0; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); background: var(--surface-2); font-size: 1rem; }

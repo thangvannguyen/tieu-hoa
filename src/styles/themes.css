@@ -163,9 +163,14 @@
 :root[data-style='tuong-phan'] .btn--primary { background: var(--ink); color: var(--bg); --ic-fill: transparent; }
 
 /* ===== Cỡ chữ (data-size trên <html>) — áp dụng cho mọi giao diện =====
-   nho 87.5% · (mặc định: vừa 100%) · to 112.5% — mọi kích thước dùng rem nên co giãn đều. */
+   nho 87.5% · vua 100% · to 112.5% — mọi kích thước dùng rem nên co giãn đều.
+   Chưa chọn (không có data-size): máy tính bảng trở xuống mặc định Nhỏ, laptop trở lên mặc định Vừa. */
 :root[data-size='nho'] { font-size: 87.5%; }
+:root[data-size='vua'] { font-size: 100%; }
 :root[data-size='to'] { font-size: 112.5%; }
+@media (max-width: 1060px), (pointer: coarse) and (max-width: 1366px) {
+  :root:not([data-size]) { font-size: 87.5%; }
+}
 @media (max-width: 520px) {
   :root[data-size='to'] .brand__name { font-size: 0.9rem; }
   :root[data-size='to'] .brand__logo { width: 38px; height: 38px; }

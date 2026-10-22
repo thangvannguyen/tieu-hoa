@@ -52,7 +52,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           var p = JSON.parse(localStorage.getItem('bev:v1:prefs') || '{}');
           if (p.theme === 'dark' || p.theme === 'light') document.documentElement.dataset.theme = p.theme;
           if (p.style === 'de-doc' || p.style === 'don-gian' || p.style === 'tuong-phan') document.documentElement.dataset.style = p.style;
-          if (p.size === 'nho' || p.size === 'to') document.documentElement.dataset.size = p.size;
+          if (p.size === 'nho' || p.size === 'vua' || p.size === 'to') document.documentElement.dataset.size = p.size;
           if (p.bottomBar === false) document.documentElement.dataset.bottombar = 'off';
           if (p.totopMobile === true) document.documentElement.dataset.totopMobile = 'on';
         } catch (e) {}

@@ -74,7 +74,7 @@ Lưu trong `bev:v1:prefs` (localStorage), áp dụng sớm trong `<head>` để 
 | Thuộc tính trên `<html>` | Giá trị | Ý nghĩa |
 |---|---|---|
 | `data-style` | *(không có)* = **Dễ thương** (mặc định) · `de-doc` · `don-gian` · `tuong-phan` | Phong cách. Không giao diện nào đổi cỡ chữ. |
-| `data-size` | `nho` (87,5%) · *(không có)* = **Vừa** (100%, mặc định) · `to` (112,5%) | Cỡ chữ cho mọi giao diện — mọi kích thước dùng `rem` nên co giãn đều. |
+| `data-size` | `nho` (87,5%) · `vua` (100%) · `to` (112,5%) · *(không có)* = chưa chọn | Cỡ chữ cho mọi giao diện — mọi kích thước dùng `rem` nên co giãn đều. Chưa chọn thì mặc định theo thiết bị: **Nhỏ** trên máy tính bảng trở xuống, **Vừa** trên laptop trở lên. |
 | `data-theme` | *(không có)* = theo máy · `light` · `dark` | Chế độ màu, kết hợp được với mọi giao diện. |
 | `data-bottombar` | *(không có)* = bật (mặc định) · `off` | Thanh tiện ích cố định ở đáy màn hình trên điện thoại / máy tính bảng (≤ 1060px hoặc màn hình cảm ứng ≤ 1366px): Trang chủ · Bài học · Tìm kiếm · Ôn tập · Công cụ. Tự ẩn khi đang gõ chữ. |
 | `data-totop-mobile` | *(không có)* = ẩn (mặc định) · `on` | Nút Lên đầu trang trên điện thoại / máy tính bảng. Trên máy tính luôn hiện. |

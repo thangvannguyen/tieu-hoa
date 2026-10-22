@@ -15,11 +15,18 @@ export const SIZES: { value: SizeId; label: string; scale: number }[] = [
   { value: 'to', label: 'To', scale: 1.125 },
 ];
 
+/** Máy tính bảng trở xuống (màn hình hẹp hoặc màn hình cảm ứng) — dùng chung cho CSS và JS. */
+export const MOBILE_QUERY = '(max-width: 1060px), (pointer: coarse) and (max-width: 1366px)';
+
+/** Cỡ chữ mặc định khi người dùng chưa chọn: máy tính bảng trở xuống → Nhỏ, laptop trở lên → Vừa. */
+export const defaultSize = (): SizeId => (matchMedia(MOBILE_QUERY).matches ? 'nho' : 'vua');
+
 export function applyDisplay(p: { style?: StyleId; size?: SizeId; theme?: 'light' | 'dark'; bottomBar?: boolean; totopMobile?: boolean }) {
   const root = document.documentElement;
   if (p.style && p.style !== 'mac-dinh') root.dataset.style = p.style;
   else delete root.dataset.style;
-  if (p.size === 'nho' || p.size === 'to') root.dataset.size = p.size;
+  // chỉ đặt thuộc tính khi người dùng đã chọn; chưa chọn thì CSS tự dùng mặc định theo thiết bị
+  if (p.size === 'nho' || p.size === 'vua' || p.size === 'to') root.dataset.size = p.size;
   else delete root.dataset.size;
   if (p.theme === 'light' || p.theme === 'dark') root.dataset.theme = p.theme;
   else delete root.dataset.theme;
