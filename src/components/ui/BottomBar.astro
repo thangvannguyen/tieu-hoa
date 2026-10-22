@@ -1,0 +1,84 @@
+---
+/**
+ * Thanh tiện ích cố định ở đáy màn hình — chỉ hiện trên điện thoại / máy tính bảng.
+ * Tắt được trong Cài đặt hiển thị (html[data-bottombar="off"]). Tự ẩn khi đang gõ chữ để không che bàn phím.
+ */
+import Icon from './Icon.astro';
+import { url } from '~/lib/url';
+
+const path = Astro.url.pathname;
+const is = (...prefixes: string[]) => prefixes.some((p) => path.startsWith(url(p)));
+const items = [
+  { href: '/', label: 'Trang chủ', icon: 'nha', active: path === url('/') },
+  { href: '/bai-hoc/', label: 'Bài học', icon: 'sach', active: is('/bai-hoc/', '/bai/', '/chuong/', '/gioi-thieu/') },
+  { search: true, label: 'Tìm kiếm', icon: 'tim-kiem', active: false },
+  { href: '/on-tap/', label: 'Ôn tập', icon: 'the-ghi-nho', active: is('/on-tap/', '/thuat-ngu/') },
+  { href: '/cong-cu/', label: 'Công cụ', icon: 'cong-cu', active: is('/cong-cu/', '/du-lieu-cua-ban/') },
+];
+---
+<nav class="bbar no-print" aria-label="Thanh tiện ích" data-pagefind-ignore>
+  <ul>
+    {items.map((it) => (
+      <li>
+        {it.search ? (
+          <button type="button" class="bbar__it" data-open-search>
+            <span class="bbar__ic"><Icon name={it.icon} size={24} /></span>
+            <span class="bbar__lb">{it.label}</span>
+          </button>
+        ) : (
+          <a class="bbar__it" href={url(it.href!)} aria-current={it.active ? 'page' : undefined}>
+            <span class="bbar__ic"><Icon name={it.icon} size={24} /></span>
+            <span class="bbar__lb">{it.label}</span>
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  // Ẩn thanh khi đang nhập chữ (bàn phím ảo bật lên) — không ẩn với ô tick / nút chọn
+  const root = document.documentElement;
+  const typing = (el: EventTarget | null) =>
+    el instanceof HTMLElement &&
+    (el instanceof HTMLTextAreaElement ||
+      el.isContentEditable ||
+      (el instanceof HTMLInputElement && !['checkbox', 'radio', 'button', 'submit', 'range', 'file'].includes(el.type)));
+  document.addEventListener('focusin', (e) => { if (typing(e.target)) root.classList.add('is-typing'); });
+  document.addEventListener('focusout', () => setTimeout(() => { if (!typing(document.activeElement)) root.classList.remove('is-typing'); }, 50));
+</script>
+
+<style>
+  .bbar { display: none; }
+  /* điện thoại, máy tính bảng (màn hình hẹp hoặc màn hình cảm ứng) */
+  @media (max-width: 1060px), (pointer: coarse) and (max-width: 1366px) {
+    :global(:root:not([data-bottombar='off'])) .bbar {
+      display: block; position: fixed; z-index: 45;
+      left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right));
+      bottom: max(10px, env(safe-area-inset-bottom));
+      max-width: 560px; margin: 0 auto;
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+      border: 2px solid var(--edge); border-radius: 22px;
+      box-shadow: 0 4px 0 var(--edge-shadow), var(--shadow-lg);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    :global(:root:not([data-bottombar='off']) body) { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+    :global(:root:not([data-bottombar='off']) .totop) { bottom: calc(86px + env(safe-area-inset-bottom)); }
+    :global(:root.is-typing:not([data-bottombar='off'])) .bbar { transform: translateY(140%); opacity: 0; pointer-events: none; }
+  }
+  .bbar ul { list-style: none; margin: 0; padding: 5px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
+  .bbar li { margin: 0; }
+  .bbar__it {
+    width: 100%; display: grid; justify-items: center; gap: 1px; padding: 6px 2px 5px; border: 0; border-radius: 16px;
+    background: transparent; color: var(--ink-2); text-decoration: none; cursor: pointer; font: inherit; min-height: 52px;
+    --ic-fill: var(--line);
+  }
+  .bbar__it:hover { color: var(--ink); background: var(--surface-2); }
+  .bbar__it:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+  .bbar__it[aria-current='page'] { background: var(--h-fill); color: var(--h-ink); --ic-fill: var(--surface); }
+  .bbar__ic { display: grid; place-items: center; height: 26px; }
+  .bbar__lb { font-family: var(--font-head); font-weight: 800; font-size: 0.72rem; line-height: 1.2; white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { .bbar { transition: none; } }
+  @media print { .bbar { display: none !important; } }
+</style>

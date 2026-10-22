@@ -62,6 +62,18 @@ const modes = [
     </div>
   </fieldset>
 
+  <fieldset class="st__group">
+    <legend>Thanh tiện ích</legend>
+    <label class="st__switch">
+      <input type="checkbox" role="switch" name="bev-bottombar" />
+      <span class="st__track" aria-hidden="true"><span class="st__thumb"></span></span>
+      <span class="st__swtx">
+        <span class="st__swt">Hiện thanh tiện ích ở cuối màn hình</span>
+        <span class="st__swd">Trên điện thoại và máy tính bảng: Trang chủ · Bài học · Tìm kiếm · Ôn tập · Công cụ. Tắt đi thì thanh không hiện nữa.</span>
+      </span>
+    </label>
+  </fieldset>
+
   <div class="st__foot">
     <p>Lựa chọn được lưu trên máy này và áp dụng cho mọi trang.</p>
     <button type="button" class="btn btn--sm btn--ghost" data-reset-display><Icon name="lap-lai" size={18} /> Khôi phục mặc định</button>
@@ -77,6 +89,7 @@ const modes = [
     const p = prefs.get();
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-style]').forEach((i) => (i.checked = i.value === (p.style ?? 'mac-dinh')));
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-mode]').forEach((i) => (i.checked = i.value === (p.theme ?? 'auto')));
+    dialog.querySelector<HTMLInputElement>('input[name=bev-bottombar]')!.checked = p.bottomBar !== false;
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-size]').forEach((i) => (i.checked = i.value === (p.size === 'nho' || p.size === 'to' ? p.size : 'vua')));
   };
   document.querySelectorAll('[data-open-settings]').forEach((b) =>
@@ -93,6 +106,7 @@ const modes = [
     if (t.name === 'bev-style') p.style = t.value as StyleId;
     if (t.name === 'bev-mode') p.theme = t.value === 'auto' ? undefined : (t.value as 'light' | 'dark');
     if (t.name === 'bev-size') p.size = t.value as SizeId;
+    if (t.name === 'bev-bottombar') { if (t.checked) delete p.bottomBar; else p.bottomBar = false; }
     prefs.set(p);
     applyDisplay(p);
   });
@@ -101,6 +115,7 @@ const modes = [
     delete p.style;
     delete p.size;
     delete p.theme;
+    delete p.bottomBar;
     prefs.set(p);
     applyDisplay(p);
     sync();
@@ -120,6 +135,12 @@ const modes = [
   .st__group { border: 0; padding: 0; margin: 0.8rem 0 0; min-width: 0; }
   .st__group legend { font-family: var(--font-head); font-weight: 900; font-size: 1.02rem; padding: 0; margin-bottom: 0.5rem; }
   .st__styles { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); }
+  @media (max-width: 520px) {
+    .st__styles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+    .st__preview { height: 62px; }
+    .st__desc { font-size: 0.76rem; }
+    .settings { padding: 0.9rem; }
+  }
   .st__style { position: relative; display: grid; gap: 0.3rem; align-content: start; padding: 0.6rem; border-radius: var(--radius); border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; }
   .st__style:has(input:checked) { border-color: var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); background: var(--h-fill); }
   .st__style:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
@@ -171,6 +192,15 @@ const modes = [
   .st__mode span { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.9rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); font-family: var(--font-head); font-weight: 800; --ic-fill: var(--h-fill); }
   .st__mode input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .st__mode input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__switch { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: center; padding: 0.7rem 0.9rem; border-radius: var(--radius); border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; position: relative; }
+  .st__switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .st__track { position: relative; width: 52px; height: 30px; border-radius: 999px; background: var(--line-2); border: 2px solid var(--edge); transition: background 0.15s; }
+  .st__thumb { position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--edge); transition: transform 0.15s; }
+  .st__switch input:checked + .st__track { background: var(--sage); }
+  .st__switch input:checked + .st__track .st__thumb { transform: translateX(22px); }
+  .st__switch input:focus-visible + .st__track { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__swt { display: block; font-family: var(--font-head); font-weight: 800; }
+  .st__swd { display: block; font-size: 0.85rem; color: var(--ink-2); }
   .st__foot { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; margin-top: 1.1rem; padding-top: 0.8rem; border-top: 2px dashed var(--line); }
   .st__foot p { margin: 0; font-size: 0.85rem; color: var(--ink-2); }
 </style>

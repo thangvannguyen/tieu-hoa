@@ -172,3 +172,7 @@
   :root[data-size='to'] .icon-btn { width: 40px; height: 40px; }
   :root[data-size='to'] .bar { gap: 0.4rem; }
 }
+
+/* thanh tiện ích: nền đặc ở giao diện tương phản cao / dễ đọc */
+:root:is([data-style='tuong-phan'], [data-style='de-doc']) .bbar { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
+:root[data-style='tuong-phan'] .bbar__it[aria-current='page'] { outline: 2px solid var(--ink); outline-offset: -2px; }

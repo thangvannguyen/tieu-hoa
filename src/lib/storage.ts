@@ -128,6 +128,8 @@ export interface Prefs {
   theme?: 'light' | 'dark';
   style?: 'mac-dinh' | 'de-doc' | 'don-gian' | 'tuong-phan';
   size?: 'nho' | 'vua' | 'to';
+  /** thanh tiện ích ở đáy màn hình (điện thoại / máy tính bảng); mặc định bật */
+  bottomBar?: boolean;
   lastBackup?: string;
   lastLesson?: string;
 }
