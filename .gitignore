@@ -5,3 +5,4 @@ scripts/_staging/
 .DS_Store
 *.log
 .env*
+.claude/

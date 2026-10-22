@@ -1,0 +1,47 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import LessonCard from '~/components/home/LessonCard.astro';
+import ProgressMarker from '~/components/home/ProgressMarker.astro';
+import { getLessons } from '~/lib/lessons';
+import { chapters } from '~/data/chapters';
+import { url } from '~/lib/url';
+const lessons = await getLessons();
+---
+<BaseLayout title="Tất cả bài học" description="Danh sách toàn bộ bản tin và bài thêm theo 4 chương của chuỗi Bụng Êm, Việc Ổn.">
+  <section class="container page">
+    <h1>Tất cả bài học</h1>
+    <p class="lead">Chuỗi bản tin “Bụng Êm, Việc Ổn” được xếp theo đúng thứ tự phát hành: hiểu dạ dày → hệ vi sinh đường ruột → giấc ngủ → dinh dưỡng phục hồi bệnh lý, cùng các bài thêm.</p>
+    {chapters.map((c) => {
+      const items = lessons.filter((l) => l.data.chapter === c.id);
+      if (!items.length) return null;
+      return (
+        <section class="ch" data-hue={c.hue} aria-labelledby={`ch-${c.id}`}>
+          <header class="ch__head">
+            <span class="ch__ic"><Icon name={c.icon} size={34} /></span>
+            <div>
+              <h2 id={`ch-${c.id}`}><a href={url(`/chuong/${c.id}/`)}>{c.id === 'c0' || c.id === 'them' ? c.title : `Chương ${c.so} · ${c.title}`}</a></h2>
+              <p>{c.description}</p>
+              <p class="ch__prog" data-progress-of={items.map((l) => l.id).join(',')}></p>
+            </div>
+          </header>
+          <ul class="grid">{items.map((l) => <li><LessonCard lesson={l} /></li>)}</ul>
+        </section>
+      );
+    })}
+  </section>
+  <ProgressMarker />
+</BaseLayout>
+<style>
+  .page { padding: 2.5rem 0; }
+  .lead { max-width: 60ch; color: var(--ink-2); }
+  .ch { margin-top: 2.5rem; }
+  .ch__head { display: flex; gap: 0.9rem; align-items: flex-start; margin-bottom: 1rem; }
+  .ch__ic { flex: none; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 20px; background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface); }
+  .ch__head h2 { margin: 0 0 0.2rem; }
+  .ch__head h2 a { color: var(--ink); text-decoration: none; }
+  .ch__head p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+  .ch__prog { margin-top: 0.3rem !important; font-size: 0.85rem; font-weight: 700; color: var(--sage-ink) !important; }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .grid li { margin: 0; }
+</style>

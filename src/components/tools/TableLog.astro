@@ -1,0 +1,93 @@
+---
+/** Bảng ghi chép nhiều dòng (Ngày 1…N) × các cột tự định nghĩa. Trên điện thoại mỗi dòng thành một thẻ. */
+interface Col { id: string; label: string; placeholder?: string; wide?: boolean }
+interface Props { id: string; rows: number; columns: Col[]; rowLabel?: string; examples?: string[] }
+const { id, rows, columns, rowLabel = 'Ngày', examples = [] } = Astro.props;
+---
+<bev-tablelog class="tl" data-key={`tool:${id}`} data-rows={rows}>
+  <script type="application/json" data-cols set:html={JSON.stringify(columns)} />
+  {examples.length > 0 && (
+    <div class="tl__ex">
+      <p><strong>Gợi ý ghi ngắn:</strong></p>
+      <ul>{examples.map((e) => <li>{e}</li>)}</ul>
+    </div>
+  )}
+  <div class="tl__table" role="table" aria-label="Bảng ghi chép" style={`--cols:${columns.length}`}>
+    <div class="tl__row tl__head" role="row">
+      <span role="columnheader">{rowLabel}</span>
+      {columns.map((c) => <span role="columnheader">{c.label}</span>)}
+    </div>
+    {Array.from({ length: rows }, (_, i) => (
+      <div class="tl__row" role="row">
+        <span class="tl__rl" role="rowheader">{rowLabel} {i + 1}<input type="date" aria-label={`${rowLabel} ${i + 1}: ngày ghi`} data-r={i} data-c="__date" /></span>
+        {columns.map((c) => (
+          <label class="tl__cell" role="cell">
+            <span class="tl__cl">{c.label}</span>
+            <textarea rows="2" data-r={i} data-c={c.id} placeholder={c.placeholder}></textarea>
+          </label>
+        ))}
+      </div>
+    ))}
+  </div>
+</bev-tablelog>
+<script>
+  import { read, write, onExternalChange, requestPersist } from '~/lib/storage';
+  type State = { rows: Record<string, Record<string, string>>; updatedAt?: string };
+  class BevTableLog extends HTMLElement {
+    key!: string; state!: State; cols!: { id: string; label: string }[];
+    connectedCallback() {
+      this.key = this.dataset.key!;
+      this.cols = JSON.parse(this.querySelector('script[data-cols]')!.textContent!);
+      this.load();
+      this.addEventListener('input', (e) => {
+        const el = e.target as HTMLTextAreaElement | HTMLInputElement;
+        if (el.dataset.r == null) return;
+        const row = (this.state.rows[el.dataset.r] ??= {});
+        if (el.value) row[el.dataset.c!] = el.value; else delete row[el.dataset.c!];
+        this.state.updatedAt = new Date().toISOString();
+        write(this.key, this.state);
+        requestPersist();
+      });
+      onExternalChange(this.key, () => this.load());
+      (this as any).toolApi = { reload: () => this.load(), csv: () => this.csv() };
+    }
+    load() {
+      this.state = read<State>(this.key, { rows: {} });
+      this.state.rows ??= {};
+      this.querySelectorAll<HTMLTextAreaElement | HTMLInputElement>('[data-r]').forEach((el) => (el.value = this.state.rows[el.dataset.r!]?.[el.dataset.c!] ?? ''));
+    }
+    csv() {
+      const n = Number(this.dataset.rows);
+      const out = [['Ngày', 'Ngày ghi', ...this.cols.map((c) => c.label)]];
+      for (let i = 0; i < n; i++) out.push([`Ngày ${i + 1}`, this.state.rows[i]?.__date ?? '', ...this.cols.map((c) => this.state.rows[i]?.[c.id] ?? '')]);
+      return out;
+    }
+  }
+  customElements.define('bev-tablelog', BevTableLog);
+</script>
+<style>
+  .tl { display: block; }
+  .tl__ex { padding: 0.8rem 1rem; border-radius: var(--radius-sm); background: var(--h-fill); margin-bottom: 1rem; font-size: 0.94rem; }
+  .tl__ex p { margin: 0 0 0.3rem; }
+  .tl__ex ul { margin: 0; padding-left: 1.2rem; }
+  .tl__table { display: grid; gap: 0.7rem; }
+  .tl__head { display: none !important; }
+  .tl__row { display: grid; gap: 0.5rem; padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .tl__rl { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: space-between; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .tl__rl input { font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; padding: 0.25rem 0.4rem; border-radius: 8px; border: 2px solid var(--line-2); background: var(--bg); color: var(--ink); }
+  .tl__cell { display: grid; gap: 0.2rem; }
+  .tl__cl { font-size: 0.85rem; font-weight: 700; color: var(--ink-2); }
+  textarea { width: 100%; padding: 0.5rem 0.65rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); resize: vertical; line-height: 1.45; }
+  textarea:focus { outline: none; border-color: var(--ink); }
+  @media (min-width: 900px) {
+    .tl__table { gap: 0; border: 2px solid var(--ink); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 0 var(--ink); }
+    .tl__head { display: grid !important; background: var(--h-fill); font-family: var(--font-head); font-weight: 900; font-size: 0.9rem; }
+    .tl__row { grid-template-columns: 9rem repeat(var(--cols, 4), minmax(0, 1fr)); gap: 0; padding: 0; border: 0; border-bottom: 2px solid var(--line); border-radius: 0; box-shadow: none; }
+    .tl__row > * { padding: 0.5rem; }
+    .tl__head > * { padding: 0.6rem 0.5rem; }
+    .tl__row > * + * { border-left: 2px solid var(--line); }
+    .tl__rl { flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+    .tl__cl { display: none; }
+    textarea { border-color: transparent; background: transparent; }
+  }
+</style>

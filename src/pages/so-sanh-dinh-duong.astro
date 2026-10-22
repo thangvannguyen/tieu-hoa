@@ -1,0 +1,96 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { getLessons } from '~/lib/lessons';
+import { inline } from '~/lib/inline';
+import { url } from '~/lib/url';
+type Src = { bai: string; trich: string };
+type Data = {
+  aspects: { id: string; label: string; icon?: string; cells: Record<string, { text: string; source: Src } | null> }[];
+  conflicts?: { title: string; text: string; sources: Src[] }[];
+};
+const mods = import.meta.glob<Data>('/src/data/so-sanh-dinh-duong.json', { eager: true, import: 'default' });
+const data = Object.values(mods)[0];
+const lessons = (await getLessons()).filter((l) => l.data.chapter === 'c4');
+const cols = ['13', '14', '15', '16'].map((so) => ({ so, lesson: lessons.find((l) => l.id.startsWith(so)) }));
+const short: Record<string, string> = { '13': 'Trào ngược dạ dày – thực quản', '14': 'Viêm loét dạ dày – tá tràng', '15': 'Hội chứng ruột kích thích', '16': 'Táo bón' };
+const icons: Record<string, string> = { '13': 'thuc-quan', '14': 'da-day', '15': 'ruot', '16': 'chat-xo' };
+---
+<BaseLayout title="So sánh dinh dưỡng 4 bệnh lý" description="Đặt cạnh nhau lời khuyên dinh dưỡng của bản tin #13–#16: trào ngược, viêm loét, IBS, táo bón." hue="bo">
+  <section class="container page">
+    <div class="head">
+      <BeBung mood="suy-nghi" size={110} />
+      <div>
+        <h1>So sánh dinh dưỡng 4 bệnh lý</h1>
+        <p class="lead">Mỗi bản tin của chương 4 dành cho một bệnh lý. Bảng dưới đặt các lời khuyên cạnh nhau để thấy điểm chung và chỗ khác nhau. Ô “Bài không đề cập” nghĩa là bản tin đó không nói về mục này.</p>
+      </div>
+    </div>
+    {!data ? <p>Bảng so sánh đang được cập nhật.</p> : (
+      <>
+        <div class="table-scroll">
+          <table class="mx">
+            <thead>
+              <tr>
+                <th scope="col">Mục</th>
+                {cols.map((c) => (
+                  <th scope="col">
+                    <a href={url(`/bai/${c.lesson?.id ?? ''}/`)}><Icon name={icons[c.so]} size={26} /><span>#{c.so}</span><span class="mx__n">{short[c.so]}</span></a>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.aspects.map((a) => (
+                <tr>
+                  <th scope="row">{a.icon && <Icon name={a.icon} size={24} />} {a.label}</th>
+                  {cols.map((c) => {
+                    const cell = a.cells[c.so];
+                    return cell ? <td set:html={inline(cell.text)} /> : <td class="mx__na">Bài không đề cập</td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {data.conflicts && data.conflicts.length > 0 && (
+          <section class="cf" aria-labelledby="cf">
+            <h2 id="cf"><Icon name="can-bang" size={30} /> Những chỗ các bài nói khác nhau</h2>
+            <p class="cf__lead">Mỗi bản tin viết cho một bệnh lý khác nhau, nên lời khuyên có thể khác. Nếu bạn có nhiều vấn đề cùng lúc, hãy hỏi bác sĩ hoặc chuyên gia dinh dưỡng.</p>
+            <ul>
+              {data.conflicts.map((c) => (
+                <li>
+                  <p class="cf__t" set:html={inline(c.title)} />
+                  <p set:html={inline(c.text)} />
+                  <p class="cf__s">{c.sources.map((s, i) => <>{i > 0 && ' · '}<a href={url(`/bai/${s.bai}/`)}>#{s.bai.slice(0, 2)}</a></>)}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </>
+    )}
+  </section>
+</BaseLayout>
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+  .head h1 { margin: 0; }
+  .lead { margin: 0.3rem 0 0; color: var(--ink-2); max-width: 62ch; }
+  .mx { width: 100%; min-width: 820px; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; font-size: 0.92rem; }
+  .mx th, .mx td { padding: 0.65rem 0.75rem; vertical-align: top; text-align: left; border-bottom: 1.5px solid var(--line); }
+  .mx thead th { background: var(--bo-fill); border-bottom: 2px solid var(--ink); }
+  .mx thead a { display: grid; gap: 0.15rem; color: var(--ink); text-decoration: none; font-family: var(--font-head); font-weight: 900; --ic-fill: var(--surface); }
+  .mx__n { font-size: 0.8rem; font-weight: 700; color: var(--ink-2); }
+  .mx tbody th { font-family: var(--font-head); font-weight: 900; white-space: nowrap; background: var(--surface-2); }
+  .mx tbody th :global(.icon) { vertical-align: -0.4em; }
+  .mx__na { color: var(--ink-3); font-style: italic; }
+  .cf { margin-top: 2.5rem; }
+  .cf h2 { display: flex; align-items: center; gap: 0.5rem; }
+  .cf__lead { color: var(--ink-2); max-width: 62ch; }
+  .cf ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+  .cf li { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--dao-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); margin: 0; }
+  .cf li p { margin: 0 0 0.4rem; font-size: 0.94rem; }
+  .cf__t { font-family: var(--font-head); font-weight: 900; font-size: 1.05rem !important; }
+  .cf__s { font-size: 0.82rem !important; }
+</style>

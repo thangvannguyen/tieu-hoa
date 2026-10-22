@@ -1,0 +1,144 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import Quiz from '~/components/lesson/Quiz.astro';
+import { glossary, quizzes, type Quiz as QuizT } from '~/lib/data';
+import { chapters } from '~/data/chapters';
+import { getLessons, lessonLabel } from '~/lib/lessons';
+import { url } from '~/lib/url';
+const lessons = await getLessons();
+const byChapter = chapters
+  .map((c) => {
+    const ls = lessons.filter((l) => l.data.chapter === c.id && quizzes[l.id]);
+    const quiz: QuizT | null = ls.length
+      ? { lesson: `chuong-${c.id}`, questions: ls.flatMap((l) => quizzes[l.id].questions.map((q) => ({ ...q, id: `${l.id}-${q.id}` }))) }
+      : null;
+    return { c, ls, quiz };
+  })
+  .filter((x) => x.quiz);
+const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai: g.source.bai }));
+---
+<BaseLayout title="Ôn tập" description="Ôn lại kiến thức bằng thẻ ghi nhớ thuật ngữ và quiz theo từng chương.">
+  <section class="container page">
+    <div class="head">
+      <BeBung mood="khoe" size={110} />
+      <div>
+        <h1>Ôn tập</h1>
+        <p class="lead">Lật thẻ để nhớ thuật ngữ, rồi làm quiz theo chương. Điểm và thẻ “đã nhớ” được lưu trên máy bạn.</p>
+      </div>
+    </div>
+
+    <h2 id="the">Thẻ ghi nhớ</h2>
+    {cards.length === 0 ? <p>Thẻ ghi nhớ đang được cập nhật.</p> : (
+      <bev-deck class="deck" data-cards={JSON.stringify(cards)} data-base={url('/bai/')}>
+        <div class="deck__bar">
+          <span class="deck__pos" aria-live="polite"></span>
+          <label class="deck__opt"><input type="checkbox" data-hide-known /> Ẩn thẻ đã nhớ</label>
+          <button type="button" class="btn btn--sm btn--ghost" data-shuffle><Icon name="lap-lai" size={18} /> Trộn thẻ</button>
+        </div>
+        <button type="button" class="deck__card" aria-pressed="false" aria-label="Lật thẻ">
+          <span class="deck__face deck__front"><span class="deck__k">Thuật ngữ</span><span class="deck__t" data-front></span><span class="deck__hint">Bấm hoặc nhấn phím cách để lật</span></span>
+          <span class="deck__face deck__back"><span class="deck__k">Giải thích</span><span class="deck__x" data-back></span><a class="deck__src" data-src href="#">Xem trong bài</a></span>
+        </button>
+        <div class="deck__nav">
+          <button type="button" class="btn btn--sm" data-prev><Icon name="mui-ten-trai" size={18} /> Trước</button>
+          <button type="button" class="btn btn--sm btn--ghost" data-known><Icon name="dung" size={18} /> <span>Mình nhớ rồi</span></button>
+          <button type="button" class="btn btn--sm" data-next>Sau <Icon name="mui-ten-phai" size={18} /></button>
+        </div>
+      </bev-deck>
+    )}
+
+    <h2 id="quiz">Quiz theo chương</h2>
+    {byChapter.length === 0 && <p>Quiz đang được cập nhật.</p>}
+    {byChapter.map(({ c, ls, quiz }) => (
+      <details class="qch" data-hue={c.hue}>
+        <summary>
+          <span class="qch__ic"><Icon name={c.icon} size={30} /></span>
+          <span><span class="qch__t">{c.id === 'them' ? c.title : `Chương ${c.so} · ${c.title}`}</span><span class="qch__n">{quiz!.questions.length} câu từ {ls.length} bài</span></span>
+        </summary>
+        <ul class="qch__ls">{ls.map((l) => <li><a href={url(`/bai/${l.id}/`)}>{lessonLabel(l)} · {l.data.title}</a></li>)}</ul>
+        <Quiz quiz={quiz!} title={`Quiz · ${c.short}`} compact />
+      </details>
+    ))}
+  </section>
+</BaseLayout>
+
+<script>
+  import { read, write } from '~/lib/storage';
+  type Card = { id: string; front: string; back: string; bai: string };
+  class BevDeck extends HTMLElement {
+    all: Card[] = []; order: number[] = []; i = 0; known = new Set<string>();
+    connectedCallback() {
+      this.all = JSON.parse(this.dataset.cards!);
+      this.known = new Set(read<string[]>('on-tap:da-nho', []));
+      this.order = this.all.map((_, k) => k);
+      const card = this.querySelector<HTMLButtonElement>('.deck__card')!;
+      card.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) return; card.setAttribute('aria-pressed', String(card.getAttribute('aria-pressed') !== 'true')); });
+      this.querySelector('[data-next]')!.addEventListener('click', () => this.go(1));
+      this.querySelector('[data-prev]')!.addEventListener('click', () => this.go(-1));
+      this.querySelector('[data-shuffle]')!.addEventListener('click', () => { this.order.sort(() => Math.random() - 0.5); this.i = 0; this.render(); });
+      this.querySelector('[data-known]')!.addEventListener('click', () => {
+        const c = this.current(); if (!c) return;
+        this.known.has(c.id) ? this.known.delete(c.id) : this.known.add(c.id);
+        write('on-tap:da-nho', [...this.known]);
+        this.render();
+      });
+      this.querySelector<HTMLInputElement>('[data-hide-known]')!.addEventListener('change', () => { this.i = 0; this.render(); });
+      this.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') this.go(1); if (e.key === 'ArrowLeft') this.go(-1); });
+      this.render();
+    }
+    list() { const hide = this.querySelector<HTMLInputElement>('[data-hide-known]')!.checked; return this.order.filter((k) => !hide || !this.known.has(this.all[k].id)); }
+    current() { const l = this.list(); return l.length ? this.all[l[Math.min(this.i, l.length - 1)]] : null; }
+    go(d: number) { const n = this.list().length; if (!n) return; this.i = (this.i + d + n) % n; this.render(); }
+    render() {
+      const l = this.list();
+      const c = this.current();
+      const card = this.querySelector<HTMLButtonElement>('.deck__card')!;
+      card.setAttribute('aria-pressed', 'false');
+      this.querySelector('[data-front]')!.textContent = c ? c.front : 'Bạn đã nhớ hết các thẻ!';
+      this.querySelector('[data-back]')!.textContent = c ? c.back : '';
+      const src = this.querySelector<HTMLAnchorElement>('[data-src]')!;
+      src.hidden = !c;
+      if (c) src.href = `${this.dataset.base}${c.bai}/`;
+      this.querySelector('.deck__pos')!.textContent = l.length ? `Thẻ ${Math.min(this.i, l.length - 1) + 1}/${l.length} · đã nhớ ${this.known.size}/${this.all.length}` : `Đã nhớ ${this.known.size}/${this.all.length}`;
+      const kb = this.querySelector('[data-known] span')!;
+      kb.textContent = c && this.known.has(c.id) ? 'Bỏ đánh dấu đã nhớ' : 'Mình nhớ rồi';
+    }
+  }
+  customElements.define('bev-deck', BevDeck);
+</script>
+
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+  .head h1 { margin: 0; }
+  .lead { margin: 0.3rem 0 0; color: var(--ink-2); max-width: 60ch; }
+  h2 { margin-top: 2.2rem; }
+  .deck { display: block; max-width: 640px; }
+  .deck__bar { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
+  .deck__pos { font-weight: 700; color: var(--ink-2); font-size: 0.92rem; }
+  .deck__opt { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.9rem; }
+  .deck__card { all: unset; box-sizing: border-box; display: grid; width: 100%; cursor: pointer; perspective: 1200px; min-height: 15rem; }
+  .deck__card:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: var(--radius-lg); }
+  .deck__face { grid-area: 1 / 1; display: grid; align-content: center; justify-items: center; text-align: center; gap: 0.6rem; padding: 1.6rem; border-radius: var(--radius-lg); border: 3px solid var(--ink); box-shadow: 0 6px 0 var(--ink); backface-visibility: hidden; transition: transform 0.55s cubic-bezier(0.3, 1.3, 0.5, 1); }
+  .deck__front { background: var(--bo-fill); }
+  .deck__back { background: var(--sage-fill); transform: rotateY(180deg); }
+  .deck__card[aria-pressed='true'] .deck__front { transform: rotateY(-180deg); }
+  .deck__card[aria-pressed='true'] .deck__back { transform: rotateY(0); }
+  .deck__k { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+  .deck__t { font-family: var(--font-head); font-weight: 900; font-size: clamp(1.5rem, 1.1rem + 2vw, 2.2rem); line-height: 1.2; }
+  .deck__x { font-size: 1.05rem; line-height: 1.55; max-width: 34rem; }
+  .deck__hint { font-size: 0.82rem; color: var(--ink-3); }
+  .deck__src { font-size: 0.9rem; }
+  .deck__nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  @media (prefers-reduced-motion: reduce) { .deck__face { transition: none; } }
+  .qch { margin: 0 0 1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .qch summary { display: flex; gap: 0.8rem; align-items: center; padding: 0.9rem 1rem; cursor: pointer; list-style: none; }
+  .qch summary::-webkit-details-marker { display: none; }
+  .qch__ic { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 16px; background: var(--surface); --ic-fill: var(--h-fill); }
+  .qch__t { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; }
+  .qch__n { display: block; font-size: 0.86rem; color: var(--ink-2); }
+  .qch__ls { margin: 0 1rem; padding-left: 1.2rem; font-size: 0.9rem; }
+  .qch :global(.qz) { margin: 1rem; }
+</style>

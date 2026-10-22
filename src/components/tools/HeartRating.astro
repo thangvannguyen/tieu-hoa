@@ -1,0 +1,101 @@
+---
+/** Chấm "trái tim động lực" (0–10) cho từng thói quen — bản tin #02. */
+interface Props { id: string; habits: string[] }
+const { id, habits } = Astro.props;
+---
+<bev-hearts class="hr" data-key={`tool:${id}`}>
+  <ol class="hr__list">
+    {habits.map((h, i) => (
+      <li class="hr__item" data-i={i}>
+        <fieldset>
+          <legend>{h}</legend>
+          <div class="hr__hearts" role="radiogroup" aria-label={`Số trái tim cho: ${h}`}>
+            {Array.from({ length: 10 }, (_, k) => (
+              <label class="hr__h" title={`${k + 1} trái tim`}>
+                <input type="radio" name={`${id}-${i}`} value={k + 1} />
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2s-7.6-4.6-7.6-10.3C4.4 7 6.4 5 8.8 5c1.4 0 2.5.7 3.2 1.8C12.7 5.7 13.8 5 15.2 5c2.4 0 4.4 2 4.4 4.9 0 5.7-7.6 10.3-7.6 10.3z" /></svg>
+                <span class="visually-hidden">{k + 1}</span>
+              </label>
+            ))}
+          </div>
+          <output class="hr__n">0/10</output>
+        </fieldset>
+      </li>
+    ))}
+  </ol>
+  <div class="hr__result" aria-live="polite">
+    <p class="hr__rt">Thói quen tuần này</p>
+    <p class="hr__rv" data-top>Chấm tim cho các thói quen ở trên để chọn điểm bắt đầu.</p>
+  </div>
+  <label class="hr__note">
+    <span>Những điều chỉnh (dù nhỏ) mà bạn làm được trong tuần này</span>
+    <textarea rows="4" data-note placeholder="Ví dụ: Thứ 2 mình đã cất điện thoại khi ăn trưa…"></textarea>
+  </label>
+</bev-hearts>
+<script>
+  import { read, write, requestPersist } from '~/lib/storage';
+  type State = { scores: Record<string, number>; note?: string };
+  class BevHearts extends HTMLElement {
+    key!: string; state!: State;
+    connectedCallback() {
+      this.key = this.dataset.key!;
+      this.load();
+      this.addEventListener('change', (e) => {
+        const el = e.target as HTMLInputElement;
+        if (el.type !== 'radio') return;
+        const i = el.closest<HTMLElement>('.hr__item')!.dataset.i!;
+        this.state.scores[i] = Number(el.value);
+        this.save();
+      });
+      this.querySelector<HTMLTextAreaElement>('[data-note]')!.addEventListener('input', (e) => { this.state.note = (e.target as HTMLTextAreaElement).value; this.save(); });
+      (this as any).toolApi = {
+        reload: () => this.load(),
+        csv: () => [['Thói quen', 'Số trái tim'], ...[...this.querySelectorAll('.hr__item')].map((li) => [li.querySelector('legend')!.textContent!, String(this.state.scores[(li as HTMLElement).dataset.i!] ?? '')]), [], ['Những điều chỉnh trong tuần', this.state.note ?? '']],
+      };
+    }
+    load() {
+      this.state = read<State>(this.key, { scores: {} });
+      this.state.scores ??= {};
+      this.querySelectorAll<HTMLElement>('.hr__item').forEach((li) => {
+        const v = this.state.scores[li.dataset.i!] ?? 0;
+        li.querySelectorAll<HTMLInputElement>('input').forEach((inp) => (inp.checked = Number(inp.value) === v));
+      });
+      this.querySelector<HTMLTextAreaElement>('[data-note]')!.value = this.state.note ?? '';
+      this.paint();
+    }
+    save() { write(this.key, this.state); requestPersist(); this.paint(); }
+    paint() {
+      let best = 0;
+      const names: string[] = [];
+      this.querySelectorAll<HTMLElement>('.hr__item').forEach((li) => {
+        const v = this.state.scores[li.dataset.i!] ?? 0;
+        li.style.setProperty('--v', String(v));
+        li.querySelectorAll<HTMLLabelElement>('.hr__h').forEach((h, k) => h.classList.toggle('is-on', k < v));
+        li.querySelector('output')!.textContent = `${v}/10`;
+        const name = li.querySelector('legend')!.textContent!;
+        if (v > best) { best = v; names.length = 0; names.push(name); } else if (v === best && v > 0) names.push(name);
+      });
+      const out = this.querySelector<HTMLElement>('[data-top]')!;
+      out.textContent = best === 0 ? 'Chấm tim cho các thói quen ở trên để chọn điểm bắt đầu.' : `${names.join(' · ')} (${best} trái tim) — tuần này hãy bắt đầu điều chỉnh từ ${names.length > 1 ? 'một trong những thói quen' : 'thói quen'} này nhé!`;
+    }
+  }
+  customElements.define('bev-hearts', BevHearts);
+</script>
+<style>
+  .hr__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .hr__item fieldset { margin: 0; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--surface); padding: 0.7rem 0.9rem; display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.8rem; align-items: center; box-shadow: 0 3px 0 var(--ink); }
+  legend { float: left; font-weight: 700; padding: 0; grid-column: 1 / -1; }
+  .hr__hearts { display: flex; flex-wrap: wrap; gap: 0.1rem; }
+  .hr__h { position: relative; cursor: pointer; display: grid; place-items: center; width: 34px; height: 34px; }
+  .hr__h input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+  .hr__h svg { width: 28px; height: 28px; fill: var(--surface-2); stroke: var(--line-2); stroke-width: 1.8; transition: transform 0.15s; }
+  .hr__h.is-on svg { fill: var(--dao); stroke: var(--ink); }
+  .hr__h:hover svg { transform: scale(1.15); }
+  .hr__h input:focus-visible + svg { outline: 3px solid var(--focus); border-radius: 6px; }
+  .hr__n { font-family: var(--font-head); font-weight: 900; color: var(--dao-ink); }
+  .hr__result { margin: 1.2rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--bo-fill); border: 2px solid var(--ink); }
+  .hr__rt { margin: 0; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bo-ink); }
+  .hr__rv { margin: 0.2rem 0 0; font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; }
+  .hr__note { display: grid; gap: 0.35rem; font-weight: 700; }
+  .hr__note textarea { width: 100%; padding: 0.6rem 0.8rem; border-radius: 14px; border: 2px solid var(--line-2); background: var(--surface); font-weight: 400; }
+</style>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { tools } from '~/data/tools';
+import { url } from '~/lib/url';
+const groups = [
+  { title: 'Quan sát cơ thể & hệ tiêu hóa', ids: ['checklist-7-ngay', 'cham-tim-thoi-quen', 'nhat-ky-ibs'] },
+  { title: 'Hệ vi sinh đường ruột', ids: ['nhat-ky-loi-khuan-5-ngay', 'ke-hoach-7-ngay-vi-sinh'] },
+  { title: 'Giấc ngủ', ids: ['nhat-ky-giac-ngu', 'kich-ban-giac-ngu', 'chuan-bi-kham-giac-ngu'] },
+  { title: 'Dinh dưỡng', ids: ['thuc-don-cua-toi'] },
+];
+const byId = Object.fromEntries(tools.map((t) => [t.id, t]));
+---
+<BaseLayout title="Công cụ thực hành" description="Các nhật ký, checklist và bảng kế hoạch từ bản tin — dùng ngay trên trình duyệt, dữ liệu lưu trên máy bạn.">
+  <header class="hero">
+    <div class="container hero__in">
+      <div>
+        <h1>Công cụ thực hành</h1>
+        <p>Mỗi bản tin đều kết thúc bằng một bài <strong>Thực hành</strong>. Ở đây, các bảng kiểm, nhật ký và mẫu kế hoạch đã được dựng lại để bạn điền ngay trên điện thoại hoặc máy tính — không cần tải file Excel, không cần tài khoản.</p>
+        <p class="hero__note"><Icon name="khien" size={20} /> Dữ liệu chỉ lưu trên trình duyệt của bạn. Xem <a href={url('/du-lieu-cua-ban/')}>Dữ liệu của bạn</a> để sao lưu tất cả một lần.</p>
+      </div>
+      <BeBung mood="khoe" size={140} />
+    </div>
+  </header>
+  <div class="container body">
+    {groups.map((g) => (
+      <section class="grp">
+        <h2>{g.title}</h2>
+        <ul class="cards">
+          {g.ids.map((id) => {
+            const t = byId[id];
+            return (
+              <li data-hue={t.hue}>
+                <a class="card-tool" href={url(`/cong-cu/${t.id}/`)}>
+                  <span class="card-tool__ic"><Icon name={t.icon} size={40} /></span>
+                  <span class="card-tool__t">{t.title}</span>
+                  <span class="card-tool__d">{t.short}</span>
+                  <span class="card-tool__k">Từ {t.lesson.startsWith('bt-') ? 'bài thêm' : `bản tin #${t.lesson.slice(0, 2)}`}{t.xlsx ? ' · thay cho file Excel' : ''}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+<style>
+  .hero { background: linear-gradient(180deg, var(--sage-fill), var(--bg)); border-bottom: 2px solid var(--line); }
+  .hero__in { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 2.4rem 0 2rem; }
+  @media (max-width: 640px) { .hero__in { grid-template-columns: 1fr; } .hero__in :global(.bebung) { display: none; } }
+  .hero p { max-width: 62ch; color: var(--ink-2); }
+  .hero__note { display: flex; gap: 0.4rem; align-items: center; font-size: 0.92rem; }
+  .body { padding: 1.5rem 0; }
+  .grp { margin-bottom: 2rem; }
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
+  .cards li { margin: 0; }
+  .card-tool { height: 100%; display: grid; align-content: start; gap: 0.4rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
+  .card-tool:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--ink); }
+  .card-tool__ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: var(--h-fill); --ic-fill: var(--surface); }
+  .card-tool__t { font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; line-height: 1.3; }
+  .card-tool__d { font-size: 0.92rem; color: var(--ink-2); }
+  .card-tool__k { font-size: 0.78rem; font-weight: 700; color: var(--h-ink); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
+</style>

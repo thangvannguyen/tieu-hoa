@@ -1,0 +1,39 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { iconNames } from '~/lib/icons';
+import type { Mood } from '~/lib/types';
+const hues = ['dao', 'sage', 'lav', 'bo', 'ngoc', 'hong'];
+const moods: Mood[] = ['vui', 'khoe', 'suy-nghi', 'lo-lang', 'dau', 'buon-ngu'];
+---
+<BaseLayout title="Bộ biểu tượng" description="Toàn bộ icon SVG tự vẽ của web: lưới 24, nét bo tròn, lớp màu sticker pastel, mặt cười cho các nhân vật.">
+  <section class="container page">
+    <h1>Bộ biểu tượng</h1>
+    <p class="lead">{iconNames.length} biểu tượng vẽ tay bằng SVG theo cùng một quy tắc: lưới 24×24, nét 1.75 bo tròn, lớp màu “sticker” pastel lệch nhẹ, mặt cười kawaii cho các nhân vật (dạ dày, lợi khuẩn, đồ ăn, mặt trăng…). Màu tự đổi theo chương và chế độ sáng/tối.</p>
+    <h2>Bé Bụng — linh vật</h2>
+    <ul class="moods">{moods.map((m) => <li><BeBung mood={m} size={110} /><span>{m}</span></li>)}</ul>
+    <h2>Icon</h2>
+    <ul class="grid">
+      {iconNames.map((n, i) => (
+        <li data-hue={hues[i % hues.length]}>
+          <span class="big"><Icon name={n} size={48} /></span>
+          <span class="sm"><Icon name={n} size={24} /><Icon name={n} size={18} /></span>
+          <code>{n}</code>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+<style>
+  .page { padding: 2.5rem 0; }
+  .lead { max-width: 64ch; color: var(--ink-2); }
+  .moods { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }
+  .moods li { display: grid; justify-items: center; gap: 0.3rem; padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line); }
+  .moods span { font-size: 0.85rem; font-weight: 700; color: var(--ink-2); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); }
+  .grid li { display: grid; justify-items: center; gap: 0.3rem; padding: 0.8rem 0.4rem; border-radius: 16px; background: var(--surface); border: 2px solid var(--line); margin: 0; }
+  .big { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 20px; background: var(--surface-2); }
+  .sm { display: flex; gap: 0.4rem; align-items: center; color: var(--ink-2); }
+  code { font-size: 0.74rem; color: var(--ink-2); }
+</style>

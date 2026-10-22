@@ -1,9 +1,156 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import Icon from '~/components/ui/Icon.astro';
+import JourneyMap from '~/components/home/JourneyMap.astro';
 import BanhXeSauTruCot from '~/components/diagrams/chung/BanhXeSauTruCot.astro';
+import { getLessons } from '~/lib/lessons';
+import { diagrams } from '~/components/mdx';
+import { tools } from '~/data/tools';
+import { glossary } from '~/lib/data';
+import { url } from '~/lib/url';
+
+const lessons = await getLessons();
+const banTin = lessons.filter((l) => l.data.kind === 'ban-tin').length;
+const first = lessons[0];
+const stickers = [
+  { icon: 'loi-khuan', hue: 'sage', x: 6, y: 18, r: -10 },
+  { icon: 'trang', hue: 'lav', x: 82, y: 8, r: 12 },
+  { icon: 'com', hue: 'bo', x: 88, y: 64, r: -6 },
+  { icon: 'may-stress', hue: 'hong', x: 2, y: 70, r: 8 },
+  { icon: 'nuoc', hue: 'ngoc', x: 70, y: 86, r: -12 },
+];
+const hubs = [
+  { href: '/cong-cu/', icon: 'cong-cu', hue: 'sage', title: 'Công cụ thực hành', text: `${tools.length} nhật ký, checklist, kế hoạch — điền ngay trên điện thoại.` },
+  { href: '/on-tap/', icon: 'the-ghi-nho', hue: 'bo', title: 'Ôn tập', text: 'Quiz theo từng bài và thẻ ghi nhớ thuật ngữ.' },
+  { href: '/thuat-ngu/', icon: 'bong-den', hue: 'lav', title: 'Thuật ngữ', text: 'Probiotic, FODMAP, LES, CBT-I… giải thích đúng theo bài.' },
+  { href: '/khi-nao-can-di-kham/', icon: 'co-do', hue: 'do', title: 'Khi nào cần đi khám', text: 'Các dấu hiệu cảnh báo được nhắc trong chuỗi bản tin.' },
+  { href: '/so-sanh-dinh-duong/', icon: 'can-bang', hue: 'dao', title: 'So sánh dinh dưỡng', text: 'Trào ngược · viêm loét · IBS · táo bón — điểm giống và khác.' },
+  { href: '/bieu-tuong/', icon: 'sparkle', hue: 'ngoc', title: 'Bộ biểu tượng', text: 'Toàn bộ icon tự vẽ dùng trên web.' },
+];
 ---
 <BaseLayout title="Bụng Êm, Việc Ổn">
-  <section class="container-narrow" style="padding:2rem 0">
+  <section class="hero">
+    <div class="container hero__in">
+      <div class="hero__tx">
+        <p class="chip hero__chip" data-hue="dao"><Icon name="sach" size={18} /> Sổ tay học Tiêu hóa</p>
+        <h1>Bụng Êm,<br /><span>Việc Ổn</span></h1>
+        <p class="hero__lead">Chào mừng bạn đến với hành trình giúp giữ ổn định hệ tiêu hóa trong đời sống bận rộn — học lại toàn bộ chuỗi bản tin y khoa của <strong>BS. Phan Thị Lan Viên</strong> với sơ đồ, quiz và công cụ thực hành.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href={url(`/bai/${first?.id ?? ''}/`)} data-continue><Icon name="play" size={22} /> <span>Bắt đầu học</span></a>
+          <a class="btn" href={url('/bai-hoc/')}><Icon name="ban-do" size={22} /> Xem lộ trình</a>
+        </div>
+        <ul class="hero__stats">
+          <li><b>{banTin}</b> bản tin</li>
+          <li><b>4</b> chương + bài thêm</li>
+          <li><b>{Object.keys(diagrams).length}</b> sơ đồ</li>
+          <li><b>{tools.length}</b> công cụ</li>
+          {glossary.length > 0 && <li><b>{glossary.length}</b> thuật ngữ</li>}
+        </ul>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <span class="hero__blob"></span>
+        {stickers.map((s) => (
+          <span class="hero__st" data-hue={s.hue} style={`left:${s.x}%;top:${s.y}%;--r:${s.r}deg`}><Icon name={s.icon} size={40} /></span>
+        ))}
+        <BeBung mood="vui" size={250} />
+      </div>
+    </div>
+  </section>
+
+  <section class="container sec" id="lo-trinh" aria-labelledby="lt">
+    <div class="sec__head">
+      <h2 id="lt">Lộ trình học</h2>
+      <p>Đi lần lượt qua 4 chặng như chuỗi bản tin gốc — hoặc chọn chặng bạn cần. Tiến độ “đã học” được lưu trên máy bạn.</p>
+    </div>
+    <JourneyMap lessons={lessons} />
+  </section>
+
+  <section class="container-narrow sec sec--wheel" aria-label="Sáu yếu tố">
     <BanhXeSauTruCot />
   </section>
+
+  <section class="container sec" aria-labelledby="hub">
+    <div class="sec__head"><h2 id="hub">Học theo cách của bạn</h2></div>
+    <ul class="hubs">
+      {hubs.map((h) => (
+        <li data-hue={h.hue}>
+          <a href={url(h.href)}>
+            <span class="hubs__ic"><Icon name={h.icon} size={36} /></span>
+            <span class="hubs__t">{h.title}</span>
+            <span class="hubs__x">{h.text}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container-narrow sec about">
+    <BeBung mood="suy-nghi" size={96} />
+    <div>
+      <h2>Về chuỗi bản tin</h2>
+      <p>Chương trình được thiết kế dành riêng cho nhân viên văn phòng không chỉ đang sống chung với bệnh lý viêm loét dạ dày, viêm dạ dày thực quản trào ngược hoặc rối loạn tiêu hóa mãn tính mà còn dành cho những ai hay bị bệnh lặt vặt do sức đề kháng kém.</p>
+      <p class="about__note"><Icon name="thong-tin" size={20} /> Đây không phải là một chương trình tư vấn, chẩn đoán và điều trị. <a href={url('/gioi-thieu/')}>Đọc thêm về web này</a>.</p>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  import { prefs, progress } from '~/lib/storage';
+  const last = prefs.get().lastLesson;
+  const btn = document.querySelector<HTMLAnchorElement>('[data-continue]');
+  if (last && btn) {
+    const base = btn.getAttribute('href')!.replace(/bai\/[^/]*\/$/, '');
+    btn.href = `${base}bai/${last}/`;
+    btn.querySelector('span')!.textContent = 'Học tiếp';
+  }
+  const n = Object.keys(progress.get().lessons).length;
+  if (n) {
+    const stats = document.querySelector('.hero__stats');
+    const li = document.createElement('li');
+    li.className = 'is-me';
+    li.innerHTML = '<b></b> bài bạn đã học';
+    li.querySelector('b')!.textContent = String(n);
+    stats?.prepend(li);
+  }
+</script>
+
+<style>
+  .hero { position: relative; overflow: hidden; background: radial-gradient(circle at 80% 20%, var(--dao-fill), transparent 55%), radial-gradient(circle at 10% 90%, var(--sage-fill), transparent 50%), var(--bg); border-bottom: 2px solid var(--line); }
+  .hero__in { display: grid; gap: 1.5rem; align-items: center; padding: 3rem 0 3.2rem; }
+  @media (min-width: 900px) { .hero__in { grid-template-columns: 1.1fr 0.9fr; padding: 4rem 0; } }
+  .hero__chip { margin: 0 0 1rem; background: var(--surface); border: 2px solid var(--dao); }
+  .hero h1 { font-size: clamp(2.8rem, 1.6rem + 6vw, 5.2rem); line-height: 0.98; margin: 0 0 1rem; }
+  .hero h1 span { color: var(--dao-ink); }
+  .hero__lead { font-size: 1.15rem; max-width: 34rem; color: var(--ink-2); }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.4rem 0; }
+  .hero__cta .btn { font-size: 1.08rem; min-height: 52px; padding-inline: 1.4rem; }
+  .hero__stats { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .hero__stats li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--line); font-size: 0.9rem; }
+  .hero__stats li :global(b), .hero__stats b { font-family: var(--font-head); font-weight: 900; color: var(--dao-ink); }
+  .hero__stats :global(.is-me) { background: var(--sage-fill); border-color: var(--sage); }
+  .hero__art { position: relative; display: grid; place-items: center; min-height: 300px; }
+  .hero__blob { position: absolute; width: min(90%, 360px); aspect-ratio: 1; border-radius: 44% 56% 52% 48% / 50% 42% 58% 50%; background: var(--dao); opacity: 0.3; animation: blob 12s ease-in-out infinite alternate; }
+  @keyframes blob { to { border-radius: 56% 44% 40% 60% / 40% 58% 42% 60%; transform: rotate(12deg); } }
+  .hero__art :global(.bebung) { position: relative; animation: bob 3.2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-8px); } }
+  .hero__st { position: absolute; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); transform: rotate(var(--r)); --ic-fill: var(--h-fill); }
+  @media (max-width: 520px) { .hero__st { width: 50px; height: 50px; border-radius: 16px; } .hero__art { min-height: 260px; } }
+  @media (prefers-reduced-motion: reduce) { .hero__blob, .hero__art :global(.bebung) { animation: none; } }
+  .sec { padding: 3.5rem 0 1rem; }
+  .sec__head { margin-bottom: 1.6rem; max-width: 46rem; }
+  .sec__head h2 { margin-bottom: 0.3rem; }
+  .sec__head p { color: var(--ink-2); margin: 0; }
+  .sec--wheel { padding-top: 4.5rem; }
+  .hubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+  .hubs li { margin: 0; }
+  .hubs a { height: 100%; display: grid; align-content: start; gap: 0.35rem; padding: 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; }
+  .hubs a:hover { transform: translateY(-3px) rotate(-0.5deg); box-shadow: 0 7px 0 var(--ink); }
+  .hubs__ic { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; background: var(--surface); --ic-fill: var(--h-fill); }
+  .hubs__t { font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; }
+  .hubs__x { font-size: 0.92rem; color: var(--ink-2); }
+  .about { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .about h2 { margin-top: 0.3rem; }
+  .about__note { display: flex; gap: 0.4rem; align-items: center; font-size: 0.92rem; color: var(--ink-2); flex-wrap: wrap; }
+  @media (max-width: 560px) { .about { flex-direction: column; } }
+</style>

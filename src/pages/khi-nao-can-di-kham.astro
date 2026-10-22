@@ -1,0 +1,91 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { redFlags } from '~/lib/data';
+import { getLessons } from '~/lib/lessons';
+import { inline } from '~/lib/inline';
+import { url } from '~/lib/url';
+const lessons = await getLessons();
+const title = (bai: string) => lessons.find((l) => l.id === bai)?.data.title ?? bai;
+const label = (bai: string) => (bai.startsWith('bt-') ? 'Bài thêm' : `#${bai.slice(0, 2)}`);
+const groups = [
+  { id: 'tieu-hoa', name: 'Tiêu hóa & lợi khuẩn', icon: 'da-day', hue: 'dao' },
+  { id: 'giac-ngu', name: 'Giấc ngủ', icon: 'trang', hue: 'lav' },
+  { id: 'dinh-duong', name: 'Dinh dưỡng & bệnh lý', icon: 'com', hue: 'bo' },
+] as const;
+// gộp mục trùng chữ giữa các bài, giữ danh sách nguồn
+const norm = (s: string) => s.normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
+const merged = groups.map((g) => {
+  const levels = (['kham-som', 'nen-kham'] as const).map((lv) => {
+    const blocks = redFlags.filter((r) => r.group === g.id && r.level === lv);
+    const map = new Map<string, { text: string; sources: string[] }>();
+    for (const b of blocks) for (const it of b.items) {
+      const k = norm(it.text);
+      const cur = map.get(k) ?? { text: it.text, sources: [] };
+      if (!cur.sources.includes(it.source.bai)) cur.sources.push(it.source.bai);
+      map.set(k, cur);
+    }
+    return { lv, titles: [...new Set(blocks.map((b) => b.title))], notes: blocks.map((b) => b.note).filter(Boolean) as string[], items: [...map.values()] };
+  }).filter((x) => x.items.length);
+  return { ...g, levels };
+}).filter((g) => g.levels.length);
+---
+<BaseLayout title="Khi nào cần đi khám" description="Các dấu hiệu cảnh báo được nhắc trong chuỗi bản tin — khi gặp, đừng tự xử lý mà hãy đi khám.">
+  <section class="container page">
+    <div class="head">
+      <BeBung mood="lo-lang" size={120} />
+      <div>
+        <h1>Khi nào cần đi khám?</h1>
+        <p class="lead">“Khi cơ thể bật đèn đỏ, đừng chỉ ‘dỗ bụng’ bằng men vi sinh.” Dưới đây là các dấu hiệu mà chuỗi bản tin dặn cần đi khám — gom từ nhiều bài, mỗi dòng ghi rõ nguồn.</p>
+      </div>
+    </div>
+    <aside class="note" role="note"><Icon name="thong-tin" size={24} /><p>Danh sách này không đầy đủ và không dùng để tự chẩn đoán. Nếu bạn lo lắng về bất kỳ triệu chứng nào, hãy đi khám. Trường hợp khẩn cấp, hãy đến cơ sở y tế gần nhất.</p></aside>
+    {merged.length === 0 && <p>Nội dung đang được cập nhật.</p>}
+    {merged.map((g) => (
+      <section class="grp" data-hue={g.hue} aria-labelledby={`g-${g.id}`}>
+        <h2 id={`g-${g.id}`}><Icon name={g.icon} size={30} /> {g.name}</h2>
+        <div class="lvls">
+          {g.levels.map((l) => (
+            <div class:list={['lvl', `lvl--${l.lv}`]} data-hue={l.lv === 'kham-som' ? 'do' : 'bo'}>
+              <p class="lvl__k"><span class="light" aria-hidden="true"></span> {l.lv === 'kham-som' ? 'Cần ưu tiên xử lý sớm' : 'Nên đi khám / sắp xếp đánh giá'}</p>
+              {l.titles.map((t) => <p class="lvl__t">{t}</p>)}
+              <ul>
+                {l.items.map((it) => (
+                  <li>
+                    <Icon name="co-do" size={22} />
+                    <span>
+                      <span set:html={inline(it.text)} />
+                      <span class="src">{it.sources.map((s, i) => <>{i > 0 && ' · '}<a href={url(`/bai/${s}/`)} title={title(s)}>{label(s)}</a></>)}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {l.notes.map((n) => <p class="lvl__n" set:html={inline(n)} />)}
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+</BaseLayout>
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+  .head h1 { margin: 0; }
+  .lead { margin: 0.3rem 0 0; color: var(--ink-2); max-width: 62ch; }
+  .note { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.9rem 1.1rem; border-radius: var(--radius); background: var(--lav-fill); border: 2px solid var(--lav); max-width: 62rem; }
+  .note p { margin: 0; }
+  .grp { margin-top: 2.2rem; }
+  .grp h2 { display: flex; align-items: center; gap: 0.5rem; --ic-fill: var(--h-fill); }
+  .lvls { display: grid; gap: 1rem; }
+  @media (min-width: 900px) { .lvls { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); } }
+  .lvl { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .lvl__k { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.4rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .light { width: 18px; height: 18px; border-radius: 50%; background: var(--h); border: 2px solid var(--ink); box-shadow: 0 0 0 4px var(--surface); }
+  .lvl__t { margin: 0 0 0.6rem; font-weight: 700; font-size: 0.95rem; }
+  .lvl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+  .lvl li { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; align-items: start; padding: 0.45rem 0.6rem; border-radius: 12px; background: var(--surface); margin: 0; --ic-fill: var(--do-fill); }
+  .src { display: block; font-size: 0.78rem; color: var(--ink-3); margin-top: 0.1rem; }
+  .lvl__n { margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
+</style>

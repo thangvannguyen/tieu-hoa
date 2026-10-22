@@ -1,0 +1,27 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import TableLog from '~/components/tools/TableLog.astro';
+---
+<ToolShell id="nhat-ky-loi-khuan-5-ngay" mood="suy-nghi">
+  <ToolIntro slot="intro" title="Việc 3: Nếu đang dùng men vi sinh, hãy theo dõi 5 ngày (bản tin #07)" icon="sua-chua">
+    <p>Nếu bạn đang dùng men vi sinh hoặc thực phẩm lên men, hãy ghi nhanh. Ghi thật là được. Không cần văn hay. Bụng mình cần dữ liệu thật, không cần văn mẫu.</p>
+  </ToolIntro>
+  <TableLog
+    id="nhat-ky-loi-khuan-5-ngay"
+    rows={5}
+    columns={[
+      { id: 'san-pham', label: 'Sản phẩm/món đã dùng' },
+      { id: 'luong', label: 'Lượng dùng' },
+      { id: 'bung', label: 'Bụng sau khi dùng' },
+      { id: 'ghi-chu', label: 'Ghi chú' },
+    ]}
+    examples={[
+      '“Sữa chua không đường, 1 hũ – bụng êm”',
+      '“Kim chi hơi nhiều – khát nước, đầy”',
+      '“Men vi sinh ngày 2 – chưa rõ thay đổi”',
+      '“Kombucha nửa chai – hơi chướng bụng”',
+      '“Không dùng gì, chỉ thêm rau – đi cầu dễ hơn”',
+    ]}
+  />
+</ToolShell>

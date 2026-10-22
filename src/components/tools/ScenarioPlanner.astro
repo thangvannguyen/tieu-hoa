@@ -1,0 +1,208 @@
+---
+/** Thiết kế hai kịch bản ngủ (bản tin #11): A — ngày thường (có đồng hồ 24h tự vẽ), B — tăng ca / làm đêm. */
+import Icon from '~/components/ui/Icon.astro';
+const id = 'kich-ban-giac-ngu';
+const aFields = [
+  { id: 'thuc-day', label: 'Giờ thức dậy', type: 'time', icon: 'bao-thuc' },
+  { id: 'anh-sang', label: 'Thời điểm tiếp xúc ánh sáng buổi sáng', type: 'time', icon: 'mat-troi' },
+  { id: 'tap-trung-tu', label: 'Khung giờ tập trung cao nhất — từ', type: 'time', icon: 'muc-tieu' },
+  { id: 'tap-trung-den', label: 'Khung giờ tập trung cao nhất — đến', type: 'time', icon: 'muc-tieu' },
+  { id: 'caffeine', label: 'Thời điểm dùng caffeine cuối cùng', type: 'time', icon: 'ca-phe' },
+  { id: 'ket-thuc', label: 'Thời điểm kết thúc công việc', type: 'time', icon: 'laptop' },
+  { id: 'thu-gian', label: 'Hoạt động thư giãn trước ngủ', type: 'text', icon: 'sach' },
+  { id: 'ngu-tu', label: 'Khoảng thời gian dành cho ngủ — từ', type: 'time', icon: 'giuong' },
+  { id: 'ngu-den', label: 'Khoảng thời gian dành cho ngủ — đến', type: 'time', icon: 'giuong' },
+];
+const bFields = [
+  { id: 'ngu-them', label: 'Tôi có thể ngủ thêm hoặc ngủ trưa vào thời điểm nào?' },
+  { id: 'caffeine-gd', label: 'Tôi sẽ dùng caffeine vào giai đoạn nào?' },
+  { id: 'caffeine-dung', label: 'Tôi sẽ dừng caffeine vào lúc nào?' },
+  { id: 've-nha', label: 'Phương án về nhà an toàn nếu buồn ngủ là gì?' },
+  { id: 'anh-sang', label: 'Tôi sẽ giảm ánh sáng và tiếng ồn sau ca như thế nào?' },
+  { id: 'nguoi-than', label: 'Người thân hoặc đồng nghiệp cần biết điều gì để bảo vệ thời gian ngủ của tôi?' },
+];
+---
+<bev-scenario class="sc" data-key={`tool:${id}`}>
+  <section class="sc__card" data-hue="lav" aria-labelledby="sc-a">
+    <h2 id="sc-a" class="sc__t"><Icon name="mat-troi" size={28} /> Kịch bản A: Ngày làm việc bình thường</h2>
+    <div class="sc__grid">
+      <div class="sc__form">
+        {aFields.map((f) => (
+          <label class="sc__f">
+            <span><Icon name={f.icon} size={20} /> {f.label}</span>
+            <input type={f.type} data-s="a" data-f={f.id} />
+          </label>
+        ))}
+      </div>
+      <div class="sc__viz">
+        <svg viewBox="0 0 320 320" class="sc__clock" role="img" aria-label="Đồng hồ 24 giờ của kịch bản A" data-clock></svg>
+        <ul class="sc__checks" data-checks aria-live="polite"></ul>
+      </div>
+    </div>
+    <div class="sc__rules">
+      <p class="sc__rt">Nhắc lại từ bản tin #11</p>
+      <ul>
+        <li>Chọn một khung giờ thức dậy phù hợp với công việc và duy trì trong phạm vi dao động khoảng 30–60 phút khi có thể.</li>
+        <li>Dành khoảng 30–60 phút trước giờ ngủ dự kiến để giảm dần kích thích — “đường băng hạ cánh”.</li>
+        <li>Nhìn chung, nên dùng các thức uống chứa caffeine cách xa giờ ngủ ít nhất 6-8 tiếng.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sc__card" data-hue="hong" aria-labelledby="sc-b">
+    <h2 id="sc-b" class="sc__t"><Icon name="trang" size={28} /> Kịch bản B: Ngày tăng ca hoặc làm đêm</h2>
+    <div class="sc__form sc__form--b">
+      {bFields.map((f) => (
+        <label class="sc__f">
+          <span>{f.label}</span>
+          <textarea rows="2" data-s="b" data-f={f.id}></textarea>
+        </label>
+      ))}
+    </div>
+    <p class="sc__tip"><Icon name="bong-den" size={20} /> Hãy chuẩn bị kịch bản trước khi giai đoạn bận rộn bắt đầu vì khi đã quá mệt, khả năng lập kế hoạch và tự kiểm soát thường giảm.</p>
+  </section>
+</bev-scenario>
+
+<script>
+  import { read, write, requestPersist } from '~/lib/storage';
+  type State = { a: Record<string, string>; b: Record<string, string> };
+  const NS = 'http://www.w3.org/2000/svg';
+  const toH = (t?: string) => (t && /^\d{1,2}:\d{2}$/.test(t) ? Number(t.slice(0, 2)) + Number(t.slice(3)) / 60 : null);
+  const fmt = (h: number) => { const x = ((h % 24) + 24) % 24; const hh = Math.floor(x); const mm = Math.round((x - hh) * 60); return `${String(hh).padStart(2, '0')}:${String(mm % 60).padStart(2, '0')}`; };
+
+  class BevScenario extends HTMLElement {
+    key!: string; state!: State;
+    connectedCallback() {
+      this.key = this.dataset.key!;
+      this.load();
+      this.addEventListener('input', (e) => {
+        const el = e.target as HTMLInputElement;
+        if (!el.dataset.s) return;
+        const part = this.state[el.dataset.s as 'a' | 'b'];
+        if (el.value) part[el.dataset.f!] = el.value; else delete part[el.dataset.f!];
+        write(this.key, this.state);
+        requestPersist();
+        this.draw();
+      });
+      (this as any).toolApi = {
+        reload: () => this.load(),
+        csv: () => [
+          ['Kịch bản', 'Câu hỏi', 'Trả lời'],
+          ...[...this.querySelectorAll<HTMLInputElement>('[data-s]')].map((el) => [el.dataset.s === 'a' ? 'A – Ngày thường' : 'B – Tăng ca / làm đêm', el.closest('label')!.querySelector('span')!.textContent!.trim(), el.value]),
+        ],
+      };
+    }
+    load() {
+      this.state = read<State>(this.key, { a: {}, b: {} });
+      this.state.a ??= {}; this.state.b ??= {};
+      this.querySelectorAll<HTMLInputElement>('[data-s]').forEach((el) => (el.value = this.state[el.dataset.s as 'a' | 'b'][el.dataset.f!] ?? ''));
+      this.draw();
+    }
+    draw() {
+      const a = this.state.a;
+      const svg = this.querySelector<SVGSVGElement>('[data-clock]')!;
+      svg.replaceChildren();
+      const C = 160, R = 118, W = 26;
+      const ang = (h: number) => -Math.PI / 2 + (h / 24) * 2 * Math.PI;
+      const pt = (r: number, h: number) => [C + r * Math.cos(ang(h)), C + r * Math.sin(ang(h))];
+      const el = (tag: string, attrs: Record<string, string | number>) => { const n = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v)); svg.append(n); return n; };
+      el('circle', { cx: C, cy: C, r: R, class: 'sc__track', 'stroke-width': W });
+      const arc = (from: number, to: number, cls: string, label: string) => {
+        let t = to; if (t <= from) t += 24;
+        const [x0, y0] = pt(R, from), [x1, y1] = pt(R, t);
+        const p = el('path', { d: `M${x0} ${y0}A${R} ${R} 0 ${t - from > 12 ? 1 : 0} 1 ${x1} ${y1}`, class: `sc__arc ${cls}`, 'stroke-width': W });
+        const title = document.createElementNS(NS, 'title'); title.textContent = label; p.append(title);
+      };
+      for (let h = 0; h < 24; h++) {
+        const [x0, y0] = pt(R - W / 2 - 4, h), [x1, y1] = pt(R - W / 2 - (h % 6 ? 8 : 14), h);
+        el('line', { x1: x0, y1: y0, x2: x1, y2: y1, class: 'sc__tick' });
+      }
+      [0, 6, 12, 18].forEach((h) => { const [x, y] = pt(R - W / 2 - 28, h); const t = el('text', { x, y, class: 'sc__num', 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = `${h}h`; });
+      const sleepFrom = toH(a['ngu-tu']), sleepTo = toH(a['ngu-den']);
+      const focusFrom = toH(a['tap-trung-tu']), focusTo = toH(a['tap-trung-den']);
+      if (sleepFrom != null && sleepTo != null) {
+        arc(sleepFrom, sleepTo, 'sc__arc--sleep', 'Thời gian dành cho ngủ');
+        arc(sleepFrom - 1, sleepFrom, 'sc__arc--runway', 'Đường băng hạ cánh (30–60 phút)');
+        arc(sleepFrom - 8, sleepFrom - 6, 'sc__arc--cut', 'Nên dừng caffeine (6-8 tiếng trước giờ ngủ)');
+      }
+      if (focusFrom != null && focusTo != null) arc(focusFrom, focusTo, 'sc__arc--focus', 'Khung giờ tập trung cao nhất');
+      const marks: [string, string][] = [['thuc-day', 'Thức dậy'], ['anh-sang', 'Ánh sáng buổi sáng'], ['caffeine', 'Caffeine cuối'], ['ket-thuc', 'Kết thúc công việc']];
+      marks.forEach(([f, label], i) => {
+        const h = toH(a[f]); if (h == null) return;
+        const [x, y] = pt(R, h);
+        const c = el('circle', { cx: x, cy: y, r: 13, class: `sc__mark sc__mark--${i}` });
+        const title = document.createElementNS(NS, 'title'); title.textContent = `${label}: ${a[f]}`; c.append(title);
+        const t = el('text', { x, y, class: 'sc__mk', 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = String(i + 1);
+      });
+      const center = el('text', { x: C, y: C - 8, class: 'sc__center', 'text-anchor': 'middle' }); center.textContent = 'Kịch bản A';
+      const center2 = el('text', { x: C, y: C + 14, class: 'sc__center2', 'text-anchor': 'middle' }); center2.textContent = sleepFrom != null ? `ngủ lúc ${a['ngu-tu']}` : 'điền giờ để vẽ';
+
+      const checks = this.querySelector<HTMLUListElement>('[data-checks]')!;
+      checks.replaceChildren();
+      const add = (cls: string, text: string) => { const li = document.createElement('li'); li.className = cls; li.textContent = text; checks.append(li); };
+      add('sc__lg sc__lg--sleep', 'Thời gian dành cho ngủ');
+      add('sc__lg sc__lg--runway', 'Đường băng hạ cánh: 30–60 phút trước giờ ngủ');
+      add('sc__lg sc__lg--cut', 'Mốc nên dừng caffeine: 6-8 tiếng trước giờ ngủ');
+      add('sc__lg sc__lg--focus', 'Khung giờ tập trung cao nhất');
+      add('sc__lg sc__lg--marks', '① Thức dậy · ② Ánh sáng buổi sáng · ③ Caffeine cuối · ④ Kết thúc công việc');
+      const caf = toH(a['caffeine']);
+      if (sleepFrom != null) {
+        add('sc__info', `Theo khung ngủ của bạn, mốc “cách xa giờ ngủ ít nhất 6-8 tiếng” rơi vào khoảng ${fmt(sleepFrom - 8)}–${fmt(sleepFrom - 6)}.`);
+        if (caf != null) {
+          const gap = ((sleepFrom - caf) % 24 + 24) % 24;
+          add(gap >= 6 ? 'sc__ok' : 'sc__warn', gap >= 6 ? `Ly caffeine cuối (${a['caffeine']}) cách giờ ngủ khoảng ${gap.toFixed(1).replace('.', ',')} tiếng.` : `Ly caffeine cuối (${a['caffeine']}) chỉ cách giờ ngủ khoảng ${gap.toFixed(1).replace('.', ',')} tiếng — sớm hơn mốc 6-8 tiếng sẽ phù hợp hơn.`);
+        }
+        const end = toH(a['ket-thuc']);
+        if (end != null) {
+          const gap = ((sleepFrom - end) % 24 + 24) % 24;
+          add(gap >= 0.5 ? 'sc__ok' : 'sc__warn', gap >= 0.5 ? `Từ lúc kết thúc công việc đến giờ ngủ có khoảng ${Math.round(gap * 60)} phút cho “đường băng hạ cánh”.` : 'Kết thúc công việc quá sát giờ ngủ — thử chừa 30–60 phút để giảm dần kích thích.');
+        }
+      }
+    }
+  }
+  customElements.define('bev-scenario', BevScenario);
+</script>
+
+<style>
+  .sc { display: grid; gap: 1.2rem; }
+  .sc__card { padding: 1.1rem 1.2rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .sc__t { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; font-size: 1.3rem; --ic-fill: var(--surface); }
+  .sc__grid { display: grid; gap: 1rem; }
+  @media (min-width: 900px) { .sc__grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .sc__form { display: grid; gap: 0.55rem; }
+  .sc__form--b { grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+  .sc__f { display: grid; gap: 0.25rem; padding: 0.55rem 0.7rem; border-radius: 14px; background: var(--surface); }
+  .sc__f span { display: flex; align-items: center; gap: 0.35rem; font-weight: 700; font-size: 0.92rem; --ic-fill: var(--h-fill); }
+  .sc__f input, .sc__f textarea { width: 100%; min-height: 40px; padding: 0.4rem 0.6rem; border-radius: 10px; border: 2px solid var(--line); background: var(--bg); }
+  .sc__f input:focus, .sc__f textarea:focus { outline: none; border-color: var(--ink); }
+  .sc__viz { padding: 0.8rem; border-radius: var(--radius); background: var(--surface); border: 2px dashed var(--line-2); }
+  .sc__clock { width: 100%; max-width: 320px; display: block; margin: 0 auto; }
+  .sc__clock :global(.sc__track) { fill: none; stroke: var(--line); }
+  .sc__clock :global(.sc__arc) { fill: none; stroke-linecap: butt; }
+  .sc__clock :global(.sc__arc--sleep) { stroke: var(--lav); }
+  .sc__clock :global(.sc__arc--runway) { stroke: var(--ngoc); }
+  .sc__clock :global(.sc__arc--cut) { stroke: var(--do); opacity: 0.75; }
+  .sc__clock :global(.sc__arc--focus) { stroke: var(--bo); }
+  .sc__clock :global(.sc__tick) { stroke: var(--ink-3); stroke-width: 2; stroke-linecap: round; }
+  .sc__clock :global(.sc__num) { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink-2); }
+  .sc__clock :global(.sc__mark) { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+  .sc__clock :global(.sc__mk) { font-family: var(--font-head); font-weight: 900; font-size: 13px; fill: var(--ink); }
+  .sc__clock :global(.sc__center) { font-family: var(--font-head); font-weight: 900; font-size: 18px; fill: var(--ink); }
+  .sc__clock :global(.sc__center2) { font-size: 13px; fill: var(--ink-2); }
+  .sc__checks { list-style: none; margin: 0.8rem 0 0; padding: 0; display: grid; gap: 0.3rem; font-size: 0.88rem; }
+  .sc__checks :global(li) { padding: 0.35rem 0.6rem; border-radius: 10px; background: var(--surface-2); }
+  .sc__checks :global(.sc__lg) { padding-left: 1.9rem; position: relative; }
+  .sc__checks :global(.sc__lg::before) { content: ''; position: absolute; left: 0.6rem; top: 0.55rem; width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--ink); }
+  .sc__checks :global(.sc__lg--sleep::before) { background: var(--lav); }
+  .sc__checks :global(.sc__lg--runway::before) { background: var(--ngoc); }
+  .sc__checks :global(.sc__lg--cut::before) { background: var(--do); }
+  .sc__checks :global(.sc__lg--focus::before) { background: var(--bo); }
+  .sc__checks :global(.sc__lg--marks::before) { background: var(--surface); border-radius: 50%; }
+  .sc__checks :global(.sc__info) { background: var(--lav-fill); }
+  .sc__checks :global(.sc__ok) { background: var(--sage-fill); }
+  .sc__checks :global(.sc__warn) { background: var(--do-fill); font-weight: 700; }
+  .sc__rules { margin-top: 1rem; padding: 0.8rem 1rem; border-radius: var(--radius-sm); background: var(--surface); font-size: 0.92rem; }
+  .sc__rt { margin: 0 0 0.3rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .sc__rules ul { margin: 0; padding-left: 1.2rem; }
+  .sc__tip { display: flex; gap: 0.5rem; align-items: flex-start; margin: 1rem 0 0; font-size: 0.92rem; font-style: italic; }
+</style>

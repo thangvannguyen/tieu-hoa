@@ -1,0 +1,121 @@
+---
+/** Phiếu chuẩn bị buổi khám giấc ngủ (bản tin #12) — 5 phần, có thể lấy số liệu từ Nhật ký giấc ngủ. In được. */
+import Icon from '~/components/ui/Icon.astro';
+const id = 'chuan-bi-kham-giac-ngu';
+const consequences = ['Sai sót trong công việc', 'Khó nhớ cuộc trao đổi', 'Cáu gắt', 'Ngủ gật', 'Tránh giao tiếp', 'Không đủ năng lượng vận động', 'Buồn ngủ khi lái xe'];
+const substances = ['Thuốc kê toa', 'Thuốc không kê toa/thực phẩm chức năng', 'Caffeine', 'Rượu bia', 'Nicotine (thuốc lá)'];
+---
+<bev-visitprep class="vp" data-key={`tool:${id}`}>
+  <section class="vp__s">
+    <h2><span class="dg-num">1</span> Vấn đề chính</h2>
+    <label class="vp__f"><span>“Vấn đề giấc ngủ ảnh hưởng tôi nhiều nhất là…”</span><textarea rows="3" data-f="van-de" placeholder="Ví dụ: Tôi mất hơn một giờ mới ngủ được"></textarea></label>
+    <p class="vp__ex">Ví dụ: Tôi mất hơn một giờ mới ngủ được · Tôi thức nhiều lần và sáng rất mệt · Tôi ngủ gật trong các cuộc họp · Người nhà thấy tôi ngưng thở khi ngủ · Tôi không thể ngủ trước 2 giờ sáng</p>
+  </section>
+  <section class="vp__s">
+    <h2><span class="dg-num">2</span> Diễn tiến</h2>
+    <div class="vp__grid">
+      <label class="vp__f"><span>Vấn đề bắt đầu khi nào?</span><textarea rows="2" data-f="bat-dau"></textarea></label>
+      <label class="vp__f"><span>Xảy ra bao nhiêu đêm mỗi tuần?</span><textarea rows="2" data-f="so-dem"></textarea></label>
+      <label class="vp__f"><span>Có yếu tố nào khởi phát?</span><textarea rows="2" data-f="khoi-phat"></textarea></label>
+      <label class="vp__f"><span>Điều gì làm nặng hoặc giảm triệu chứng?</span><textarea rows="2" data-f="nang-giam"></textarea></label>
+    </div>
+  </section>
+  <section class="vp__s">
+    <h2><span class="dg-num">3</span> Lịch ngủ hoặc thói quen ngủ</h2>
+    <p class="vp__hint">Giờ lên giường, thời điểm ước tính ngủ, số lần thức giấc, giờ thức dậy, giờ rời giường và ngủ trưa</p>
+    <button type="button" class="btn btn--sm no-print" data-pull><Icon name="nhat-ky" size={18} /> Lấy từ Nhật ký giấc ngủ của tôi</button>
+    <label class="vp__f"><span class="visually-hidden">Lịch ngủ</span><textarea rows="6" data-f="lich-ngu"></textarea></label>
+    <p class="vp__pullmsg" aria-live="polite" data-pullmsg></p>
+  </section>
+  <section class="vp__s">
+    <h2><span class="dg-num">4</span> Các chất và thuốc đang sử dụng</h2>
+    <div class="vp__grid">
+      {substances.map((s, i) => <label class="vp__f"><span>{s}</span><textarea rows="2" data-f={`chat-${i}`}></textarea></label>)}
+    </div>
+  </section>
+  <section class="vp__s">
+    <h2><span class="dg-num">5</span> Hậu quả ban ngày</h2>
+    <p class="vp__hint">Mô tả cụ thể thay vì chỉ nói “tôi mệt”:</p>
+    <div class="vp__checks">
+      {consequences.map((c, i) => <label class="vp__ck"><input type="checkbox" data-f={`hq-${i}`} /> <span>{c}</span></label>)}
+    </div>
+    <label class="vp__f"><span>Mô tả cụ thể</span><textarea rows="3" data-f="hq-mo-ta"></textarea></label>
+  </section>
+  <p class="vp__end"><Icon name="bac-si" size={22} /> Thông tin càng cụ thể, việc đánh giá càng hiệu quả và bác sĩ chuyên về giấc ngủ sẽ dễ dàng giúp chúng ta một cách phù hợp hơn.</p>
+</bev-visitprep>
+<script>
+  import { read, write, requestPersist } from '~/lib/storage';
+  type State = Record<string, string>;
+  class BevVisitPrep extends HTMLElement {
+    key!: string; state!: State;
+    connectedCallback() {
+      this.key = this.dataset.key!;
+      this.load();
+      this.addEventListener('input', (e) => this.onChange(e));
+      this.addEventListener('change', (e) => this.onChange(e));
+      this.querySelector('[data-pull]')!.addEventListener('click', () => this.pull());
+      (this as any).toolApi = {
+        reload: () => this.load(),
+        csv: () => [['Mục', 'Nội dung'], ...[...this.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-f]')].map((el) => [el.closest('label')!.querySelector('span')!.textContent!.trim(), el instanceof HTMLInputElement && el.type === 'checkbox' ? (el.checked ? 'Có' : '') : el.value])],
+      };
+    }
+    onChange(e: Event) {
+      const el = e.target as HTMLInputElement;
+      if (!el.dataset.f) return;
+      const v = el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value;
+      if (v) this.state[el.dataset.f] = v; else delete this.state[el.dataset.f];
+      write(this.key, this.state);
+      requestPersist();
+    }
+    load() {
+      this.state = read<State>(this.key, {});
+      this.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-f]').forEach((el) => {
+        if (el instanceof HTMLInputElement && el.type === 'checkbox') el.checked = this.state[el.dataset.f!] === '1';
+        else el.value = this.state[el.dataset.f!] ?? '';
+      });
+    }
+    pull() {
+      const diary = read<{ days: number; entries: Record<string, Record<string, string>> } | null>('tool:nhat-ky-giac-ngu', null);
+      const msg = this.querySelector<HTMLElement>('[data-pullmsg]')!;
+      if (!diary || !diary.entries || Object.keys(diary.entries).length === 0) { msg.textContent = 'Chưa có dữ liệu trong Nhật ký giấc ngủ trên máy này.'; return; }
+      const lines: string[] = [];
+      for (let d = 1; d <= (diary.days ?? 7); d++) {
+        const e = diary.entries[d];
+        if (!e) continue;
+        const parts = [
+          e['__date'] && `(${e['__date']})`,
+          e['len-giuong'] && `lên giường ${e['len-giuong']}`,
+          e['ngu-duoc'] && `ngủ được ~${e['ngu-duoc']}`,
+          e['thuc-day'] && `thức dậy lần cuối ${e['thuc-day']}`,
+          e['roi-giuong'] && `rời giường ${e['roi-giuong']}`,
+          e['chat-luong'] && `chất lượng ${e['chat-luong']}/10`,
+          e['ngu-trua'] && `ngủ trưa: ${e['ngu-trua']}`,
+          e['caffeine'] && `caffeine cuối ${e['caffeine']}`,
+        ].filter(Boolean);
+        if (parts.length) lines.push(`Ngày ${d}: ${parts.join(', ')}`);
+      }
+      const ta = this.querySelector<HTMLTextAreaElement>('[data-f="lich-ngu"]')!;
+      ta.value = (ta.value ? ta.value.trim() + '\n' : '') + lines.join('\n');
+      this.state['lich-ngu'] = ta.value;
+      write(this.key, this.state);
+      msg.textContent = `Đã thêm ${lines.length} ngày từ nhật ký. Bạn có thể sửa lại cho gọn.`;
+    }
+  }
+  customElements.define('bev-visitprep', BevVisitPrep);
+</script>
+<style>
+  .vp { display: grid; gap: 1rem; }
+  .vp__s { padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); break-inside: avoid; }
+  .vp__s h2 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; margin: 0 0 0.6rem; }
+  .vp__grid { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+  .vp__f { display: grid; gap: 0.25rem; margin-top: 0.4rem; }
+  .vp__f span { font-weight: 700; font-size: 0.93rem; }
+  .vp__f textarea { width: 100%; padding: 0.5rem 0.7rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); resize: vertical; line-height: 1.45; }
+  .vp__f textarea:focus { outline: none; border-color: var(--ink); }
+  .vp__ex, .vp__hint { font-size: 0.88rem; color: var(--ink-2); margin: 0.3rem 0; }
+  .vp__checks { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+  .vp__ck { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.7rem; border-radius: 999px; background: var(--h-fill); cursor: pointer; font-size: 0.92rem; }
+  .vp__ck input { accent-color: var(--ink); width: 18px; height: 18px; }
+  .vp__pullmsg { font-size: 0.88rem; color: var(--sage-ink); min-height: 1.2em; margin: 0.3rem 0 0; }
+  .vp__end { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.8rem 1rem; border-radius: var(--radius-sm); background: var(--h-fill); margin: 0; }
+</style>

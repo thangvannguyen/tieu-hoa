@@ -1,0 +1,19 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import TableLog from '~/components/tools/TableLog.astro';
+---
+<ToolShell id="ke-hoach-7-ngay-vi-sinh" mood="khoe">
+  <ToolIntro slot="intro" title="Mẫu kế hoạch 7 ngày duy trì hệ vi sinh (bản tin #08)" icon="loi-khuan">
+    <p>Mỗi ngày, ghi ngắn ba điều theo công thức <strong>4 nuôi – 3 giảm – 2 theo dõi</strong>: mình đã thêm gì để nuôi lợi khuẩn, đã giảm gì, và bụng hôm nay thế nào.</p>
+  </ToolIntro>
+  <TableLog
+    id="ke-hoach-7-ngay-vi-sinh"
+    rows={7}
+    columns={[
+      { id: 'them', label: 'Tôi đã thêm gì để nuôi lợi khuẩn?' },
+      { id: 'giam', label: 'Tôi đã giảm gì?' },
+      { id: 'bung', label: 'Bụng hôm nay thế nào?' },
+    ]}
+  />
+</ToolShell>

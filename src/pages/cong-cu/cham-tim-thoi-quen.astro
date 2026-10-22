@@ -1,0 +1,22 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import HeartRating from '~/components/tools/HeartRating.astro';
+const habits = [
+  'Ngủ sớm hơn',
+  'Ăn uống chú tâm hơn (cất điện thoại khi ăn)',
+  'Thiết kế những khoảng thời gian nghỉ ngắn trong ngày',
+  'Giảm ăn đồ chua, cay, mặn, béo',
+  'Ăn uống điều độ',
+  'Hạn chế ăn khuya',
+  'Ăn chậm, nhai kỹ hơn',
+  'Vận động tại chỗ thêm 5 phút mỗi ngày',
+];
+---
+<ToolShell id="cham-tim-thoi-quen" mood="vui">
+  <ToolIntro slot="intro" title="Trái tim động lực (bản tin #02)" icon="tim">
+    <p>Giờ thì mình mời bạn, chúng ta cùng đánh giá xem, mình muốn điều chỉnh để có thói quen nào sau đây nhé: chấm từ 1 đến 10 trái tim cho mỗi thói quen.</p>
+    <p>Bạn có nhiều trái tim động lực ở thói quen nào nhiều nhất, tuần này hãy bắt đầu điều chỉnh từ một thói quen đó bạn nha.</p>
+  </ToolIntro>
+  <HeartRating id="cham-tim-thoi-quen" habits={habits} />
+</ToolShell>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+---
+<BaseLayout title="Dữ liệu của bạn" description="Sao lưu, nhập lại hoặc xoá toàn bộ dữ liệu bạn đã nhập trên web (nhật ký, tiến độ, ghi chú).">
+  <section class="container-narrow page">
+    <div class="head"><BeBung mood="suy-nghi" size={110} /><h1>Dữ liệu của bạn</h1></div>
+    <p>Mọi thứ bạn nhập trên web — nhật ký, checklist, ghi chú chiêm nghiệm, tiến độ học, điểm quiz — <strong>chỉ lưu trong trình duyệt của máy này</strong>. Không có tài khoản, không có máy chủ nào nhận dữ liệu của bạn.</p>
+    <ul class="facts">
+      <li><Icon name="canh-bao" size={22} /> Trình duyệt có thể tự xoá dữ liệu nếu lâu không mở trang (nhất là Safari trên iPhone sau khoảng 7 ngày), hoặc khi bạn xoá lịch sử duyệt web.</li>
+      <li><Icon name="dien-thoai" size={22} /> Mỗi trình duyệt / thiết bị có dữ liệu riêng. Muốn chuyển sang máy khác: sao lưu ở máy cũ rồi nhập ở máy mới.</li>
+    </ul>
+    <div class="box">
+      <p class="sum" data-sum>Đang đếm dữ liệu…</p>
+      <div class="acts">
+        <button type="button" class="btn btn--primary" data-backup><Icon name="tai-xuong" size={20} /> Sao lưu tất cả (.json)</button>
+        <label class="btn btn--ghost imp"><Icon name="tai-len" size={20} /> Nhập bản sao lưu<input type="file" accept="application/json,.json" data-import /></label>
+        <button type="button" class="btn btn--ghost danger" data-clear><Icon name="xoa" size={20} /> Xoá toàn bộ dữ liệu</button>
+      </div>
+      <p class="msg" aria-live="polite" data-msg></p>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  import { exportAll, importAll, downloadFile, listKeys, remove, prefs, localDate, formatDateVi } from '~/lib/storage';
+  const sum = document.querySelector<HTMLElement>('[data-sum]')!;
+  const msg = document.querySelector<HTMLElement>('[data-msg]')!;
+  const label = (k: string) => k.startsWith('tool:') ? 'công cụ' : k.startsWith('ghi-chu:') ? 'ghi chú chiêm nghiệm' : k.startsWith('checklist:') ? 'ô tick trong bài' : k === 'progress' ? 'tiến độ học' : 'cài đặt';
+  const count = () => {
+    const keys = listKeys();
+    const groups: Record<string, number> = {};
+    keys.forEach((k) => (groups[label(k)] = (groups[label(k)] ?? 0) + 1));
+    const last = prefs.get().lastBackup;
+    sum.textContent = keys.length ? `Trên máy này đang có: ${Object.entries(groups).map(([g, n]) => `${n} mục ${g}`).join(', ')}.${last ? ` Sao lưu gần nhất: ${formatDateVi(last)}.` : ' Bạn chưa sao lưu lần nào.'}` : 'Chưa có dữ liệu nào trên máy này.';
+  };
+  count();
+  document.querySelector('[data-backup]')!.addEventListener('click', () => {
+    downloadFile(`sao-luu-bung-em-viec-on-${localDate()}.json`, JSON.stringify(exportAll(), null, 2), 'application/json');
+    prefs.set({ ...prefs.get(), lastBackup: localDate() });
+    msg.textContent = 'Đã tải file sao lưu.';
+    count();
+  });
+  document.querySelector<HTMLInputElement>('[data-import]')!.addEventListener('change', async (e) => {
+    const input = e.target as HTMLInputElement;
+    const f = input.files?.[0];
+    if (!f) return;
+    try { msg.textContent = `Đã nhập ${importAll(JSON.parse(await f.text()))} mục.`; } catch (err) { msg.textContent = err instanceof Error ? err.message : 'Không đọc được file.'; }
+    input.value = '';
+    count();
+  });
+  document.querySelector('[data-clear]')!.addEventListener('click', () => {
+    if (!confirm('Xoá TOÀN BỘ dữ liệu của web trên máy này? Không hoàn tác được (trừ khi bạn có bản sao lưu).')) return;
+    listKeys().forEach((k) => remove(k));
+    msg.textContent = 'Đã xoá toàn bộ dữ liệu.';
+    count();
+  });
+</script>
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; }
+  .head h1 { margin: 0; }
+  .facts { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+  .facts li { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; padding: 0.7rem 0.9rem; border-radius: var(--radius-sm); background: var(--surface); border: 2px solid var(--line); }
+  .box { margin-top: 1.5rem; padding: 1.2rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .sum { font-weight: 600; }
+  .acts { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .imp { position: relative; overflow: hidden; }
+  .imp input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .danger { color: var(--do-ink); }
+  .msg { margin: 0.8rem 0 0; color: var(--sage-ink); font-weight: 600; min-height: 1.4em; }
+</style>

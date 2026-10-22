@@ -1,0 +1,13 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import DiaryGrid from '~/components/tools/DiaryGrid.astro';
+import { nhatKyGiacNgu } from '~/tools/schemas/nhat-ky-giac-ngu';
+---
+<ToolShell id="nhat-ky-giac-ngu" mood="buon-ngu">
+  <ToolIntro slot="intro" title="Thực hành tuần này (bản tin #09)" icon="trang">
+    <p>Tuần này, bạn chưa cần thay đổi toàn bộ thói quen. Hãy bắt đầu bằng việc quan sát. Mỗi sáng, ghi lại sáu thông tin; trong ngày, ghi thêm vài điều nhỏ. Công cụ sẽ tự tính <strong>thời gian nằm trên giường</strong> và <strong>thời gian ngủ ước tính</strong> từ các mốc giờ bạn nhập.</p>
+    <p>Ở tab <strong>Tổng kết</strong>, bạn có thể trả lời 3 câu hỏi ngắn về giấc ngủ của bản tin #10 (thời lượng, chất lượng, thời điểm). Phiếu <a href="../chuan-bi-kham-giac-ngu/">chuẩn bị buổi khám giấc ngủ</a> có thể lấy lại số liệu từ nhật ký này.</p>
+  </ToolIntro>
+  <DiaryGrid schema={nhatKyGiacNgu} />
+</ToolShell>

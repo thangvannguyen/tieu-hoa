@@ -1,0 +1,503 @@
+---
+/**
+ * Nhật ký nhiều ngày dựng từ schema (src/tools/schemas). Mỗi ngày một tab; nhóm câu hỏi là thẻ màu.
+ * Có tab "Tổng kết": biểu đồ nhỏ, đếm lựa chọn, ô suy ngẫm. Dữ liệu: bev:v1:tool:<id>.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import type { DiarySchema, Field } from '~/tools/schemas/types';
+
+interface Props { schema: DiarySchema }
+const { schema } = Astro.props;
+const maxDays = Math.max(schema.days, ...(schema.daysOptions ?? []));
+const days = Array.from({ length: maxDays }, (_, i) => i + 1);
+const fid = (d: number, f: string) => `${schema.id}-d${d}-${f}`;
+const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type === 'scale';
+---
+<bev-diary class="dy" data-key={`tool:${schema.id}`} data-days={schema.days} data-max={maxDays}>
+  <script type="application/json" data-schema set:html={JSON.stringify(schema)} />
+
+  <div class="dy__bar no-print">
+    <div class="dy__tabs" role="tablist" aria-label="Chọn ngày">
+      {days.map((d) => (
+        <button type="button" role="tab" class="dy__tab" data-tab={d} aria-selected={d === 1 ? 'true' : 'false'} aria-controls={`${schema.id}-p${d}`} id={`${schema.id}-t${d}`} hidden={d > schema.days}>
+          <span>Ngày {d}</span><span class="dy__dot" aria-hidden="true"></span>
+        </button>
+      ))}
+      <button type="button" role="tab" class="dy__tab dy__tab--sum" data-tab="sum" aria-selected="false" aria-controls={`${schema.id}-psum`} id={`${schema.id}-tsum`}>
+        <Icon name="bieu-do" size={18} /> <span>Tổng kết</span>
+      </button>
+    </div>
+    {schema.daysOptions && (
+      <label class="dy__count">
+        Số ngày theo dõi
+        <select data-days-select>
+          {schema.daysOptions.map((n) => <option value={n} selected={n === schema.days}>{n} ngày</option>)}
+        </select>
+      </label>
+    )}
+  </div>
+
+  {days.map((d) => (
+    <section class="dy__panel" role="tabpanel" id={`${schema.id}-p${d}`} aria-labelledby={`${schema.id}-t${d}`} data-panel={d} hidden={d !== 1}>
+      <div class="dy__dayhead">
+        <h2 class="dy__dayt">Ngày {d}</h2>
+        <label class="dy__date">Ngày ghi <input type="date" data-day={d} data-field="__date" /></label>
+      </div>
+      <div class="dy__groups">
+        {schema.groups.map((g) => (
+          <fieldset class="dy__group" data-hue={g.hue}>
+            <legend class="dy__gl"><span class="dy__gi"><Icon name={g.icon} size={24} /></span> <span>{g.label}</span></legend>
+            {g.hint && <p class="dy__gh">{g.hint}</p>}
+            {g.fields.map((f) => (
+              <div class:list={['dy__field', `dy__field--${f.type}`]}>
+                {isScale(f) ? (
+                  <fieldset class="dy__scale">
+                    <legend class="dy__fl">{f.label}</legend>
+                    {f.hint && <span class="dy__fh">{f.hint}</span>}
+                    <div class="dy__pills">
+                      {Array.from({ length: f.max - f.min + 1 }, (_, k) => f.min + k).map((n) => (
+                        <label class="dy__pill" title={f.anchors?.[n]}>
+                          <input type="radio" name={fid(d, f.id)} value={n} data-day={d} data-field={f.id} />
+                          <span>{n}</span>
+                        </label>
+                      ))}
+                      <button type="button" class="dy__clear" data-clear={fid(d, f.id)} aria-label={`Bỏ chọn: ${f.label}`}>×</button>
+                    </div>
+                    {f.anchors && (
+                      <ul class="dy__anchors">
+                        {Object.entries(f.anchors).map(([n, t]) => <li><b>{n}</b> {t}</li>)}
+                      </ul>
+                    )}
+                  </fieldset>
+                ) : f.type === 'choice' || f.type === 'select' ? (
+                  <fieldset class="dy__scale">
+                    <legend class="dy__fl">{f.label}</legend>
+                    {f.hint && <span class="dy__fh">{f.hint}</span>}
+                    <div class="dy__pills dy__pills--text">
+                      {f.options.map((o) => (
+                        <label class="dy__pill">
+                          <input type="radio" name={fid(d, f.id)} value={o.value} data-day={d} data-field={f.id} />
+                          <span>{o.label}</span>
+                        </label>
+                      ))}
+                      <button type="button" class="dy__clear" data-clear={fid(d, f.id)} aria-label={`Bỏ chọn: ${f.label}`}>×</button>
+                    </div>
+                  </fieldset>
+                ) : (
+                  <label class="dy__lab">
+                    <span class="dy__fl">{f.label}</span>
+                    {f.hint && <span class="dy__fh">{f.hint}</span>}
+                    {f.type === 'textarea' ? (
+                      <textarea rows="2" data-day={d} data-field={f.id} placeholder={f.placeholder}></textarea>
+                    ) : f.type === 'number' ? (
+                      <span class="dy__num">
+                        <input type="number" inputmode="decimal" step={f.step ?? 1} min={f.min} max={f.max} data-day={d} data-field={f.id} placeholder={f.placeholder} />
+                        {f.unit && <span>{f.unit}</span>}
+                      </span>
+                    ) : (
+                      <input type={f.type} data-day={d} data-field={f.id} placeholder={f.placeholder} />
+                    )}
+                  </label>
+                )}
+              </div>
+            ))}
+          </fieldset>
+        ))}
+      </div>
+      {schema.durations && <p class="dy__durations" data-durations={d}></p>}
+      <div class="dy__nav no-print">
+        <button type="button" class="btn btn--ghost btn--sm" data-go={d - 1} hidden={d === 1}><Icon name="mui-ten-trai" size={18} /> Ngày {d - 1}</button>
+        <button type="button" class="btn btn--sm" data-go={d + 1} data-next>Ngày {d + 1} <Icon name="mui-ten-phai" size={18} /></button>
+      </div>
+    </section>
+  ))}
+
+  <section class="dy__panel dy__sum" role="tabpanel" id={`${schema.id}-psum`} aria-labelledby={`${schema.id}-tsum`} data-panel="sum" hidden>
+    <h2 class="dy__dayt">Tổng kết các ngày đã ghi</h2>
+    <p class="dy__sumhint">Các con số dưới đây được tính từ những gì bạn đã nhập — để nhìn ra “mô thức”, không phải để chấm điểm.</p>
+    <div class="dy__charts" data-charts></div>
+    <div class="dy__counts" data-counts></div>
+    {schema.summary && (
+      <div class="dy__reflect">
+        <h3>{schema.summary.title}</h3>
+        <div class="dy__rgrid">
+          {schema.summary.colA && <span class="dy__rh">{schema.summary.colA}</span>}
+          {schema.summary.colB && <span class="dy__rh">{schema.summary.colB}</span>}
+          {schema.summary.rows.map((r) => (
+            <>
+              <label class="dy__rl" for={`${schema.id}-s-${r.id}`}>{r.label}</label>
+              <textarea id={`${schema.id}-s-${r.id}`} rows="2" data-summary={r.id}></textarea>
+            </>
+          ))}
+        </div>
+        {schema.summary.closing && <p class="dy__closing">{schema.summary.closing}</p>}
+      </div>
+    )}
+    <details class="dy__matrixbox">
+      <summary>Xem tất cả các ngày dạng bảng</summary>
+      <div class="table-scroll"><table class="dy__matrix" data-matrix></table></div>
+    </details>
+  </section>
+</bev-diary>
+
+<script>
+  import { read, write, onExternalChange, requestPersist } from '~/lib/storage';
+  import type { DiarySchema, Field } from '~/tools/schemas/types';
+
+  type State = { v: number; days: number; entries: Record<string, Record<string, string>>; summary: Record<string, string>; updatedAt?: string };
+
+  const minutes = (t?: string) => {
+    if (!t || !/^\d{1,2}:\d{2}$/.test(t)) return null;
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  };
+  const fmtDur = (mins: number) => `${Math.floor(mins / 60)} giờ ${String(mins % 60).padStart(2, '0')} phút`;
+
+  class BevDiary extends HTMLElement {
+    schema!: DiarySchema;
+    key!: string;
+    state!: State;
+    fields = new Map<string, Field>();
+
+    connectedCallback() {
+      this.schema = JSON.parse(this.querySelector('script[data-schema]')!.textContent!);
+      this.key = this.dataset.key!;
+      this.schema.groups.forEach((g) => g.fields.forEach((f) => this.fields.set(f.id, f)));
+      this.load();
+      this.addEventListener('input', (e) => this.onInput(e));
+      this.addEventListener('change', (e) => this.onInput(e));
+      this.querySelectorAll<HTMLButtonElement>('[role=tab]').forEach((t) => t.addEventListener('click', () => this.show(t.dataset.tab!)));
+      this.querySelector('[role=tablist]')!.addEventListener('keydown', (e) => this.onTabKey(e as KeyboardEvent));
+      this.querySelectorAll<HTMLButtonElement>('[data-go]').forEach((b) => b.addEventListener('click', () => {
+        const n = Number(b.dataset.go);
+        this.show(n > this.state.days ? 'sum' : String(n));
+        this.querySelector<HTMLElement>('.dy__bar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
+      this.querySelectorAll<HTMLButtonElement>('[data-clear]').forEach((b) => b.addEventListener('click', () => {
+        this.querySelectorAll<HTMLInputElement>(`input[name="${b.dataset.clear}"]`).forEach((i) => (i.checked = false));
+        const any = this.querySelector<HTMLInputElement>(`input[name="${b.dataset.clear}"]`);
+        if (any) this.setValue(any.dataset.day!, any.dataset.field!, '');
+      }));
+      this.querySelector<HTMLSelectElement>('[data-days-select]')?.addEventListener('change', (e) => {
+        this.state.days = Number((e.target as HTMLSelectElement).value);
+        this.save();
+        this.applyDays();
+      });
+      onExternalChange(this.key, () => this.load());
+      addEventListener('beforeprint', () => {
+        this.renderSummary();
+        const det = this.querySelector<HTMLDetailsElement>('.dy__matrixbox');
+        if (det) det.open = true;
+      });
+      (this as any).toolApi = { csv: () => this.csvRows(), reload: () => this.load(), title: this.schema.id };
+    }
+
+    load() {
+      this.state = read<State>(this.key, { v: this.schema.version, days: this.schema.days, entries: {}, summary: {} });
+      this.state.entries ??= {};
+      this.state.summary ??= {};
+      this.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-field]').forEach((el) => {
+        const v = this.state.entries[el.dataset.day!]?.[el.dataset.field!] ?? '';
+        if (el instanceof HTMLInputElement && el.type === 'radio') el.checked = el.value === v;
+        else el.value = v;
+      });
+      this.querySelectorAll<HTMLTextAreaElement>('[data-summary]').forEach((el) => (el.value = this.state.summary[el.dataset.summary!] ?? ''));
+      const sel = this.querySelector<HTMLSelectElement>('[data-days-select]');
+      if (sel) sel.value = String(this.state.days);
+      this.applyDays();
+      this.refresh();
+    }
+
+    applyDays() {
+      const n = this.state.days;
+      this.querySelectorAll<HTMLButtonElement>('[role=tab][data-tab]').forEach((t) => {
+        if (t.dataset.tab !== 'sum') t.hidden = Number(t.dataset.tab) > n;
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-next]').forEach((b) => {
+        const to = Number(b.dataset.go);
+        b.lastChild && (b.childNodes[0].textContent = to > n ? 'Xem tổng kết ' : `Ngày ${to} `);
+      });
+      const cur = this.querySelector<HTMLElement>('[role=tab][aria-selected=true]');
+      if (cur?.hidden) this.show('1');
+    }
+
+    show(tab: string) {
+      this.querySelectorAll<HTMLButtonElement>('[role=tab]').forEach((t) => {
+        const on = t.dataset.tab === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      this.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== tab));
+      if (tab === 'sum') this.renderSummary();
+    }
+
+    onTabKey(e: KeyboardEvent) {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      const tabs = [...this.querySelectorAll<HTMLButtonElement>('[role=tab]')].filter((t) => !t.hidden);
+      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      const next = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[next].focus();
+      this.show(tabs[next].dataset.tab!);
+      e.preventDefault();
+    }
+
+    onInput(e: Event) {
+      const el = e.target as HTMLInputElement | HTMLTextAreaElement;
+      if (el.dataset.summary) {
+        this.state.summary[el.dataset.summary] = el.value;
+        return this.save();
+      }
+      if (!el.dataset.field || !el.dataset.day) return;
+      if (el instanceof HTMLInputElement && el.type === 'radio' && !el.checked) return;
+      this.setValue(el.dataset.day, el.dataset.field, el.value);
+    }
+
+    setValue(day: string, field: string, value: string) {
+      const entry = (this.state.entries[day] ??= {});
+      if (value === '') delete entry[field];
+      else entry[field] = value;
+      this.save();
+      this.refresh();
+    }
+
+    save() {
+      this.state.updatedAt = new Date().toISOString();
+      write(this.key, this.state);
+      requestPersist();
+    }
+
+    refresh() {
+      const total = this.fields.size;
+      this.querySelectorAll<HTMLButtonElement>('[role=tab][data-tab]').forEach((t) => {
+        const e = this.state.entries[t.dataset.tab!];
+        if (!e) { t.dataset.fill = '0'; return; }
+        const n = Object.keys(e).filter((k) => k !== '__date').length;
+        t.dataset.fill = n === 0 ? '0' : n >= total ? '2' : '1';
+      });
+      this.querySelectorAll<HTMLElement>('[data-durations]').forEach((p) => {
+        const e = this.state.entries[p.dataset.durations!] ?? {};
+        const parts = (this.schema.durations ?? []).map((d) => {
+          const a = minutes(e[d.from]), b = minutes(e[d.to]);
+          if (a == null || b == null) return null;
+          const diff = (b - a + 1440) % 1440;
+          return `${d.label}: ${fmtDur(diff)}`;
+        }).filter(Boolean);
+        p.textContent = parts.length ? parts.join(' · ') : '';
+        p.hidden = parts.length === 0;
+      });
+    }
+
+    dayList() {
+      return Array.from({ length: this.state.days }, (_, i) => String(i + 1));
+    }
+
+    renderSummary() {
+      const ns = 'http://www.w3.org/2000/svg';
+      const charts = this.querySelector<HTMLElement>('[data-charts]')!;
+      charts.replaceChildren();
+      const days = this.dayList();
+      for (const c of this.schema.charts ?? []) {
+        const f = this.fields.get(c.field);
+        const vals = days.map((d) => {
+          const v = this.state.entries[d]?.[c.field];
+          return v === undefined || v === '' ? null : Number(v);
+        });
+        const nums = vals.filter((v): v is number => v != null && !Number.isNaN(v));
+        const box = document.createElement('div');
+        box.className = 'dy__chart';
+        box.dataset.hue = c.hue;
+        const t = document.createElement('p');
+        t.className = 'dy__ct';
+        t.textContent = c.label;
+        const sub = document.createElement('p');
+        sub.className = 'dy__cs';
+        sub.textContent = nums.length ? `Trung bình ${(nums.reduce((a, b) => a + b, 0) / nums.length).toFixed(1)} · thấp nhất ${Math.min(...nums)} · cao nhất ${Math.max(...nums)} (${nums.length}/${days.length} ngày)` : 'Chưa có dữ liệu';
+        const max = f && f.type === 'scale' ? f.max : Math.max(10, ...nums);
+        const min = f && f.type === 'scale' ? f.min : 0;
+        const svg = document.createElementNS(ns, 'svg');
+        const W = 300, H = 90, P = 10;
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', `${c.label}: ${vals.map((v, i) => `ngày ${i + 1} ${v ?? 'trống'}`).join(', ')}`);
+        const x = (i: number) => P + (i * (W - 2 * P)) / Math.max(days.length - 1, 1);
+        const y = (v: number) => H - P - ((v - min) / Math.max(max - min, 1)) * (H - 2 * P);
+        const base = document.createElementNS(ns, 'line');
+        base.setAttribute('x1', String(P)); base.setAttribute('x2', String(W - P));
+        base.setAttribute('y1', String(H - P)); base.setAttribute('y2', String(H - P));
+        base.setAttribute('class', 'dy__base');
+        svg.append(base);
+        let d = '';
+        vals.forEach((v, i) => { if (v != null) d += `${d ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`; });
+        if (d) {
+          const path = document.createElementNS(ns, 'path');
+          path.setAttribute('d', d);
+          path.setAttribute('class', 'dy__line');
+          svg.append(path);
+        }
+        vals.forEach((v, i) => {
+          if (v == null) return;
+          const dot = document.createElementNS(ns, 'circle');
+          dot.setAttribute('cx', x(i).toFixed(1)); dot.setAttribute('cy', y(v).toFixed(1)); dot.setAttribute('r', '5');
+          dot.setAttribute('class', 'dy__pt');
+          svg.append(dot);
+        });
+        box.append(t, svg, sub);
+        charts.append(box);
+      }
+
+      const counts = this.querySelector<HTMLElement>('[data-counts]')!;
+      counts.replaceChildren();
+      for (const g of this.schema.groups) {
+        for (const f of g.fields) {
+          if (f.type !== 'choice' && f.type !== 'select') continue;
+          const box = document.createElement('div');
+          box.className = 'dy__count-box';
+          box.dataset.hue = g.hue;
+          const t = document.createElement('p');
+          t.className = 'dy__ct';
+          t.textContent = f.label;
+          const ul = document.createElement('ul');
+          for (const o of f.options) {
+            const n = days.filter((d) => this.state.entries[d]?.[f.id] === o.value).length;
+            const li = document.createElement('li');
+            const bar = document.createElement('span');
+            bar.className = 'dy__bar-fill';
+            bar.style.width = `${(n / Math.max(days.length, 1)) * 100}%`;
+            const lab = document.createElement('span');
+            lab.textContent = `${o.label}: ${n} ngày`;
+            li.append(bar, lab);
+            ul.append(li);
+          }
+          box.append(t, ul);
+          counts.append(box);
+        }
+      }
+
+      const table = this.querySelector<HTMLTableElement>('[data-matrix]')!;
+      table.replaceChildren();
+      const head = table.createTHead().insertRow();
+      ['Câu hỏi', ...days.map((d) => `Ngày ${d}`)].forEach((h) => { const th = document.createElement('th'); th.textContent = h; head.append(th); });
+      const body = table.createTBody();
+      const dateRow = body.insertRow();
+      dateRow.insertCell().textContent = 'Ngày ghi';
+      days.forEach((d) => (dateRow.insertCell().textContent = this.state.entries[d]?.__date ?? ''));
+      for (const g of this.schema.groups) {
+        const gr = body.insertRow();
+        const gc = gr.insertCell();
+        gc.colSpan = days.length + 1;
+        gc.className = 'dy__mg';
+        gc.textContent = g.label;
+        for (const f of g.fields) {
+          const r = body.insertRow();
+          r.insertCell().textContent = f.label;
+          days.forEach((d) => (r.insertCell().textContent = this.display(f, this.state.entries[d]?.[f.id])));
+        }
+      }
+    }
+
+    display(f: Field, v?: string) {
+      if (v == null || v === '') return '';
+      if (f.type === 'choice' || f.type === 'select') return f.options.find((o) => o.value === v)?.label ?? v;
+      if (f.type === 'number' && f.unit) return `${v} ${f.unit}`;
+      return v;
+    }
+
+    csvRows() {
+      const days = this.dayList();
+      const fields = this.schema.groups.flatMap((g) => g.fields.map((f) => ({ g, f })));
+      const rows: string[][] = [['Ngày', 'Ngày ghi', ...fields.map(({ g, f }) => `${g.label} — ${f.label}`)]];
+      days.forEach((d) => rows.push([`Ngày ${d}`, this.state.entries[d]?.__date ?? '', ...fields.map(({ f }) => this.display(f, this.state.entries[d]?.[f.id]))]));
+      if (this.schema.summary) {
+        rows.push([]);
+        rows.push([this.schema.summary.title]);
+        this.schema.summary.rows.forEach((r) => rows.push([r.label, this.state.summary[r.id] ?? '']));
+      }
+      return rows;
+    }
+  }
+  customElements.define('bev-diary', BevDiary);
+</script>
+
+<style>
+  .dy { display: block; }
+  .dy__bar { position: sticky; top: 64px; z-index: 5; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; padding: 0.6rem 0; margin-bottom: 0.8rem; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); }
+  .dy__tabs { display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.2rem 0.1rem 0.4rem; scrollbar-width: thin; max-width: 100%; }
+  .dy__tab { flex: none; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.8rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.92rem; }
+  .dy__tab[aria-selected='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .dy__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
+  .dy__tab[data-fill='1'] .dy__dot { background: var(--bo); }
+  .dy__tab[data-fill='2'] .dy__dot { background: var(--sage); }
+  .dy__tab--sum { --ic-fill: var(--bo-fill); }
+  .dy__count { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; font-weight: 600; }
+  .dy__count select { padding: 0.35rem 0.5rem; border-radius: 10px; border: 2px solid var(--line-2); background: var(--surface); }
+  .dy__dayhead { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+  .dy__dayt { margin: 0; font-size: 1.4rem; }
+  .dy__date { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
+  .dy__date input { padding: 0.35rem 0.55rem; border-radius: 10px; border: 2px solid var(--line-2); background: var(--surface); }
+  .dy__groups { display: grid; gap: 0.9rem; }
+  @media (min-width: 900px) { .dy__groups { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .dy__group { margin: 0; padding: 0.9rem 1rem 1rem; border-radius: var(--radius); border: 2px solid var(--ink); background: var(--h-fill); box-shadow: 0 3px 0 var(--ink); min-width: 0; }
+  .dy__gl { display: flex; align-items: center; gap: 0.45rem; padding: 0.15rem 0.7rem 0.15rem 0.3rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--ink); font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .dy__gi { display: grid; place-items: center; --ic-fill: var(--h-fill); }
+  .dy__gh { margin: 0.5rem 0 0; font-size: 0.88rem; color: var(--ink-2); font-style: italic; }
+  .dy__field { margin-top: 0.75rem; }
+  .dy__lab { display: grid; gap: 0.25rem; }
+  .dy__fl { font-weight: 700; font-size: 0.94rem; line-height: 1.4; padding: 0; }
+  .dy__fh { display: block; font-size: 0.82rem; color: var(--ink-2); }
+  .dy input[type='text'], .dy input[type='time'], .dy input[type='number'], .dy textarea {
+    width: 100%; padding: 0.55rem 0.7rem; border-radius: 12px; border: 2px solid transparent; background: var(--surface); line-height: 1.45; min-height: 44px;
+  }
+  .dy input:focus, .dy textarea:focus { outline: none; border-color: var(--ink); }
+  .dy textarea { resize: vertical; }
+  .dy__num { display: flex; align-items: center; gap: 0.5rem; }
+  .dy__num input { max-width: 8rem; }
+  .dy__scale { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .dy__pills { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
+  .dy__pill { position: relative; }
+  .dy__pill input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .dy__pill span { display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 0.5rem; border-radius: 12px; background: var(--surface); border: 2px solid transparent; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; }
+  .dy__pills--text .dy__pill span { padding: 0 0.8rem; }
+  .dy__pill input:hover + span { border-color: var(--line-2); }
+  .dy__pill input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .dy__pill input:checked + span { background: var(--ink); color: var(--bg); }
+  .dy__clear { min-width: 38px; height: 38px; border-radius: 12px; border: 2px dashed var(--line-2); background: transparent; color: var(--ink-3); cursor: pointer; font-size: 1.1rem; }
+  .dy__anchors { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; font-size: 0.8rem; color: var(--ink-2); }
+  .dy__anchors b { color: var(--h-ink); }
+  .dy__durations { margin: 0.9rem 0 0; padding: 0.6rem 0.9rem; border-radius: 12px; background: var(--surface); border: 2px dashed var(--line-2); font-weight: 600; }
+  .dy__nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; }
+  .dy__nav [data-next] { margin-left: auto; }
+  .dy__sumhint { color: var(--ink-2); font-size: 0.92rem; }
+  .dy__charts, .dy__counts { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); margin: 1rem 0; }
+  .dy__charts :global(.dy__chart), .dy__counts :global(.dy__count-box) { padding: 0.8rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--ink); }
+  .dy__charts :global(.dy__ct), .dy__counts :global(.dy__ct) { margin: 0 0 0.3rem; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; }
+  .dy__charts :global(.dy__cs) { margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--ink-2); }
+  .dy__charts :global(svg) { width: 100%; height: auto; display: block; background: var(--surface); border-radius: 10px; }
+  .dy__charts :global(.dy__base) { stroke: var(--line-2); stroke-width: 2; }
+  .dy__charts :global(.dy__line) { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  .dy__charts :global(.dy__pt) { fill: var(--h); stroke: var(--ink); stroke-width: 2.5; }
+  .dy__counts :global(ul) { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+  .dy__counts :global(li) { position: relative; padding: 0.3rem 0.6rem; border-radius: 10px; background: var(--surface); overflow: hidden; font-size: 0.88rem; }
+  .dy__counts :global(.dy__bar-fill) { position: absolute; inset: 0 auto 0 0; background: var(--h); opacity: 0.45; }
+  .dy__counts :global(li > span:last-child) { position: relative; }
+  .dy__reflect { margin-top: 1.5rem; padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--ink); }
+  .dy__reflect h3 { margin-top: 0; }
+  .dy__rgrid { display: grid; gap: 0.5rem 0.9rem; align-items: start; }
+  @media (min-width: 720px) { .dy__rgrid { grid-template-columns: minmax(10rem, 0.7fr) 1fr; } }
+  .dy__rh { font-family: var(--font-head); font-weight: 900; color: var(--sage-ink); display: none; }
+  @media (min-width: 720px) { .dy__rh { display: block; } }
+  .dy__rl { font-weight: 700; padding-top: 0.5rem; }
+  .dy__reflect textarea { background: var(--surface-2); border-color: var(--line); }
+  .dy__closing { margin: 1rem 0 0; font-style: italic; color: var(--ink-2); }
+  .dy__matrixbox { margin-top: 1.2rem; }
+  .dy__matrixbox summary { cursor: pointer; font-weight: 700; padding: 0.5rem 0; }
+  .dy__matrix { border-collapse: collapse; font-size: 0.85rem; min-width: 640px; }
+  .dy__matrix :global(th), .dy__matrix :global(td) { border: 1px solid var(--line-2); padding: 0.35rem 0.5rem; text-align: left; vertical-align: top; }
+  .dy__matrix :global(th) { background: var(--surface-2); }
+  .dy__matrix :global(.dy__mg) { background: var(--bo-fill); font-weight: 800; }
+  @media print {
+    .dy__panel[data-panel]:not([data-panel='sum']) { display: none !important; }
+    .dy__panel[data-panel='sum'] { display: block !important; }
+    .dy__matrixbox summary { display: none; }
+    .dy__matrix { min-width: 0; width: 100%; }
+  }
+</style>

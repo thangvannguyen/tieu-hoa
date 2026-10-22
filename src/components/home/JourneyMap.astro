@@ -1,0 +1,89 @@
+---
+/**
+ * Bản đồ hành trình: con đường lượn qua các chương, mỗi chặng là một "trạm" với các bài.
+ * Tiến độ (đã học) được tô bằng JS từ localStorage.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { chapters } from '~/data/chapters';
+import { url } from '~/lib/url';
+import type { Lesson } from '~/lib/lessons';
+interface Props { lessons: Lesson[] }
+const { lessons } = Astro.props;
+const stops = chapters.map((c) => ({ ...c, items: lessons.filter((l) => l.data.chapter === c.id) }));
+---
+<ol class="jm" data-journey>
+  {stops.map((s, i) => (
+    <li class="jm__stop" data-hue={s.hue} style={`--i:${i}`}>
+      <a class="jm__badge" href={url(`/chuong/${s.id}/`)} aria-label={`${s.title} — xem chương`}>
+        <span class="jm__ic"><Icon name={s.icon} size={40} /></span>
+        <span class="jm__no">{s.id === 'them' ? '+' : s.so}</span>
+      </a>
+      <div class="jm__card">
+        <p class="jm__k">{s.id === 'c0' ? 'Khởi hành' : s.id === 'them' ? 'Trạm phụ' : `Chặng ${s.so}`}</p>
+        <h3 class="jm__t"><a href={url(`/chuong/${s.id}/`)}>{s.title}</a></h3>
+        <p class="jm__d">{s.description}</p>
+        {s.items.length > 0 && (
+          <ul class="jm__lessons">
+            {s.items.map((l) => (
+              <li>
+                <a href={url(`/bai/${l.id}/`)} data-lesson={l.id}>
+                  <span class="jm__check" aria-hidden="true"></span>
+                  <span>{l.data.so ? `#${String(l.data.so).padStart(2, '0')} ` : ''}{l.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p class="jm__prog" data-chapter-progress={s.id} data-total={s.items.length}></p>
+      </div>
+    </li>
+  ))}
+</ol>
+<script>
+  import { progress } from '~/lib/storage';
+  const done = progress.get().lessons;
+  document.querySelectorAll<HTMLAnchorElement>('[data-journey] [data-lesson]').forEach((a) => {
+    if (done[a.dataset.lesson!]?.done) { a.classList.add('is-done'); a.setAttribute('aria-label', `${a.textContent?.trim()} (đã học)`); }
+  });
+  document.querySelectorAll<HTMLElement>('[data-chapter-progress]').forEach((p) => {
+    const total = Number(p.dataset.total);
+    if (!total) return;
+    const n = p.parentElement!.querySelectorAll('.is-done').length;
+    p.textContent = n ? `Đã học ${n}/${total} bài${n === total ? ' — hoàn thành chặng!' : ''}` : '';
+    p.closest('.jm__stop')!.classList.toggle('is-complete', n === total);
+  });
+</script>
+<style>
+  .jm { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 1.4rem; }
+  .jm::before { content: ''; position: absolute; left: 39px; top: 40px; bottom: 40px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(var(--line-2) 0 14px, transparent 14px 24px); }
+  .jm__stop { position: relative; display: grid; grid-template-columns: 84px 1fr; gap: 1rem; align-items: start; margin: 0; }
+  .jm__badge { position: relative; z-index: 1; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 28px; background: var(--h-fill); border: 3px solid var(--ink); box-shadow: 0 4px 0 var(--ink); color: var(--ink); --ic-fill: var(--surface); transform: rotate(calc(-4deg + var(--i) * 3deg)); transition: transform 0.2s; }
+  .jm__badge:hover { transform: rotate(0) scale(1.05); }
+  .jm__no { position: absolute; top: -10px; right: -10px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 0.95rem; }
+  .jm__stop.is-complete .jm__no { background: var(--sage); color: var(--ink); }
+  .jm__card { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); min-width: 0; }
+  .jm__k { margin: 0; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--h-ink); }
+  .jm__t { margin: 0.15rem 0 0.35rem; font-size: 1.25rem; }
+  .jm__t a { color: var(--ink); text-decoration: none; }
+  .jm__t a:hover { text-decoration: underline; }
+  .jm__d { margin: 0 0 0.6rem; font-size: 0.92rem; color: var(--ink-2); }
+  .jm__lessons { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+  .jm__lessons li { margin: 0; }
+  .jm__lessons a { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; align-items: start; padding: 0.35rem 0.5rem; border-radius: 10px; color: var(--ink); text-decoration: none; font-size: 0.95rem; line-height: 1.4; }
+  .jm__lessons a:hover { background: var(--h-fill); }
+  .jm__check { width: 18px; height: 18px; margin-top: 0.15rem; border-radius: 6px; border: 2px solid var(--line-2); }
+  .jm__lessons a.is-done .jm__check { background: var(--sage); border-color: var(--ink); position: relative; }
+  .jm__lessons a.is-done .jm__check::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid var(--ink); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .jm__prog { margin: 0.5rem 0 0; font-size: 0.85rem; font-weight: 700; color: var(--sage-ink); }
+  .jm__prog:empty { display: none; }
+  @media (min-width: 900px) {
+    .jm { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+    .jm::before { display: none; }
+    .jm__stop:nth-child(even) { transform: translateY(2.5rem); }
+  }
+  @media (max-width: 480px) {
+    .jm__stop { grid-template-columns: 62px 1fr; gap: 0.7rem; }
+    .jm__badge { width: 62px; height: 62px; border-radius: 20px; }
+    .jm::before { left: 28px; }
+  }
+</style>

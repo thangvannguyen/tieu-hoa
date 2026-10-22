@@ -1,0 +1,17 @@
+---
+/** Khối giới thiệu đầu trang công cụ (chữ lấy từ file gốc). */
+import Icon from '~/components/ui/Icon.astro';
+interface Props { title?: string; icon?: string }
+const { title = 'Hướng dẫn', icon = 'thong-tin' } = Astro.props;
+---
+<section class="ti">
+  <p class="ti__t"><Icon name={icon} size={22} /> {title}</p>
+  <div class="ti__b"><slot /></div>
+</section>
+<style>
+  .ti { padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line); margin-bottom: 0.5rem; }
+  .ti__t { display: flex; align-items: center; gap: 0.4rem; margin: 0 0 0.4rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); --ic-fill: var(--h-fill); }
+  .ti__b :global(p) { margin: 0 0 0.6rem; }
+  .ti__b :global(p:last-child) { margin-bottom: 0; }
+  .ti__b :global(ol), .ti__b :global(ul) { margin: 0 0 0.6rem; padding-left: 1.3rem; }
+</style>

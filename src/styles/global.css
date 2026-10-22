@@ -78,7 +78,7 @@ hr { border: 0; height: 12px; margin: 2.5rem 0; background: url("data:image/svg+
 }
 .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
 .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
-.btn--primary { background: var(--h); color: #3a2c26; }
+.btn--primary { background: var(--h); color: #3a2c26; --ic-fill: rgb(255 255 255 / 0.6); }
 .btn--ghost { border-color: var(--line-2); box-shadow: none; background: transparent; }
 .btn--ghost:hover { box-shadow: none; background: var(--surface-2); }
 .btn--sm { min-height: 36px; padding: 0.35em 0.9em; font-size: 0.9rem; }

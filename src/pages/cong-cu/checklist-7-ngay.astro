@@ -1,0 +1,14 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import DiaryGrid from '~/components/tools/DiaryGrid.astro';
+import { checklist7Ngay } from '~/tools/schemas/checklist-7-ngay';
+---
+<ToolShell id="checklist-7-ngay" mood="suy-nghi">
+  <ToolIntro slot="intro" title="Mục tiêu của bản theo dõi này" icon="muc-tieu">
+    <p>Đây không phải là bảng để giúp bạn chẩn đoán bệnh hay ép bản thân phải theo dõi, điều chỉnh để trở thành phiên bản hoàn hảo. Nó chỉ là một khoảng dừng nhỏ để mình bắt đầu nhìn cơ thể rõ hơn một chút.</p>
+    <p><strong>Cách sử dụng:</strong> Ghi lại thông tin mỗi ngày (trong vòng 7 ngày), để ý xem điều gì khiến cơ thể dễ chịu hơn hoặc khó chịu hơn. Chỉ quan sát mà không phán xét. Sau đó mở tab <strong>Tổng kết</strong> để nhìn lại toàn bộ bức tranh sức khoẻ.</p>
+    <p><em>Hãy nhớ: Sự đều đặn, bền bỉ là chìa khóa, hãy ghi chép và chinh phục từng bước nhỏ một và bạn sẽ thấy sáng rõ dần lên và sức khỏe của mình được cải thiện.</em></p>
+  </ToolIntro>
+  <DiaryGrid schema={checklist7Ngay} />
+</ToolShell>

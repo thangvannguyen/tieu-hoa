@@ -1,0 +1,45 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { url } from '~/lib/url';
+---
+<BaseLayout title="Giới thiệu" description="Về web học Bụng Êm, Việc Ổn: nguồn nội dung, tác giả, cách biên tập và cách dùng.">
+  <section class="container-narrow page prose">
+    <div class="head"><BeBung mood="vui" size={120} /><h1>Về web học này</h1></div>
+    <p>Web này là <strong>sổ tay học tập</strong> được dựng lại từ chuỗi bản tin y khoa chuyên đề <strong>“Bụng Êm, Việc Ổn”</strong> của <strong>BS. Phan Thị Lan Viên</strong> — <em>Chăm sóc sức khỏe chủ động</em>, cùng BS. Quỳnh Thư (chuỗi bài vi sinh đường ruột) và ThS.BS. Diễm Khuê (chuỗi bài giấc ngủ). Bắt đầu từ <a href={url('/bai/00-chao-mung/')}>thư chào mừng</a> của chương trình.</p>
+
+    <h2>Nội dung được biên tập thế nào?</h2>
+    <ul>
+      <li><strong>Giữ nguyên ý và câu chữ của bác sĩ.</strong> Chỉ sửa lỗi rõ ràng (chính tả, lặp từ, đánh số, link trùng). Mọi chỗ sửa đều được ghi trong sổ biên tập của repo.</li>
+      <li><strong>Không thêm kiến thức y khoa mới.</strong> Sơ đồ, quiz, thuật ngữ chỉ dùng chữ có trong bài; mỗi câu hỏi và thuật ngữ đều gắn với câu trích nguyên văn từ bài.</li>
+      <li>Những chỗ nghi ngờ về chuyên môn được ghi lại để hỏi bác sĩ, không tự sửa.</li>
+      <li>Ảnh và infographic gốc được giữ lại; chữ trong ảnh được gõ lại để đọc dễ trên điện thoại và tìm kiếm được.</li>
+      <li>Toàn bộ biểu tượng và hình minh họa trên web được vẽ riêng bằng SVG theo cùng một phong cách — xem <a href={url('/bieu-tuong/')}>bộ biểu tượng</a>.</li>
+    </ul>
+
+    <h2>Cách học gợi ý</h2>
+    <ol>
+      <li>Đi theo <a href={url('/bai-hoc/')}>lộ trình 4 chặng</a>; mỗi bài có phần “Ý chính”, sơ đồ, chiêm nghiệm và quiz ôn nhanh.</li>
+      <li>Làm bài <strong>Thực hành</strong> cuối bài bằng các <a href={url('/cong-cu/')}>công cụ</a> — nhật ký, checklist, kế hoạch.</li>
+      <li>Ôn lại bằng <a href={url('/on-tap/')}>thẻ ghi nhớ và quiz</a>, tra cứu ở trang <a href={url('/thuat-ngu/')}>thuật ngữ</a>.</li>
+    </ol>
+
+    <aside class="note" role="note">
+      <Icon name="thong-tin" size={26} />
+      <div>
+        <p><strong>Đây không phải là một chương trình tư vấn, chẩn đoán và điều trị.</strong> Về nguyên tắc, không thể chẩn đoán và kê đơn thay cho bác sĩ khám lâm sàng trực tiếp. Khi có dấu hiệu bất thường, hãy xem trang <a href={url('/khi-nao-can-di-kham/')}>Khi nào cần đi khám</a> và đi khám.</p>
+      </div>
+    </aside>
+
+    <h2>Dữ liệu và quyền riêng tư</h2>
+    <p>Web không có tài khoản, không có máy chủ lưu dữ liệu. Những gì bạn nhập (nhật ký, ghi chú, tiến độ) chỉ nằm trong trình duyệt của bạn — xem <a href={url('/du-lieu-cua-ban/')}>Dữ liệu của bạn</a> để sao lưu.</p>
+  </section>
+</BaseLayout>
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+  .head h1 { margin: 0; }
+  .note { display: flex; gap: 0.8rem; align-items: flex-start; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--lav-fill); border: 2px solid var(--lav); margin: 2rem 0; }
+  .note p { margin: 0; }
+</style>

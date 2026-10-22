@@ -1,0 +1,140 @@
+---
+/**
+ * Khung trang công cụ: tiêu đề, giới thiệu, thanh thao tác (CSV / sao lưu / nhập / in / xoá), lưu ý dữ liệu.
+ * Công cụ con là một custom element có `toolApi = { csv(): string[][], reload(): void }` và data-key="tool:<id>".
+ */
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { toolById } from '~/data/tools';
+import { url } from '~/lib/url';
+import type { Mood } from '~/lib/types';
+
+interface Props { id: string; mood?: Mood; csv?: boolean }
+const { id, mood = 'vui', csv = true } = Astro.props;
+const tool = toolById[id];
+---
+<BaseLayout title={tool.title} description={tool.short} hue={tool.hue}>
+  <div class="ts" data-hue={tool.hue} data-tool-shell={id}>
+    <header class="ts__hero">
+      <div class="container ts__in">
+        <div>
+          <p class="ts__crumb no-print"><a href={url('/cong-cu/')}><Icon name="cong-cu" size={18} /> Công cụ thực hành</a></p>
+          <h1>{tool.title}</h1>
+          <p class="ts__lead">{tool.short}</p>
+          <p class="ts__from no-print">
+            <Icon name="sach" size={18} /> Từ bài: <a href={url(`/bai/${tool.lesson}/`)}>{tool.lesson.startsWith('bt-') ? 'Bài thêm' : `Bản tin #${tool.lesson.slice(0, 2)}`}</a>
+            {tool.xlsx && <span> · dựng lại từ file Excel “{tool.xlsx}”</span>}
+          </p>
+        </div>
+        <BeBung mood={mood} size={120} />
+      </div>
+    </header>
+
+    <div class="container ts__body">
+      <slot name="intro" />
+
+      <div class="ts__notice no-print" role="note">
+        <Icon name="khien" size={24} />
+        <p>
+          <strong>Dữ liệu chỉ lưu trên trình duyệt của máy này</strong> — không gửi đi đâu. Trình duyệt (nhất là Safari)
+          có thể tự xoá dữ liệu nếu lâu không mở trang, nên hãy bấm <strong>Sao lưu</strong> thỉnh thoảng.
+          <span class="ts__last" data-last-backup></span>
+        </p>
+      </div>
+      <p class="ts__warn" data-storage-warn hidden>
+        <Icon name="canh-bao" size={22} /> Trình duyệt đang chặn lưu trữ (ví dụ chế độ ẩn danh nghiêm ngặt) — bạn vẫn dùng được, nhưng dữ liệu sẽ mất khi đóng trang. Hãy xuất CSV hoặc in trước khi rời đi.
+      </p>
+
+      <div class="ts__actions no-print" role="toolbar" aria-label="Thao tác với dữ liệu">
+        {csv && <button type="button" class="btn btn--sm" data-act="csv"><Icon name="tai-xuong" size={18} /> Xuất CSV (Excel)</button>}
+        <button type="button" class="btn btn--sm" data-act="backup"><Icon name="tai-xuong" size={18} /> Sao lưu (.json)</button>
+        <label class="btn btn--sm btn--ghost ts__import"><Icon name="tai-len" size={18} /> Nhập bản sao lưu<input type="file" accept="application/json,.json" data-act="import" /></label>
+        <button type="button" class="btn btn--sm btn--ghost" data-act="print"><Icon name="in" size={18} /> In / lưu PDF</button>
+        <button type="button" class="btn btn--sm btn--ghost ts__danger" data-act="clear"><Icon name="xoa" size={18} /> Xoá dữ liệu</button>
+      </div>
+      <p class="ts__msg" aria-live="polite" data-msg></p>
+
+      <div class="ts__tool">
+        <slot />
+      </div>
+
+      <slot name="after" />
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { exportAll, importAll, downloadFile, toCSV, remove, prefs, storageAvailable, localDate, formatDateVi } from '~/lib/storage';
+
+  const shell = document.querySelector<HTMLElement>('[data-tool-shell]')!;
+  const id = shell.dataset.toolShell!;
+  const msg = shell.querySelector<HTMLElement>('[data-msg]')!;
+  const tool = () => shell.querySelector<HTMLElement & { toolApi?: { csv?: () => (string | number)[][]; reload: () => void } }>('[data-key]');
+  const say = (t: string) => { msg.textContent = t; setTimeout(() => { if (msg.textContent === t) msg.textContent = ''; }, 5000); };
+  const showLast = () => {
+    const last = prefs.get().lastBackup;
+    shell.querySelector<HTMLElement>('[data-last-backup]')!.textContent = last ? `Lần sao lưu gần nhất: ${formatDateVi(last)}.` : 'Bạn chưa sao lưu lần nào.';
+  };
+  showLast();
+  if (!storageAvailable()) shell.querySelector<HTMLElement>('[data-storage-warn]')!.hidden = false;
+  document.addEventListener('bev:storage-unavailable', () => (shell.querySelector<HTMLElement>('[data-storage-warn]')!.hidden = false));
+
+  shell.querySelector('[data-act=csv]')?.addEventListener('click', () => {
+    const rows = tool()?.toolApi?.csv?.();
+    if (!rows) return;
+    downloadFile(`${id}-${localDate()}.csv`, toCSV(rows), 'text/csv;charset=utf-8');
+    say('Đã tải file CSV — mở được bằng Excel hoặc Google Sheets.');
+  });
+  shell.querySelector('[data-act=backup]')!.addEventListener('click', () => {
+    const data = exportAll(`tool:${id}`);
+    downloadFile(`sao-luu-${id}-${localDate()}.json`, JSON.stringify(data, null, 2), 'application/json');
+    prefs.set({ ...prefs.get(), lastBackup: localDate() });
+    showLast();
+    say('Đã tải bản sao lưu. Giữ file này để nhập lại khi cần.');
+  });
+  shell.querySelector<HTMLInputElement>('[data-act=import]')!.addEventListener('change', async (e) => {
+    const input = e.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    try {
+      const n = importAll(JSON.parse(await file.text()));
+      tool()?.toolApi?.reload();
+      say(`Đã nhập ${n} mục dữ liệu.`);
+    } catch (err) {
+      say(err instanceof Error ? err.message : 'Không đọc được file.');
+    }
+    input.value = '';
+  });
+  shell.querySelector('[data-act=print]')!.addEventListener('click', () => window.print());
+  shell.querySelector('[data-act=clear]')!.addEventListener('click', () => {
+    if (!confirm('Xoá toàn bộ dữ liệu của công cụ này trên máy? Thao tác không hoàn tác được (trừ khi bạn có bản sao lưu).')) return;
+    const key = tool()?.dataset.key;
+    if (key) remove(key);
+    tool()?.toolApi?.reload();
+    say('Đã xoá dữ liệu.');
+  });
+</script>
+
+<style>
+  .ts__hero { background: linear-gradient(180deg, var(--h-fill), var(--bg)); border-bottom: 2px solid var(--line); }
+  .ts__in { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 2rem 0 1.6rem; }
+  @media (max-width: 640px) { .ts__in { grid-template-columns: 1fr; } .ts__in :global(.bebung) { display: none; } }
+  .ts__crumb { margin: 0 0 0.4rem; font-size: 0.9rem; }
+  .ts__crumb a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--ink-2); }
+  h1 { margin: 0 0 0.4rem; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.4rem); }
+  .ts__lead { margin: 0 0 0.5rem; max-width: 60ch; color: var(--ink-2); }
+  .ts__from { margin: 0; font-size: 0.88rem; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
+  .ts__body { padding: 1.5rem 0 1rem; }
+  .ts__notice, .ts__warn { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: var(--surface); border: 2px dashed var(--line-2); font-size: 0.9rem; margin: 1rem 0; }
+  .ts__notice p, .ts__warn { margin: 0; }
+  .ts__warn { border-color: var(--do); background: var(--do-fill); }
+  .ts__last { display: block; color: var(--ink-3); margin-top: 0.2rem; }
+  .ts__actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.5rem 0; }
+  .ts__import { position: relative; overflow: hidden; }
+  .ts__import input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .ts__import:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .ts__danger { color: var(--do-ink); }
+  .ts__msg { min-height: 1.4em; margin: 0.2rem 0 1rem; font-weight: 600; color: var(--sage-ink); }
+  @media print { .ts__hero { background: none; } }
+</style>

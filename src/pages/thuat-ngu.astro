@@ -1,0 +1,115 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { glossary } from '~/lib/data';
+import { chapters } from '~/data/chapters';
+import { getLessons } from '~/lib/lessons';
+import { inline } from '~/lib/inline';
+import { url } from '~/lib/url';
+const lessons = await getLessons();
+const lessonById = Object.fromEntries(lessons.map((l) => [l.id, l]));
+const chapterOfBai = (bai: string) => lessonById[bai]?.data.chapter ?? 'them';
+const label = (bai: string) => (bai.startsWith('bt-') ? 'Bài thêm' : `Bản tin #${bai.slice(0, 2)}`);
+const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+const used = chapters.filter((c) => glossary.some((g) => chapterOfBai(g.source.bai) === c.id));
+---
+<BaseLayout title="Thuật ngữ" description="Giải thích các thuật ngữ trong chuỗi bản tin: probiotic, prebiotic, FODMAP, LES, CBT-I… theo đúng câu chữ của bài.">
+  <section class="container page">
+    <div class="head">
+      <BeBung mood="suy-nghi" size={110} />
+      <div>
+        <h1>Thuật ngữ</h1>
+        <p class="lead">Mỗi định nghĩa lấy từ chính bài học, kèm đường dẫn về bản tin gốc. Gõ để lọc — gõ không dấu cũng được.</p>
+      </div>
+    </div>
+    {glossary.length === 0 ? (
+      <p>Danh sách thuật ngữ đang được cập nhật.</p>
+    ) : (
+      <bev-glossary>
+        <div class="tools no-print">
+          <label class="search"><Icon name="tim-kiem" size={22} /><span class="visually-hidden">Lọc thuật ngữ</span><input type="search" placeholder="Lọc: probiotic, ngưng thở, chất xơ…" data-q /></label>
+          <div class="chips" role="group" aria-label="Lọc theo chương">
+            <button type="button" class="chipbtn" aria-pressed="true" data-ch="">Tất cả ({glossary.length})</button>
+            {used.map((c) => <button type="button" class="chipbtn" aria-pressed="false" data-ch={c.id} data-hue={c.hue}><Icon name={c.icon} size={18} /> {c.short}</button>)}
+          </div>
+        </div>
+        <p class="count" aria-live="polite" data-count></p>
+        <dl class="list">
+          {glossary.map((g) => {
+            const ch = chapterOfBai(g.source.bai);
+            const c = chapters.find((x) => x.id === ch)!;
+            return (
+              <div class="item" id={g.id} data-hue={c.hue} data-ch={ch} data-text={fold([g.term, ...g.aliases, g.en ?? '', g.short].join(' '))}>
+                <dt>
+                  <span class="ic">{g.icon && <Icon name={g.icon} size={30} />}</span>
+                  <span>
+                    <span class="term">{g.term}</span>
+                    {g.en && g.en !== g.term && <span class="en">{g.en}</span>}
+                    {g.aliases.length > 0 && <span class="al">còn gọi: {g.aliases.join(', ')}</span>}
+                  </span>
+                </dt>
+                <dd>
+                  <p class="short" set:html={inline(g.short)} />
+                  {g.definition !== g.short && <p class="def" set:html={inline(g.definition)} />}
+                  <p class="src"><a href={url(`/bai/${g.source.bai}/`)}><Icon name="sach" size={16} /> {label(g.source.bai)}{lessonById[g.source.bai] ? ` · ${lessonById[g.source.bai].data.title}` : ''}</a></p>
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
+      </bev-glossary>
+    )}
+  </section>
+</BaseLayout>
+<script>
+  const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+  class BevGlossary extends HTMLElement {
+    connectedCallback() {
+      const q = this.querySelector<HTMLInputElement>('[data-q]')!;
+      const items = [...this.querySelectorAll<HTMLElement>('.item')];
+      const count = this.querySelector<HTMLElement>('[data-count]')!;
+      let ch = '';
+      const apply = () => {
+        const t = fold(q.value.trim());
+        let n = 0;
+        items.forEach((it) => { const ok = (!ch || it.dataset.ch === ch) && (!t || it.dataset.text!.includes(t)); it.hidden = !ok; if (ok) n++; });
+        count.textContent = `${n} thuật ngữ`;
+      };
+      q.addEventListener('input', apply);
+      this.querySelectorAll<HTMLButtonElement>('[data-ch]').forEach((b) => b.addEventListener('click', () => {
+        ch = b.dataset.ch!;
+        this.querySelectorAll('[data-ch][aria-pressed]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        apply();
+      }));
+      apply();
+    }
+  }
+  customElements.define('bev-glossary', BevGlossary);
+</script>
+<style>
+  .page { padding: 2.5rem 0; }
+  .head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+  .head h1 { margin: 0; }
+  .lead { margin: 0.3rem 0 0; color: var(--ink-2); max-width: 60ch; }
+  .tools { position: sticky; top: 64px; z-index: 4; display: grid; gap: 0.6rem; padding: 0.6rem 0; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); }
+  .search { display: flex; align-items: center; gap: 0.5rem; padding: 0 0.9rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--ink); max-width: 34rem; }
+  .search input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 0.7rem 0; outline: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chipbtn { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.8rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; color: var(--ink); --ic-fill: var(--h-fill); }
+  .chipbtn[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .count { font-size: 0.88rem; color: var(--ink-3); margin: 0.4rem 0 0.8rem; }
+  .list { margin: 0; display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+  .item { padding: 1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); scroll-margin-top: 140px; }
+  .item:target { outline: 4px solid var(--h); }
+  dt { display: flex; gap: 0.7rem; align-items: center; margin-bottom: 0.4rem; }
+  .ic { display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 15px; background: var(--h-fill); --ic-fill: var(--surface); }
+  .term { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1.15rem; line-height: 1.25; }
+  .en { display: block; font-size: 0.85rem; color: var(--ink-3); font-style: italic; }
+  .al { display: block; font-size: 0.82rem; color: var(--ink-2); }
+  dd { margin: 0; }
+  .short { font-weight: 600; margin: 0 0 0.3rem; }
+  .def { font-size: 0.94rem; color: var(--ink-2); margin: 0 0 0.4rem; }
+  .src { margin: 0; font-size: 0.85rem; }
+  .src a { display: inline-flex; align-items: center; gap: 0.3rem; }
+</style>

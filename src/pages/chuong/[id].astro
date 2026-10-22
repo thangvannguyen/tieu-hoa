@@ -1,0 +1,75 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import LessonCard from '~/components/home/LessonCard.astro';
+import ProgressMarker from '~/components/home/ProgressMarker.astro';
+import { getLessons } from '~/lib/lessons';
+import { chapters, type Chapter } from '~/data/chapters';
+import { tools } from '~/data/tools';
+import { url } from '~/lib/url';
+import type { Mood } from '~/lib/types';
+
+export function getStaticPaths() {
+  return chapters.map((c) => ({ params: { id: c.id }, props: { chapter: c } }));
+}
+interface Props { chapter: Chapter }
+const { chapter } = Astro.props;
+const lessons = (await getLessons()).filter((l) => l.data.chapter === chapter.id);
+const chTools = tools.filter((t) => lessons.some((l) => l.id === t.lesson));
+const idx = chapters.findIndex((c) => c.id === chapter.id);
+const prev = chapters[idx - 1];
+const next = chapters[idx + 1];
+const moods: Record<string, Mood> = { c0: 'vui', c1: 'dau', c2: 'khoe', c3: 'buon-ngu', c4: 'vui', them: 'khoe' };
+---
+<BaseLayout title={chapter.title} description={chapter.description} hue={chapter.hue}>
+  <header class="hero" data-hue={chapter.hue}>
+    <div class="container hero__in">
+      <div>
+        <p class="chip"><Icon name={chapter.icon} size={18} /> {chapter.id === 'c0' ? 'Khởi hành' : chapter.id === 'them' ? 'Trạm phụ' : `Chương ${chapter.so}`}</p>
+        <h1>{chapter.title}</h1>
+        <p class="lead">{chapter.description}</p>
+        <p class="prog" data-progress-of={lessons.map((l) => l.id).join(',')}></p>
+      </div>
+      <BeBung mood={moods[chapter.id]} size={150} />
+    </div>
+  </header>
+  <section class="container body">
+    {lessons.length === 0 && <p>Chương này đang được biên tập.</p>}
+    <ol class="list">
+      {lessons.map((l) => <li><LessonCard lesson={l} /></li>)}
+    </ol>
+    {chTools.length > 0 && (
+      <section class="tools">
+        <h2>Công cụ thực hành của chặng này</h2>
+        <ul>
+          {chTools.map((t) => (
+            <li data-hue={t.hue}><a href={url(`/cong-cu/${t.id}/`)}><Icon name={t.icon} size={28} /> {t.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <nav class="cnav" aria-label="Chương trước / sau">
+      {prev ? <a href={url(`/chuong/${prev.id}/`)}><Icon name="mui-ten-trai" size={20} /> {prev.title}</a> : <span />}
+      {next && <a href={url(`/chuong/${next.id}/`)}>{next.title} <Icon name="mui-ten-phai" size={20} /></a>}
+    </nav>
+  </section>
+  <ProgressMarker />
+</BaseLayout>
+<style>
+  .hero { background: linear-gradient(180deg, var(--h-fill), var(--bg)); border-bottom: 2px solid var(--line); }
+  .hero__in { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 2.5rem 0 2rem; }
+  @media (max-width: 640px) { .hero__in { grid-template-columns: 1fr; } .hero__in :global(.bebung) { display: none; } }
+  .chip { background: var(--surface); border: 2px solid var(--h); }
+  .lead { max-width: 58ch; color: var(--ink-2); font-size: 1.08rem; }
+  .prog { font-weight: 700; color: var(--sage-ink); }
+  .body { padding: 2rem 0; }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .list li { margin: 0; }
+  .tools { margin-top: 2.5rem; }
+  .tools ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tools li { margin: 0; }
+  .tools a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border-radius: 999px; background: var(--h-fill); border: 2px solid var(--ink); color: var(--ink); text-decoration: none; font-family: var(--font-head); font-weight: 800; --ic-fill: var(--surface); }
+  .cnav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .cnav a { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-head); font-weight: 800; }
+</style>

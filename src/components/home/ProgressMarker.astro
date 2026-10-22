@@ -1,0 +1,14 @@
+---
+/** Đánh dấu các thẻ bài [data-lesson] đã học (đọc từ localStorage). Đặt một lần cuối trang. */
+---
+<script>
+  import { progress } from '~/lib/storage';
+  const done = progress.get().lessons;
+  document.querySelectorAll<HTMLElement>('a.lc[data-lesson]').forEach((a) => a.classList.toggle('is-done', !!done[a.dataset.lesson!]?.done));
+  document.querySelectorAll<HTMLElement>('[data-progress-of]').forEach((el) => {
+    const ids = el.dataset.progressOf!.split(',').filter(Boolean);
+    const n = ids.filter((id) => done[id]?.done).length;
+    el.textContent = ids.length ? `Đã học ${n}/${ids.length} bài` : '';
+    el.style.setProperty('--p', String(ids.length ? n / ids.length : 0));
+  });
+</script>

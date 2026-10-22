@@ -1,0 +1,11 @@
+---
+import ToolShell from '~/components/tools/ToolShell.astro';
+import ToolIntro from '~/components/tools/ToolIntro.astro';
+import ScenarioPlanner from '~/components/tools/ScenarioPlanner.astro';
+---
+<ToolShell id="kich-ban-giac-ngu" mood="buon-ngu">
+  <ToolIntro slot="intro" title="Thực hành tuần này: thiết kế hai kịch bản (bản tin #11)" icon="dong-ho">
+    <p>Điền vào các khung cho <strong>Kịch bản A</strong> (ngày làm việc bình thường) — đồng hồ 24 giờ bên cạnh sẽ tự vẽ lại theo giờ bạn nhập. Sau đó trả lời các câu hỏi cho <strong>Kịch bản B</strong> (ngày tăng ca hoặc làm đêm).</p>
+  </ToolIntro>
+  <ScenarioPlanner />
+</ToolShell>
