@@ -1,14 +1,9 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import BeBung from '~/components/ui/BeBung.astro';
+import BanhXeSauTruCot from '~/components/diagrams/chung/BanhXeSauTruCot.astro';
 ---
 <BaseLayout title="Bụng Êm, Việc Ổn">
-  <section class="container" style="padding:3rem 0;display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
-    <BeBung mood="vui" size={180} />
-    <BeBung mood="khoe" size={180} />
-    <BeBung mood="buon-ngu" size={180} />
-    <BeBung mood="dau" size={180} />
-    <BeBung mood="lo-lang" size={180} />
-    <BeBung mood="suy-nghi" size={180} />
+  <section class="container-narrow" style="padding:2rem 0">
+    <BanhXeSauTruCot />
   </section>
 </BaseLayout>

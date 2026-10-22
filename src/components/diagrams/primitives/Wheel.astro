@@ -37,7 +37,7 @@ const segs = segments.map((s, i) => {
       </svg>
       {center && (
         <div class="wh__center">
-          {center.mood ? <BeBung mood={center.mood} size={74} /> : center.icon && <Icon name={center.icon} size={44} />}
+          {center.mood ? <BeBung mood={center.mood} size={60} /> : center.icon && <Icon name={center.icon} size={44} />}
           <span set:html={inline(center.title)} />
         </div>
       )}
