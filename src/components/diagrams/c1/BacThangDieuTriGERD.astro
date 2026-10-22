@@ -1,7 +1,7 @@
 ---
 /**
  * Các bậc quản lý triệu chứng GERD theo mức độ (theo bản tin #03).
- * Ghi chú: Layers shape="stairs" vẽ phần tử đầu tiên hẹp nhất ở TRÊN cùng, nên liệt kê từ bậc cao (nặng) xuống bậc nền.
+ * Layers shape="stairs": liệt kê từ bậc nền (dưới cùng) lên bậc cao nhất.
  */
 import Diagram from '../primitives/Diagram.astro';
 import Layers from '../primitives/Layers.astro';
@@ -18,9 +18,9 @@ import Layers from '../primitives/Layers.astro';
     shape="stairs"
     baseLabel="Bản tin này tập trung ở bậc nền: phòng bệnh và hỗ trợ điều trị bằng các phương pháp không dùng thuốc."
     layers={[
-      { icon: 'canh-bao', hue: 'do', title: 'Thậm chí', text: 'Cần phẫu thuật để giảm bớt các triệu chứng' },
-      { icon: 'bac-si', hue: 'bo', title: 'Trường hợp nặng hơn', text: 'Cần tới bác sĩ để được kê đơn thuốc mạnh hơn' },
       { icon: 'nguoi', hue: 'sage', title: 'Phần lớn mọi người', text: 'Thay đổi lối sống hoặc sử dụng các loại thuốc không cần kê đơn mua tại nhà thuốc' },
+      { icon: 'bac-si', hue: 'bo', title: 'Trường hợp nặng hơn', text: 'Cần tới bác sĩ để được kê đơn thuốc mạnh hơn' },
+      { icon: 'canh-bao', hue: 'do', title: 'Thậm chí', text: 'Cần phẫu thuật để giảm bớt các triệu chứng' },
     ]}
   />
 </Diagram>
