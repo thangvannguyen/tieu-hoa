@@ -1,0 +1,48 @@
+---
+/**
+ * Khung chung cho mọi sơ đồ: tiêu đề + icon + phần thân + chú thích + nguồn.
+ * `from`: id các bài là nguồn của chữ trong sơ đồ (hiển thị "Theo bản tin #…").
+ */
+import Icon from '~/components/ui/Icon.astro';
+import type { Hue } from '~/lib/types';
+import { url } from '~/lib/url';
+
+interface Props {
+  title: string;
+  kicker?: string;
+  icon?: string;
+  hue?: Hue;
+  caption?: string;
+  from?: string[];
+  class?: string;
+  interactive?: boolean;
+}
+const { title, kicker = 'Sơ đồ', icon = 'sparkle', hue, caption, from = [], class: cls, interactive = false } = Astro.props;
+const uid = 'dg-' + Math.random().toString(36).slice(2, 8);
+const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : `#${Number(id.slice(0, 2))}`);
+---
+<figure class:list={['dg', cls]} data-hue={hue} role="group" aria-labelledby={`${uid}-t`}>
+  <div class="dg__head">
+    <span class="dg__ic"><Icon name={icon} size={26} /></span>
+    <span>
+      <span class="dg__kicker">{interactive ? `${kicker} · bấm để khám phá` : kicker}</span>
+      <span class="dg__title" id={`${uid}-t`}>{title}</span>
+    </span>
+  </div>
+  <div class="dg__body"><slot /></div>
+  {caption && <figcaption class="dg__cap">{caption}</figcaption>}
+  {from.length > 0 && (
+    <p class="dg__src">
+      Theo{' '}
+      {from.map((id, i) => (
+        <>
+          {i > 0 && ', '}
+          <a href={url(`/bai/${id}/`)}>bản tin {label(id)}</a>
+        </>
+      ))}
+    </p>
+  )}
+</figure>
+<style>
+  .dg__title { display: block; }
+</style>

@@ -1,0 +1,54 @@
+---
+/** Chuỗi bước nối bằng mũi tên. Ngang khi đủ rộng, dọc trên điện thoại. */
+import Card from './Card.astro';
+import type { Node } from './types';
+interface Props { steps: Node[]; numbered?: boolean; vertical?: boolean; variant?: 'default' | 'soft' | 'fill' }
+const { steps, numbered = false, vertical = false, variant = 'default' } = Astro.props;
+---
+<ol class:list={['flow', (vertical || steps.length > 5) && 'flow--v']} data-n={steps.length} style={`--n:${steps.length}`}>
+  {steps.map((s, i) => (
+    <li class="flow__step">
+      <Card node={s} num={numbered ? i + 1 : undefined} variant={variant} />
+      {i < steps.length - 1 && (
+        <span class="flow__arrow dg-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15" /><path d="M6.5 13.5 12 19l5.5-5.5" /></svg>
+        </span>
+      )}
+    </li>
+  ))}
+</ol>
+<style>
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .flow__step { display: grid; justify-items: stretch; margin: 0; padding: 0; }
+  .flow__step::marker { content: none; }
+  .flow__arrow { height: 34px; }
+  @container (min-width: 600px) {
+    .flow:not(.flow--v):is([data-n='2'], [data-n='3']) { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); }
+  }
+  @container (min-width: 700px) {
+    .flow:not(.flow--v)[data-n='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @container (min-width: 900px) {
+    .flow:not(.flow--v)[data-n='5'] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  }
+  @container (min-width: 600px) {
+    .flow:not(.flow--v):is([data-n='2'], [data-n='3']) .flow__step { grid-template-columns: 1fr 30px; align-items: center; }
+    .flow:not(.flow--v):is([data-n='2'], [data-n='3']) .flow__step:last-child { grid-template-columns: 1fr; }
+    .flow:not(.flow--v):is([data-n='2'], [data-n='3']) .flow__step > :global(.dg-card) { height: 100%; }
+    .flow:not(.flow--v):is([data-n='2'], [data-n='3']) .flow__arrow { height: auto; transform: rotate(-90deg); }
+  }
+  @container (min-width: 700px) {
+    .flow:not(.flow--v)[data-n='4'] .flow__step { grid-template-columns: 1fr 26px; align-items: center; }
+    .flow:not(.flow--v)[data-n='4'] .flow__step:last-child { grid-template-columns: 1fr; }
+    .flow:not(.flow--v)[data-n='4'] .flow__step > :global(.dg-card) { height: 100%; }
+    .flow:not(.flow--v)[data-n='4'] .flow__arrow { height: auto; transform: rotate(-90deg); }
+    .flow:not(.flow--v)[data-n='4'] :global(.dg-card__row) { flex-direction: column; align-items: flex-start; }
+  }
+  @container (min-width: 900px) {
+    .flow:not(.flow--v)[data-n='5'] .flow__step { grid-template-columns: 1fr 24px; align-items: center; }
+    .flow:not(.flow--v)[data-n='5'] .flow__step:last-child { grid-template-columns: 1fr; }
+    .flow:not(.flow--v)[data-n='5'] .flow__step > :global(.dg-card) { height: 100%; }
+    .flow:not(.flow--v)[data-n='5'] .flow__arrow { height: auto; transform: rotate(-90deg); }
+    .flow:not(.flow--v)[data-n='5'] :global(.dg-card__row) { flex-direction: column; align-items: flex-start; }
+  }
+</style>

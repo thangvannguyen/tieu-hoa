@@ -1,0 +1,27 @@
+---
+/** Video mp4 trong repo (public/videos/). */
+import Icon from '~/components/ui/Icon.astro';
+import { asset } from '~/lib/url';
+
+interface Props { file: string; title: string; poster?: string; duration?: string }
+const { file, title, poster, duration } = Astro.props;
+---
+<figure class="video">
+  <video controls preload="metadata" playsinline poster={poster ? asset(poster) : undefined} aria-label={title}>
+    <source src={asset(`videos/${file}`)} type="video/mp4" />
+    Trình duyệt của bạn không phát được video. <a href={asset(`videos/${file}`)}>Tải video về</a>.
+  </video>
+  <figcaption>
+    <Icon name="video" size={20} />
+    <strong>{title}</strong>
+    {duration && <span class="chip" data-hue="ngoc">{duration}</span>}
+    <a href={asset(`videos/${file}`)} download>Tải video</a>
+  </figcaption>
+</figure>
+
+<style>
+  .video { margin: 1.5rem 0; }
+  video { width: 100%; aspect-ratio: 16 / 9; background: #1c1714; border-radius: var(--radius); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.7rem; color: var(--ink-2); }
+  figcaption a { margin-left: auto; font-size: 0.9rem; }
+</style>

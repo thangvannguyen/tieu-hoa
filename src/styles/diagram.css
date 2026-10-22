@@ -1,0 +1,55 @@
+/* ===== Sơ đồ (diagram) — lớp dùng chung cho mọi primitive ===== */
+.dg {
+  margin: 2rem 0;
+  padding: clamp(0.9rem, 2.5vw, 1.4rem);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--h) 28%, transparent) 1px, transparent 1.6px) 0 0 / 16px 16px,
+    var(--surface-2);
+  border: 2px solid color-mix(in srgb, var(--h) 55%, var(--line));
+  container-type: inline-size;
+}
+.dg__head { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; }
+.dg__ic {
+  display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 14px;
+  background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface);
+}
+.dg__kicker { display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--h-ink); }
+.dg__title { margin: 0; font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; line-height: 1.25; }
+.dg__cap { margin: 1rem 0 0; font-size: 0.92rem; color: var(--ink-2); }
+.dg__src { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--ink-3); }
+.dg__src a { color: inherit; }
+.dg p { margin: 0; }
+
+/* thẻ nút dùng chung */
+.dg-card {
+  position: relative; display: grid; gap: 0.3rem; align-content: start;
+  padding: 0.75rem 0.85rem; border-radius: 16px;
+  background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+  font-size: 0.95rem; line-height: 1.45;
+}
+.dg-card--soft { border-color: var(--line-2); box-shadow: none; }
+.dg-card--fill { background: var(--h-fill); }
+.dg-card__ic {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px;
+  background: var(--h-fill); --ic-fill: var(--surface); color: var(--ink);
+}
+.dg-card--fill .dg-card__ic { background: var(--surface); --ic-fill: var(--h-fill); }
+.dg-card__t { font-family: var(--font-head); font-weight: 800; font-size: 1rem; line-height: 1.3; }
+.dg-card__x { color: var(--ink-2); font-size: 0.92rem; }
+.dg-card__x ul { margin: 0.2rem 0 0; padding-left: 1.1rem; }
+.dg-card__x li { margin: 0.1rem 0; }
+.dg-num {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 0.9rem;
+}
+
+/* mũi tên nối */
+.dg-arrow { display: grid; place-items: center; color: var(--h-ink); }
+.dg-arrow svg { width: 28px; height: 28px; }
+
+.dg-tag {
+  display: inline-block; padding: 0.1em 0.55em; border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+  background: var(--h-fill); color: var(--h-ink);
+}
+.dg button { font: inherit; }

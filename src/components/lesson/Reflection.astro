@@ -1,0 +1,52 @@
+---
+/** "Chiêm nghiệm": câu hỏi nguyên văn trong bài + ô ghi chú riêng lưu trên máy. */
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+interface Props { lesson: string; questions: string[]; title?: string }
+const { lesson, questions, title = 'Chiêm nghiệm' } = Astro.props;
+---
+<section class="rf" data-hue="hong" aria-labelledby={`rf-${lesson}`}>
+  <div class="rf__head">
+    <BeBung mood="suy-nghi" size={72} />
+    <div>
+      <h2 id={`rf-${lesson}`} class="rf__t">{title}</h2>
+      <p class="rf__sub">Ghi chú của bạn chỉ lưu trên máy này, không gửi đi đâu cả.</p>
+    </div>
+  </div>
+  <ol>
+    {questions.map((q, i) => (
+      <li>
+        <label for={`rf-${lesson}-${i}`}>{q}</label>
+        <textarea id={`rf-${lesson}-${i}`} data-key={`ghi-chu:${lesson}:${i}`} rows="3" placeholder="Viết vài dòng cho chính mình…"></textarea>
+      </li>
+    ))}
+  </ol>
+  <p class="rf__saved" aria-live="polite"><Icon name="dung" size={18} /> <span>Đã lưu</span></p>
+</section>
+<script>
+  import { read, write } from '~/lib/storage';
+  document.querySelectorAll<HTMLTextAreaElement>('.rf textarea[data-key]').forEach((ta) => {
+    ta.value = read<string>(ta.dataset.key!, '');
+    const saved = ta.closest('.rf')!.querySelector<HTMLElement>('.rf__saved')!;
+    let t: ReturnType<typeof setTimeout>;
+    ta.addEventListener('input', () => {
+      write(ta.dataset.key!, ta.value);
+      saved.classList.add('is-on');
+      clearTimeout(t);
+      t = setTimeout(() => saved.classList.remove('is-on'), 1500);
+    });
+  });
+</script>
+<style>
+  .rf { margin: 2.5rem 0; padding: 1.2rem 1.3rem; border-radius: var(--radius-lg); background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .rf__head { display: flex; gap: 0.8rem; align-items: center; margin-bottom: 0.6rem; }
+  .rf__t { margin: 0 !important; padding: 0 !important; }
+  .rf__t::before { display: none !important; }
+  .rf__sub { margin: 0.15rem 0 0; font-size: 0.88rem; color: var(--ink-2); }
+  ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.9rem; }
+  label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+  textarea { width: 100%; padding: 0.6rem 0.8rem; border-radius: 14px; border: 2px solid var(--line-2); background: var(--surface); resize: vertical; line-height: 1.5; }
+  textarea:focus { outline: none; border-color: var(--ink); }
+  .rf__saved { display: flex; align-items: center; gap: 0.3rem; margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--sage-ink); opacity: 0; transition: opacity 0.3s; }
+  .rf__saved.is-on { opacity: 1; }
+</style>

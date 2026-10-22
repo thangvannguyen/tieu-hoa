@@ -1,0 +1,44 @@
+---
+/**
+ * Tầng/bậc: shape="pyramid" (tầng trên hẹp, nền rộng) | "stairs" (bậc thang đi lên) | "stack".
+ * layers liệt kê từ TRÊN xuống DƯỚI (với stairs: từ bậc thấp nhất lên cao).
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Node } from './types';
+interface Props { layers: Node[]; shape?: 'pyramid' | 'stairs' | 'stack'; baseLabel?: string; topLabel?: string; highlight?: number }
+const { layers, shape = 'pyramid', baseLabel, topLabel, highlight } = Astro.props;
+const n = layers.length;
+---
+<div class:list={['ly', `ly--${shape}`]} style={`--n:${n}`}>
+  {topLabel && <p class="ly__label ly__label--top">{topLabel}</p>}
+  <ol>
+    {layers.map((l, i) => (
+      <li style={`--i:${i}`} class:list={[highlight === i && 'is-hl']} data-hue={l.hue}>
+        {l.icon && <span class="ly__ic"><Icon name={l.icon} size={26} /></span>}
+        <span class="ly__tx">
+          <span class="ly__t" set:html={inline(l.title)} />
+          {l.text && <span class="ly__x" set:html={inline(l.text)} />}
+          {l.items && <span class="ly__x">{l.items.map((it, k) => <><span set:html={inline(it)} />{k < l.items!.length - 1 && ' · '}</>)}</span>}
+        </span>
+      </li>
+    ))}
+  </ol>
+  {baseLabel && <p class="ly__label">{baseLabel}</p>}
+</div>
+<style>
+  .ly ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+  .ly li { margin: 0; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.6rem; padding: 0.7rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface); }
+  .ly li.is-hl { background: var(--h); }
+  .ly__ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--surface); }
+  .ly__t { display: block; font-family: var(--font-head); font-weight: 900; line-height: 1.25; }
+  .ly__x { display: block; font-size: 0.9rem; color: var(--ink-2); line-height: 1.4; margin-top: 0.1rem; }
+  .ly li.is-hl .ly__x { color: var(--ink); }
+  .ly__label { margin: 0.5rem 0 0; text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--h-ink); }
+  .ly__label--top { margin: 0 0 0.5rem; }
+  @container (min-width: 520px) {
+    .ly--pyramid li { width: calc(52% + (48% * var(--i) / max(var(--n) - 1, 1))); margin-inline: auto; }
+    .ly--stairs ol { grid-auto-flow: row; }
+    .ly--stairs li { width: calc(100% - (var(--n) - 1 - var(--i)) * (40% / max(var(--n) - 1, 1))); margin-left: auto; }
+  }
+</style>

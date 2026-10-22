@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+scripts/_staging/
+.DS_Store
+*.log
+.env*

@@ -1,0 +1,64 @@
+---
+/**
+ * So sánh nhiều cột (2–4). Mỗi cột: tiêu đề + icon + hue + danh sách.
+ * tone preset: 'den-giao-thong' → cột 1 xanh, 2 vàng, 3 đỏ.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+
+interface Col { title: string; icon?: string; hue?: Hue; sub?: string; items: (string | { icon?: string; text: string })[]; note?: string }
+interface Props { columns: Col[]; vs?: boolean; tone?: 'den-giao-thong'; compact?: boolean }
+const { columns, vs = false, tone, compact = false } = Astro.props;
+const toneHues: Hue[] = ['sage', 'bo', 'do'];
+---
+<div class:list={['cmp', vs && 'cmp--vs', compact && 'cmp--compact']} style={`--n:${columns.length}`}>
+  {columns.map((c, i) => (
+    <section class="cmp__col" data-hue={c.hue ?? (tone ? toneHues[i] : undefined)}>
+      <header class="cmp__head">
+        {c.icon && <span class="cmp__ic"><Icon name={c.icon} size={30} /></span>}
+        <span>
+          <span class="cmp__t" set:html={inline(c.title)} />
+          {c.sub && <span class="cmp__sub" set:html={inline(c.sub)} />}
+        </span>
+      </header>
+      <ul class="cmp__list">
+        {c.items.map((it) => {
+          const o = typeof it === 'string' ? { text: it } : it;
+          return (
+            <li>
+              {o.icon ? <Icon name={o.icon} size={22} /> : <span class="cmp__dot" aria-hidden="true" />}
+              <span set:html={inline(o.text)} />
+            </li>
+          );
+        })}
+      </ul>
+      {c.note && <p class="cmp__note" set:html={inline(c.note)} />}
+      {vs && i < columns.length - 1 && <span class="cmp__vs" aria-hidden="true">vs</span>}
+    </section>
+  ))}
+</div>
+<style>
+  .cmp { display: grid; gap: 0.9rem; }
+  @container (min-width: 560px) { .cmp { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); } }
+  .cmp__col { position: relative; display: grid; align-content: start; gap: 0.6rem; padding: 0.9rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .cmp__head { display: flex; gap: 0.6rem; align-items: center; }
+  .cmp__ic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 15px; background: var(--surface); --ic-fill: var(--h-fill); flex: none; }
+  .cmp__t { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; line-height: 1.25; color: var(--h-ink); }
+  .cmp__sub { display: block; font-size: 0.88rem; color: var(--ink-2); }
+  .cmp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+  .cmp__list li { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; align-items: start; margin: 0; padding: 0.45rem 0.6rem; border-radius: 12px; background: var(--surface); font-size: 0.94rem; line-height: 1.45; --ic-fill: var(--h-fill); }
+  .cmp--compact .cmp__list li { padding: 0.3rem 0.55rem; }
+  .cmp__dot { width: 10px; height: 10px; margin: 0.45em 0.35rem 0 0.25rem; border-radius: 50%; background: var(--h); }
+  .cmp__note { margin: 0; font-size: 0.88rem; color: var(--ink-2); }
+  .cmp__vs {
+    position: absolute; z-index: 2; left: 50%; bottom: -1.35rem; transform: translateX(-50%);
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900;
+  }
+  .cmp--vs { gap: 1.6rem; }
+  @container (min-width: 560px) {
+    .cmp--vs { gap: 1.6rem; }
+    .cmp__vs { left: auto; right: -1.45rem; bottom: auto; top: 50%; transform: translateY(-50%); }
+  }
+</style>

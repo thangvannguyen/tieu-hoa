@@ -1,0 +1,29 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Node } from './types';
+
+interface Props { node: Node; variant?: 'default' | 'soft' | 'fill'; num?: number; as?: string; class?: string }
+const { node, variant = 'default', num, as: Tag = 'div', class: cls } = Astro.props;
+---
+<Tag class:list={['dg-card', variant !== 'default' && `dg-card--${variant}`, cls]} data-hue={node.hue}>
+  <div class="dg-card__row">
+    {num != null && <span class="dg-num dg-card__num">{num}</span>}
+    {node.icon && <span class="dg-card__ic"><Icon name={node.icon} size={28} /></span>}
+    <span class="dg-card__head">
+      {node.tag && <span class="dg-tag">{node.tag}</span>}
+      <span class="dg-card__t" set:html={inline(node.title)} />
+    </span>
+  </div>
+  {node.text && <span class="dg-card__x" set:html={inline(node.text)} />}
+  {node.items && node.items.length > 0 && (
+    <span class="dg-card__x"><ul>{node.items.map((it) => <li set:html={inline(it)} />)}</ul></span>
+  )}
+  <slot />
+</Tag>
+<style>
+  .dg-card__row { display: flex; align-items: center; gap: 0.55rem; }
+  .dg-card__head { display: grid; gap: 0.15rem; min-width: 0; }
+  .dg-card__head .dg-tag { justify-self: start; }
+  .dg-card__num { position: absolute; top: -11px; left: -9px; width: 26px; height: 26px; font-size: 0.82rem; box-shadow: 0 0 0 3px var(--surface-2); }
+</style>

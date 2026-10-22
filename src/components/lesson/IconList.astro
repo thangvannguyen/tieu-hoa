@@ -1,0 +1,40 @@
+---
+/**
+ * Danh sách có icon tự vẽ thay cho emoji trong bản gốc.
+ * <IconList items={[{icon:'rau', text:'...'}]} /> — text có thể chứa **đậm** đơn giản.
+ * variant: 'default' | 'canh-bao' (cờ đỏ) | 'check' | 'grid'
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+
+interface Item { icon?: string; text: string }
+interface Props { items: Item[]; variant?: 'default' | 'canh-bao' | 'check' | 'grid'; icon?: string; ordered?: boolean }
+const { items, variant = 'default', icon, ordered = false } = Astro.props;
+const fallback = icon ?? (variant === 'canh-bao' ? 'co-do' : variant === 'check' ? 'dung' : 'sparkle');
+const Tag = ordered ? 'ol' : 'ul';
+---
+<Tag class:list={['ilist', `ilist--${variant}`]} data-hue={variant === 'canh-bao' ? 'do' : undefined}>
+  {items.map((it, i) => (
+    <li>
+      <span class="ilist__ic">{ordered ? <b>{i + 1}</b> : <Icon name={it.icon ?? fallback} size={26} />}</span>
+      <span class="ilist__tx" set:html={inline(it.text)} />
+    </li>
+  ))}
+</Tag>
+
+<style>
+  .ilist { list-style: none; padding: 0; margin: 1rem 0 1.25rem; display: grid; gap: 0.55rem; }
+  .ilist li { display: grid; grid-template-columns: auto 1fr; gap: 0.7rem; align-items: start; margin: 0; padding: 0; }
+  .ilist__ic {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px; background: var(--h-fill);
+    color: var(--ink); --ic-fill: var(--surface);
+  }
+  .ilist__ic b { font-family: var(--font-head); font-weight: 900; color: var(--h-ink); font-size: 1.1rem; }
+  .ilist__tx { padding-top: 0.45rem; }
+  .ilist--canh-bao li { background: var(--surface); border: 2px solid var(--do-fill); border-radius: var(--radius-sm); padding: 0.35rem 0.6rem; }
+  .ilist--canh-bao .ilist__ic { width: 34px; height: 34px; }
+  .ilist--canh-bao .ilist__tx { padding-top: 0.25rem; }
+  .ilist--grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 0.6rem; }
+  .ilist--grid li { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-sm); padding: 0.55rem 0.7rem; }
+  .ilist--grid .ilist__tx { padding-top: 0.35rem; }
+</style>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { url } from '~/lib/url';
+---
+<BaseLayout title="Không tìm thấy trang" noindex>
+  <section class="container-narrow nf">
+    <BeBung mood="lo-lang" size={160} />
+    <h1>Ơ, trang này không có ở đây</h1>
+    <p>Có thể đường dẫn đã đổi. Mình cùng quay về lộ trình học nhé.</p>
+    <p class="cta">
+      <a class="btn btn--primary" href={url('/')}>Về trang chủ</a>
+      <a class="btn btn--ghost" href={url('/bai-hoc/')}>Xem danh sách bài học</a>
+    </p>
+  </section>
+</BaseLayout>
+<style>
+  .nf { text-align: center; padding: 4rem 0 2rem; display: grid; justify-items: center; gap: 0.5rem; }
+  .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+</style>

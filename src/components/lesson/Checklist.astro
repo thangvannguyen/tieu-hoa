@@ -1,0 +1,53 @@
+---
+/**
+ * Danh sách ô tick (thay ☐ trong bản gốc). Không có JS vẫn đọc được; có JS thì tick và lưu trên máy.
+ * <Checklist id="07-muc-tieu" items={['...', '...']} />
+ */
+import { inline } from '~/lib/inline';
+interface Props { id: string; items: string[]; title?: string }
+const { id, items, title } = Astro.props;
+---
+<bev-checklist class="ck" data-key={`checklist:${id}`}>
+  {title && <p class="ck__title">{title}</p>}
+  <ul>
+    {items.map((t, i) => (
+      <li>
+        <label>
+          <input type="checkbox" data-i={i} />
+          <span class="ck__box" aria-hidden="true"></span>
+          <span set:html={inline(t)} />
+        </label>
+      </li>
+    ))}
+  </ul>
+</bev-checklist>
+
+<script>
+  import { read, write } from '~/lib/storage';
+  class BevChecklist extends HTMLElement {
+    connectedCallback() {
+      const key = this.dataset.key!;
+      const boxes = [...this.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+      const state = read<number[]>(key, []);
+      boxes.forEach((b, i) => {
+        b.checked = state.includes(i);
+        b.addEventListener('change', () => write(key, boxes.flatMap((x, j) => (x.checked ? [j] : []))));
+      });
+    }
+  }
+  customElements.define('bev-checklist', BevChecklist);
+</script>
+
+<style>
+  .ck { display: block; margin: 1rem 0 1.25rem; padding: 0.8rem 1rem; border-radius: var(--radius); background: var(--surface); border: 2px dashed var(--line-2); }
+  .ck__title { font-weight: 700; margin: 0 0 0.4rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.2rem; }
+  label { display: grid; grid-template-columns: auto 1fr; gap: 0.65rem; align-items: start; padding: 0.4rem 0.3rem; border-radius: 10px; cursor: pointer; }
+  label:hover { background: var(--surface-2); }
+  input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .ck__box { width: 24px; height: 24px; margin-top: 0.15rem; border: 2px solid var(--ink); border-radius: 8px; background: var(--bg); display: grid; place-items: center; }
+  input:focus-visible + .ck__box { outline: 3px solid var(--focus); outline-offset: 2px; }
+  input:checked + .ck__box { background: var(--sage); }
+  input:checked + .ck__box::after { content: ''; width: 10px; height: 6px; border: solid var(--ink); border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
+  input:checked ~ span:last-child { color: var(--ink-2); }
+</style>

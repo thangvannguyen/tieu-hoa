@@ -1,0 +1,52 @@
+---
+/**
+ * Hộp ghi chú trong bài.
+ * type: ghi-nho | luu-y | canh-bao | thuc-hanh | meo | trich-dan | chiem-nghiem
+ */
+import Icon from '~/components/ui/Icon.astro';
+import type { Hue } from '~/lib/types';
+
+type Kind = 'ghi-nho' | 'luu-y' | 'canh-bao' | 'thuc-hanh' | 'meo' | 'chiem-nghiem' | 'trich-dan';
+interface Props { type?: Kind; title?: string; icon?: string; hue?: Hue }
+const preset: Record<Kind, { icon: string; title: string; hue: Hue }> = {
+  'ghi-nho': { icon: 'bong-den', title: 'Ghi nhớ', hue: 'bo' },
+  'luu-y': { icon: 'thong-tin', title: 'Lưu ý', hue: 'lav' },
+  'canh-bao': { icon: 'co-do', title: 'Khi nào cần đi khám', hue: 'do' },
+  'thuc-hanh': { icon: 'checklist', title: 'Thực hành', hue: 'sage' },
+  meo: { icon: 'sparkle', title: 'Mẹo nhỏ', hue: 'ngoc' },
+  'chiem-nghiem': { icon: 'suy-nghi', title: 'Chiêm nghiệm', hue: 'hong' },
+  'trich-dan': { icon: 'hop-thoai', title: '', hue: 'dao' },
+};
+const { type = 'ghi-nho', title, icon, hue } = Astro.props;
+const p = preset[type];
+const heading = title ?? p.title;
+---
+<aside class:list={['callout', `callout--${type}`]} data-hue={hue ?? p.hue}>
+  <div class="callout__icon"><Icon name={icon ?? p.icon} size={30} /></div>
+  <div class="callout__body">
+    {heading && <p class="callout__title">{heading}</p>}
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start;
+    padding: 1.1rem 1.25rem; border-radius: var(--radius);
+    background: var(--h-fill); border: 2px solid color-mix(in srgb, var(--h) 70%, var(--line));
+  }
+  .callout__icon {
+    display: grid; place-items: center; width: 46px; height: 46px; border-radius: 15px;
+    background: var(--surface); border: 2px solid var(--ink); color: var(--ink); box-shadow: 0 3px 0 var(--ink);
+    --ic-fill: var(--h-fill);
+  }
+  .callout__title { font-family: var(--font-head); font-weight: 900; font-size: 1.08rem; color: var(--h-ink); margin: 0.35rem 0 0.4rem; }
+  .callout__body :global(> :last-child) { margin-bottom: 0; }
+  .callout__body :global(ul), .callout__body :global(ol) { margin-bottom: 0.6em; }
+  .callout--trich-dan { font-style: italic; }
+  .callout--trich-dan .callout__body :global(p) { font-size: 1.05rem; }
+  @media (max-width: 480px) {
+    .callout { grid-template-columns: 1fr; gap: 0.5rem; padding: 1rem; }
+    .callout__icon { width: 40px; height: 40px; }
+  }
+</style>

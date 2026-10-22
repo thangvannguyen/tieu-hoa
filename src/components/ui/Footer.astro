@@ -1,0 +1,60 @@
+---
+import Icon from './Icon.astro';
+import BeBung from './BeBung.astro';
+import { url } from '~/lib/url';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wave" aria-hidden="true"></div>
+  <div class="container inner">
+    <div class="about">
+      <BeBung mood="vui" size={84} label="Bé Bụng vẫy tay chào" />
+      <div>
+        <p class="name">Bụng Êm, Việc Ổn</p>
+        <p class="small">
+          Sổ tay học tập từ chuỗi bản tin y khoa của <strong>BS. Phan Thị Lan Viên</strong> cùng BS. Quỳnh Thư và
+          ThS.BS. Diễm Khuê — <em>Chăm sóc sức khỏe chủ động</em>.
+        </p>
+      </div>
+    </div>
+    <div class="disclaimer" role="note">
+      <Icon name="thong-tin" size={22} />
+      <p>
+        <strong>Thông tin tham khảo, không thay thế tư vấn y khoa.</strong> Nội dung không phải là chương trình tư
+        vấn, chẩn đoán và điều trị. Khi có dấu hiệu bất thường, hãy <a href={url('/khi-nao-can-di-kham/')}>đi khám</a>
+        để được bác sĩ đánh giá trực tiếp.
+      </p>
+    </div>
+    <nav class="links" aria-label="Liên kết cuối trang">
+      <a href={url('/gioi-thieu/')}>Giới thiệu</a>
+      <a href={url('/bai-hoc/')}>Bài học</a>
+      <a href={url('/cong-cu/')}>Công cụ</a>
+      <a href={url('/on-tap/')}>Ôn tập</a>
+      <a href={url('/so-sanh-dinh-duong/')}>So sánh dinh dưỡng</a>
+      <a href={url('/du-lieu-cua-ban/')}>Dữ liệu của bạn</a>
+      <a href={url('/bieu-tuong/')}>Bộ biểu tượng</a>
+    </nav>
+    <p class="copy">© {year} Nội dung thuộc về các tác giả bản tin. Dữ liệu bạn nhập chỉ lưu trên máy của bạn.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-top: 5rem; background: var(--bg-2); color: var(--ink); position: relative; }
+  .wave {
+    height: 18px; margin-top: -17px; background: var(--bg-2);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='18'%3E%3Cpath d='M0 18 Q10 0 20 9 T40 9 V18z'/%3E%3C/svg%3E") repeat-x bottom / 40px 18px;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='18'%3E%3Cpath d='M0 18 Q10 0 20 9 T40 9 V18z'/%3E%3C/svg%3E") repeat-x bottom / 40px 18px;
+  }
+  .inner { display: grid; gap: 1.5rem; padding: 2.5rem 0 2rem; }
+  .about { display: flex; gap: 1rem; align-items: center; }
+  .name { font-family: var(--font-head); font-weight: 900; font-size: 1.25rem; margin: 0; }
+  .small { margin: 0.25rem 0 0; color: var(--ink-2); font-size: 0.95rem; }
+  .disclaimer {
+    display: flex; gap: 0.75rem; align-items: flex-start; padding: 1rem 1.2rem; border-radius: var(--radius);
+    background: var(--surface); border: 2px dashed var(--line-2); font-size: 0.95rem;
+  }
+  .disclaimer p { margin: 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+  .links a { color: var(--ink); font-weight: 600; }
+  .copy { margin: 0; color: var(--ink-3); font-size: 0.85rem; }
+</style>

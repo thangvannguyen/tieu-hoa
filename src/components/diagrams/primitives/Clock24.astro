@@ -1,0 +1,57 @@
+---
+/** Đồng hồ 24 giờ: các cung (from–to, giờ thập phân) + mốc (at). Kèm chú giải bằng chữ. */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+interface Arc { from: number; to: number; label: string; hue: Hue }
+interface Mark { at: number; label: string; icon?: string }
+interface Props { arcs: Arc[]; marks?: Mark[]; center?: string }
+const { arcs, marks = [], center } = Astro.props;
+const C = 160, R = 118, W = 26;
+const ang = (h: number) => -Math.PI / 2 + (h / 24) * 2 * Math.PI;
+const p = (rad: number, h: number) => [C + rad * Math.cos(ang(h)), C + rad * Math.sin(ang(h))].map((v) => v.toFixed(2)).join(' ');
+const arcPath = (a: Arc) => {
+  const to = a.to <= a.from ? a.to + 24 : a.to;
+  const large = to - a.from > 12 ? 1 : 0;
+  return `M${p(R, a.from)}A${R} ${R} 0 ${large} 1 ${p(R, to)}`;
+};
+const fmt = (h: number) => { const hh = Math.floor(h) % 24, mm = Math.round((h % 1) * 60); return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; };
+---
+<div class="ck24">
+  <svg viewBox="0 0 320 320" class="ck24__svg" aria-hidden="true">
+    <circle cx={C} cy={C} r={R} class="ck24__track" stroke-width={W}></circle>
+    {arcs.map((a) => <path d={arcPath(a)} data-hue={a.hue} class="ck24__arc" stroke-width={W}></path>)}
+    {Array.from({ length: 24 }, (_, h) => (
+      <line x1={p(R - W / 2 - 4, h).split(' ')[0]} y1={p(R - W / 2 - 4, h).split(' ')[1]} x2={p(R - W / 2 - (h % 6 === 0 ? 14 : 8), h).split(' ')[0]} y2={p(R - W / 2 - (h % 6 === 0 ? 14 : 8), h).split(' ')[1]} class="ck24__tick"></line>
+    ))}
+    {[0, 6, 12, 18].map((h) => (
+      <text x={p(R - W / 2 - 28, h).split(' ')[0]} y={p(R - W / 2 - 28, h).split(' ')[1]} class="ck24__num" text-anchor="middle" dominant-baseline="central">{h}h</text>
+    ))}
+    {marks.map((m) => (
+      <g>
+        <circle cx={p(R, m.at).split(' ')[0]} cy={p(R, m.at).split(' ')[1]} r="15" class="ck24__mark"></circle>
+        {m.icon && <Icon name={m.icon} size={20} x={Number(p(R, m.at).split(' ')[0]) - 10} y={Number(p(R, m.at).split(' ')[1]) - 10} />}
+      </g>
+    ))}
+    {center && <text x={C} y={C} class="ck24__center" text-anchor="middle" dominant-baseline="central">{center}</text>}
+  </svg>
+  <ul class="ck24__legend">
+    {arcs.map((a) => <li data-hue={a.hue}><span class="ck24__sw"></span><span><strong>{fmt(a.from)}–{fmt(a.to)}</strong> <span set:html={inline(a.label)} /></span></li>)}
+    {marks.map((m) => <li><span class="ck24__ic">{m.icon && <Icon name={m.icon} size={20} />}</span><span><strong>{fmt(m.at)}</strong> <span set:html={inline(m.label)} /></span></li>)}
+  </ul>
+</div>
+<style>
+  .ck24 { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 600px) { .ck24 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .ck24__svg { width: 100%; max-width: 340px; margin: 0 auto; display: block; color: var(--ink); --ic-fill: var(--h-fill); }
+  .ck24__track { fill: none; stroke: var(--line); }
+  .ck24__arc { fill: none; stroke: var(--h); stroke-linecap: round; }
+  .ck24__tick { stroke: var(--ink-3); stroke-width: 2; stroke-linecap: round; }
+  .ck24__num { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink-2); }
+  .ck24__mark { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+  .ck24__center { font-family: var(--font-head); font-weight: 900; font-size: 17px; fill: var(--ink); }
+  .ck24__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; font-size: 0.93rem; }
+  .ck24__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.4rem 0.6rem; border-radius: 12px; background: var(--surface); }
+  .ck24__sw { width: 18px; height: 18px; margin-top: 0.15rem; border-radius: 6px; background: var(--h); border: 2px solid var(--ink); }
+  .ck24__ic { width: 20px; }
+</style>

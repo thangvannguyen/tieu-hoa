@@ -1,0 +1,30 @@
+---
+/** "Con số cần nhớ" — chỉ dùng con số có trong bài gốc. */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+interface Item { value: string; unit?: string; label: string; icon?: string; hue?: Hue }
+interface Props { items: Item[]; title?: string }
+const { items, title = 'Con số cần nhớ' } = Astro.props;
+---
+<section class="ns" aria-label={title}>
+  <p class="ns__t"><Icon name="bieu-do" size={22} /> {title}</p>
+  <ul>
+    {items.map((it) => (
+      <li data-hue={it.hue}>
+        {it.icon && <Icon name={it.icon} size={30} />}
+        <span class="ns__v">{it.value}{it.unit && <small> {it.unit}</small>}</span>
+        <span class="ns__l" set:html={inline(it.label)} />
+      </li>
+    ))}
+  </ul>
+</section>
+<style>
+  .ns { margin: 1.75rem 0; padding: 1rem 1.1rem 1.1rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); container-type: inline-size; }
+  .ns__t { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.8rem; font-family: var(--font-head); font-weight: 900; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+  li { margin: 0; display: grid; gap: 0.2rem; align-content: start; padding: 0.8rem; border-radius: 16px; background: var(--h-fill); --ic-fill: var(--surface); }
+  .ns__v { font-family: var(--font-head); font-weight: 900; font-size: 1.6rem; line-height: 1.1; color: var(--h-ink); }
+  .ns__v small { font-size: 0.95rem; font-weight: 800; }
+  .ns__l { font-size: 0.9rem; line-height: 1.4; }
+</style>

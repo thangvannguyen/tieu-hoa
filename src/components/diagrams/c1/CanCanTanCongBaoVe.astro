@@ -1,0 +1,49 @@
+---
+import Diagram from '../primitives/Diagram.astro';
+import Balance from '../primitives/Balance.astro';
+---
+<Diagram
+  title="Cán cân: yếu tố tấn công ↔ yếu tố bảo vệ"
+  icon="can-bang"
+  hue="dao"
+  interactive
+  caption="Cơ chế cốt lõi của bệnh viêm loét dạ dày là sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày. Bấm để bật/tắt từng yếu tố — bên trái là các nguyên nhân, yếu tố nguy cơ (bản tin #01), bên phải là những thói quen bạn có thể chọn điều chỉnh (bản tin #02)."
+  from={['01-vi-sao-viem-da-day-tai-di-tai-lai', '02-giai-ma-thoi-quen']}
+>
+  <Balance
+    left={{
+      title: 'Yếu tố tấn công',
+      icon: 'lua',
+      hue: 'do',
+      items: [
+        { icon: 'vien-thuoc', text: 'Nhiễm vi khuẩn Helicobacter pylori (HP)' },
+        { icon: 'do-chien', text: 'Thói quen ăn uống: đồ chiên xào, thức ăn nhanh, nhiều muối, đồ ngọt, cà phê, cay - nóng, ăn uống không điều độ, ăn khuya' },
+        { icon: 'may-stress', text: 'Stress, căng thẳng, áp lực' },
+        { icon: 'vien-thuoc', text: 'Dùng các thuốc như Aspirin, thuốc chống viêm non steroid, corticosteroid' },
+        { icon: 'thuoc-la', text: 'Hút thuốc, uống rượu bia' },
+        { icon: 'nguoi', text: 'Tuổi tác càng cao nguy cơ càng tăng' },
+        { icon: 'thuc-quan', text: 'Bệnh lý đi kèm: tăng tiết acid dạ dày, trào ngược dạ dày' },
+      ],
+    }}
+    right={{
+      title: 'Thói quen bảo vệ',
+      icon: 'khien',
+      hue: 'sage',
+      items: [
+        { icon: 'giuong', text: 'Ngủ sớm hơn' },
+        { icon: 'com', text: 'Ăn uống chú tâm hơn (cất điện thoại khi ăn)' },
+        { icon: 'dong-ho', text: 'Thiết kế những khoảng thời gian nghỉ ngắn trong ngày' },
+        { icon: 'ot', text: 'Giảm ăn đồ chua, cay, mặn, béo' },
+        { icon: 'lich', text: 'Ăn uống điều độ' },
+        { icon: 'trang', text: 'Hạn chế ăn khuya' },
+        { icon: 'sua-chua', text: 'Ăn chậm, nhai kỹ hơn' },
+        { icon: 'di-bo', text: 'Vận động tại chỗ thêm 5 phút mỗi ngày' },
+      ],
+    }}
+    messages={{
+      left: 'Cán cân đang nghiêng về phía yếu tố tấn công',
+      right: 'Cán cân đang nghiêng về phía bảo vệ — giữ nhịp này nhé!',
+      even: 'Hai bên đang ngang nhau — thêm một thói quen bảo vệ nữa nào',
+    }}
+  />
+</Diagram>

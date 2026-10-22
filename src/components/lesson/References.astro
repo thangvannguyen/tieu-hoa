@@ -1,0 +1,26 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+interface Ref { text: string; url?: string; note?: string }
+interface Props { items: Ref[]; title?: string }
+const { items, title = 'Tài liệu tham khảo' } = Astro.props;
+---
+<section class="refs" aria-label={title}>
+  <h2 class="refs__h"><Icon name="sach" size={26} /> {title}</h2>
+  <ol>
+    {items.map((r) => (
+      <li>
+        {r.url ? <a href={r.url} target="_blank" rel="noopener" set:html={inline(r.text)} /> : <span set:html={inline(r.text)} />}
+        {r.note && <span class="refs__note" set:html={' — ' + inline(r.note)} />}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .refs { margin-top: 2.5rem; padding: 1.2rem 1.4rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line); font-size: 0.95rem; }
+  .refs__h { display: flex; gap: 0.5rem; align-items: center; font-size: 1.15rem; margin: 0 0 0.6rem; }
+  .refs__h::before { display: none !important; }
+  ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.35rem; }
+  .refs__note { color: var(--ink-2); }
+</style>

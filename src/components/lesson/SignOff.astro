@@ -1,0 +1,17 @@
+---
+import BeBung from '~/components/ui/BeBung.astro';
+interface Props { lines: string[] }
+const { lines } = Astro.props;
+---
+{lines.length > 0 && (
+  <div class="so">
+    <BeBung mood="vui" size={64} />
+    <div>{lines.map((l, i) => <p class:list={[i === lines.length - 1 && 'so__tag']}>{l}</p>)}</div>
+  </div>
+)}
+<style>
+  .so { display: flex; gap: 0.9rem; align-items: center; margin: 2rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--surface); border: 2px dashed var(--line-2); }
+  .so p { margin: 0; }
+  .so p:first-child { font-style: italic; }
+  .so__tag { color: var(--ink-2); font-size: 0.92rem; }
+</style>

@@ -1,0 +1,116 @@
+/* ===== Bụng Êm, Việc Ổn — design tokens =====
+   Bảng màu lấy cảm hứng từ infographic gốc (kem, đào, sage, olive).
+   Mỗi "hue" có 3 mức: -fill (nền pastel), base (đường nét/khối), -ink (chữ, tương phản ≥ 4.5:1 trên nền và fill). */
+
+:root {
+  color-scheme: light;
+
+  --bg: #fff9f0;
+  --bg-2: #fff3e3;
+  --surface: #ffffff;
+  --surface-2: #fff7ec;
+  --ink: #4a3b35;
+  --ink-2: #6b5850;
+  --ink-3: #8c776c;
+  --line: #eddfcd;
+  --line-2: #dcc7b0;
+  --blush: #f7b4b4;
+  --cheek: #f59c9c;
+
+  --dao-fill: #fde3d7;   --dao: #f4a988;   --dao-ink: #a3462a;
+  --sage-fill: #ddf0e2;  --sage: #8cc7a1;  --sage-ink: #2c6943;
+  --lav-fill: #e5e9fb;   --lav: #a9b4e8;   --lav-ink: #424e9e;
+  --bo-fill: #fdf1c9;    --bo: #f5d17a;    --bo-ink: #75560a;
+  --ngoc-fill: #d7f0f0;  --ngoc: #7cc6c6;  --ngoc-ink: #216767;
+  --hong-fill: #fce2e8;  --hong: #f2a7b8;  --hong-ink: #9a3a53;
+  --do-fill: #fde1dc;    --do: #e8786d;    --do-ink: #a1302a;
+
+  --link: var(--dao-ink);
+  --focus: #424e9e;
+
+  --shadow-sm: 0 1px 2px rgb(74 59 53 / 0.06);
+  --shadow: 0 1px 0 rgb(74 59 53 / 0.04), 0 10px 28px -14px rgb(74 59 53 / 0.22);
+  --shadow-lg: 0 2px 0 rgb(74 59 53 / 0.04), 0 22px 48px -22px rgb(74 59 53 / 0.3);
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-head: 'Nunito Variable', 'Nunito', 'Be Vietnam Pro', system-ui, sans-serif;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 32px);
+
+  /* hue đang dùng (mặc định: đào) — component đọc --h-* */
+  --h-fill: var(--dao-fill);
+  --h: var(--dao);
+  --h-ink: var(--dao-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #1c1714;
+    --bg-2: #221c18;
+    --surface: #2a221e;
+    --surface-2: #322823;
+    --ink: #f6ecdf;
+    --ink-2: #d6c5b3;
+    --ink-3: #ab988c;
+    --line: #43372f;
+    --line-2: #5a4b42;
+    --blush: #b8737c;
+    --cheek: #c9808a;
+    --dao-fill: #47302a;   --dao: #e89a7c;   --dao-ink: #f8c2ab;
+    --sage-fill: #22372a;  --sage: #7fbf95;  --sage-ink: #abdfbd;
+    --lav-fill: #2a2e4a;   --lav: #9aa6e3;   --lav-ink: #c6cdf5;
+    --bo-fill: #3d3420;    --bo: #e3c062;    --bo-ink: #f3da92;
+    --ngoc-fill: #1e3a3a;  --ngoc: #6fbdbd;  --ngoc-ink: #a5dddd;
+    --hong-fill: #44262e;  --hong: #e396a8;  --hong-ink: #f5bfcc;
+    --do-fill: #47231f;    --do: #e5786d;    --do-ink: #f6b0a8;
+    --link: var(--dao-ink);
+    --focus: #c6cdf5;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 2px 0 rgb(0 0 0 / 0.2), 0 22px 48px -22px rgb(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #1c1714;
+  --bg-2: #221c18;
+  --surface: #2a221e;
+  --surface-2: #322823;
+  --ink: #f6ecdf;
+  --ink-2: #d6c5b3;
+  --ink-3: #ab988c;
+  --line: #43372f;
+  --line-2: #5a4b42;
+  --blush: #b8737c;
+  --cheek: #c9808a;
+  --dao-fill: #47302a;   --dao: #e89a7c;   --dao-ink: #f8c2ab;
+  --sage-fill: #22372a;  --sage: #7fbf95;  --sage-ink: #abdfbd;
+  --lav-fill: #2a2e4a;   --lav: #9aa6e3;   --lav-ink: #c6cdf5;
+  --bo-fill: #3d3420;    --bo: #e3c062;    --bo-ink: #f3da92;
+  --ngoc-fill: #1e3a3a;  --ngoc: #6fbdbd;  --ngoc-ink: #a5dddd;
+  --hong-fill: #44262e;  --hong: #e396a8;  --hong-ink: #f5bfcc;
+  --do-fill: #47231f;    --do: #e5786d;    --do-ink: #f6b0a8;
+  --link: var(--dao-ink);
+  --focus: #c6cdf5;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 2px 0 rgb(0 0 0 / 0.2), 0 22px 48px -22px rgb(0 0 0 / 0.7);
+}
+
+/* đặt hue cho một vùng: <div data-hue="sage"> */
+[data-hue='dao']  { --h-fill: var(--dao-fill);  --h: var(--dao);  --h-ink: var(--dao-ink); }
+[data-hue='sage'] { --h-fill: var(--sage-fill); --h: var(--sage); --h-ink: var(--sage-ink); }
+[data-hue='lav']  { --h-fill: var(--lav-fill);  --h: var(--lav);  --h-ink: var(--lav-ink); }
+[data-hue='bo']   { --h-fill: var(--bo-fill);   --h: var(--bo);   --h-ink: var(--bo-ink); }
+[data-hue='ngoc'] { --h-fill: var(--ngoc-fill); --h: var(--ngoc); --h-ink: var(--ngoc-ink); }
+[data-hue='hong'] { --h-fill: var(--hong-fill); --h: var(--hong); --h-ink: var(--hong-ink); }
+[data-hue='do']   { --h-fill: var(--do-fill);   --h: var(--do);   --h-ink: var(--do-ink); }

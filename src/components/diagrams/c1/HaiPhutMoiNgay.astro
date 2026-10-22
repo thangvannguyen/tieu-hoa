@@ -1,0 +1,15 @@
+---
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram title="Hai phút mỗi ngày: chỉnh nhẹ đúng 1 điểm" icon="dong-ho-cat" hue="sage" kicker="Thực hành" from={['01-vi-sao-viem-da-day-tai-di-tai-lai']}>
+  <Flow
+    numbered
+    steps={[
+      { icon: 'quiz', title: 'Tự hỏi nhanh (30s–60s)', text: 'Ăn quá nhanh? Đúng giờ? Căng thẳng? Nhai kỹ? Vừa ăn vừa xem điện thoại?' },
+      { icon: 'muc-tieu', title: 'Nhận ra 1 điểm “lệch”', text: 'lặp lại nhiều nhất — đó là điểm bắt đầu.' },
+      { icon: 'ke', title: 'Ngày mai chỉnh nhẹ đúng 1 điểm (60s)', text: 'Ăn chậm hơn một chút, một phút thư giãn, cất điện thoại khi ăn…' },
+      { icon: 'sao', title: 'Tự thưởng “5 sao”', text: 'và ghi lại hành trình nỗ lực của bạn.' },
+    ]}
+  />
+</Diagram>

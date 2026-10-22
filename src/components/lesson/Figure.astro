@@ -1,0 +1,46 @@
+---
+/** Ảnh gốc trong bản tin (đã tối ưu WebP) + chú thích + link ảnh gốc + phần chữ gõ lại trong ảnh. */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  /** chất lượng WebP — ảnh nhiều chữ nên để cao */
+  quality?: number;
+  /** tiêu đề cho phần gõ lại chữ trong ảnh (slot "transcript") */
+  transcriptTitle?: string;
+  width?: number;
+}
+const { src, alt, caption, quality = 88, transcriptTitle = 'Nội dung chữ trong ảnh', width } = Astro.props;
+if (!alt || alt === 'TODO') throw new Error(`Ảnh thiếu alt: ${src.src}`);
+const hasTranscript = Astro.slots.has('default');
+---
+<figure class="fig">
+  <a class="fig__img" href={src.src} target="_blank" rel="noopener" title="Mở ảnh gốc">
+    <Image src={src} alt={alt} quality={quality} width={width ?? Math.min(src.width, 1200)} loading="lazy" decoding="async" />
+  </a>
+  {(caption || hasTranscript) && (
+    <figcaption>
+      {caption && <span class="fig__cap">{caption}</span>}
+      {hasTranscript && (
+        <details class="fig__tx">
+          <summary>{transcriptTitle}</summary>
+          <div class="fig__txbody"><slot /></div>
+        </details>
+      )}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .fig { margin: 1.75rem 0; }
+  .fig__img { display: block; border-radius: var(--radius); overflow: hidden; border: 2px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+  .fig__img :global(img) { width: 100%; height: auto; }
+  figcaption { margin-top: 0.6rem; font-size: 0.92rem; color: var(--ink-2); display: grid; gap: 0.5rem; }
+  .fig__tx { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-sm); }
+  .fig__tx summary { cursor: pointer; padding: 0.6rem 0.9rem; font-weight: 700; color: var(--ink); }
+  .fig__txbody { padding: 0 1rem 0.8rem; color: var(--ink); font-size: 0.98rem; }
+  .fig__txbody :global(> :last-child) { margin-bottom: 0; }
+</style>

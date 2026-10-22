@@ -1,0 +1,68 @@
+---
+/** Thẻ lật "Nhầm tưởng ↔ Sự thật". Không có JS: hiện cả hai mặt. */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+interface Card { front: string; back: string; icon?: string }
+interface Props { cards: Card[]; frontLabel?: string; backLabel?: string }
+const { cards, frontLabel = 'Nhầm tưởng', backLabel = 'Sự thật' } = Astro.props;
+---
+<bev-flip class="fc">
+  <ul>
+    {cards.map((c, i) => (
+      <li>
+        <button type="button" class="fc__card" aria-pressed="false">
+          <span class="fc__face fc__front" data-hue="do">
+            <span class="fc__k"><Icon name={c.icon ?? 'quiz'} size={22} /> {frontLabel} {cards.length > 1 ? i + 1 : ''}</span>
+            <span class="fc__t" set:html={inline(c.front)} />
+            <span class="fc__hint">Bấm để lật thẻ</span>
+          </span>
+          <span class="fc__face fc__back" data-hue="sage">
+            <span class="fc__k"><Icon name="dung" size={22} /> {backLabel}</span>
+            <span class="fc__t fc__t--sm" set:html={inline(c.back)} />
+          </span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</bev-flip>
+
+<script>
+  class BevFlip extends HTMLElement {
+    connectedCallback() {
+      this.classList.add('is-js');
+      this.querySelectorAll<HTMLButtonElement>('.fc__card').forEach((b) => {
+        const front = b.querySelector('.fc__front')!, back = b.querySelector('.fc__back')!;
+        back.setAttribute('aria-hidden', 'true');
+        b.addEventListener('click', () => {
+          const on = b.getAttribute('aria-pressed') !== 'true';
+          b.setAttribute('aria-pressed', String(on));
+          front.setAttribute('aria-hidden', String(on));
+          back.setAttribute('aria-hidden', String(!on));
+        });
+      });
+    }
+  }
+  customElements.define('bev-flip', BevFlip);
+</script>
+
+<style>
+  .fc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); }
+  .fc li { margin: 0; }
+  .fc__card { all: unset; box-sizing: border-box; display: grid; width: 100%; cursor: pointer; perspective: 900px; border-radius: 18px; }
+  .fc__card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .fc__face { display: grid; align-content: start; gap: 0.45rem; padding: 0.9rem 1rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface); color: var(--ink); }
+  .fc__k { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--h-ink); }
+  .fc__t { font-family: var(--font-head); font-weight: 800; font-size: 1rem; line-height: 1.35; }
+  .fc__t--sm { font-family: var(--font-body); font-weight: 500; font-size: 0.93rem; line-height: 1.5; }
+  .fc__hint { font-size: 0.8rem; color: var(--ink-3); display: none; }
+  .fc:not(.is-js) .fc__back { margin-top: 0.4rem; }
+  .fc.is-js .fc__card { grid-template-areas: 'c'; }
+  .fc.is-js .fc__face { grid-area: c; backface-visibility: hidden; transition: transform 0.5s cubic-bezier(0.3, 1.3, 0.5, 1); min-height: 9.5rem; }
+  .fc.is-js .fc__hint { display: block; margin-top: auto; }
+  .fc.is-js .fc__back { transform: rotateY(180deg); }
+  .fc.is-js .fc__card[aria-pressed='true'] .fc__front { transform: rotateY(-180deg); }
+  .fc.is-js .fc__card[aria-pressed='true'] .fc__back { transform: rotateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .fc.is-js .fc__face { transition: none; }
+  }
+</style>

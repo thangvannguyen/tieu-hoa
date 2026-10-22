@@ -1,0 +1,41 @@
+---
+/** Một nguồn → nhiều nhánh (→ một kết quả). Dùng cho "thác" cơ chế, nguyên nhân → triệu chứng. */
+import Card from './Card.astro';
+import type { Node } from './types';
+interface Props { root: Node; branches: Node[]; result?: Node; via?: string }
+const { root, branches, result, via } = Astro.props;
+---
+<div class="br" style={`--n:${branches.length}`}>
+  <div class="br__root"><Card node={root} variant="fill" /></div>
+  <div class="br__fan" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18" /><path d="M6.5 15.5 12 21l5.5-5.5" /></svg>
+    {via && <span class="br__via">{via}</span>}
+  </div>
+  <ul class="br__list">
+    {branches.map((b) => <li><Card node={b} /></li>)}
+  </ul>
+  {result && (
+    <>
+      <div class="br__fan" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18" /><path d="M6.5 15.5 12 21l5.5-5.5" /></svg>
+      </div>
+      <div class="br__result"><Card node={result} variant="fill" /></div>
+    </>
+  )}
+</div>
+<style>
+  .br { display: grid; justify-items: center; }
+  .br__root, .br__result { width: min(100%, 420px); }
+  .br__fan { display: grid; justify-items: center; color: var(--h-ink); padding: 0.2rem 0; }
+  .br__fan svg { width: 30px; height: 30px; }
+  .br__via { font-size: 0.82rem; font-weight: 700; background: var(--surface); padding: 0.1rem 0.6rem; border-radius: 999px; border: 1.5px dashed var(--h); }
+  .br__list { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: 0.7rem; }
+  .br__list li { margin: 0; }
+  .br__list :global(.dg-card) { height: 100%; }
+  @container (min-width: 600px) {
+    .br__list { grid-template-columns: repeat(min(var(--n), 3), minmax(0, 1fr)); position: relative; padding-top: 0.9rem; }
+    .br__list::before { content: ''; position: absolute; top: 0; left: calc(100% / (2 * min(var(--n), 3))); right: calc(100% / (2 * min(var(--n), 3))); height: 2px; background: var(--h); }
+    .br__list li { position: relative; }
+    .br__list li::before { content: ''; position: absolute; top: -0.9rem; left: 50%; width: 2px; height: 0.9rem; background: var(--h); }
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+/** Bánh xe tương tác: bấm một phần để xem chi tiết. */
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { inline } from '~/lib/inline';
+import { url } from '~/lib/url';
+import type { Hue, Mood } from '~/lib/types';
+interface Seg { title: string; icon: string; hue: Hue; text?: string; links?: { href: string; label: string }[] }
+interface Props { segments: Seg[]; center?: { title: string; mood?: Mood; icon?: string }; prompt?: string }
+const { segments, center, prompt = 'Chọn một phần của bánh xe để xem chi tiết' } = Astro.props;
+const n = segments.length;
+const R = 150, r = 62, C = 160;
+const pt = (rad: number, a: number) => [C + rad * Math.cos(a), C + rad * Math.sin(a)];
+const segs = segments.map((s, i) => {
+  const gap = 0.025;
+  const a0 = -Math.PI / 2 + (i * 2 * Math.PI) / n + gap;
+  const a1 = -Math.PI / 2 + ((i + 1) * 2 * Math.PI) / n - gap;
+  const [x0, y0] = pt(R, a0), [x1, y1] = pt(R, a1), [x2, y2] = pt(r, a1), [x3, y3] = pt(r, a0);
+  const large = a1 - a0 > Math.PI ? 1 : 0;
+  const d = `M${x0.toFixed(2)} ${y0.toFixed(2)}A${R} ${R} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}L${x2.toFixed(2)} ${y2.toFixed(2)}A${r} ${r} 0 ${large} 0 ${x3.toFixed(2)} ${y3.toFixed(2)}Z`;
+  const am = (a0 + a1) / 2;
+  const [ix, iy] = pt((R + r) / 2, am);
+  return { ...s, d, ix, iy };
+});
+---
+<bev-wheel class="wh">
+  <div class="wh__grid">
+    <div class="wh__art">
+      <svg viewBox="0 0 320 320" class="wh__svg" aria-hidden="true">
+        {segs.map((s, i) => (
+          <g class="wh__seg" data-i={i} data-hue={s.hue}>
+            <path d={s.d}></path>
+            <Icon name={s.icon} size={40} x={s.ix - 20} y={s.iy - 20} />
+          </g>
+        ))}
+        <circle cx="160" cy="160" r="56" class="wh__hub"></circle>
+      </svg>
+      {center && (
+        <div class="wh__center">
+          {center.mood ? <BeBung mood={center.mood} size={74} /> : center.icon && <Icon name={center.icon} size={44} />}
+          <span set:html={inline(center.title)} />
+        </div>
+      )}
+    </div>
+    <div class="wh__side">
+      <div class="wh__btns" role="group" aria-label="Các phần của bánh xe">
+        {segs.map((s, i) => (
+          <button type="button" class="wh__btn" data-i={i} data-hue={s.hue} aria-pressed="false">
+            <Icon name={s.icon} size={24} /> <span set:html={inline(s.title)} />
+          </button>
+        ))}
+      </div>
+      <div class="wh__panel" aria-live="polite">
+        <p class="wh__prompt">{prompt}</p>
+        {segs.map((s, i) => (
+          <div class="wh__detail" data-i={i} data-hue={s.hue} hidden>
+            <p class="wh__dt"><Icon name={s.icon} size={28} /> <span set:html={inline(s.title)} /></p>
+            {s.text && <p set:html={inline(s.text)} />}
+            {s.links && s.links.length > 0 && (
+              <ul class="wh__links">{s.links.map((l) => <li><a href={url(l.href)}>{l.label}</a></li>)}</ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</bev-wheel>
+
+<script>
+  class BevWheel extends HTMLElement {
+    connectedCallback() {
+      const select = (i: number) => {
+        this.querySelectorAll<HTMLElement>('.wh__detail').forEach((d) => (d.hidden = d.dataset.i !== String(i)));
+        this.querySelectorAll('.wh__btn').forEach((b) => b.setAttribute('aria-pressed', String((b as HTMLElement).dataset.i === String(i))));
+        this.querySelectorAll('.wh__seg').forEach((g) => g.classList.toggle('is-on', (g as HTMLElement).dataset.i === String(i)));
+        this.querySelector<HTMLElement>('.wh__prompt')!.hidden = true;
+      };
+      this.querySelectorAll<HTMLElement>('.wh__btn').forEach((b) => b.addEventListener('click', () => select(Number(b.dataset.i))));
+      this.querySelectorAll<SVGGElement>('.wh__seg').forEach((g) => g.addEventListener('click', () => select(Number(g.dataset.i))));
+    }
+  }
+  customElements.define('bev-wheel', BevWheel);
+</script>
+
+<style>
+  .wh { display: block; }
+  .wh__grid { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 640px) { .wh__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .wh__art { position: relative; max-width: 340px; width: 100%; margin: 0 auto; }
+  .wh__svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .wh__seg { cursor: pointer; color: var(--ink); --ic-fill: var(--surface); }
+  .wh__seg path { fill: var(--h-fill); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; transition: fill 0.2s, transform 0.2s; transform-origin: 160px 160px; }
+  .wh__seg:hover path, .wh__seg.is-on path { fill: var(--h); }
+  .wh__seg.is-on path { transform: scale(1.04); }
+  .wh__hub { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .wh__center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 34%; display: grid; justify-items: center; text-align: center; font-family: var(--font-head); font-weight: 900; font-size: 0.82rem; line-height: 1.2; pointer-events: none; }
+  .wh__btns { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+  .wh__btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem 0.35rem 0.45rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; --ic-fill: var(--h-fill); }
+  .wh__btn[aria-pressed='true'] { background: var(--h-fill); border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+  .wh__panel { min-height: 6rem; padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px dashed var(--line-2); }
+  .wh__prompt { color: var(--ink-2); font-size: 0.95rem; }
+  .wh__dt { display: flex; align-items: center; gap: 0.45rem; font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; color: var(--h-ink); margin-bottom: 0.35rem !important; --ic-fill: var(--h-fill); }
+  .wh__detail p { font-size: 0.95rem; }
+  .wh__links { margin: 0.5rem 0 0; padding-left: 1.1rem; font-size: 0.92rem; }
+</style>

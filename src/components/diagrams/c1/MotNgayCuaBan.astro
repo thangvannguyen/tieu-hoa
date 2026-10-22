@@ -1,0 +1,14 @@
+---
+import Diagram from '../primitives/Diagram.astro';
+import Timeline from '../primitives/Timeline.astro';
+---
+<Diagram title="Một ngày của bạn có quen không?" kicker="Minh họa" icon="lich" hue="dao" from={['01-vi-sao-viem-da-day-tai-di-tai-lai']}>
+  <Timeline
+    items={[
+      { time: 'Sáng', icon: 'ca-phe', title: 'Uống đỡ một ly cà phê rồi vào làm', hue: 'bo' },
+      { time: 'Trưa', icon: 'dien-thoai', title: 'Ăn vội một bữa ăn trước màn hình điện thoại', hue: 'dao' },
+      { time: 'Trong giờ họp', icon: 'lua', title: 'Bụng cồn cào, xót bụng', text: 'đến mức phải uống liền một liều thuốc mình mua để sẵn', hue: 'do' },
+      { time: 'Tối', icon: 'laptop', title: 'Về muộn, ăn đỡ một cái gì đó', text: 'rồi cày việc đến tận giữa đêm', hue: 'lav' },
+    ]}
+  />
+</Diagram>

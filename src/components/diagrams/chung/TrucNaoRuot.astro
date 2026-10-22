@@ -1,0 +1,103 @@
+---
+/** Minh họa vẽ tay: trục não – ruột với 3 kênh liên kết (theo bản tin #01). */
+import Diagram from '../primitives/Diagram.astro';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const BRAIN =
+  'M12 4.6C11.1 3.6 9.6 3.3 8.3 3.8 7 4.3 6.2 5.5 6.2 6.8 4.6 7.2 3.6 8.7 3.8 10.3 2.8 11.4 2.8 13.2 3.7 14.4c-.2 1.8 1 3.4 2.8 3.7.7 1.6 2.4 2.5 4.1 2.2.6-.1 1-.3 1.4-.6.4.3.8.5 1.4.6 1.7.3 3.4-.6 4.1-2.2 1.8-.3 3-1.9 2.8-3.7.9-1.2.9-3-.1-4.1.2-1.6-.8-3.1-2.4-3.5 0-1.3-.8-2.5-2.1-3-1.3-.5-2.8-.2-3.7.8z';
+const STOMACH = 'M13 2v4.2C8.6 6.6 4.2 9.6 4.2 14.2c0 4 3.2 6.6 7.2 6.6 3.4 0 5.6-1.6 7.2-3.8l2.8.6v-4.6l-2.6-.4c-2.2-.8-3.2-2.4-3.2-5V2';
+---
+<Diagram
+  title="Trục não – ruột: “Não bộ thứ hai” của cơ thể"
+  icon="truc-nao-ruot"
+  hue="lav"
+  kicker="Minh họa"
+  caption="Giữa ruột và não có một mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh, được gọi là trục não - ruột. Hệ thần kinh trung ương và hệ thần kinh ruột phối hợp chi phối các hoạt động của hệ tiêu hóa, đồng thời tình trạng của hệ tiêu hóa cũng phản hồi và ảnh hưởng ngược lại đến tâm trạng và sức khỏe tâm thần."
+  from={['01-vi-sao-viem-da-day-tai-di-tai-lai']}
+>
+  <div class:list={['tnr', compact && 'tnr--compact']}>
+    <svg viewBox="0 0 360 300" role="img" aria-label="Não ở trên, dạ dày – ruột ở dưới, nối với nhau bằng ba kênh hai chiều: thần kinh, nội tiết tố và miễn dịch.">
+      <!-- não -->
+      <path class="tnr__shadow" transform="translate(137 5) scale(3.6)" d={BRAIN}></path>
+      <path class="tnr__brain" transform="translate(133 1) scale(3.6)" d={BRAIN}></path>
+      <path class="tnr__line" d="M159 34c3.6.7 6 3.2 6.8 6.8M207 34c-3.6.7-6 3.2-6.8 6.8"></path>
+      <circle class="tnr__ink" cx="172" cy="47" r="3.2"></circle>
+      <circle class="tnr__ink" cx="194" cy="47" r="3.2"></circle>
+      <path class="tnr__line" d="M178 54c3 3 7 3 10 0"></path>
+      <ellipse class="tnr__blush" cx="162" cy="54" rx="5" ry="3"></ellipse>
+      <ellipse class="tnr__blush" cx="204" cy="54" rx="5" ry="3"></ellipse>
+      <text x="262" y="34" class="tnr__name" text-anchor="middle">Não</text>
+
+      <!-- dạ dày / hệ tiêu hóa -->
+      <path class="tnr__shadow" transform="translate(141 196) scale(3.9)" d={STOMACH}></path>
+      <path class="tnr__gut" transform="translate(137 192) scale(3.9)" d={STOMACH}></path>
+      <circle class="tnr__ink" cx="171" cy="248" r="3.2"></circle>
+      <circle class="tnr__ink" cx="188" cy="248" r="3.2"></circle>
+      <path class="tnr__line" d="M175 255c2.6 2.6 6.4 2.6 9 0"></path>
+      <ellipse class="tnr__blush" cx="162" cy="255" rx="5" ry="3"></ellipse>
+      <ellipse class="tnr__blush" cx="197" cy="255" rx="5" ry="3"></ellipse>
+      <text x="282" y="252" class="tnr__name" text-anchor="middle">Hệ tiêu hóa</text>
+
+      <!-- kênh 1: thần kinh (trái) -->
+      <path class="tnr__ch tnr__ch--tk" d="M150 82c-38 18-44 52-10 70s30 36 12 50"></path>
+      <path class="tnr__head" d="M143 86l8-5-1 9"></path>
+      <path class="tnr__head" d="M146 196l7 7 2-9"></path>
+      <circle class="tnr__spark" cx="132" cy="122" r="4"></circle>
+      <circle class="tnr__spark" cx="150" cy="168" r="4"></circle>
+      <text x="62" y="140" class="tnr__lbl" text-anchor="middle">Thần kinh</text>
+
+      <!-- kênh 2: nội tiết tố (giữa) -->
+      <path class="tnr__ch tnr__ch--nt" d="M183 90v104"></path>
+      <path class="tnr__head" d="M177 97l6-8 6 8"></path>
+      <path class="tnr__head" d="M177 187l6 8 6-8"></path>
+      <path class="tnr__drop" d="M183 104c4 5 6 8 6 10.6a6 6 0 0 1-12 0c0-2.6 2-5.6 6-10.6z"></path>
+      <path class="tnr__drop" d="M183 166c4 5 6 8 6 10.6a6 6 0 0 1-12 0c0-2.6 2-5.6 6-10.6z"></path>
+      <rect x="137" y="134" width="92" height="26" rx="13" class="tnr__pill"></rect><text x="183" y="147" class="tnr__lbl tnr__lbl--sm" text-anchor="middle" dominant-baseline="central">Nội tiết tố</text>
+
+      <!-- kênh 3: miễn dịch (phải) -->
+      <path class="tnr__ch tnr__ch--md" d="M216 82c38 18 44 52 10 70s-30 36-10 52"></path>
+      <path class="tnr__head" d="M223 86l-8-5 1 9"></path>
+      <path class="tnr__head" d="M214 196l-5 8 9 1"></path>
+      <path class="tnr__shield" d="M234 112l9 3.4v6.4c0 5.4-3.8 9.6-9 11.4-5.2-1.8-9-6-9-11.4v-6.4z"></path>
+      <path class="tnr__shield" d="M226 158l7.4 2.8v5.2c0 4.4-3.1 7.8-7.4 9.4-4.3-1.6-7.4-5-7.4-9.4v-5.2z"></path>
+      <text x="300" y="140" class="tnr__lbl" text-anchor="middle">Miễn dịch</text>
+    </svg>
+    <ul class="tnr__legend">
+      <li data-hue="lav"><span class="tnr__sw tnr__sw--tk"></span><span><strong>Thần kinh</strong> — hệ thần kinh trung ương và hệ thần kinh ruột phối hợp chi phối các hoạt động của hệ tiêu hóa</span></li>
+      <li data-hue="dao"><span class="tnr__sw tnr__sw--nt"></span><span><strong>Nội tiết tố</strong></span></li>
+      <li data-hue="sage"><span class="tnr__sw tnr__sw--md"></span><span><strong>Miễn dịch</strong></span></li>
+      <li><span class="tnr__sw tnr__sw--both">⇅</span><span>Hai chiều: tình trạng của hệ tiêu hóa cũng phản hồi và ảnh hưởng ngược lại đến <strong>tâm trạng và sức khỏe tâm thần</strong></span></li>
+    </ul>
+  </div>
+</Diagram>
+
+<style>
+  .tnr { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .tnr { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+  .tnr svg { width: 100%; max-width: 420px; margin: 0 auto; display: block; overflow: visible; }
+  .tnr__shadow { fill: var(--line); stroke: none; }
+  .tnr__brain { fill: var(--lav-fill); stroke: var(--ink); stroke-width: 0.85; stroke-linejoin: round; }
+  .tnr__gut { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 0.8; stroke-linejoin: round; stroke-linecap: round; }
+  .tnr__line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+  .tnr__ink { fill: var(--ink); }
+  .tnr__blush { fill: var(--cheek); opacity: 0.8; }
+  .tnr__name { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink); }
+  .tnr__ch { fill: none; stroke-width: 5; stroke-linecap: round; }
+  .tnr__ch--tk { stroke: var(--lav); }
+  .tnr__ch--nt { stroke: var(--dao); stroke-dasharray: 2 10; stroke-width: 6; }
+  .tnr__ch--md { stroke: var(--sage); }
+  .tnr__head { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .tnr__spark { fill: var(--bo); stroke: var(--ink); stroke-width: 2.5; }
+  .tnr__drop { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 2.5; }
+  .tnr__shield { fill: var(--sage-fill); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .tnr__lbl { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .tnr__pill { fill: var(--surface); stroke: var(--dao); stroke-width: 2.5; }
+  .tnr__lbl--sm { font-size: 14px; }
+  .tnr__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-size: 0.93rem; }
+  .tnr__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); }
+  .tnr__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--ink); display: grid; place-items: center; font-weight: 900; font-size: 0.8rem; }
+  .tnr__sw--tk { background: var(--lav); }
+  .tnr__sw--nt { background: var(--dao); }
+  .tnr__sw--md { background: var(--sage); }
+  .tnr__sw--both { background: var(--bo-fill); }
+</style>

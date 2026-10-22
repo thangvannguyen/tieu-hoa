@@ -1,0 +1,152 @@
+---
+/**
+ * Mascot "Bé Bụng" — chiếc dạ dày dễ thương, 6 biểu cảm.
+ * Vẽ trong khung 120×120, nét 4px, luôn giữ màu đào kiểu sticker (cả ở dark mode).
+ */
+import type { Mood } from '~/lib/types';
+
+interface Props {
+  mood?: Mood;
+  size?: number | string;
+  label?: string;
+  class?: string;
+}
+const { mood = 'vui', size = 120, label, class: cls } = Astro.props;
+
+const BODY =
+  'M64 12v20C43 34 22 49 22 72c0 20 16 33 36 33 17 0 28-8 36-19l14 3V66l-13-2c-11-4-16-12-16-25V12';
+const moodLabel: Record<Mood, string> = {
+  vui: 'Bé Bụng đang vui vẻ',
+  'lo-lang': 'Bé Bụng đang lo lắng',
+  'buon-ngu': 'Bé Bụng đang buồn ngủ',
+  dau: 'Bé Bụng đang đau',
+  khoe: 'Bé Bụng khỏe mạnh',
+  'suy-nghi': 'Bé Bụng đang suy nghĩ',
+};
+const a11y = label ?? moodLabel[mood];
+---
+<svg
+  class:list={['bebung', `bebung--${mood}`, cls]}
+  viewBox="0 0 120 120"
+  width={size}
+  height={size}
+  role="img"
+  aria-label={a11y}
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <ellipse class="bb-shadow" cx="60" cy="113" rx="30" ry="3.5"></ellipse>
+  <path class="bb-halo" d={BODY}></path>
+  <!-- chân -->
+  <ellipse class="bb-part" cx="46" cy="106.5" rx="8" ry="4.6"></ellipse>
+  <ellipse class="bb-part" cx="68" cy="106.5" rx="8" ry="4.6"></ellipse>
+  <path class="bb-body" d={BODY}></path>
+  <path class="bb-line" d="M64 22.5h15"></path>
+
+  {mood === 'vui' && (
+    <g>
+      <path class="bb-line" d="M27 74c-7-2-11-7-12-14"></path>
+      <circle class="bb-part" cx="14.5" cy="57" r="5"></circle>
+      <circle class="bb-ink" cx="44" cy="70" r="4.2"></circle>
+      <circle class="bb-ink" cx="62" cy="70" r="4.2"></circle>
+      <circle class="bb-shine" cx="42.6" cy="68.5" r="1.4"></circle>
+      <circle class="bb-shine" cx="60.6" cy="68.5" r="1.4"></circle>
+      <path class="bb-ink bb-line" d="M46.5 78h13c0 5-3 8.2-6.5 8.2S46.5 83 46.5 78z"></path>
+      <path class="bb-tongue" d="M49.8 83.4c1.8-1.6 4.6-1.6 6.4 0-1 1.2-2 1.8-3.2 1.8s-2.2-.6-3.2-1.8z"></path>
+    </g>
+  )}
+
+  {mood === 'khoe' && (
+    <g>
+      <path class="bb-line" d="M26 84c-9 1-13-5-11-13"></path>
+      <circle class="bb-part" cx="15.5" cy="68.5" r="5.5"></circle>
+      <path class="bb-line" d="M12 80c2-2 5-2 7 0"></path>
+      <path class="bb-ink bb-line" d="M40 69c2-3 6-3 8 0"></path>
+      <path class="bb-ink bb-line" d="M58 69c2-3 6-3 8 0"></path>
+      <path class="bb-ink bb-line" d="M45 77h17c0 6-4 9.5-8.5 9.5S45 83 45 77z"></path>
+      <path class="bb-tongue" d="M49.5 83.6c2.2-1.8 5.8-1.8 8 0-1.2 1.4-2.5 2-4 2s-2.8-.6-4-2z"></path>
+      <path class="bb-spark" d="M101 22c1 6 3.6 8.6 9.6 9.6-6 1-8.6 3.6-9.6 9.6-1-6-3.6-8.6-9.6-9.6 6-1 8.6-3.6 9.6-9.6z"></path>
+      <path class="bb-spark" d="M22 30c.6 3.4 2 4.8 5.4 5.4-3.4.6-4.8 2-5.4 5.4-.6-3.4-2-4.8-5.4-5.4 3.4-.6 4.8-2 5.4-5.4z"></path>
+    </g>
+  )}
+
+  {mood === 'buon-ngu' && (
+    <g>
+      <path class="bb-line" d="M39.5 71c2.6 2.2 6 2.2 8.6 0"></path>
+      <path class="bb-line" d="M57.5 71c2.6 2.2 6 2.2 8.6 0"></path>
+      <ellipse class="bb-ink" cx="53" cy="81" rx="2.6" ry="3"></ellipse>
+      <path class="bb-zz" d="M12 30h10L12 41h10"></path>
+      <path class="bb-zz" d="M27 14h7l-7 8h7"></path>
+    </g>
+  )}
+
+  {mood === 'dau' && (
+    <g>
+      <path class="bb-line" d="M38.5 64.5l7.5-3"></path>
+      <path class="bb-line" d="M67.5 64.5l-7.5-3"></path>
+      <path class="bb-line" d="M40.5 68.5l5 3-5 3"></path>
+      <path class="bb-line" d="M65.5 68.5l-5 3 5 3"></path>
+      <path class="bb-line" d="M46.5 85c2.2-2.6 4.4-2.6 6.6 0s4.4 2.6 6.6 0"></path>
+      <path class="bb-flame" d="M70 99c-4.6 0-7.4-3-7.4-6.6 0-3 2-5 3.6-6.8.3 2 1.3 3.2 2.6 3.6 0-3 1.4-6.2 4.2-8.4.2 3.6 4.4 5.6 4.4 11 0 4.4-3 7.2-7.4 7.2z"></path>
+      <path class="bb-flame" d="M36 98c-3 0-5-2-5-4.4 0-2 1.3-3.4 2.4-4.6.2 1.4.9 2.2 1.8 2.4 0-2 1-4.2 2.8-5.6.2 2.4 3 3.8 3 7.4 0 3-2 4.8-5 4.8z"></path>
+      <path class="bb-drop" d="M80 44c3 4 4.5 6.4 4.5 8.4a4.5 4.5 0 0 1-9 0c0-2 1.5-4.4 4.5-8.4z"></path>
+    </g>
+  )}
+
+  {mood === 'lo-lang' && (
+    <g>
+      <path class="bb-line" d="M38 64l8-3"></path>
+      <path class="bb-line" d="M68 64l-8-3"></path>
+      <circle class="bb-ink" cx="44" cy="71" r="3.8"></circle>
+      <circle class="bb-ink" cx="62" cy="71" r="3.8"></circle>
+      <circle class="bb-shine" cx="42.8" cy="69.8" r="1.2"></circle>
+      <circle class="bb-shine" cx="60.8" cy="69.8" r="1.2"></circle>
+      <path class="bb-line" d="M45.5 82c2.4-2.4 4.6-2.4 6 0s3.6 2.4 6 0"></path>
+      <path class="bb-drop" d="M82 42c3 4 4.5 6.4 4.5 8.4a4.5 4.5 0 0 1-9 0c0-2 1.5-4.4 4.5-8.4z"></path>
+    </g>
+  )}
+
+  {mood === 'suy-nghi' && (
+    <g>
+      <path class="bb-line" d="M29 86c4 7 12 9 18 4.6"></path>
+      <circle class="bb-part" cx="48" cy="89.4" r="4.6"></circle>
+      <circle class="bb-ink" cx="45" cy="68" r="3.8"></circle>
+      <circle class="bb-ink" cx="63" cy="68" r="3.8"></circle>
+      <circle class="bb-shine" cx="46" cy="66.2" r="1.3"></circle>
+      <circle class="bb-shine" cx="64" cy="66.2" r="1.3"></circle>
+      <path class="bb-line" d="M50 80.5c2.2.8 4.6.8 7 0"></path>
+      <circle class="bb-bubble" cx="26" cy="40" r="4"></circle>
+      <circle class="bb-bubble" cx="17" cy="27" r="6.5"></circle>
+      <path class="bb-line" d="M14.6 24.6a2.6 2.6 0 1 1 3.4 2.5c-.6.2-1 .8-1 1.4"></path>
+      <circle class="bb-ink" cx="17" cy="31.4" r="1"></circle>
+    </g>
+  )}
+
+  <ellipse class="bb-blush" cx="34.5" cy="79.5" rx="5" ry="3"></ellipse>
+  <ellipse class="bb-blush" cx="71.5" cy="79.5" rx="5" ry="3"></ellipse>
+</svg>
+
+<style>
+  .bebung { flex: none; overflow: visible; display: inline-block; }
+  .bb-shadow { fill: rgb(74 59 53 / 0.12); }
+  .bb-halo { stroke: #fff; stroke-width: 12; fill: #fff; }
+  .bb-body { fill: #fde3d7; stroke: #4a3b35; stroke-width: 4; }
+  .bb-part { fill: #fcd2c0; stroke: #4a3b35; stroke-width: 4; }
+  .bb-line { stroke: #4a3b35; stroke-width: 4; }
+  .bb-ink { fill: #4a3b35; }
+  .bb-shine { fill: #fff; }
+  .bb-tongue { fill: #f59c9c; }
+  .bb-blush { fill: #f59c9c; opacity: 0.75; }
+  .bb-spark { fill: #fdf1c9; stroke: #4a3b35; stroke-width: 3.2; }
+  .bb-zz { stroke: #424e9e; stroke-width: 4; }
+  .bb-flame { fill: #f4a988; stroke: #4a3b35; stroke-width: 3; }
+  .bb-drop { fill: #e5e9fb; stroke: #4a3b35; stroke-width: 3; }
+  .bb-bubble { fill: #fff; stroke: #4a3b35; stroke-width: 3; }
+  :global(:root[data-theme='dark']) .bb-shadow { fill: rgb(0 0 0 / 0.35); }
+  :global(:root[data-theme='dark']) .bb-zz { stroke: #c6cdf5; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .bb-shadow { fill: rgb(0 0 0 / 0.35); }
+    :global(:root:not([data-theme='light'])) .bb-zz { stroke: #c6cdf5; }
+  }
+</style>

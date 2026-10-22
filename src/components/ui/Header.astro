@@ -1,0 +1,139 @@
+---
+import Icon from './Icon.astro';
+import { url } from '~/lib/url';
+
+const nav = [
+  { href: '/bai-hoc/', label: 'Bài học', icon: 'sach' },
+  { href: '/cong-cu/', label: 'Công cụ', icon: 'cong-cu' },
+  { href: '/on-tap/', label: 'Ôn tập', icon: 'the-ghi-nho' },
+  { href: '/thuat-ngu/', label: 'Thuật ngữ', icon: 'bong-den' },
+  { href: '/khi-nao-can-di-kham/', label: 'Khi nào đi khám', icon: 'co-do' },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) => path.startsWith(url(href));
+---
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href={url('/')} aria-label="Bụng Êm, Việc Ổn — trang chủ">
+      <span class="brand__logo" data-hue="dao"><Icon name="da-day" size={34} /></span>
+      <span class="brand__text">
+        <span class="brand__name">Bụng Êm, Việc Ổn</span>
+        <span class="brand__sub">Sổ tay Tiêu hóa · BS Lan Viên</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Điều hướng chính">
+      <ul>
+        {nav.map((n) => (
+          <li>
+            <a href={url(n.href)} aria-current={isActive(n.href) ? 'page' : undefined}>
+              <Icon name={n.icon} size={20} />
+              <span>{n.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <button class="icon-btn" type="button" data-open-search aria-label="Tìm kiếm (phím /)" title="Tìm kiếm (phím /)">
+        <Icon name="tim-kiem" size={22} />
+      </button>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Đổi giao diện sáng / tối" title="Đổi giao diện sáng / tối">
+        <span class="t-sun"><Icon name="mat-troi" size={22} /></span>
+        <span class="t-moon"><Icon name="trang" size={22} /></span>
+      </button>
+      <button class="icon-btn menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" data-menu-toggle aria-label="Mở menu">
+        <span class="m-open"><Icon name="menu" size={22} /></span>
+        <span class="m-close"><Icon name="dong" size={22} /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { prefs } from '~/lib/storage';
+
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const current = () =>
+    root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  toggle?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    prefs.set({ ...prefs.get(), theme: next });
+  });
+
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.getElementById('site-nav');
+  menuBtn?.addEventListener('click', () => {
+    const open = menuBtn.getAttribute('aria-expanded') !== 'true';
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+    nav?.classList.toggle('is-open', open);
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 2px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 1rem; min-height: 64px; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+  .brand__logo {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
+    background: var(--h-fill); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+    transform: rotate(-4deg);
+  }
+  .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand__name { font-family: var(--font-head); font-weight: 900; font-size: 1.12rem; }
+  .brand__sub { font-size: 0.78rem; color: var(--ink-2); }
+
+  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.25rem; }
+  .nav a {
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.75rem; border-radius: 999px;
+    color: var(--ink); text-decoration: none; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem;
+  }
+  .nav a:hover { background: var(--surface-2); }
+  .nav a[aria-current='page'] { background: var(--h-fill); color: var(--h-ink); }
+
+  .actions { display: flex; gap: 0.35rem; }
+  .icon-btn {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
+    border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; color: var(--ink);
+  }
+  .icon-btn:hover { border-color: var(--ink); }
+  .t-moon { display: none; }
+  :global(:root[data-theme='dark']) .t-sun { display: none; }
+  :global(:root[data-theme='dark']) .t-moon { display: contents; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .t-sun { display: none; }
+    :global(:root:not([data-theme='light'])) .t-moon { display: contents; }
+  }
+  .menu-btn { display: none; }
+  .m-close { display: none; }
+  .menu-btn[aria-expanded='true'] .m-open { display: none; }
+  .menu-btn[aria-expanded='true'] .m-close { display: contents; }
+
+  @media (max-width: 1060px) {
+    .brand__sub { display: none; }
+    .menu-btn { display: grid; }
+    .nav {
+      display: none; position: absolute; left: 0; right: 0; top: 100%;
+      background: var(--bg); border-bottom: 2px solid var(--line); padding: 0.75rem var(--gutter) 1rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .nav.is-open { display: block; }
+    .nav ul { flex-direction: column; gap: 0.15rem; }
+    .nav a { display: flex; padding: 0.7rem 0.9rem; font-size: 1.02rem; }
+  }
+  @media (max-width: 400px) {
+    .brand__name { font-size: 1rem; }
+    .brand__logo { width: 40px; height: 40px; }
+    .bar { gap: 0.5rem; }
+  }
+</style>

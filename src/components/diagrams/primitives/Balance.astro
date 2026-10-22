@@ -1,0 +1,117 @@
+---
+/**
+ * Cán cân tương tác: bấm các yếu tố hai bên để thêm/bớt — cán cân nghiêng về bên nặng hơn.
+ * Mặc định bật: left.on / right.on (mảng chỉ số), nếu bỏ trống thì bật hết bên trái, tắt hết bên phải.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+interface Side { title: string; icon: string; hue: Hue; items: { icon?: string; text: string }[]; on?: number[] }
+interface Props { left: Side; right: Side; messages: { left: string; right: string; even: string } }
+const { left, right, messages } = Astro.props;
+const leftOn = new Set(left.on ?? left.items.map((_, i) => i));
+const rightOn = new Set(right.on ?? []);
+---
+<bev-balance class="bal" data-msg-left={messages.left} data-msg-right={messages.right} data-msg-even={messages.even}>
+  <div class="bal__stage" aria-hidden="true">
+    <svg viewBox="0 0 320 170" class="bal__svg">
+      <g class="bal__pan-g bal__pan-g--l">
+        <path d="M60 62 36 112h48z" class="bal__rope"></path>
+        <path d="M26 112h68a34 14 0 0 1-68 0z" class="bal__pan bal__pan--l"></path>
+        <text x="60" y="152" text-anchor="middle" class="bal__count" data-count="left">0</text>
+      </g>
+      <g class="bal__pan-g bal__pan-g--r">
+        <path d="M260 62 236 112h48z" class="bal__rope"></path>
+        <path d="M226 112h68a34 14 0 0 1-68 0z" class="bal__pan bal__pan--r"></path>
+        <text x="260" y="152" text-anchor="middle" class="bal__count" data-count="right">0</text>
+      </g>
+      <g class="bal__beam"><rect x="30" y="52" width="260" height="10" rx="5" class="bal__bar"></rect></g>
+      <path d="M160 58 136 158h48z" class="bal__stand"></path>
+      <circle cx="160" cy="57" r="9" class="bal__pivot"></circle>
+      <rect x="112" y="156" width="96" height="10" rx="5" class="bal__stand"></rect>
+    </svg>
+  </div>
+  <p class="bal__status" aria-live="polite"></p>
+  <div class="bal__sides">
+    {[left, right].map((side, si) => (
+      <section class="bal__side" data-hue={side.hue} data-side={si === 0 ? 'left' : 'right'}>
+        <p class="bal__title"><Icon name={side.icon} size={28} /> {side.title}</p>
+        <ul>
+          {side.items.map((it, i) => (
+            <li>
+              <button type="button" class="bal__item" aria-pressed={(si === 0 ? leftOn : rightOn).has(i) ? 'true' : 'false'}>
+                <Icon name={it.icon ?? side.icon} size={22} />
+                <span set:html={inline(it.text)} />
+                <span class="bal__chk" aria-hidden="true"></span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</bev-balance>
+
+<script>
+  class BevBalance extends HTMLElement {
+    connectedCallback() {
+      const beam = this.querySelector<SVGGElement>('.bal__beam')!;
+      const status = this.querySelector<HTMLElement>('.bal__status')!;
+      const update = () => {
+        const l = this.querySelectorAll('[data-side=left] [aria-pressed=true]').length;
+        const r = this.querySelectorAll('[data-side=right] [aria-pressed=true]').length;
+        const deg = Math.max(-16, Math.min(16, (r - l) * 2.2));
+        beam.style.transform = `rotate(${deg}deg)`;
+        const dy = 100 * Math.sin((deg * Math.PI) / 180);
+        this.querySelector<SVGGElement>('.bal__pan-g--l')!.style.transform = `translateY(${-dy}px)`;
+        this.querySelector<SVGGElement>('.bal__pan-g--r')!.style.transform = `translateY(${dy}px)`;
+        this.querySelector('[data-count=left]')!.textContent = String(l);
+        this.querySelector('[data-count=right]')!.textContent = String(r);
+        status.textContent = l > r ? this.dataset.msgLeft! : r > l ? this.dataset.msgRight! : this.dataset.msgEven!;
+        this.dataset.tilt = l > r ? 'left' : r > l ? 'right' : 'even';
+      };
+      this.querySelectorAll<HTMLButtonElement>('.bal__item').forEach((b) =>
+        b.addEventListener('click', () => {
+          b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+          update();
+        }),
+      );
+      update();
+    }
+  }
+  customElements.define('bev-balance', BevBalance);
+</script>
+
+<style>
+  .bal { display: block; }
+  .bal__stage { max-width: 420px; margin: 0 auto; color: var(--ink); }
+  .bal__svg { width: 100%; height: auto; overflow: visible; }
+  .bal__beam { transform-box: view-box; transform-origin: 160px 57px; transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1); }
+  .bal__pan-g { transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1); }
+  .bal__bar { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .bal__rope { fill: none; stroke: var(--ink-3); stroke-width: 2; stroke-dasharray: 4 3; }
+  .bal__pan { stroke: var(--ink); stroke-width: 3; }
+  .bal__pan--l { fill: var(--do-fill); }
+  .bal__pan--r { fill: var(--sage-fill); }
+  .bal__stand { fill: var(--line-2); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .bal__pivot { fill: var(--bo); stroke: var(--ink); stroke-width: 3; }
+  .bal__count { font-family: var(--font-head); font-weight: 900; font-size: 22px; fill: var(--ink); }
+  .bal__status { text-align: center; font-family: var(--font-head); font-weight: 800; margin: 0.4rem 0 1rem; min-height: 1.6em; padding: 0.4rem 0.8rem; border-radius: 999px; background: var(--surface); }
+  .bal[data-tilt='left'] .bal__status { color: var(--do-ink); }
+  .bal[data-tilt='right'] .bal__status { color: var(--sage-ink); }
+  .bal__sides { display: grid; gap: 0.9rem; }
+  @container (max-width: 599px) { .bal__status { position: sticky; top: 74px; z-index: 3; box-shadow: 0 0 0 2px var(--line-2), var(--shadow); } }
+  @container (min-width: 600px) { .bal__sides { grid-template-columns: 1fr 1fr; } }
+  .bal__side { padding: 0.8rem; border-radius: 18px; background: var(--h-fill); border: 2px solid var(--ink); }
+  .bal__title { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.6rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); --ic-fill: var(--surface); }
+  .bal__side ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+  .bal__side li { margin: 0; }
+  .bal__item {
+    width: 100%; display: grid; grid-template-columns: auto 1fr auto; gap: 0.5rem; align-items: center; text-align: left;
+    padding: 0.45rem 0.6rem; border-radius: 12px; border: 2px solid transparent; background: var(--surface); color: var(--ink-3);
+    cursor: pointer; font-size: 0.92rem; line-height: 1.35; --ic-fill: var(--line);
+  }
+  .bal__item[aria-pressed='true'] { color: var(--ink); border-color: var(--ink); --ic-fill: var(--h-fill); }
+  .bal__chk { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--line-2); }
+  .bal__item[aria-pressed='true'] .bal__chk { background: var(--h); border-color: var(--ink); }
+</style>

@@ -1,0 +1,112 @@
+---
+/** Ôn nhanh: câu hỏi trắc nghiệm, chấm ngay, lưu điểm cao nhất trên máy. */
+import Icon from '~/components/ui/Icon.astro';
+import BeBung from '~/components/ui/BeBung.astro';
+import { inline } from '~/lib/inline';
+import type { Quiz } from '~/lib/data';
+interface Props { quiz: Quiz; title?: string; compact?: boolean }
+const { quiz, title = 'Ôn nhanh', compact = false } = Astro.props;
+const qid = quiz.lesson;
+---
+<section class:list={['qz', compact && 'qz--compact']} data-quiz={qid} data-total={quiz.questions.length} aria-labelledby={`qz-${qid}`}>
+  <div class="qz__head">
+    <BeBung mood="khoe" size={compact ? 56 : 72} />
+    <div>
+      <h2 id={`qz-${qid}`} class="qz__t">{title}</h2>
+      <p class="qz__sub">{quiz.questions.length} câu · chọn đáp án rồi bấm “Kiểm tra”. <span class="qz__best" hidden></span></p>
+    </div>
+  </div>
+  <ol class="qz__list">
+    {quiz.questions.map((q, qi) => (
+      <li class="qz__q" data-answer={q.answer.join(',')} data-type={q.type}>
+        <fieldset>
+          <legend set:html={`<span class="qz__n">Câu ${qi + 1}</span>` + inline(q.prompt) + (q.type === 'multi' ? ' <span class="qz__multi">(chọn nhiều)</span>' : '')} />
+          <div class="qz__opts">
+            {q.options.map((o) => (
+              <label class="qz__opt">
+                <input type={q.type === 'multi' ? 'checkbox' : 'radio'} name={`${qid}-${q.id}`} value={o.id} />
+                <span set:html={inline(o.text)} />
+              </label>
+            ))}
+          </div>
+          <div class="qz__fb" aria-live="polite" hidden>
+            <p class="qz__verdict"></p>
+            <p class="qz__explain" set:html={inline(q.explain)} />
+          </div>
+          <button type="button" class="btn btn--sm qz__check">Kiểm tra</button>
+        </fieldset>
+      </li>
+    ))}
+  </ol>
+  <p class="qz__score" aria-live="polite" hidden><Icon name="sao" size={26} /> <span></span></p>
+</section>
+
+<script>
+  import { progress } from '~/lib/storage';
+  document.querySelectorAll<HTMLElement>('.qz').forEach((root) => {
+    const id = root.dataset.quiz!;
+    const total = Number(root.dataset.total);
+    const done = new Map<HTMLElement, boolean>();
+    const best = root.querySelector<HTMLElement>('.qz__best')!;
+    const prev = progress.get().quiz[id];
+    if (prev) { best.hidden = false; best.textContent = `Lần tốt nhất: ${prev.best}/${prev.total}.`; }
+    root.querySelectorAll<HTMLElement>('.qz__q').forEach((li) => {
+      const btn = li.querySelector<HTMLButtonElement>('.qz__check')!;
+      btn.addEventListener('click', () => {
+        const answer = li.dataset.answer!.split(',').sort().join(',');
+        const picked = [...li.querySelectorAll<HTMLInputElement>('input:checked')].map((i) => i.value).sort().join(',');
+        if (!picked) { btn.textContent = 'Chọn một đáp án trước nhé'; return; }
+        const ok = picked === answer;
+        done.set(li, ok);
+        li.classList.toggle('is-ok', ok);
+        li.classList.toggle('is-no', !ok);
+        li.querySelectorAll<HTMLLabelElement>('.qz__opt').forEach((lb) => {
+          const v = lb.querySelector('input')!.value;
+          lb.classList.toggle('is-right', answer.split(',').includes(v));
+        });
+        const fb = li.querySelector<HTMLElement>('.qz__fb')!;
+        fb.hidden = false;
+        fb.querySelector('.qz__verdict')!.textContent = ok ? 'Chính xác!' : 'Chưa đúng — xem đáp án được tô xanh nhé.';
+        btn.textContent = 'Kiểm tra lại';
+        if (done.size === total) {
+          const score = [...done.values()].filter(Boolean).length;
+          const out = root.querySelector<HTMLElement>('.qz__score')!;
+          out.hidden = false;
+          out.querySelector('span')!.textContent = `Bạn đúng ${score}/${total} câu. ${score === total ? 'Tuyệt vời!' : 'Đọc lại phần liên quan rồi thử lần nữa nhé.'}`;
+          const p = progress.get();
+          const old = p.quiz[id];
+          if (!old || score >= old.best) p.quiz[id] = { best: score, total, at: new Date().toISOString() };
+          progress.set(p);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .qz { margin: 2.5rem 0; padding: 1.2rem 1.3rem; border-radius: var(--radius-lg); background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .qz__head { display: flex; gap: 0.8rem; align-items: center; margin-bottom: 0.8rem; }
+  .qz__t { margin: 0 !important; padding: 0 !important; }
+  .qz__t::before { display: none !important; }
+  .qz__sub { margin: 0.15rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
+  .qz__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .qz__q { margin: 0; }
+  fieldset { border: 2px solid var(--line); border-radius: 18px; padding: 0.8rem 1rem 1rem; margin: 0; background: var(--bg); }
+  .qz__q.is-ok fieldset { border-color: var(--sage); }
+  .qz__q.is-no fieldset { border-color: var(--do); }
+  legend { font-weight: 700; padding: 0; line-height: 1.45; float: left; width: 100%; margin-bottom: 0.2rem; }
+  legend + * { clear: both; }
+  legend :global(.qz__n) { display: inline-block; margin-right: 0.5rem; padding: 0 0.55rem; border-radius: 999px; background: var(--ink); color: var(--bg); font-family: var(--font-head); font-size: 0.8rem; font-weight: 900; vertical-align: 0.1em; }
+  legend :global(.qz__multi) { font-weight: 500; color: var(--ink-3); font-size: 0.88em; }
+  .qz__opts { display: grid; gap: 0.35rem; margin: 0.4rem 0 0.8rem; }
+  .qz__opt { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); border: 2px solid transparent; cursor: pointer; line-height: 1.45; }
+  .qz__opt:hover { border-color: var(--line-2); }
+  .qz__opt input { margin-top: 0.3rem; accent-color: var(--ink); width: 18px; height: 18px; }
+  .qz__q.is-ok .qz__opt.is-right, .qz__q.is-no .qz__opt.is-right { background: var(--sage-fill); border-color: var(--sage); }
+  .qz__fb { margin: 0 0 0.8rem; padding: 0.6rem 0.8rem; border-radius: 12px; background: var(--surface-2); font-size: 0.94rem; }
+  .qz__verdict { font-weight: 800; margin: 0 0 0.2rem; }
+  .qz__q.is-ok .qz__verdict { color: var(--sage-ink); }
+  .qz__q.is-no .qz__verdict { color: var(--do-ink); }
+  .qz__explain { margin: 0; }
+  .qz__score { display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0 0; padding: 0.7rem 1rem; border-radius: 14px; background: var(--bo-fill); font-family: var(--font-head); font-weight: 800; --ic-fill: var(--surface); }
+</style>

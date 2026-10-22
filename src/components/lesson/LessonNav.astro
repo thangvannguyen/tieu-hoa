@@ -1,0 +1,30 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import { url } from '~/lib/url';
+import { lessonLabel, type Lesson } from '~/lib/lessons';
+interface Props { prev?: Lesson; next?: Lesson }
+const { prev, next } = Astro.props;
+---
+<nav class="lnav" aria-label="Bài trước và bài sau">
+  {prev ? (
+    <a class="lnav__a lnav__prev" href={url(`/bai/${prev.id}/`)}>
+      <Icon name="mui-ten-trai" size={24} />
+      <span><span class="lnav__k">Bài trước · {lessonLabel(prev)}</span><span class="lnav__t">{prev.data.title}</span></span>
+    </a>
+  ) : <span />}
+  {next && (
+    <a class="lnav__a lnav__next" href={url(`/bai/${next.id}/`)}>
+      <span><span class="lnav__k">Bài tiếp theo · {lessonLabel(next)}</span><span class="lnav__t">{next.data.title}</span></span>
+      <Icon name="mui-ten-phai" size={24} />
+    </a>
+  )}
+</nav>
+<style>
+  .lnav { display: grid; gap: 0.8rem; margin: 2rem 0 0; }
+  @media (min-width: 720px) { .lnav { grid-template-columns: 1fr 1fr; } }
+  .lnav__a { display: flex; gap: 0.7rem; align-items: center; padding: 0.9rem 1rem; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line-2); color: var(--ink); text-decoration: none; }
+  .lnav__a:hover { border-color: var(--ink); }
+  .lnav__next { justify-content: space-between; text-align: right; }
+  .lnav__k { display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+  .lnav__t { display: block; font-family: var(--font-head); font-weight: 800; line-height: 1.3; }
+</style>

@@ -1,0 +1,16 @@
+---
+import Diagram from '../primitives/Diagram.astro';
+import Cycle from '../primitives/Cycle.astro';
+---
+<Diagram title="Vì sao bệnh “tái đi tái lại”?" icon="lap-lai" hue="dao" caption="Dùng thuốc là cần thiết nhưng nó chỉ giúp giải quyết phần ngọn; để đỡ bệnh lâu dài cần hiểu rõ cơ chế gây nên bệnh và tác động phần gốc." from={['01-vi-sao-viem-da-day-tai-di-tai-lai']}>
+  <Cycle
+    center={{ title: 'Phần ngọn ≠ phần gốc', icon: 'da-day' }}
+    nodes={[
+      { icon: 'vien-thuoc', title: 'Một đợt uống thuốc điều trị', text: 'Thuốc vẫn cần nhất là khi bạn đang ở trong đợt bệnh cấp.' },
+      { icon: 'dung', title: 'Đỡ triệu chứng', text: 'Thuốc giúp giải quyết phần ngọn — dập “lửa tạm thời”.' },
+      { icon: 'may-stress', title: 'Mọi thứ lại quay về như cũ', text: 'Chủ quan, kèm với stress dồn dập và nhịp sống bận rộn.' },
+      { icon: 'lua', title: 'Dạ dày lại “kêu gào”', text: 'Những yếu tố trong nhịp sống hằng ngày âm thầm tạo điều kiện cho tình trạng viêm quay trở lại.' },
+    ]}
+    breakAt={{ after: 1, label: 'Tác động phần gốc' }}
+  />
+</Diagram>

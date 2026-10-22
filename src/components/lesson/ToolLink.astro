@@ -1,0 +1,32 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import { url } from '~/lib/url';
+import { toolById } from '~/data/tools';
+interface Props { tool: string; text?: string }
+const { tool, text } = Astro.props;
+const t = toolById[tool];
+if (!t) throw new Error(`Không có công cụ "${tool}" (xem src/data/tools.ts)`);
+---
+<a class="toollink" href={url(`/cong-cu/${t.id}/`)} data-hue={t.hue}>
+  <span class="toollink__ic"><Icon name={t.icon} size={34} /></span>
+  <span class="toollink__tx">
+    <span class="toollink__k">Công cụ thực hành</span>
+    <span class="toollink__t">{t.title}</span>
+    <span class="toollink__d">{text ?? t.short}</span>
+  </span>
+  <Icon name="mui-ten-phai" size={24} class="toollink__go" />
+</a>
+
+<style>
+  .toollink {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: center; margin: 1.5rem 0;
+    padding: 1rem 1.1rem; border-radius: var(--radius); text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .toollink:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .toollink__ic { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; background: var(--h-fill); --ic-fill: var(--surface); }
+  .toollink__tx { display: grid; gap: 0.1rem; }
+  .toollink__k { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--h-ink); }
+  .toollink__t { font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; }
+  .toollink__d { font-size: 0.92rem; color: var(--ink-2); }
+</style>

@@ -1,0 +1,133 @@
+---
+/**
+ * Cây quyết định từng bước. nodes: { [id]: { q, hint?, options: [{label, to}] } | { result: {tone, title, text} } }
+ * Có JS: hỏi từng câu. Không JS / khi in: hiện toàn bộ cây.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+
+type Tone = 'ok' | 'warn' | 'stop';
+interface QNode { q: string; hint?: string; options: { label: string; to: string }[] }
+interface RNode { result: { tone: Tone; title: string; text?: string; icon?: string } }
+interface Props { nodes: Record<string, QNode | RNode>; start: string }
+const { nodes, start } = Astro.props;
+const toneHue: Record<Tone, string> = { ok: 'sage', warn: 'bo', stop: 'do' };
+const toneIcon: Record<Tone, string> = { ok: 'dung', warn: 'canh-bao', stop: 'co-do' };
+const isQ = (n: QNode | RNode): n is QNode => 'q' in n;
+// thứ tự hiển thị tĩnh: duyệt theo chiều rộng từ start
+const order: string[] = [];
+const queue = [start];
+while (queue.length) {
+  const id = queue.shift()!;
+  if (order.includes(id) || !nodes[id]) continue;
+  order.push(id);
+  const nd = nodes[id];
+  if (isQ(nd)) nd.options.forEach((o) => queue.push(o.to));
+}
+const qIndex = Object.fromEntries(order.filter((id) => isQ(nodes[id])).map((id, i) => [id, i + 1]));
+---
+<bev-steptree class="st" data-start={start}>
+  <div class="st__live" hidden>
+    <ol class="st__trail" aria-label="Các bước đã chọn"></ol>
+    {order.map((id) => {
+      const nd = nodes[id];
+      return isQ(nd) ? (
+        <div class="st__q" data-id={id} hidden>
+          <p class="st__qt"><span class="dg-num">{qIndex[id]}</span> <span set:html={inline(nd.q)} /></p>
+          {nd.hint && <p class="st__hint" set:html={inline(nd.hint)} />}
+          <div class="st__opts">
+            {nd.options.map((o) => <button type="button" class="btn btn--sm" data-to={o.to} set:html={inline(o.label)} />)}
+          </div>
+        </div>
+      ) : (
+        <div class="st__r" data-id={id} data-hue={toneHue[nd.result.tone]} hidden>
+          <Icon name={nd.result.icon ?? toneIcon[nd.result.tone]} size={34} />
+          <div>
+            <p class="st__rt" set:html={inline(nd.result.title)} />
+            {nd.result.text && <p class="st__rx" set:html={inline(nd.result.text)} />}
+          </div>
+        </div>
+      );
+    })}
+    <p class="st__actions">
+      <button type="button" class="btn btn--ghost btn--sm" data-back hidden><Icon name="mui-ten-trai" size={18} /> Quay lại</button>
+      <button type="button" class="btn btn--ghost btn--sm" data-reset hidden><Icon name="lap-lai" size={18} /> Làm lại</button>
+    </p>
+  </div>
+
+  <ol class="st__static">
+    {order.map((id) => {
+      const nd = nodes[id];
+      return isQ(nd) ? (
+        <li id={`st-${id}`}>
+          <strong set:html={`${qIndex[id]}. ` + inline(nd.q)} />
+          <ul>
+            {nd.options.map((o) => {
+              const t = nodes[o.to];
+              return (
+                <li>
+                  <span set:html={inline(o.label)} /> →{' '}
+                  {t && isQ(t) ? <span>câu {qIndex[o.to]}</span> : t ? <em set:html={inline((t as RNode).result.title)} /> : null}
+                </li>
+              );
+            })}
+          </ul>
+        </li>
+      ) : null;
+    })}
+  </ol>
+</bev-steptree>
+
+<script>
+  class BevStepTree extends HTMLElement {
+    connectedCallback() {
+      const live = this.querySelector<HTMLElement>('.st__live')!;
+      const stat = this.querySelector<HTMLElement>('.st__static')!;
+      const trail = this.querySelector<HTMLOListElement>('.st__trail')!;
+      const back = this.querySelector<HTMLButtonElement>('[data-back]')!;
+      const reset = this.querySelector<HTMLButtonElement>('[data-reset]')!;
+      live.hidden = false;
+      stat.classList.add('is-print-only');
+      const history: { id: string; label: string }[] = [];
+      const show = (id: string) => {
+        this.querySelectorAll<HTMLElement>('.st__q, .st__r').forEach((el) => (el.hidden = el.dataset.id !== id));
+        trail.replaceChildren(...history.map((h) => { const li = document.createElement('li'); li.textContent = h.label; return li; }));
+        back.hidden = history.length === 0;
+        reset.hidden = history.length === 0;
+        const cur = this.querySelector<HTMLElement>(`[data-id="${id}"]`);
+        cur?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+      };
+      let current = this.dataset.start!;
+      this.querySelectorAll<HTMLButtonElement>('.st__opts button').forEach((b) =>
+        b.addEventListener('click', () => {
+          history.push({ id: current, label: b.textContent ?? '' });
+          current = b.dataset.to!;
+          show(current);
+        }),
+      );
+      back.addEventListener('click', () => { const h = history.pop(); if (h) { current = h.id; show(current); } });
+      reset.addEventListener('click', () => { history.length = 0; current = this.dataset.start!; show(current); });
+      show(current);
+    }
+  }
+  customElements.define('bev-steptree', BevStepTree);
+</script>
+
+<style>
+  .st { display: block; }
+  .st__trail { list-style: none; margin: 0 0 0.6rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .st__trail:empty { display: none; }
+  .st__trail :global(li) { font-size: 0.8rem; font-weight: 700; padding: 0.1rem 0.6rem; border-radius: 999px; background: var(--surface); border: 1.5px solid var(--line-2); }
+  .st__q, .st__r { padding: 1rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .st__qt { display: flex; gap: 0.6rem; align-items: flex-start; font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; line-height: 1.35; }
+  .st__hint { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.4rem !important; }
+  .st__opts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .st__r { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; background: var(--h-fill); --ic-fill: var(--surface); }
+  .st__rt { font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; color: var(--h-ink); }
+  .st__rx { font-size: 0.95rem; margin-top: 0.3rem !important; }
+  .st__actions { display: flex; gap: 0.5rem; margin-top: 0.8rem !important; }
+  .st__static { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.6rem; font-size: 0.95rem; }
+  .st__static ul { margin: 0.2rem 0 0; padding-left: 1.1rem; }
+  .st__static.is-print-only { display: none; }
+  @media print { .st__live { display: none !important; } .st__static.is-print-only { display: grid; } }
+</style>

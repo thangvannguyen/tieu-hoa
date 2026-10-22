@@ -1,0 +1,41 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+interface Props { lesson: string }
+const { lesson } = Astro.props;
+---
+<bev-markdone class="md" data-lesson={lesson}>
+  <button type="button" class="btn btn--primary md__btn" aria-pressed="false">
+    <Icon name="dung" size={22} /> <span class="md__label">Đánh dấu đã học xong</span>
+  </button>
+  <p class="md__hint">Tiến độ được lưu trên máy này.</p>
+</bev-markdone>
+<script>
+  import { progress, prefs } from '~/lib/storage';
+  class BevMarkDone extends HTMLElement {
+    connectedCallback() {
+      const id = this.dataset.lesson!;
+      const btn = this.querySelector<HTMLButtonElement>('button')!;
+      const label = this.querySelector<HTMLElement>('.md__label')!;
+      prefs.set({ ...prefs.get(), lastLesson: id });
+      const sync = () => {
+        const done = !!progress.get().lessons[id]?.done;
+        btn.setAttribute('aria-pressed', String(done));
+        label.textContent = done ? 'Đã học xong bài này' : 'Đánh dấu đã học xong';
+      };
+      btn.addEventListener('click', () => {
+        const p = progress.get();
+        if (p.lessons[id]?.done) delete p.lessons[id];
+        else p.lessons[id] = { done: true, at: new Date().toISOString() };
+        progress.set(p);
+        sync();
+      });
+      sync();
+    }
+  }
+  customElements.define('bev-markdone', BevMarkDone);
+</script>
+<style>
+  .md { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; justify-content: center; margin: 2rem 0; }
+  .md__hint { margin: 0; font-size: 0.85rem; color: var(--ink-3); }
+  .md__btn[aria-pressed='true'] { background: var(--sage); }
+</style>

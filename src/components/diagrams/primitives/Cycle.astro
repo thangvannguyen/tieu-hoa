@@ -1,0 +1,75 @@
+---
+/**
+ * Vòng lặp (3–6 bước) quanh một tâm. Trên màn hình hẹp: danh sách dọc + dòng "quay lại bước 1".
+ * breakAt: chèn nhãn "phá vòng" sau bước có chỉ số này.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import Card from './Card.astro';
+import { inline } from '~/lib/inline';
+import type { Node } from './types';
+
+interface Props { nodes: Node[]; center?: { title: string; icon?: string; text?: string }; breakAt?: { after: number; label: string } }
+const { nodes, center, breakAt } = Astro.props;
+const n = nodes.length;
+// toạ độ % cho từng nút trên vòng tròn (bắt đầu ở đỉnh, theo chiều kim đồng hồ)
+const pos = nodes.map((_, i) => {
+  const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+  return { x: 50 + 38 * Math.cos(a), y: 50 + 38 * Math.sin(a) };
+});
+// đầu mũi tên giữa hai nút liên tiếp, trên đường tròn bán kính 38 (viewBox 100)
+const heads = nodes.map((_, i) => {
+  const a = -Math.PI / 2 + ((i + 0.5) * 2 * Math.PI) / n;
+  return { x: 50 + 38 * Math.cos(a), y: 50 + 38 * Math.sin(a), deg: (a * 180) / Math.PI };
+});
+const breakHead = breakAt ? (() => { const a = -Math.PI / 2 + ((breakAt.after + 0.5) * 2 * Math.PI) / n; return { x: 50 + 47 * Math.cos(a), y: 50 + 47 * Math.sin(a) }; })() : undefined;
+---
+<div class="cyc" style={`--n:${n}`}>
+  <div class="cyc__ring" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="1.1" stroke-dasharray="2.2 2.2" vector-effect="non-scaling-stroke"></circle>
+      {heads.map((h) => (
+        <path d="M-1.6 -1.2 L0 1 L1.6 -1.2" transform={`translate(${h.x} ${h.y}) rotate(${h.deg})`} fill="none" stroke="currentColor" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></path>
+      ))}
+    </svg>
+  </div>
+  {center && (
+    <div class="cyc__center">
+      {center.icon && <Icon name={center.icon} size={40} />}
+      <span class="cyc__ct" set:html={inline(center.title)} />
+      {center.text && <span class="cyc__cx" set:html={inline(center.text)} />}
+    </div>
+  )}
+  <ol class="cyc__nodes">
+    {nodes.map((node, i) => (
+      <li class="cyc__node" style={`--x:${pos[i].x}%;--y:${pos[i].y}%`}>
+        <Card node={node} num={i + 1} />
+        {breakAt && breakAt.after === i && <span class="cyc__break cyc__break--list"><Icon name="dong" size={18} /> {breakAt.label}</span>}
+      </li>
+    ))}
+  </ol>
+  {breakHead && breakAt && (
+    <span class="cyc__break cyc__break--ring" style={`--x:${breakHead.x}%;--y:${breakHead.y}%`} aria-hidden="true"><Icon name="dong" size={18} /> {breakAt.label}</span>
+  )}
+  <p class="cyc__loop"><Icon name="lap-lai" size={22} /> …rồi lại quay về bước 1</p>
+</div>
+<style>
+  .cyc { position: relative; color: var(--h-ink); }
+  .cyc__nodes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; color: var(--ink); }
+  .cyc__node { margin: 0; display: grid; gap: 0.4rem; }
+  .cyc__center { display: grid; justify-items: center; text-align: center; gap: 0.2rem; padding: 0.8rem; margin-bottom: 0.8rem; border-radius: 18px; background: var(--h-fill); color: var(--ink); }
+  .cyc__ct { font-family: var(--font-head); font-weight: 900; }
+  .cyc__cx { font-size: 0.88rem; color: var(--ink-2); }
+  .cyc__loop { display: flex; align-items: center; gap: 0.4rem; margin: 0.6rem 0 0; font-weight: 700; font-size: 0.92rem; }
+  .cyc__break { display: inline-flex; align-items: center; gap: 0.3rem; justify-self: start; padding: 0.25rem 0.7rem; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 800; font-size: 0.82rem; font-family: var(--font-head); }
+  .cyc__ring, .cyc__break.cyc__break--ring { display: none; }
+  @container (min-width: 620px) {
+    .cyc { aspect-ratio: 1 / 0.86; max-width: 700px; margin-inline: auto; }
+    .cyc__ring { display: block; position: absolute; inset: 0; }
+    .cyc__ring svg { width: 100%; height: 100%; }
+    .cyc__nodes { position: absolute; inset: 0; display: block; }
+    .cyc__node { position: absolute; left: var(--x); top: var(--y); width: min(31%, 200px); transform: translate(-50%, -50%); }
+    .cyc__center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 26%; margin: 0; background: var(--surface); border: 2px dashed var(--h); }
+    .cyc__loop, .cyc__break--list { display: none; }
+    .cyc__break.cyc__break--ring { display: inline-flex; position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); z-index: 3; white-space: nowrap; }
+  }
+</style>

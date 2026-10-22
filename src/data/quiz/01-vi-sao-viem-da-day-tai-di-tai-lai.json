@@ -1,0 +1,57 @@
+{
+  "lesson": "01-vi-sao-viem-da-day-tai-di-tai-lai",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin, cơ chế cốt lõi của bệnh viêm loét dạ dày là gì?",
+      "options": [
+        { "id": "a", "text": "Do thiếu kỷ luật khi uống thuốc" },
+        { "id": "b", "text": "Sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày" },
+        { "id": "c", "text": "Do ăn uống quá ít" }
+      ],
+      "answer": ["b"],
+      "explain": "Các nguyên nhân và yếu tố nguy cơ gây bệnh dựa trên cơ chế cốt lõi **là sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày**.",
+      "source": { "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai", "trich": "là sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày" }
+    },
+    {
+      "id": "q2",
+      "type": "dung-sai",
+      "prompt": "“Dùng thuốc đủ là giải quyết được cả phần ngọn lẫn phần gốc của bệnh.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Dùng thuốc là cần thiết nhưng nó chỉ giúp giải quyết **phần ngọn**; để đỡ bệnh lâu dài cần hiểu rõ cơ chế gây nên bệnh và tác động **phần gốc**.",
+      "source": { "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai", "trich": "Dùng thuốc là cần thiết nhưng nó chỉ giúp giải quyết phần ngọn" }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "prompt": "Trục não - ruột là mối liên kết chặt chẽ giữa ruột và não về những mặt nào?",
+      "options": [
+        { "id": "a", "text": "Nội tiết tố" },
+        { "id": "b", "text": "Miễn dịch" },
+        { "id": "c", "text": "Thần kinh" },
+        { "id": "d", "text": "Xương khớp" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Giữa ruột và não có một mối liên kết chặt chẽ về **nội tiết tố, miễn dịch và thần kinh**, được gọi là trục não - ruột.",
+      "source": { "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai", "trich": "mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh, được gọi là trục não - ruột" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Bản tin gợi ý bắt đầu thay đổi như thế nào?",
+      "options": [
+        { "id": "a", "text": "Thay đổi cả cuộc sống ngay lập tức" },
+        { "id": "b", "text": "Mỗi ngày dành hai phút: tự hỏi nhanh và chỉnh nhẹ đúng 1 điểm “lệch”" },
+        { "id": "c", "text": "Chờ đến đợt bệnh cấp tiếp theo" }
+      ],
+      "answer": ["b"],
+      "explain": "Bạn không cần thay đổi cả cuộc sống ngay lúc này — **chỉ cần chỉnh nhẹ đúng 1 điểm đó (60s)**, mỗi ngày **chỉ dành ra hai phút**.",
+      "source": { "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai", "trich": "chỉ cần chỉnh nhẹ đúng 1 điểm đó (60s)" }
+    }
+  ]
+}

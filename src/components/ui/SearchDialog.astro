@@ -1,0 +1,140 @@
+---
+import Icon from './Icon.astro';
+import BeBung from './BeBung.astro';
+import { url } from '~/lib/url';
+const bundle = url('/pagefind/pagefind.js');
+const base = url('/');
+---
+<dialog class="search" aria-labelledby="search-title" data-bundle={bundle} data-base={base}>
+  <form method="dialog" class="search__box" role="search">
+    <h2 id="search-title" class="visually-hidden">Tìm kiếm trong bài học</h2>
+    <label class="search__field">
+      <Icon name="tim-kiem" size={22} />
+      <span class="visually-hidden">Từ khoá</span>
+      <input type="search" name="q" placeholder="Tìm: lợi khuẩn, FODMAP, mất ngủ…" autocomplete="off" enterkeyhint="search" />
+    </label>
+    <button class="btn btn--ghost btn--sm" value="close" aria-label="Đóng tìm kiếm">Đóng</button>
+  </form>
+  <p class="search__status" aria-live="polite"></p>
+  <ol class="search__results"></ol>
+  <div class="search__empty">
+    <BeBung mood="suy-nghi" size={90} />
+    <p>Gõ một từ để tìm trong 19 bài học, thuật ngữ và công cụ. Gõ không dấu cũng được, ví dụ <kbd>da day</kbd>.</p>
+  </div>
+</dialog>
+
+<script>
+  type PF = {
+    options: (o: Record<string, unknown>) => Promise<void>;
+    debouncedSearch: (q: string, o?: unknown, ms?: number) => Promise<{ results: { data: () => Promise<any> }[] } | null>;
+  };
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.search')!;
+  const input = dialog.querySelector<HTMLInputElement>('input[name=q]')!;
+  const list = dialog.querySelector<HTMLOListElement>('.search__results')!;
+  const status = dialog.querySelector<HTMLParagraphElement>('.search__status')!;
+  const empty = dialog.querySelector<HTMLDivElement>('.search__empty')!;
+  let pf: PF | null = null;
+
+  async function load(): Promise<PF | null> {
+    if (pf) return pf;
+    try {
+      pf = (await import(/* @vite-ignore */ dialog.dataset.bundle!)) as PF;
+      await pf.options({ baseUrl: dialog.dataset.base, excerptLength: 24 });
+    } catch {
+      status.textContent = 'Chưa tải được bộ tìm kiếm (chỉ có sau khi build trang).';
+      pf = null;
+    }
+    return pf;
+  }
+
+  function open() {
+    if (!dialog.open) dialog.showModal();
+    input.focus();
+    input.select();
+    load();
+  }
+  document.querySelectorAll('[data-open-search]').forEach((b) => b.addEventListener('click', open));
+  addEventListener('keydown', (e) => {
+    const t = e.target as HTMLElement;
+    if (e.key === '/' && !dialog.open && !/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && !t.isContentEditable) {
+      e.preventDefault();
+      open();
+    }
+  });
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+  function render(items: any[], q: string) {
+    list.replaceChildren();
+    empty.hidden = q.length > 0;
+    status.textContent = q ? (items.length ? `${items.length} kết quả cho “${q}”` : `Chưa tìm thấy “${q}”. Thử từ khác nhé!`) : '';
+    for (const r of items) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = r.url;
+      const kicker = document.createElement('span');
+      kicker.className = 'kicker';
+      kicker.textContent = r.meta?.kicker ?? '';
+      const title = document.createElement('span');
+      title.className = 'title';
+      title.textContent = r.meta?.title ?? r.url;
+      const ex = document.createElement('span');
+      ex.className = 'excerpt';
+      // excerpt của Pagefind chỉ chứa <mark>; dựng lại an toàn bằng text + mark
+      const tmp = document.createElement('div');
+      tmp.innerHTML = r.excerpt ?? '';
+      tmp.childNodes.forEach((n) => {
+        if (n.nodeName === 'MARK') {
+          const m = document.createElement('mark');
+          m.textContent = n.textContent;
+          ex.append(m);
+        } else ex.append(document.createTextNode(n.textContent ?? ''));
+      });
+      a.append(kicker, title, ex);
+      li.append(a);
+      list.append(li);
+    }
+  }
+
+  let seq = 0;
+  input.addEventListener('input', async () => {
+    const q = input.value.trim();
+    const my = ++seq;
+    if (!q) return render([], '');
+    const p = await load();
+    if (!p) return;
+    const res = await p.debouncedSearch(q, {}, 180);
+    if (!res || my !== seq) return;
+    const data = await Promise.all(res.results.slice(0, 12).map((r) => r.data()));
+    if (my === seq) render(data, q);
+  });
+</script>
+
+<style>
+  .search {
+    width: min(720px, calc(100% - 24px)); max-height: min(80vh, 720px); padding: 0; border: 2px solid var(--ink);
+    border-radius: var(--radius-lg); background: var(--bg); color: var(--ink); box-shadow: 0 6px 0 var(--ink), var(--shadow-lg);
+    margin-top: 8vh;
+  }
+  .search::backdrop { background: rgb(40 30 25 / 0.45); backdrop-filter: blur(3px); }
+  .search__box { display: flex; gap: 0.5rem; align-items: center; padding: 0.9rem; border-bottom: 2px solid var(--line); position: sticky; top: 0; background: var(--bg); }
+  .search__field { flex: 1; display: flex; align-items: center; gap: 0.5rem; padding: 0 0.85rem; border-radius: 999px; background: var(--surface); border: 2px solid var(--line-2); }
+  .search__field:focus-within { border-color: var(--ink); }
+  .search__field input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 0.7rem 0; font-size: 1.05rem; outline: none; }
+  .search__status { margin: 0; padding: 0.6rem 1.2rem 0; color: var(--ink-2); font-size: 0.9rem; }
+  .search__status:empty { display: none; }
+  .search__results { list-style: none; margin: 0; padding: 0.6rem; display: grid; gap: 0.4rem; }
+  .search__results :global(a) {
+    display: grid; gap: 0.15rem; padding: 0.8rem 1rem; border-radius: var(--radius-sm); text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 2px solid transparent;
+  }
+  .search__results :global(a:hover), .search__results :global(a:focus-visible) { border-color: var(--line-2); }
+  .search__results :global(.kicker) { font-size: 0.78rem; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+  .search__results :global(.kicker:empty) { display: none; }
+  .search__results :global(.title) { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; }
+  .search__results :global(.excerpt) { font-size: 0.92rem; color: var(--ink-2); }
+  .search__results :global(mark) { background: var(--bo-fill); color: var(--ink); border-radius: 4px; padding: 0 2px; }
+  .search__empty { display: flex; gap: 1rem; align-items: center; padding: 1rem 1.4rem 1.6rem; color: var(--ink-2); }
+  .search__empty[hidden] { display: none; }
+  .search__empty p { margin: 0; }
+  kbd { font-family: inherit; background: var(--surface); border: 1.5px solid var(--line-2); border-bottom-width: 3px; border-radius: 6px; padding: 0 0.35em; }
+</style>

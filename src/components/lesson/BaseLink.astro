@@ -1,0 +1,8 @@
+---
+/** Thay cho thẻ <a> trong MDX: thêm base cho link nội bộ, mở tab mới cho link ngoài. */
+import { url } from '~/lib/url';
+const { href = '', ...rest } = Astro.props as { href?: string; [k: string]: unknown };
+const external = /^https?:\/\//.test(href);
+const finalHref = external || href.startsWith('#') || href.startsWith('mailto:') ? href : url(href);
+---
+{external ? <a href={finalHref} target="_blank" rel="noopener" {...rest}><slot /></a> : <a href={finalHref} {...rest}><slot /></a>}

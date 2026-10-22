@@ -1,0 +1,32 @@
+{
+  "name": "bung-em-viec-on",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Web học tập từ chuỗi bản tin y khoa \"Bụng Êm, Việc Ổn\" của BS. Phan Thị Lan Viên",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build && pagefind --site dist",
+    "build:ci": "astro check && npm run build && node scripts/check-dist.mjs && node scripts/check-content.mjs",
+    "preview": "astro preview",
+    "check:content": "node scripts/check-content.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "8.1.1",
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/nunito": "5.3.0",
+    "@fontsource/be-vietnam-pro": "5.3.0",
+    "astro": "7.4.2",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "pagefind": "1.5.2",
+    "playwright": "1.64.1",
+    "typescript": "6.0.3"
+  }
+}

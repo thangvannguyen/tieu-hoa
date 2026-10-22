@@ -1,0 +1,41 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+interface Props { headings: { depth: number; slug: string; text: string }[] }
+const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+{items.length > 2 && (
+  <nav class="toc" aria-label="Mục lục bài">
+    <details open>
+      <summary><Icon name="menu" size={20} /> Mục lục</summary>
+      <ol>
+        {items.map((h) => <li class:list={[`d${h.depth}`]}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+      </ol>
+    </details>
+  </nav>
+)}
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc a')];
+  const targets = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+  let ticking = false;
+  const spy = () => {
+    ticking = false;
+    let cur = -1;
+    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('is-on', i === cur));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+  spy();
+  if (matchMedia('(max-width: 1100px)').matches) document.querySelector('.toc details')?.removeAttribute('open');
+</script>
+<style>
+  .toc { font-size: 0.92rem; }
+  details { border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line); padding: 0.4rem 0.6rem; }
+  summary { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-family: var(--font-head); font-weight: 900; padding: 0.35rem 0.3rem; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  ol { list-style: none; margin: 0.2rem 0 0.4rem; padding: 0; display: grid; gap: 0.1rem; }
+  li { margin: 0; }
+  li.d3 { padding-left: 0.9rem; font-size: 0.88rem; }
+  a { display: block; padding: 0.3rem 0.5rem; border-radius: 10px; color: var(--ink-2); text-decoration: none; line-height: 1.35; }
+  a:hover { background: var(--surface-2); color: var(--ink); }
+  a.is-on { background: var(--h-fill); color: var(--h-ink); font-weight: 700; }
+</style>
