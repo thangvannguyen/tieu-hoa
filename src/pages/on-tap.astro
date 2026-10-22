@@ -39,8 +39,9 @@ const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai
         </div>
         <button type="button" class="deck__card" aria-pressed="false" aria-label="Lật thẻ">
           <span class="deck__face deck__front"><span class="deck__k">Thuật ngữ</span><span class="deck__t" data-front></span><span class="deck__hint">Bấm hoặc nhấn phím cách để lật</span></span>
-          <span class="deck__face deck__back"><span class="deck__k">Giải thích</span><span class="deck__x" data-back></span><a class="deck__src" data-src href="#">Xem trong bài</a></span>
+          <span class="deck__face deck__back"><span class="deck__k">Giải thích</span><span class="deck__x" data-back></span></span>
         </button>
+        <p class="deck__srcp"><a class="deck__src" data-src href="#">Xem thuật ngữ này trong bài học</a></p>
         <div class="deck__nav">
           <button type="button" class="btn btn--sm" data-prev><Icon name="mui-ten-trai" size={18} /> Trước</button>
           <button type="button" class="btn btn--sm btn--ghost" data-known><Icon name="dung" size={18} /> <span>Mình nhớ rồi</span></button>
@@ -130,6 +131,7 @@ const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai
   .deck__t { font-family: var(--font-head); font-weight: 900; font-size: clamp(1.5rem, 1.1rem + 2vw, 2.2rem); line-height: 1.2; }
   .deck__x { font-size: 1.05rem; line-height: 1.55; max-width: 34rem; }
   .deck__hint { font-size: 0.82rem; color: var(--ink-3); }
+  .deck__srcp { margin: 0.8rem 0 0; text-align: center; }
   .deck__src { font-size: 0.9rem; }
   .deck__nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
   @media (prefers-reduced-motion: reduce) { .deck__face { transition: none; } }
