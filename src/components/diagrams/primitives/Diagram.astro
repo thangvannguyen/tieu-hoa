@@ -19,7 +19,7 @@ interface Props {
 }
 const { title, kicker = 'Sơ đồ', icon = 'sparkle', hue, caption, from = [], class: cls, interactive = false } = Astro.props;
 const uid = 'dg-' + Math.random().toString(36).slice(2, 8);
-const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : `#${Number(id.slice(0, 2))}`);
+const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : id.startsWith('00') ? 'thư chào mừng' : `#${Number(id.slice(0, 2))}`);
 ---
 <figure class:list={['dg', cls]} data-hue={hue} role="group" aria-labelledby={`${uid}-t`}>
   <div class="dg__head">
@@ -39,7 +39,7 @@ const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : `#${Number(
           {from.map((id, i) => (
             <>
               {i > 0 && ', '}
-              <a href={url(`/bai/${id}/`)}>bản tin {label(id)}</a>
+              <a href={url(`/bai/${id}/`)}>{id.startsWith('00') || id.startsWith('bt-') ? label(id) : `bản tin ${label(id)}`}</a>
             </>
           ))}
         </span>

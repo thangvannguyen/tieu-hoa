@@ -12,17 +12,17 @@ const { id, rows, columns, rowLabel = 'Ngày', examples = [] } = Astro.props;
       <ul>{examples.map((e) => <li>{e}</li>)}</ul>
     </div>
   )}
-  <div class="tl__table" role="table" aria-label="Bảng ghi chép" style={`--cols:${columns.length}`}>
-    <div class="tl__row tl__head" role="row">
-      <span role="columnheader">{rowLabel}</span>
-      {columns.map((c) => <span role="columnheader">{c.label}</span>)}
+  <div class="tl__table" style={`--cols:${columns.length}`}>
+    <div class="tl__row tl__head" aria-hidden="true">
+      <span>{rowLabel}</span>
+      {columns.map((c) => <span>{c.label}</span>)}
     </div>
     {Array.from({ length: rows }, (_, i) => (
-      <div class="tl__row" role="row">
-        <span class="tl__rl" role="rowheader">{rowLabel} {i + 1}<input type="date" aria-label={`${rowLabel} ${i + 1}: ngày ghi`} data-r={i} data-c="__date" /></span>
+      <div class="tl__row">
+        <span class="tl__rl">{rowLabel} {i + 1}<input type="date" aria-label={`${rowLabel} ${i + 1}: ngày ghi`} data-r={i} data-c="__date" /></span>
         {columns.map((c) => (
-          <label class="tl__cell" role="cell">
-            <span class="tl__cl">{c.label}</span>
+          <label class="tl__cell">
+            <span class="tl__cl">{c.label}<span class="visually-hidden"> — {rowLabel} {i + 1}</span></span>
             <textarea rows="2" data-r={i} data-c={c.id} placeholder={c.placeholder}></textarea>
           </label>
         ))}

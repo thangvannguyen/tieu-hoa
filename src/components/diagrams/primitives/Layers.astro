@@ -1,7 +1,7 @@
 ---
 /**
  * Tầng/bậc: shape="pyramid" (tầng trên hẹp, nền rộng) | "stairs" (bậc thang đi lên) | "stack".
- * layers liệt kê từ TRÊN xuống DƯỚI (với stairs: từ bậc thấp nhất lên cao).
+ * layers liệt kê từ TRÊN xuống DƯỚI; riêng stairs liệt kê từ bậc THẤP NHẤT (nền tảng, hiện dưới cùng) lên bậc CAO NHẤT.
  */
 import Icon from '~/components/ui/Icon.astro';
 import { inline } from '~/lib/inline';
@@ -28,17 +28,18 @@ const n = layers.length;
 </div>
 <style>
   .ly ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+  /* stairs: bậc đầu tiên (thấp nhất / nền tảng) nằm DƯỚI CÙNG, càng lên càng hẹp */
+  .ly--stairs ol { display: flex; flex-direction: column-reverse; }
   .ly li { margin: 0; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.6rem; padding: 0.7rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); --ic-fill: var(--surface); }
-  .ly li.is-hl { background: var(--h); }
+  .ly li.is-hl { background: var(--h); color: #2b201b; }
   .ly__ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--surface); }
   .ly__t { display: block; font-family: var(--font-head); font-weight: 900; line-height: 1.25; }
   .ly__x { display: block; font-size: 0.9rem; color: var(--ink-2); line-height: 1.4; margin-top: 0.1rem; }
-  .ly li.is-hl .ly__x { color: var(--ink); }
+  .ly li.is-hl .ly__x { color: #2b201b; }
   .ly__label { margin: 0.5rem 0 0; text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--h-ink); }
   .ly__label--top { margin: 0 0 0.5rem; }
   @container (min-width: 520px) {
     .ly--pyramid li { width: calc(52% + (48% * var(--i) / max(var(--n) - 1, 1))); margin-inline: auto; }
-    .ly--stairs ol { grid-auto-flow: row; }
-    .ly--stairs li { width: calc(100% - (var(--n) - 1 - var(--i)) * (40% / max(var(--n) - 1, 1))); margin-left: auto; }
+    .ly--stairs li { width: calc(100% - var(--i) * (40% / max(var(--n) - 1, 1))); margin-left: auto; }
   }
 </style>
