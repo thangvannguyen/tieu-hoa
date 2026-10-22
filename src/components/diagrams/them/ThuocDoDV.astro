@@ -93,7 +93,7 @@ const sep = (deg: number) => `M${pt(deg, 64)} L${pt(deg, 92)}`;
   .dv__scale strong { color: var(--h-ink); }
   .dv { display: grid; gap: 0.9rem; }
   @container (min-width: 540px) { .dv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .dv__card { display: grid; align-content: start; gap: 0.5rem; padding: 0.8rem 0.9rem 0.9rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .dv__card { display: grid; align-content: start; gap: 0.5rem; padding: 0.8rem 0.9rem 0.9rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .dv__card > svg { width: 100%; max-width: 280px; margin: 0 auto; display: block; overflow: visible; }
   .dv__t { font-family: var(--font-head); font-weight: 900; font-size: 1.02rem; line-height: 1.3; color: var(--h-ink); text-align: center; }
   .dv__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; }

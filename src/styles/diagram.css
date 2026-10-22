@@ -53,3 +53,26 @@
   background: var(--h-fill); color: var(--h-ink);
 }
 .dg button { font: inherit; }
+
+/* Hình minh họa vẽ tay (svg role="img" trong sơ đồ): ở dark mode hiển thị như một tờ giấy sáng,
+   giữ nguyên màu sticker pastel và nét nâu như ở chế độ sáng (giống Bé Bụng). */
+:root[data-theme='dark'] .dg svg[role='img'] {
+  --ink: #4a3b35; --ink-2: #6b5850; --ink-3: #76625a; --line: #eddfcd; --line-2: #dcc7b0;
+  --bg: #fff9f0; --surface: #ffffff; --surface-2: #fff7ec; --cheek: #f59c9c; --blush: #f7b4b4;
+  --dao-fill: #fde3d7; --dao: #f4a988; --dao-ink: #a3462a; --sage-fill: #ddf0e2; --sage: #8cc7a1; --sage-ink: #2c6943;
+  --lav-fill: #e5e9fb; --lav: #a9b4e8; --lav-ink: #424e9e; --bo-fill: #fdf1c9; --bo: #f5d17a; --bo-ink: #75560a;
+  --ngoc-fill: #d7f0f0; --ngoc: #7cc6c6; --ngoc-ink: #216767; --hong-fill: #fce2e8; --hong: #f2a7b8; --hong-ink: #9a3a53;
+  --do-fill: #fde1dc; --do: #e8786d; --do-ink: #a1302a; --edge: #4a3b35; --edge-shadow: #4a3b35;
+  background: #fff9f0; border-radius: 18px; color: #4a3b35;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .dg svg[role='img'] {
+    --ink: #4a3b35; --ink-2: #6b5850; --ink-3: #76625a; --line: #eddfcd; --line-2: #dcc7b0;
+    --bg: #fff9f0; --surface: #ffffff; --surface-2: #fff7ec; --cheek: #f59c9c; --blush: #f7b4b4;
+    --dao-fill: #fde3d7; --dao: #f4a988; --dao-ink: #a3462a; --sage-fill: #ddf0e2; --sage: #8cc7a1; --sage-ink: #2c6943;
+    --lav-fill: #e5e9fb; --lav: #a9b4e8; --lav-ink: #424e9e; --bo-fill: #fdf1c9; --bo: #f5d17a; --bo-ink: #75560a;
+    --ngoc-fill: #d7f0f0; --ngoc: #7cc6c6; --ngoc-ink: #216767; --hong-fill: #fce2e8; --hong: #f2a7b8; --hong-ink: #9a3a53;
+    --do-fill: #fde1dc; --do: #e8786d; --do-ink: #a1302a; --edge: #4a3b35; --edge-shadow: #4a3b35;
+    background: #fff9f0; border-radius: 18px; color: #4a3b35;
+  }
+}

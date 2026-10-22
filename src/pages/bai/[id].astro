@@ -44,7 +44,7 @@ const endTools = d.tools.filter((t) => !new RegExp(`<ToolLink[^>]*tool=["']${t}[
         <div class="hero__tx">
           <p class="hero__meta">
             <a class="chip" href={url(`/chuong/${chapter.id}/`)}><Icon name={chapter.icon} size={18} /> {chapter.title}</a>
-            <span class="chip chip--ink" data-pagefind-meta="kicker">{label}</span>
+            {d.kind === 'bai-them' ? <span class="chip chip--ink" data-pagefind-meta="kicker">{d.published ? `Đăng ${d.published.split(' ')[0]}` : 'Bài đọc thêm'}</span> : <span class="chip chip--ink" data-pagefind-meta="kicker">{label}</span>}
           </p>
           <h1 data-pagefind-meta="title">{d.title}</h1>
           {d.subtitle && <p class="hero__sub">{d.subtitle}</p>}
