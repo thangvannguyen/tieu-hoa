@@ -30,19 +30,25 @@ const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : `#${Number(
     </span>
   </div>
   <div class="dg__body"><slot /></div>
-  {caption && <figcaption class="dg__cap">{caption}</figcaption>}
-  {from.length > 0 && (
-    <p class="dg__src">
-      Theo{' '}
-      {from.map((id, i) => (
-        <>
-          {i > 0 && ', '}
-          <a href={url(`/bai/${id}/`)}>bản tin {label(id)}</a>
-        </>
-      ))}
-    </p>
+  {(caption || from.length > 0) && (
+    <figcaption class="dg__foot">
+      {caption && <span class="dg__cap">{caption}</span>}
+      {from.length > 0 && (
+        <span class="dg__src">
+          Theo{' '}
+          {from.map((id, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={url(`/bai/${id}/`)}>bản tin {label(id)}</a>
+            </>
+          ))}
+        </span>
+      )}
+    </figcaption>
   )}
 </figure>
 <style>
   .dg__title { display: block; }
+  .dg__foot { display: grid; gap: 0.3rem; margin-top: 1rem; }
+  .dg__foot .dg__cap, .dg__foot .dg__src { display: block; margin: 0; }
 </style>

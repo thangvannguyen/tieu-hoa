@@ -24,7 +24,7 @@ const qid = quiz.lesson;
           <div class="qz__opts">
             {q.options.map((o) => (
               <label class="qz__opt">
-                <input type={q.type === 'multi' ? 'checkbox' : 'radio'} name={`${qid}-${q.id}`} value={o.id} />
+                <input type={q.type === 'multi' ? 'checkbox' : 'radio'} name={q.type === 'multi' ? `${qid}-${q.id}-${o.id}` : `${qid}-${q.id}`} value={o.id} />
                 <span set:html={inline(o.text)} />
               </label>
             ))}

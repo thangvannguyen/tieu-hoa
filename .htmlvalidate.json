@@ -1,0 +1,18 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-inline-style": "off",
+    "attribute-boolean-style": "off",
+    "no-trailing-whitespace": "off",
+    "void-style": "off",
+    "long-title": "off",
+    "no-redundant-role": "off",
+    "prefer-native-element": "off",
+    "attribute-empty-style": "off",
+    "element-required-attributes": "off",
+    "no-implicit-button-type": "error",
+    "unique-landmark": "off",
+    "valid-id": "off"
+  },
+  "elements": ["html5", { "bev-diary": { "flow": true, "phrasing": true }, "bev-tablelog": { "flow": true }, "bev-hearts": { "flow": true }, "bev-scenario": { "flow": true }, "bev-visitprep": { "flow": true }, "bev-menu": { "flow": true }, "bev-balance": { "flow": true }, "bev-wheel": { "flow": true }, "bev-flip": { "flow": true }, "bev-steptree": { "flow": true }, "bev-checklist": { "flow": true }, "bev-markdone": { "flow": true }, "bev-deck": { "flow": true }, "bev-glossary": { "flow": true }, "yt-embed": { "flow": true } }]
+}
