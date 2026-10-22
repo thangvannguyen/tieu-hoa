@@ -1,0 +1,53 @@
+---
+/** Bảy nhóm quan sát mỗi ngày trong “Checklist 7 ngày” (file Excel đi kèm bản tin #04). */
+import Diagram from '../primitives/Diagram.astro';
+import Card from '../primitives/Card.astro';
+import type { Node } from '../primitives/types';
+
+const groups: Node[] = [
+  { icon: 'co-the', hue: 'dao', title: 'Tín hiệu cơ thể', text: 'Cơ thể đã nói với bạn bằng những biểu hiện gì?', items: ['Dấu hiệu nổi bật nhất hôm nay (1–10)', 'Dấu hiệu mới xuất hiện hoặc nặng hơn', 'Dấu hiệu nhẹ hơn và giảm dần'] },
+  { icon: 'com', hue: 'bo', title: 'Dinh dưỡng & phản ứng', items: ['Bạn đã ăn gì hôm nay?', 'Cơ thể phản ứng thế nào sau ăn?', 'Tình trạng đi tiêu/ tiểu của bạn thế nào'] },
+  { icon: 'lich', hue: 'ngoc', title: 'Nhịp sống', items: ['Hôm nay có thay đổi gì trong sinh hoạt hoặc môi trường không?', 'Cơ thể phản ứng với thay đổi đó thế nào?'] },
+  { icon: 'di-bo', hue: 'sage', title: 'Vận động', items: ['Mức độ vận động trong ngày (cao - trung bình - thấp)', 'Vận động hơn 30 phút (Có - Không)'] },
+  { icon: 'trang', hue: 'lav', title: 'Giấc ngủ', items: ['Đêm qua bạn ngủ được mấy tiếng', 'Mức độ sảng khoái sau khi ngủ dậy (1–10)'] },
+  { icon: 'tim', hue: 'hong', title: 'Năng lượng & cảm xúc', items: ['Mức độ stress chung của ngày hôm nay (1–10)', 'Mức năng lượng tổng thể hôm nay (1–10)', 'Hôm nay bạn cảm thấy thế nào?'] },
+  { icon: 'tim-kiem', hue: 'do', title: 'Quan sát', items: ['Điều bạn bắt đầu nhận ra', 'Ghi nhận thành quả', 'Thách thức bạn đang gặp'] },
+];
+---
+<Diagram
+  title="Tấm bản đồ 7 ngày: mỗi ngày nhìn lại 7 nhóm"
+  kicker="Thực hành"
+  icon="ban-do"
+  hue="dao"
+  caption="Checklist 7 ngày nhìn lại cơ thể này không giúp bạn chẩn bệnh hay chữa bệnh nhưng nó như một tấm bản đồ để bạn có thể nhìn thấy rõ hơn những mô thức phản ứng của cơ thể mình, của hệ tiêu hóa của mình. (Các nhóm và câu hỏi lấy từ file “Checklist 7 ngày” đi kèm bản tin.)"
+  from={['04-suc-khoe-tinh-than-ban-do-co-the']}
+>
+  <div class="bd7">
+    <p class="bd7__days" aria-label="Ghi lại mỗi ngày, trong vòng 7 ngày">
+      {[1, 2, 3, 4, 5, 6, 7].map((d) => <span>Ngày {d}</span>)}
+    </p>
+    <ol class="bd7__grid">
+      {groups.map((g, i) => (
+        <li><Card node={g} num={i + 1} /></li>
+      ))}
+    </ol>
+    <div class="bd7__sum" data-hue="sage">
+      <Card
+        node={{ icon: 'checklist', hue: 'sage', title: 'Sau 7 ngày: trang Tổng kết', text: 'Nhìn lại **điều đang lặp lại** — triệu chứng xuất hiện nhiều, những món ăn dễ gây phản ứng, các yếu tố dễ làm cơ thể nhạy hơn… — rồi chọn **điều bạn muốn bắt đầu điều chỉnh**.' }}
+        variant="fill"
+      />
+    </div>
+  </div>
+</Diagram>
+
+<style>
+  .bd7 { display: grid; gap: 0.9rem; }
+  .bd7__days { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0; }
+  .bd7__days span {
+    padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--surface); border: 1.5px dashed var(--h);
+    font-family: var(--font-head); font-weight: 800; font-size: 0.8rem; color: var(--h-ink);
+  }
+  .bd7__grid { list-style: none; margin: 0; padding: 0.4rem 0 0 0.4rem; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); }
+  .bd7__grid li { margin: 0; }
+  .bd7__grid li > :global(.dg-card) { height: 100%; }
+</style>

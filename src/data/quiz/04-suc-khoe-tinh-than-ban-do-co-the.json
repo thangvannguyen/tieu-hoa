@@ -1,0 +1,72 @@
+{
+  "lesson": "04-suc-khoe-tinh-than-ban-do-co-the",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin #04, khi stress cơ thể sẽ tăng tiết những chất nào?",
+      "options": [
+        { "id": "a", "text": "Cortisol, adrenaline" },
+        { "id": "b", "text": "Chất xơ, lợi khuẩn" },
+        { "id": "c", "text": "Men tiêu hóa" }
+      ],
+      "answer": ["a"],
+      "explain": "Khi stress cơ thể sẽ tăng tiết **cortisol, adrenaline**, những chất này kích thích khiến acid dạ dày tăng lên…",
+      "source": { "bai": "04-suc-khoe-tinh-than-ban-do-co-the", "trich": "Khi stress cơ thể sẽ tăng tiết cortisol, adrenaline" }
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "Bản tin nhắc lại những tác động nào của stress lên dạ dày và ống tiêu hóa?",
+      "options": [
+        { "id": "a", "text": "Acid dạ dày tăng lên, làm mất cân bằng giữa yếu tố bảo vệ - tấn công" },
+        { "id": "b", "text": "Dạ dày - ruột rối loạn co bóp" },
+        { "id": "c", "text": "Hệ vi sinh đường ruột suy yếu, giảm sức đề kháng" },
+        { "id": "d", "text": "Niêm mạc dạ dày được bảo vệ tốt hơn" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Cortisol, adrenaline kích thích khiến **acid dạ dày tăng lên**, làm mất cân bằng giữa yếu tố bảo vệ - tấn công, **dạ dày - ruột rối loạn co bóp**, ảnh hưởng đến môi trường bên trong khiến **hệ vi sinh đường ruột suy yếu, giảm sức đề kháng**.",
+      "source": { "bai": "04-suc-khoe-tinh-than-ban-do-co-the", "trich": "dạ dày - ruột rối loạn co bóp, ảnh hưởng đến môi trường bên trong khiến hệ vi sinh đường ruột suy yếu" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Khi stress kéo dài, chỉ cần uống thuốc là bệnh dạ dày sẽ không quay lại.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Thuốc có thể giúp giải quyết triệu chứng lúc đó, nhưng **nếu không có cách chăm sóc sức khỏe tinh thần phù hợp và giải quyết vấn đề căng thẳng thì bệnh vẫn quay trở lại**.",
+      "source": { "bai": "04-suc-khoe-tinh-than-ban-do-co-the", "trich": "nếu không có cách chăm sóc sức khỏe tinh thần phù hợp và giải quyết vấn đề căng thẳng thì bệnh vẫn quay trở lại" }
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "prompt": "Để phòng bệnh và hỗ trợ đảo ngược tình trạng bệnh lý, cần tổng hòa của những yếu tố nào?",
+      "options": [
+        { "id": "a", "text": "Dinh dưỡng" },
+        { "id": "b", "text": "Giấc ngủ" },
+        { "id": "c", "text": "Giảm stress" },
+        { "id": "d", "text": "Gia tăng các mối quan hệ lành mạnh" },
+        { "id": "e", "text": "Chỉ cần dùng thuốc đúng liều" }
+      ],
+      "answer": ["a", "b", "c", "d"],
+      "explain": "Cần tổng hòa của các yếu tố: **Dinh dưỡng, Giấc ngủ, vận động, giảm stress, giảm nghiện chất và gia tăng các mối quan hệ lành mạnh**.",
+      "source": { "bai": "04-suc-khoe-tinh-than-ban-do-co-the", "trich": "cần tổng hòa của các yếu tố liên quan đến" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "“Bản đồ” giúp hiểu cơ thể - hệ tiêu hóa trong bản tin #04 là gì?",
+      "options": [
+        { "id": "a", "text": "Một bảng giúp tự chẩn đoán bệnh" },
+        { "id": "b", "text": "Một bản checklist giúp bạn nhận diện ra những mô thức hành vi ảnh hưởng lên sức khỏe của mình" },
+        { "id": "c", "text": "Một thực đơn mẫu cho 7 ngày" }
+      ],
+      "answer": ["b"],
+      "explain": "Bản đồ này là **một bản checklist**, sẽ như một người bạn, giúp bạn **nhận diện ra những mô thức hành vi ảnh hưởng lên sức khỏe của mình**, từ đó dễ tự nhận ra điều mình nên ưu tiên tác động để khỏe hơn.",
+      "source": { "bai": "04-suc-khoe-tinh-than-ban-do-co-the", "trich": "bản đồ này là một bản checklist, sẽ như một người bạn" }
+    }
+  ]
+}

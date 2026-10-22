@@ -1,0 +1,71 @@
+{
+  "lesson": "02-giai-ma-thoi-quen",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin #02, bệnh dạ dày - hệ tiêu hóa hình thành như thế nào?",
+      "options": [
+        { "id": "a", "text": "Xuất hiện đột ngột chỉ sau một bữa ăn" },
+        { "id": "b", "text": "“Mầm bệnh” được nuôi dưỡng và tạo điều kiện rất lâu từ những thói quen, lối sống không lành mạnh một cách âm thầm" },
+        { "id": "c", "text": "Chỉ do thời tiết thay đổi" }
+      ],
+      "answer": ["b"],
+      "explain": "Bệnh không xuất hiện trong một ngày, một bữa mà **“mầm bệnh” đã được nuôi dưỡng và tạo điều kiện rất lâu** từ những thói quen, lối sống không lành mạnh một cách âm thầm.",
+      "source": { "bai": "02-giai-ma-thoi-quen", "trich": "bệnh không xuất hiện trong một ngày, một bữa mà “mầm bệnh” đã được nuôi dưỡng và tạo điều kiện rất lâu" }
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "Những thói quen thường nhật nào được bản tin #02 giải mã qua video?",
+      "options": [
+        { "id": "a", "text": "Vừa ăn, vừa xem điện thoại, đọc sách, làm việc" },
+        { "id": "b", "text": "Ăn trái cây chua khi bụng đói" },
+        { "id": "c", "text": "Thức khuya, ăn khuya" },
+        { "id": "d", "text": "Uống đủ nước mỗi ngày" },
+        { "id": "e", "text": "Ăn nhanh, nhai không kỹ" }
+      ],
+      "answer": ["a", "b", "c", "e"],
+      "explain": "Sáu thói quen được giải mã: vừa ăn vừa xem điện thoại; căng thẳng, lo âu, stress; **ăn trái cây chua khi bụng đói**; bỏ bữa/ăn không đúng bữa; **thức khuya, ăn khuya**; **ăn nhanh, nhai không kỹ**. “Uống đủ nước” không nằm trong danh sách này.",
+      "source": { "bai": "02-giai-ma-thoi-quen", "trich": "Ăn trái cây chua khi bụng đói" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Sau khi chấm “trái tim động lực”, bản tin gợi ý bạn bắt đầu thế nào trong tuần này?",
+      "options": [
+        { "id": "a", "text": "Điều chỉnh cùng lúc cả 8 thói quen" },
+        { "id": "b", "text": "Bắt đầu điều chỉnh từ một thói quen có nhiều trái tim động lực nhất" },
+        { "id": "c", "text": "Chọn thói quen có ít trái tim nhất để thử thách bản thân" }
+      ],
+      "answer": ["b"],
+      "explain": "Bạn có nhiều trái tim động lực ở thói quen nào nhiều nhất, **tuần này hãy bắt đầu điều chỉnh từ một thói quen đó** bạn nha.",
+      "source": { "bai": "02-giai-ma-thoi-quen", "trich": "tuần này hãy bắt đầu điều chỉnh từ một thói quen đó bạn nha" }
+    },
+    {
+      "id": "q4",
+      "type": "dung-sai",
+      "prompt": "“Nếu nhận ra mình có nhiều thói quen chưa tốt và thấy cảm xúc hơi khó, bạn nên tự trách mình.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Dù là cảm xúc nào đi chăng nữa, bản tin mời bạn **hít thở một vài hơi** để quay về với cảm xúc **thương cơ thể của mình** — bạn cũng đã - đang nỗ lực chăm sóc cơ thể mình.",
+      "source": { "bai": "02-giai-ma-thoi-quen", "trich": "mình cũng mời bạn hít thở một vài hơi để mời chúng ta quay về với cảm xúc thương cơ thể của mình" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Thói quen nào sau đây nằm trong danh sách 8 thói quen bạn có thể chọn điều chỉnh?",
+      "options": [
+        { "id": "a", "text": "Vận động tại chỗ thêm 5 phút mỗi ngày" },
+        { "id": "b", "text": "Nhịn ăn sáng để dạ dày được nghỉ" },
+        { "id": "c", "text": "Ăn thật nhanh để có thêm thời gian làm việc" }
+      ],
+      "answer": ["a"],
+      "explain": "Tám thói quen gồm: ngủ sớm hơn, ăn uống chú tâm hơn, thiết kế những khoảng nghỉ ngắn, giảm ăn đồ chua – cay – mặn – béo, ăn uống điều độ, hạn chế ăn khuya, ăn chậm – nhai kỹ hơn và **vận động tại chỗ thêm 5 phút mỗi ngày**.",
+      "source": { "bai": "02-giai-ma-thoi-quen", "trich": "Vận động tại chỗ thêm 5 phút mỗi ngày" }
+    }
+  ]
+}

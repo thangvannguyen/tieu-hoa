@@ -1,0 +1,43 @@
+{
+  "lesson": "00-chao-mung",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Mỗi tuần, bạn sẽ nhận được bản tin sức khỏe qua email vào ngày nào?",
+      "options": [
+        { "id": "a", "text": "Thứ 2" },
+        { "id": "b", "text": "Thứ 5" },
+        { "id": "c", "text": "Thứ 7" }
+      ],
+      "answer": ["c"],
+      "explain": "**Mỗi tuần vào Thứ 7** bạn sẽ nhận được một bản tin sức khỏe qua email.",
+      "source": { "bai": "00-chao-mung", "trich": "Mỗi tuần vào Thứ 7 bạn sẽ nhận được một bản tin sức khỏe qua email" }
+    },
+    {
+      "id": "q2",
+      "type": "dung-sai",
+      "prompt": "“Bản tin này có thể chẩn đoán và kê đơn thay cho bác sĩ khám lâm sàng trực tiếp.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Đây **không phải là một chương trình tư vấn, chẩn đoán và điều trị**. Về nguyên tắc, chúng tôi không thể chẩn đoán và kê đơn thay cho bác sĩ khám lâm sàng trực tiếp.",
+      "source": { "bai": "00-chao-mung", "trich": "chúng tôi không thể chẩn đoán và kê đơn thay cho bác sĩ khám lâm sàng trực tiếp" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Chuỗi bản tin 9–12 xoay quanh chủ đề nào?",
+      "options": [
+        { "id": "a", "text": "Nuôi dưỡng hệ vi sinh đường ruột" },
+        { "id": "b", "text": "Cải thiện chất lượng giấc ngủ dành cho nhân viên văn phòng bận rộn" },
+        { "id": "c", "text": "Dinh dưỡng phục hồi bệnh lý đường tiêu hóa thường gặp" }
+      ],
+      "answer": ["b"],
+      "explain": "Chuỗi bài 9-12 là chuỗi bài về **cải thiện chất lượng giấc ngủ** dành cho nhân viên văn phòng bận rộn.",
+      "source": { "bai": "00-chao-mung", "trich": "Chuỗi bài về cải thiện chất lượng giấc ngủ dành cho nhân viên văn phòng bận rộn (9-12)" }
+    }
+  ]
+}

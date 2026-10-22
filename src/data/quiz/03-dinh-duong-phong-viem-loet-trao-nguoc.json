@@ -1,0 +1,83 @@
+{
+  "lesson": "03-dinh-duong-phong-viem-loet-trao-nguoc",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Bệnh trào ngược dạ dày thực quản (GERD) xảy ra khi nào?",
+      "options": [
+        { "id": "a", "text": "Khi thức ăn đi xuống ruột quá nhanh" },
+        { "id": "b", "text": "Khi dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản" },
+        { "id": "c", "text": "Khi dạ dày ngừng tiết dịch tiêu hóa" }
+      ],
+      "answer": ["b"],
+      "explain": "GERD xảy ra khi **dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản**. Do có tính axit nên dịch này có thể gây kích ứng hoặc viêm niêm mạc thực quản.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "xảy ra khi dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Theo bản tin, thực quản là gì?",
+      "options": [
+        { "id": "a", "text": "Ống nối từ miệng xuống dạ dày" },
+        { "id": "b", "text": "Đoạn ruột nối dạ dày với ruột già" },
+        { "id": "c", "text": "Lớp niêm mạc lót bên trong dạ dày" }
+      ],
+      "answer": ["a"],
+      "explain": "Thực quản là **ống nối từ miệng xuống dạ dày**.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "thực quản, ống nối từ miệng xuống dạ dày" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Người bị GERD nào cũng phải phẫu thuật mới đỡ triệu chứng.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "**Phần lớn mọi người** có thể quản lý các triệu chứng khó chịu của GERD bằng cách thay đổi lối sống hoặc sử dụng các loại thuốc không cần kê đơn. Chỉ trong những trường hợp nặng hơn mới có thể cần kê đơn thuốc mạnh hơn hoặc thậm chí phẫu thuật.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "Phần lớn mọi người có thể quản lý các triệu chứng khó chịu của GERD bằng cách thay đổi lối sống" }
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "prompt": "“3 nguyên tắc ăn uống giúp bảo vệ và phòng bệnh dạ dày” trong infographic gồm những nguyên tắc nào?",
+      "options": [
+        { "id": "a", "text": "Chế độ ăn nhiều thực phẩm chứa chất xơ" },
+        { "id": "b", "text": "Tăng cường thực phẩm chứa probiotic" },
+        { "id": "c", "text": "Hạn chế thực phẩm cay, nóng, dầu mỡ, có nhiều acid" },
+        { "id": "d", "text": "Để tinh bột chiếm phần lớn đĩa ăn" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Ba nguyên tắc: **nhiều chất xơ**, **tăng cường thực phẩm chứa probiotic** và **hạn chế thực phẩm cay, nóng, dầu mỡ, có nhiều acid**. Trong đĩa ăn cân đối, tinh bột chỉ chiếm khoảng 10–20%.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "Hạn chế thực phẩm cay, nóng, dầu mỡ, có nhiều acid" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Trong “đĩa ăn cân đối cho dạ dày khỏe mạnh”, rau và chất xơ chiếm khoảng bao nhiêu?",
+      "options": [
+        { "id": "a", "text": "10–20%" },
+        { "id": "b", "text": "20–30%" },
+        { "id": "c", "text": "50–60%" }
+      ],
+      "answer": ["c"],
+      "explain": "Rau và chất xơ chiếm **50–60%** (rau xanh, rau củ, trái cây, đậu, nấm, rong biển…), đạm 20–30%, tinh bột 10–20%.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "Rau xanh, rau củ, trái cây, đậu, nấm, rong biển" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Với người bị viêm dạ dày, infographic khuyên tổng lượng muối mỗi ngày nên thế nào?",
+      "options": [
+        { "id": "a", "text": "Dưới 5g/ngày (khoảng 1 thìa cà phê)" },
+        { "id": "b", "text": "Khoảng 3 thìa cà phê mỗi ngày" },
+        { "id": "c", "text": "Không cần để ý lượng muối" }
+      ],
+      "answer": ["a"],
+      "explain": "**Giảm lượng muối:** hạn chế đồ mặn, thực phẩm chế biến sẵn. Tổng lượng muối **< 5g/ngày (khoảng 1 thìa cà phê)**.",
+      "source": { "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc", "trich": "Tổng lượng muối < 5g/ngày (khoảng 1 thìa cà phê)" }
+    }
+  ]
+}

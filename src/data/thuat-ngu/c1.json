@@ -1,0 +1,124 @@
+[
+  {
+    "id": "phan-ngon-phan-goc",
+    "term": "Phần ngọn và phần gốc",
+    "aliases": [
+      "phần ngọn",
+      "phần gốc",
+      "điều trị triệu chứng"
+    ],
+    "short": "Dùng thuốc chỉ giúp giải quyết phần ngọn; để đỡ bệnh lâu dài cần hiểu rõ cơ chế gây nên bệnh và tác động phần gốc.",
+    "definition": "Dùng thuốc là cần thiết nhưng nó chỉ giúp giải quyết **phần ngọn**, để đỡ bệnh lâu dài chúng ta cần hiểu rõ cơ chế gây nên bệnh và tác động **phần gốc**. Nếu không có những cách thức giúp giảm thiểu nguy cơ thì việc dùng thuốc để điều trị triệu chứng cũng chỉ là dập “lửa tạm thời”.",
+    "icon": "vien-thuoc",
+    "source": {
+      "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai",
+      "trich": "Dùng thuốc là cần thiết nhưng nó chỉ giúp giải quyết phần ngọn, để đỡ bệnh lâu dài chúng ta cần hiểu rõ cơ chế gây nên bệnh và tác động phần gốc"
+    }
+  },
+  {
+    "id": "nao-bo-thu-hai",
+    "term": "Não bộ thứ hai",
+    "aliases": [
+      "não thứ hai"
+    ],
+    "short": "Cách gọi hệ tiêu hóa, vì giữa ruột và não có mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh (trục não - ruột).",
+    "definition": "Hệ tiêu hóa cũng là “Não bộ thứ hai” của cơ thể khi giữa ruột và não có một mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh, được gọi là trục não - ruột.",
+    "icon": "nao",
+    "source": {
+      "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai",
+      "trich": "Hệ tiêu hóa cũng là \"Não bộ thứ hai\" của cơ thể"
+    }
+  },
+  {
+    "id": "truc-nao-ruot",
+    "term": "Trục não - ruột",
+    "aliases": [
+      "trục não ruột",
+      "liên kết não - ruột"
+    ],
+    "short": "Mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh giữa ruột và não; tác động theo hai chiều.",
+    "definition": "Giữa ruột và não có một mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh, được gọi là **trục não - ruột**. Hệ thần kinh trung ương và hệ thần kinh ruột phối hợp chi phối các hoạt động của hệ tiêu hóa, đồng thời tình trạng của hệ tiêu hóa cũng phản hồi và ảnh hưởng ngược lại đến tâm trạng và sức khỏe tâm thần.",
+    "icon": "truc-nao-ruot",
+    "source": {
+      "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai",
+      "trich": "mối liên kết chặt chẽ về nội tiết tố, miễn dịch và thần kinh, được gọi là trục não - ruột"
+    }
+  },
+  {
+    "id": "yeu-to-tan-cong-bao-ve",
+    "term": "Yếu tố tấn công – yếu tố bảo vệ",
+    "aliases": [
+      "yếu tố tấn công",
+      "yếu tố bảo vệ",
+      "mất cân bằng tấn công - bảo vệ"
+    ],
+    "short": "Cơ chế cốt lõi của viêm loét dạ dày: sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày.",
+    "definition": "Các nguyên nhân và yếu tố nguy cơ (nhiễm HP, thói quen ăn uống, stress, một số thuốc, hút thuốc, rượu bia…) gây bệnh dựa trên cơ chế cốt lõi của bệnh viêm loét dạ dày **là sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày nói riêng và đường tiêu hóa nói chung**. Khi stress, acid dạ dày tăng lên cũng làm mất cân bằng giữa yếu tố bảo vệ - tấn công (bản tin #04).",
+    "icon": "can-bang",
+    "source": {
+      "bai": "01-vi-sao-viem-da-day-tai-di-tai-lai",
+      "trich": "là sự mất cân bằng giữa yếu tố tấn công và yếu tố bảo vệ niêm mạc dạ dày"
+    }
+  },
+  {
+    "id": "thuc-quan",
+    "term": "Thực quản",
+    "aliases": [],
+    "short": "Ống nối từ miệng xuống dạ dày.",
+    "definition": "Thực quản là ống nối từ miệng xuống dạ dày. Khi dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản, dịch có tính axit này có thể gây kích ứng hoặc viêm niêm mạc thực quản.",
+    "icon": "thuc-quan",
+    "source": {
+      "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc",
+      "trich": "thực quản, ống nối từ miệng xuống dạ dày"
+    }
+  },
+  {
+    "id": "gerd",
+    "term": "Trào ngược dạ dày thực quản (GERD)",
+    "aliases": [
+      "GERD",
+      "trào ngược dạ dày",
+      "viêm dạ dày thực quản trào ngược",
+      "trào ngược dạ dày - thực quản"
+    ],
+    "en": "GERD",
+    "short": "Dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản; do có tính axit nên có thể gây kích ứng hoặc viêm niêm mạc thực quản.",
+    "definition": "Bệnh trào ngược dạ dày thực quản (GERD) xảy ra khi dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản, ống nối từ miệng xuống dạ dày. Do có tính axit nên dịch này có thể gây kích ứng hoặc viêm niêm mạc thực quản. Phần lớn mọi người có thể quản lý các triệu chứng bằng cách thay đổi lối sống hoặc sử dụng các loại thuốc không cần kê đơn; trường hợp nặng hơn có thể cần bác sĩ kê đơn thuốc mạnh hơn hoặc thậm chí phẫu thuật.",
+    "icon": "thuc-quan",
+    "source": {
+      "bai": "03-dinh-duong-phong-viem-loet-trao-nguoc",
+      "trich": "xảy ra khi dịch tiêu hóa từ dạ dày thường xuyên trào ngược lên thực quản, ống nối từ miệng xuống dạ dày"
+    }
+  },
+  {
+    "id": "cortisol-adrenaline",
+    "term": "Cortisol, adrenaline",
+    "aliases": [
+      "cortisol",
+      "adrenaline"
+    ],
+    "short": "Những chất cơ thể tăng tiết khi stress; chúng kích thích khiến acid dạ dày tăng lên, dạ dày - ruột rối loạn co bóp.",
+    "definition": "Khi stress cơ thể sẽ tăng tiết cortisol, adrenaline, những chất này kích thích khiến acid dạ dày tăng lên, làm mất cân bằng giữa yếu tố bảo vệ - tấn công, dạ dày - ruột rối loạn co bóp, ảnh hưởng đến môi trường bên trong khiến hệ vi sinh đường ruột suy yếu, giảm sức đề kháng…",
+    "icon": "may-stress",
+    "source": {
+      "bai": "04-suc-khoe-tinh-than-ban-do-co-the",
+      "trich": "Khi stress cơ thể sẽ tăng tiết cortisol, adrenaline, những chất này kích thích khiến acid dạ dày tăng lên"
+    }
+  },
+  {
+    "id": "ban-do-co-the",
+    "term": "“Bản đồ” hiểu cơ thể",
+    "aliases": [
+      "bản đồ cơ thể",
+      "checklist 7 ngày",
+      "bản đồ để hiểu cơ thể - hệ tiêu hóa"
+    ],
+    "short": "Một bản checklist giúp bạn nhận diện những mô thức hành vi ảnh hưởng lên sức khỏe, từ đó biết nên ưu tiên tác động điều gì.",
+    "definition": "Bản đồ này là một bản checklist, sẽ như một người bạn, có thể giúp chúng ta nhận diện lại những vấn đề liên quan đến sức khỏe của bạn, nhất là sức khỏe hệ tiêu hóa, để bạn nhận diện ra những mô thức hành vi ảnh hưởng lên sức khỏe của mình, từ đó, bạn sẽ dễ tự nhận ra điều mình nên ưu tiên tác động để khỏe hơn.",
+    "icon": "ban-do",
+    "source": {
+      "bai": "04-suc-khoe-tinh-than-ban-do-co-the",
+      "trich": "bản đồ này là một bản checklist, sẽ như một người bạn, có thể giúp chúng ta nhận diện lại những vấn đề liên quan đến sức khỏe của bạn"
+    }
+  }
+]
