@@ -16,6 +16,7 @@ import ScrollTop from '~/components/ui/ScrollTop.astro';
 import BottomBar from '~/components/ui/BottomBar.astro';
 import type { Hue } from '~/lib/types';
 import { url } from '~/lib/url';
+import { GA_ID, SITE_HOST } from '~/data/site';
 
 interface Props {
   title: string;
@@ -46,6 +47,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="vi_VN" />
     {noindex && <meta name="robots" content="noindex" />}
+    <!-- Google Analytics 4: chỉ đo trên tên miền thật, không đo khi chạy thử trên máy -->
+    <script is:inline define:vars={{ GA_ID, SITE_HOST }}>
+      if (location.hostname === SITE_HOST) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID);
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+      }
+    </script>
     <script is:inline>
       (function () {
         try {
