@@ -1,0 +1,24 @@
+---
+/** Năm cơ chế bệnh sinh chính của hội chứng ruột kích thích (theo bản tin #15). */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+---
+<Diagram
+  title="IBS: một hội chứng, nhiều cơ chế"
+  icon="ruot"
+  hue="bo"
+  caption="Cơ chế bệnh sinh chính trong hội chứng IBS khởi phát đa yếu tố với sinh lý bệnh phức tạp."
+  from={['15-dinh-duong-ibs']}
+>
+  <Branches
+    root={{ icon: 'ruot', title: 'Hội chứng ruột kích thích (IBS)', text: 'khởi phát đa yếu tố, sinh lý bệnh phức tạp', hue: 'bo' }}
+    via="cơ chế bệnh sinh chính"
+    branches={[
+      { icon: 'ruot', title: 'Rối loạn vận động ruột', text: 'tăng nhu động ruột gây tiêu chảy, giảm nhu động ruột gây táo bón', hue: 'dao' },
+      { icon: 'dau-an', title: 'Tăng tính thấm ruột', hue: 'ngoc' },
+      { icon: 'khien', title: 'Kích hoạt hệ miễn dịch', hue: 'sage' },
+      { icon: 'loi-khuan', title: 'Thay đổi hệ vi sinh đường ruột', hue: 'lav' },
+      { icon: 'truc-nao-ruot', title: 'Rối loạn trục não ruột', hue: 'hong' },
+    ]}
+  />
+</Diagram>

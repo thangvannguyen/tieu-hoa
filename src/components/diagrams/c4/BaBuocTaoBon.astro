@@ -1,0 +1,39 @@
+---
+/** Ba bước thực hành cho người đang bị táo bón + 5 nhóm yếu tố nguy cơ (theo bản tin #16). */
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+import Icon from '~/components/ui/Icon.astro';
+import type { Hue } from '~/lib/types';
+
+const groups: { icon: string; label: string; hue: Hue }[] = [
+  { icon: 'com', label: 'Dinh dưỡng', hue: 'bo' },
+  { icon: 'di-bo', label: 'Vận động', hue: 'ngoc' },
+  { icon: 'trang', label: 'Giấc ngủ', hue: 'lav' },
+  { icon: 'thuoc-la', label: 'Nghiện chất', hue: 'do' },
+  { icon: 'may-stress', label: 'Stress', hue: 'hong' },
+];
+---
+<Diagram title="Ba bước thực hành khi bị táo bón" icon="checklist" hue="sage" kicker="Thực hành" from={['16-dinh-duong-tao-bon']}>
+  <Flow
+    numbered
+    steps={[
+      { icon: 'ke', title: 'Ngẫm lại và ghi xuống những yếu tố nguy cơ', text: 'có thể làm nặng hơn tình trạng táo bón của mình' },
+      { icon: 'muc-tieu', title: 'Chọn nhóm nguy cơ có nhiều nguy cơ nhất' },
+      { icon: 'sparkle', title: 'Chọn một hành động nhỏ phù hợp', text: 'để thử nghiệm mỗi ngày và quan sát tác động của hành động đó lên tình trạng táo bón' },
+    ]}
+  />
+  <p class="bb__k">Các nhóm yếu tố nguy cơ để rà soát ở bước 1:</p>
+  <ul class="bb__groups">
+    {groups.map((g) => (
+      <li data-hue={g.hue}><Icon name={g.icon} size={26} /> <span>{g.label}</span></li>
+    ))}
+    <li class="bb__more" aria-label="và các yếu tố khác">…</li>
+  </ul>
+</Diagram>
+
+<style>
+  .bb__k { margin: 1rem 0 0.5rem !important; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; color: var(--h-ink); }
+  .bb__groups { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .bb__groups li { margin: 0; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem 0.3rem 0.4rem; border-radius: 999px; background: var(--h-fill); border: 2px solid var(--ink); font-family: var(--font-head); font-weight: 800; font-size: 0.92rem; --ic-fill: var(--surface); }
+  .bb__groups .bb__more { padding: 0.3rem 0.8rem; background: var(--surface); }
+</style>

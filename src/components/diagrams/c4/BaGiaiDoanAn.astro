@@ -1,0 +1,39 @@
+---
+/** Ba giai đoạn ăn qua đường miệng cho người bệnh viêm loét dạ dày - tá tràng (theo bản tin #14). */
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram
+  title="Ba giai đoạn ăn: từ lỏng đến thông thường"
+  icon="canh"
+  hue="bo"
+  caption="Khi mới bước vào điều trị nên sử dụng thức ăn lỏng với lượng thức ăn ít và tăng dần theo khả năng dung nạp và tình trạng bệnh lý của người bệnh; khi dạ dày dần phục hồi chuyển sang món ăn mềm; trong giai đoạn hồi phục, người bệnh có thể ăn thức ăn thông thường."
+  from={['14-dinh-duong-viem-loet-da-day-ta-trang']}
+>
+  <Flow
+    numbered
+    steps={[
+      {
+        tag: 'Giai đoạn đầu',
+        icon: 'canh',
+        hue: 'ngoc',
+        title: 'Thức ăn lỏng (cháo, súp)',
+        items: ['Khi mới bước vào điều trị', '**6 bữa/ngày**, lượng ít: **100 ml/bữa**', 'Tăng dần theo khả năng dung nạp và tình trạng bệnh lý'],
+      },
+      {
+        tag: 'Giai đoạn thứ 2',
+        icon: 'com',
+        hue: 'bo',
+        title: 'Món ăn mềm (cháo đặc, cơm nhão…)',
+        items: ['Dạ dày dần phục hồi, đau ít/không còn đau bụng', '**4–6 bữa** ăn trong ngày'],
+      },
+      {
+        tag: 'Giai đoạn thứ 3',
+        icon: 'dia',
+        hue: 'sage',
+        title: 'Thức ăn thông thường',
+        items: ['Trong giai đoạn hồi phục'],
+      },
+    ]}
+  />
+</Diagram>

@@ -1,0 +1,51 @@
+---
+/** "Đèn giao thông" thực phẩm cho người bị trào ngược dạ dày - thực quản (chỉ các mục có trong bản tin #13). */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Đèn giao thông thực phẩm khi bị trào ngược"
+  icon="dia"
+  hue="bo"
+  kicker="So sánh"
+  caption="Mỗi cơ thể đều có những phản ứng với từng loại thực phẩm, thức ăn, nước uống có khác nhau — hãy quan sát cơ thể của mình một cách có hệ thống để có những điều chỉnh thật phù hợp. Bài gốc gộp chung “Nên tránh/ hạn chế”; cột vàng gom các mục bài dùng chữ “hạn chế”, “giảm”, cột đỏ gom các mục bài dùng chữ “tránh”, “không dùng”, “loại bỏ”."
+  from={['13-dinh-duong-trao-nguoc']}
+>
+  <Compare
+    tone="den-giao-thong"
+    compact
+    columns={[
+      {
+        title: 'Nên dùng',
+        icon: 'dung',
+        items: [
+          { icon: 'trai-cay', text: '**Thực phẩm có tính kiềm:** táo, hạnh nhân, củ cải, bơ, khoai lang, bắp cải, cà rốt…' },
+          { icon: 'chat-xo', text: '**Nhiều chất xơ**' },
+          { icon: 'rau', text: '**Rau, trái cây, các loại đậu và ngũ cốc nguyên hạt** (chế độ ăn chay)' },
+        ],
+      },
+      {
+        title: 'Hạn chế',
+        icon: 'canh-bao',
+        items: [
+          { icon: 'dau-an', text: '**Thức ăn nhiều chất béo**; thực phẩm chứa nhiều cholesterol' },
+          { icon: 'sparkle', text: '**Thức ăn có mùi thơm, vị đậm** (gây tăng tiết dịch vị)' },
+          { icon: 'dia', text: '**Thực phẩm từ động vật** (nên giảm)' },
+        ],
+      },
+      {
+        title: 'Tránh',
+        icon: 'sai',
+        items: [
+          { icon: 'ot', text: 'Thức ăn **chua, cay** hoặc **lên men chua**' },
+          { icon: 'do-chien', text: 'Thực phẩm **chiên, béo hoặc cay**, hành sống' },
+          { icon: 'socola', text: '**Sôcô la, bạc hà**' },
+          { icon: 'muoi', text: 'Thực phẩm **nhiều muối**' },
+          { icon: 'nuoc-co-gas', text: 'Đồ uống **có gas**, nước trái cây **họ cam quýt** (độ axít cao)' },
+          { icon: 'ca-phe', text: '**Cà phê** (loại bỏ)' },
+          { icon: 'ruou-bia', text: '**Rượu, bia** và các đồ uống có cồn khác' },
+        ],
+      },
+    ]}
+  />
+</Diagram>

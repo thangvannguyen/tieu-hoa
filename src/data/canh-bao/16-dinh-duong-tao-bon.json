@@ -1,0 +1,14 @@
+[
+  {
+    "group": "dinh-duong",
+    "title": "Táo bón kéo dài hoặc có thêm dấu hiệu khác",
+    "level": "nen-kham",
+    "items": [
+      {
+        "text": "Khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác, bạn hãy sắp xếp đi khám để loại trừ những bệnh tiềm ẩn.",
+        "source": { "bai": "16-dinh-duong-tao-bon", "trich": "khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác, bạn hãy sắp xếp đi khám để loại trừ những bệnh tiềm ẩn" }
+      }
+    ],
+    "note": "Tình trạng táo bón cũng có thể là một biểu hiện của một bệnh lý thực thể khác."
+  }
+]

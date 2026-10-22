@@ -1,0 +1,25 @@
+---
+/** Bốn loại IBS (theo bản tin #15) — lưới 4 thẻ. */
+import Diagram from '../primitives/Diagram.astro';
+import Card from '../primitives/Card.astro';
+import type { Node } from '../primitives/types';
+
+const types: Node[] = [
+  { tag: 'IBS-D', icon: 'ruot', title: 'IBS bị tiêu chảy', hue: 'ngoc' },
+  { tag: 'IBS-C', icon: 'ruot', title: 'IBS bị táo bón', hue: 'bo' },
+  { tag: 'IBS-M', icon: 'ruot', title: 'IBS với các triệu chứng hỗn hợp', hue: 'lav' },
+  { tag: 'IBS-U', icon: 'ruot', title: 'IBS không phân loại', hue: 'hong' },
+];
+---
+<Diagram title="IBS được chia thành bốn loại" icon="ruot" hue="bo" kicker="So sánh" from={['15-dinh-duong-ibs']}>
+  <ul class="ibs4">
+    {types.map((t) => <li><Card node={t} variant="fill" /></li>)}
+  </ul>
+</Diagram>
+
+<style>
+  .ibs4 { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  @container (min-width: 760px) { .ibs4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .ibs4 li { margin: 0; }
+  .ibs4 :global(.dg-card) { height: 100%; }
+</style>

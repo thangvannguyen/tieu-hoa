@@ -1,0 +1,84 @@
+{
+  "lesson": "15-dinh-duong-ibs",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multi",
+      "prompt": "IBS được chia thành những loại nào?",
+      "options": [
+        { "id": "a", "text": "IBS-D (IBS bị tiêu chảy)" },
+        { "id": "b", "text": "IBS-C (IBS bị táo bón)" },
+        { "id": "c", "text": "IBS-M (IBS với các triệu chứng hỗn hợp)" },
+        { "id": "d", "text": "IBS-U (IBS không phân loại)" },
+        { "id": "e", "text": "IBS-F (IBS do FODMAPs)" }
+      ],
+      "answer": ["a", "b", "c", "d"],
+      "explain": "IBS được chia thành **bốn loại**: IBS-D, IBS-C, IBS-M và IBS-U. Không có loại “IBS-F”.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "IBS-D (IBS bị tiêu chảy)." }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Theo bài, chế độ ăn FODMAPs bao gồm gì?",
+      "options": [
+        { "id": "a", "text": "Các loại lợi khuẩn có trong sữa chua" },
+        { "id": "b", "text": "Các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí" },
+        { "id": "c", "text": "Các loại chất béo bão hòa" }
+      ],
+      "answer": ["b"],
+      "explain": "Chế độ ăn FODMAPs bao gồm **các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau**.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "bao gồm các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau" }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Nếu vẫn muốn tiếp tục dùng một loại thực phẩm, bài khuyên thử như thế nào?",
+      "options": [
+        { "id": "a", "text": "Dùng ngay một lượng lớn để biết cơ thể phản ứng ra sao" },
+        { "id": "b", "text": "Loại bỏ hoàn toàn mọi thực phẩm có FODMAPs suốt đời" },
+        { "id": "c", "text": "Từ liều thấp đến liều cao và theo dõi triệu chứng" }
+      ],
+      "answer": ["c"],
+      "explain": "Nếu vẫn tiếp tục dùng loại thực phẩm đó thì nên **từ liều thấp đến liều cao và theo dõi triệu chứng**; nếu triệu chứng xuất hiện liên tục hoặc trầm trọng thì ngưng dùng và thay thế bằng thực phẩm tương tự phù hợp.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "nên từ liều thấp đến liều cao và theo dõi triệu chứng nếu có" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Loại chất xơ nào được nhấn mạnh là giúp cải thiện triệu chứng IBS?",
+      "options": [
+        { "id": "a", "text": "Chất xơ tan, có nhiều trong yến mạch, lúa mạch, hạt chia…" },
+        { "id": "b", "text": "Xơ không tan như lúa mì, ngũ cốc nguyên hạt" },
+        { "id": "c", "text": "Xơ trong vỏ táo, nho, cà chua" }
+      ],
+      "answer": ["a"],
+      "explain": "Tăng từ từ lượng chất xơ, **đặc biệt là các chất xơ tan** (yến mạch, lúa mạch, hạt chia…); **hạn chế các loại xơ không tan** như lúa mì, ngũ cốc nguyên hạt, vỏ các loại trái cây.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "đặc biệt là các chất xơ tan có nhiều trong yến mạch, lúa mạch, hạt chia" }
+    },
+    {
+      "id": "q5",
+      "type": "dung-sai",
+      "prompt": "“Với IBS, càng kiêng khem nhiều, loại hoàn toàn các thức ăn gây bất lợi thì càng tốt.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Chế độ ăn kiêng quá mức, loại hoàn toàn các thức ăn gây bất lợi **sẽ làm mất tính cân đối khẩu phần ăn**, có thể dẫn đến suy dinh dưỡng và thiếu hụt vi chất dinh dưỡng.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "loại hoàn toàn các thức ăn gây bất lợi sẽ làm mất tính cân đối khẩu phần ăn" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Theo bài, đâu là nguyên tắc điều trị đầu tay cho hội chứng ruột kích thích?",
+      "options": [
+        { "id": "a", "text": "Dùng thuốc giảm đau mỗi khi đau bụng" },
+        { "id": "b", "text": "Nhịn ăn để ruột được nghỉ" },
+        { "id": "c", "text": "Thay đổi chế độ ăn" }
+      ],
+      "answer": ["c"],
+      "explain": "Chế độ ăn phù hợp giúp cải thiện triệu chứng, tăng đáp ứng điều trị và nâng cao chất lượng cuộc sống — do đó **thay đổi chế độ ăn là nguyên tắc điều trị đầu tay**.",
+      "source": { "bai": "15-dinh-duong-ibs", "trich": "thay đổi chế độ ăn là nguyên tắc điều trị đầu tay cho hội chứng ruột kích thích" }
+    }
+  ]
+}

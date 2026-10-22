@@ -1,0 +1,83 @@
+{
+  "lesson": "16-dinh-duong-tao-bon",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Nhu cầu chất xơ khuyến nghị cho người Việt Nam là bao nhiêu?",
+      "options": [
+        { "id": "a", "text": "Khoảng 5–10 g/người/ngày" },
+        { "id": "b", "text": "Ít nhất 20–25 g/người/ngày" },
+        { "id": "c", "text": "Không quá 10 g/người/ngày" }
+      ],
+      "answer": ["b"],
+      "explain": "Nhu cầu chất xơ khuyến nghị cho người Việt Nam **ít nhất là 20–25 g/người/ngày**; nên ăn đa dạng thực phẩm có đủ hai loại chất xơ hòa tan và không hòa tan.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Nhu cầu chất xơ khuyến nghị cho người Việt Nam ít nhất là 20–25 g/người/ngày" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Người trưởng thành nên uống khoảng bao nhiêu nước mỗi ngày?",
+      "options": [
+        { "id": "a", "text": "Khoảng 0,5 lít" },
+        { "id": "b", "text": "Khoảng 4–5 lít" },
+        { "id": "c", "text": "Khoảng 1,5–2 lít" }
+      ],
+      "answer": ["c"],
+      "explain": "Để đáp ứng đủ nhu cầu nước của cơ thể, **nên uống khoảng 1,5–2 lít nước mỗi ngày** đối với người trưởng thành.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "nên uống khoảng 1,5–2 lít nước mỗi ngày đối với người trưởng thành" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Đã ăn nhiều chất xơ thì không cần uống thêm nước.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Khi tăng cường ăn thực phẩm giàu chất xơ, bạn phải uống nhiều nước — **người bệnh cần uống đủ nước nếu không chất xơ có thể gây tác dụng ngược và gây táo bón**.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "người bệnh cần uống đủ nước nếu không chất xơ có thể gây tác dụng ngược và gây táo bón" }
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "prompt": "Vì sao có người đã bổ sung rất nhiều chất xơ mà táo bón vẫn không cải thiện?",
+      "options": [
+        { "id": "a", "text": "Nhu động ruột không đủ mạnh khi ngồi quá lâu, ít vận động" },
+        { "id": "b", "text": "Uống không đủ nước để chất xơ vận hành" },
+        { "id": "c", "text": "Có rào cản tâm lý trong việc đi tiêu khi bị táo bón quá lâu" },
+        { "id": "d", "text": "Vì đã ăn quá nhiều rau xanh" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Bài nêu ba khả năng: **nhu động ruột không đủ mạnh** (ngồi quá lâu, ít vận động), **uống không đủ nước**, và **rào cản tâm lý** trong việc đi tiêu.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Cũng có thể bạn dùng đủ chất xơ nhưng uống không đủ nước để chất xơ vận hành." }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Khi nào bài khuyên bạn nên sắp xếp đi khám?",
+      "options": [
+        { "id": "a", "text": "Khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác" },
+        { "id": "b", "text": "Không cần đi khám, vì táo bón luôn chỉ do ăn uống" },
+        { "id": "c", "text": "Chỉ khi đã thử nhịn ăn mà không đỡ" }
+      ],
+      "answer": ["a"],
+      "explain": "Táo bón cũng có thể là một biểu hiện của một bệnh lý thực thể khác — **khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác, hãy sắp xếp đi khám** để loại trừ những bệnh tiềm ẩn.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "khi bị táo bón kéo dài hoặc có thêm các dấu hiệu khác, bạn hãy sắp xếp đi khám để loại trừ những bệnh tiềm ẩn" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Việc bổ sung lợi khuẩn nên đi cùng với điều gì để phát huy hiệu quả?",
+      "options": [
+        { "id": "a", "text": "Uống thêm cà phê" },
+        { "id": "b", "text": "Bổ sung chất xơ" },
+        { "id": "c", "text": "Ăn nhiều thịt đỏ" }
+      ],
+      "answer": ["b"],
+      "explain": "**Việc bổ sung lợi khuẩn nên đi cùng với việc bổ sung chất xơ** để phát huy hiệu quả vai trò trong tiêu hóa, hấp thu thức ăn. Thịt đỏ, cà phê nằm trong nhóm thực phẩm có thể làm nặng thêm táo bón.",
+      "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Việc bổ sung lợi khuẩn nên đi cùng với việc bổ sung chất xơ" }
+    }
+  ]
+}

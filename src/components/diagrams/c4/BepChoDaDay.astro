@@ -1,0 +1,71 @@
+---
+/** Thẻ "bếp cho dạ dày": cách chọn và chế biến thức ăn cho người bệnh viêm loét dạ dày - tá tràng (theo bản tin #14, mục 4). */
+import Diagram from '../primitives/Diagram.astro';
+import Card from '../primitives/Card.astro';
+import Icon from '~/components/ui/Icon.astro';
+import type { Node } from '../primitives/types';
+
+const steps: Node[] = [
+  { icon: 'noi', title: 'Luộc, hấp, kho', text: 'Đạm dễ tiêu (thịt lợn nạc, cá nạc, các loại đạm từ hạt) nên chế biến là luộc, hấp, kho để dễ hấp thu.', hue: 'dao' },
+  { icon: 'khoai', title: 'Nấu hoặc luộc chín kỹ', text: 'Tinh bột ít mùi vị và dễ tiêu: cơm, bánh mì, các loại cháo, khoai củ.', hue: 'bo' },
+  { icon: 'dia', title: 'Thái nhỏ, nghiền nát, hoặc nấu mềm', text: 'Các loại thực phẩm trước khi nấu.', hue: 'sage' },
+  { icon: 'dau-an', title: 'Dầu thực vật từ các loại hạt', text: 'Dầu từ hạt hướng dương, dầu vừng, dầu hạt cải, dầu đậu nành…', hue: 'ngoc' },
+  { icon: 'dong-ho', title: 'Ăn ngay sau khi nấu xong', hue: 'lav' },
+];
+---
+<Diagram
+  title="Bếp cho dạ dày: chế biến thế nào?"
+  icon="noi"
+  hue="bo"
+  kicker="Thực hành"
+  caption="Nhiệt độ thức ăn cũng làm ảnh hưởng đến kích thích dạ dày, nhiệt độ thích hợp để thức ăn dễ tiêu hoá và hấp thu là 40–50 °C."
+  from={['14-dinh-duong-viem-loet-da-day-ta-trang']}
+>
+  <div class="bep">
+    <ol class="bep__steps">
+      {steps.map((s, i) => <li><Card node={s} num={i + 1} /></li>)}
+    </ol>
+    <div class="bep__temp" data-hue="do">
+      <svg viewBox="0 0 150 300" role="img" aria-label="Nhiệt kế: vùng tô màu từ 40 đến 50 độ C là nhiệt độ thích hợp để thức ăn dễ tiêu hoá và hấp thu.">
+        <rect class="bep__shadow" x="58" y="16" width="40" height="214" rx="20"></rect>
+        <circle class="bep__shadow" cx="78" cy="254" r="36"></circle>
+        <rect class="bep__tube" x="54" y="12" width="40" height="214" rx="20"></rect>
+        <rect class="bep__band" x="54" y="92" width="40" height="46"></rect>
+        <rect class="bep__merc" x="64" y="112" width="20" height="130" rx="10"></rect>
+        <circle class="bep__bulb" cx="74" cy="250" r="36"></circle>
+        <path class="bep__tick" d="M54 46h12M54 70h12M54 162h12M54 186h12M54 208h12"></path>
+        <path class="bep__tick bep__tick--on" d="M54 92h18M54 138h18"></path>
+        <circle class="bep__ink" cx="62" cy="248" r="3.4"></circle>
+        <circle class="bep__ink" cx="86" cy="248" r="3.4"></circle>
+        <path class="bep__line" d="M68 258c3.5 3.5 8.5 3.5 12 0"></path>
+        <ellipse class="bep__blush" cx="52" cy="258" rx="5.5" ry="3.2"></ellipse>
+        <ellipse class="bep__blush" cx="96" cy="258" rx="5.5" ry="3.2"></ellipse>
+        <text x="100" y="97" class="bep__lbl">50 °C</text>
+        <text x="100" y="143" class="bep__lbl">40 °C</text>
+      </svg>
+      <p class="bep__cap"><Icon name="nhiet-ke" size={26} /> <span><strong>40–50 °C</strong> — nhiệt độ thích hợp để thức ăn dễ tiêu hoá và hấp thu</span></p>
+    </div>
+  </div>
+</Diagram>
+
+<style>
+  .bep { display: grid; gap: 1rem; }
+  @container (min-width: 600px) { .bep { grid-template-columns: minmax(0, 1fr) 190px; align-items: center; } }
+  .bep__steps { list-style: none; margin: 0; padding: 0.4rem 0 0 0.4rem; display: grid; gap: 0.9rem; }
+  .bep__steps li { margin: 0; }
+  @container (min-width: 760px) { .bep__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .bep__temp { display: grid; justify-items: center; gap: 0.5rem; padding: 0.8rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .bep__temp > svg { width: 100%; max-width: 150px; display: block; overflow: visible; }
+  .bep__shadow { fill: var(--line); }
+  .bep__tube { fill: var(--surface-2); stroke: var(--ink); stroke-width: 3.5; }
+  .bep__band { fill: var(--bo); opacity: 0.85; }
+  .bep__merc { fill: var(--do); }
+  .bep__bulb { fill: var(--do-fill); stroke: var(--ink); stroke-width: 3.5; }
+  .bep__tick { fill: none; stroke: var(--ink-3); stroke-width: 2.5; stroke-linecap: round; }
+  .bep__tick--on { stroke: var(--ink); stroke-width: 3; }
+  .bep__ink { fill: var(--ink); }
+  .bep__line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+  .bep__blush { fill: var(--cheek); opacity: 0.8; }
+  .bep__lbl { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .bep__cap { display: flex; gap: 0.4rem; align-items: flex-start; margin: 0; font-size: 0.92rem; line-height: 1.4; --ic-fill: var(--h-fill); }
+</style>
