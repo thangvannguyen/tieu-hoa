@@ -56,7 +56,7 @@ const cards = glossary.map((g) => ({ id: g.id, front: g.term, back: g.short, bai
       <details class="qch" data-hue={c.hue}>
         <summary>
           <span class="qch__ic"><Icon name={c.icon} size={30} /></span>
-          <span><span class="qch__t">{c.id === 'them' ? c.title : `Chương ${c.so} · ${c.title}`}</span><span class="qch__n">{quiz!.questions.length} câu từ {ls.length} bài</span></span>
+          <span><span class="qch__t">{c.id === 'them' || c.id === 'c0' ? c.title : `Chương ${c.so} · ${c.title}`}</span><span class="qch__n">{quiz!.questions.length} câu từ {ls.length} bài</span></span>
         </summary>
         <ul class="qch__ls">{ls.map((l) => <li><a href={url(`/bai/${l.id}/`)}>{lessonLabel(l)} · {l.data.title}</a></li>)}</ul>
         <Quiz quiz={quiz!} title={`Quiz · ${c.short}`} compact />

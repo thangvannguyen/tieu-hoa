@@ -58,11 +58,12 @@ function load<T>(mods: Record<string, unknown>, schema: z.ZodType<T>, label: str
 }
 
 export const quizzes = load(import.meta.glob('/src/data/quiz/*.json', { eager: true, import: 'default' }), quizSchema, 'Quiz');
+const sortKey = (t: string) => t.replace(/^[“”"'%(\s]+/, '');
 export const glossary = Object.values(
   load(import.meta.glob('/src/data/thuat-ngu/*.json', { eager: true, import: 'default' }), glossarySchema, 'Thuật ngữ'),
 )
   .flat()
-  .sort((a, b) => a.term.localeCompare(b.term, 'vi'));
+  .sort((a, b) => sortKey(a.term).localeCompare(sortKey(b.term), 'vi'));
 export const redFlags = Object.values(
   load(import.meta.glob('/src/data/canh-bao/*.json', { eager: true, import: 'default' }), z.array(redFlagSchema), 'Cảnh báo'),
 ).flat();
