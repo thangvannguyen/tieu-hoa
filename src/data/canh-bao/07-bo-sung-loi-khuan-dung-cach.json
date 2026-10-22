@@ -1,0 +1,20 @@
+[
+  {
+    "group": "tieu-hoa",
+    "title": "Dấu hiệu cần đi khám, không nên tự bổ sung lợi khuẩn",
+    "level": "nen-kham",
+    "items": [
+      { "text": "Đau bụng kéo dài hoặc đau tăng dần", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Đau bụng kéo dài hoặc đau tăng dần" } },
+      { "text": "Tiêu chảy kéo dài", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Tiêu chảy kéo dài" } },
+      { "text": "Tiêu chảy kèm sốt", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Tiêu chảy kèm sốt" } },
+      { "text": "Dấu hiệu mất nước", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Dấu hiệu mất nước" } },
+      { "text": "Đi cầu ra máu hoặc phân đen bất thường", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Đi cầu ra máu hoặc phân đen bất thường" } },
+      { "text": "Sụt cân không rõ nguyên nhân", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Sụt cân không rõ nguyên nhân" } },
+      { "text": "Nôn ói nhiều", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Nôn ói nhiều" } },
+      { "text": "Táo bón nặng, kéo dài", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Táo bón nặng, kéo dài" } },
+      { "text": "Thiếu máu, mệt bất thường", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Thiếu máu, mệt bất thường" } },
+      { "text": "Người lớn tuổi yếu, phụ nữ mang thai, người suy giảm miễn dịch hoặc người có bệnh nền nặng có triệu chứng tiêu hóa bất thường", "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Người lớn tuổi yếu, phụ nữ mang thai, người suy giảm miễn dịch hoặc người có bệnh nền nặng có triệu chứng tiêu hóa bất thường" } }
+    ],
+    "note": "Không nên chỉ tự uống men vi sinh nếu có các dấu hiệu trên. Khi cơ thể bật đèn đỏ, đừng chỉ “dỗ bụng” bằng men vi sinh. Cần tìm đúng nguyên nhân. (Bản tin #08 nhắc lại đúng danh sách này ở mục “Theo dõi dấu hiệu cần đi khám”.)"
+  }
+]

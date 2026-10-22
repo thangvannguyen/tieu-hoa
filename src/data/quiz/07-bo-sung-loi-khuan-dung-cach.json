@@ -1,0 +1,84 @@
+{
+  "lesson": "07-bo-sung-loi-khuan-dung-cach",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Trong 3 hướng bổ sung lợi khuẩn thường gặp, hướng nào thường bị xem nhẹ nhất nhưng lại là nền tảng quan trọng?",
+      "options": [
+        { "id": "a", "text": "Dùng sản phẩm probiotic dạng viên, gói, ống, giọt" },
+        { "id": "b", "text": "Dùng thực phẩm có thể chứa lợi khuẩn như sữa chua có men sống, kefir" },
+        { "id": "c", "text": "Nuôi lợi khuẩn sẵn có: ăn đủ chất xơ, đa dạng thực phẩm thực vật, uống nước hợp lý, vận động và ngủ tốt hơn" }
+      ],
+      "answer": ["c"],
+      "explain": "**Hướng thứ 3 — nuôi lợi khuẩn sẵn có —** thường bị xem nhẹ nhất, nhưng lại là nền tảng quan trọng. Vì lợi khuẩn không chỉ cần được “đưa vào”, mà cần được “nuôi sống”.",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "hướng thứ 3 thường bị xem nhẹ nhất, nhưng lại là nền tảng quan trọng" }
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "Nguyên tắc “5 đúng” khi bổ sung lợi khuẩn gồm những gì? (chọn tất cả ý đúng)",
+      "options": [
+        { "id": "a", "text": "Đúng người" },
+        { "id": "b", "text": "Đúng mục tiêu" },
+        { "id": "c", "text": "Đúng sản phẩm đắt nhất" },
+        { "id": "d", "text": "Đúng cách" },
+        { "id": "e", "text": "Đúng nền tảng" }
+      ],
+      "answer": ["a", "b", "d", "e"],
+      "explain": "Men vi sinh nên dùng **đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách và đúng nền tảng**. “Đúng sản phẩm” là sản phẩm ghi rõ chủng vi sinh, liều dùng, hạn sử dụng… chứ không phải sản phẩm đắt nhất.",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Men vi sinh nên dùng đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách và đúng nền tảng." }
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Trong “5 đúng”, phần nào được bài gọi là quan trọng nhất?",
+      "options": [
+        { "id": "a", "text": "Đúng sản phẩm" },
+        { "id": "b", "text": "Đúng cách" },
+        { "id": "c", "text": "Đúng nền tảng" }
+      ],
+      "answer": ["c"],
+      "explain": "**Đúng nền tảng — đây là phần quan trọng nhất.** Nếu muốn lợi khuẩn có lợi thật sự, đừng chỉ nghĩ đến “uống gì”; hãy nhìn lại chất xơ, nước, vận động, giấc ngủ, stress… mỗi ngày.",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Nếu muốn lợi khuẩn có lợi thật sự, đừng chỉ nghĩ đến “uống gì”." }
+    },
+    {
+      "id": "q4",
+      "type": "dung-sai",
+      "prompt": "“Nên tự phối nhiều loại men vi sinh cùng lúc để đường ruột khỏe nhanh hơn.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "**Không tự phối nhiều loại men vi sinh cùng lúc.** Dùng nhiều loại cùng lúc có thể làm mình khó biết sản phẩm nào hợp, sản phẩm nào gây đầy bụng, đau bụng hoặc khó chịu.",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Không tự phối nhiều loại men vi sinh cùng lúc" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Nhóm nào được bài khuyên nên thận trọng hơn và cần hỏi nhân viên y tế trước khi dùng lợi khuẩn?",
+      "options": [
+        { "id": "a", "text": "Người khỏe mạnh, triệu chứng nhẹ, không có bệnh nền phức tạp" },
+        { "id": "b", "text": "Người suy giảm miễn dịch, đang điều trị ung thư hoặc dùng thuốc ức chế miễn dịch" },
+        { "id": "c", "text": "Người muốn ăn sữa chua như một phần của chế độ ăn" }
+      ],
+      "answer": ["b"],
+      "explain": "Một số nhóm nên thận trọng hơn và **cần hỏi nhân viên y tế trước khi dùng**, ví dụ người suy giảm miễn dịch, người đang bệnh nặng, người đang điều trị ung thư hoặc dùng thuốc ức chế miễn dịch… Người khỏe mạnh, triệu chứng nhẹ có thể bắt đầu từ thực phẩm và thói quen trước.",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Một số nhóm nên thận trọng hơn và cần hỏi nhân viên y tế trước khi dùng" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Nếu có dấu hiệu như đi cầu ra máu, tiêu chảy kèm sốt hoặc sụt cân không rõ nguyên nhân, bạn nên làm gì?",
+      "options": [
+        { "id": "a", "text": "Tự uống men vi sinh và chờ xem" },
+        { "id": "b", "text": "Đi khám, không nên tự bổ sung lợi khuẩn" },
+        { "id": "c", "text": "Tăng liều men vi sinh gấp đôi" }
+      ],
+      "answer": ["b"],
+      "explain": "Khi cơ thể bật đèn đỏ, **đừng chỉ “dỗ bụng” bằng men vi sinh. Cần tìm đúng nguyên nhân.**",
+      "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Khi cơ thể bật đèn đỏ, đừng chỉ “dỗ bụng” bằng men vi sinh." }
+    }
+  ]
+}

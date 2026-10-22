@@ -1,0 +1,73 @@
+---
+/** Cây quyết định "Bụng hơi khó chịu thì làm gì?" — thay cho "cứ khó tiêu là uống men" (theo bản tin #08, Việc 2). */
+import Diagram from '../primitives/Diagram.astro';
+import StepTree from '../primitives/StepTree.astro';
+---
+<Diagram
+  title="Bụng hơi khó chịu: làm gì thay vì uống men ngay?"
+  kicker="Thực hành"
+  icon="ruot"
+  hue="sage"
+  interactive
+  caption="Khi thấy bụng hơi khó chịu nhẹ, chưa có dấu hiệu cảnh báo, hãy thử nhìn lại trước rồi chọn một hành động nền tảng. Nếu triệu chứng kéo dài, nặng hoặc lặp lại nhiều lần, nên đi khám thay vì tự xử lý."
+  from={['08-nuoi-duong-he-vi-sinh-ben-vung']}
+>
+  <div class="st-fix">
+  <StepTree
+    start="canhbao"
+    nodes={{
+      canhbao: {
+        q: 'Có dấu hiệu cảnh báo nào không?',
+        hint: 'Đau bụng kéo dài hoặc đau tăng dần · tiêu chảy kéo dài · tiêu chảy kèm sốt · táo bón nặng, kéo dài · đi cầu ra máu hoặc phân đen bất thường · sụt cân không rõ nguyên nhân · nôn ói nhiều · dấu hiệu mất nước · thiếu máu, mệt bất thường.',
+        options: [
+          { label: 'Có', to: 'kham' },
+          { label: 'Không, chỉ khó chịu nhẹ', to: 'nhinlai' },
+        ],
+      },
+      nhinlai: {
+        q: 'Thử nhìn lại trước: hôm nay có điều nào giống bạn không?',
+        hint: 'Mình có ăn quá nhanh không? · Bữa này có quá nhiều dầu mỡ không? · Hôm nay có uống ít nước không? · Có ngồi quá lâu không? · Có căng thẳng quá không? · Có uống cà phê/trà sữa lúc bụng đói không?',
+        options: [
+          { label: 'Có, mình đã nhận ra', to: 'hanhdong' },
+          { label: 'Không chắc', to: 'hanhdong' },
+        ],
+      },
+      hanhdong: {
+        q: 'Chọn một hành động nền tảng và làm thử',
+        hint: 'Uống nước ấm hoặc nước lọc từng ngụm · đi bộ nhẹ 5–10 phút nếu phù hợp · bữa sau thêm rau nấu chín mềm · ăn chậm hơn, nhai kỹ hơn · không ăn quá trễ, quá no vào buổi tối · ghi lại món làm mình khó chịu.',
+        options: [
+          { label: 'Bụng dễ chịu hơn', to: 'on' },
+          { label: 'Triệu chứng kéo dài, nặng hoặc lặp lại nhiều lần', to: 'kham2' },
+        ],
+      },
+      kham: {
+        result: {
+          tone: 'stop',
+          title: 'Nên đi khám',
+          text: 'Khi có dấu hiệu cảnh báo, đừng cố “nuôi lợi khuẩn” tại nhà để chờ qua. Cần được nhân viên y tế đánh giá.',
+        },
+      },
+      kham2: {
+        result: {
+          tone: 'stop',
+          title: 'Nên đi khám thay vì tự xử lý',
+          text: 'Nếu triệu chứng kéo dài, nặng hoặc lặp lại nhiều lần, nên đi khám thay vì tự xử lý.',
+        },
+      },
+      on: {
+        result: {
+          tone: 'ok',
+          icon: 'nhat-ky',
+          title: 'Ghi lại và giữ nền tảng',
+          text: 'Ghi lại món làm mình khó chịu. Không phải mọi khó chịu tiêu hóa đều cần bổ sung sản phẩm.',
+        },
+      },
+    }}
+  />
+  </div>
+</Diagram>
+
+<style>
+  /* StepTree: số thứ tự câu hỏi bị co lại khi câu hỏi dài (thiếu flex: none trong primitive) */
+  .st-fix :global(.st__qt .dg-num) { flex: none; }
+</style>

@@ -1,0 +1,22 @@
+---
+/** Chất xơ → hệ vi sinh lên men → acid béo chuỗi ngắn (theo bản tin #06, mục 1). */
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram
+  title="Chất xơ được hệ vi sinh “chế biến” ra sao?"
+  icon="chat-xo"
+  hue="sage"
+  caption="Theo Harvard T.H. Chan School of Public Health, chế độ ăn là một trong những yếu tố quan trọng ảnh hưởng đến hệ vi sinh đường ruột; chất xơ có thể được hệ vi sinh lên men để tạo ra các acid béo chuỗi ngắn, nhóm chất có vai trò trong sức khỏe đường ruột và chuyển hóa."
+  from={['06-loi-khuan-hieu-cho-dung', '05-vi-sao-dan-van-phong-roi-loan-tieu-hoa']}
+>
+  <Flow
+    numbered
+    steps={[
+      { icon: 'rau', title: 'Chất xơ trong bữa ăn', text: 'Chất xơ là “thức ăn” của lợi khuẩn — rau, trái cây nguyên miếng, đậu, ngũ cốc nguyên hạt.', hue: 'bo' },
+      { icon: 'loi-khuan', title: 'Hệ vi sinh lên men chất xơ', text: 'Nhiều vi sinh vật trong ruột tham gia vào quá trình tiêu hóa, chuyển hóa chất xơ.', hue: 'sage' },
+      { icon: 'sparkle', title: 'Tạo ra các acid béo chuỗi ngắn', hue: 'ngoc' },
+      { icon: 'ruot', title: 'Vai trò trong sức khỏe đường ruột và chuyển hóa', hue: 'dao' },
+    ]}
+  />
+</Diagram>

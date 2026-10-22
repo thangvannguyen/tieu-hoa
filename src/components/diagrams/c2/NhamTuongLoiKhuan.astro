@@ -1,0 +1,44 @@
+---
+/** Thẻ lật 5 nhầm tưởng về lợi khuẩn (theo bản tin #06, mục 3). */
+import Diagram from '../primitives/Diagram.astro';
+import FlipCards from '../primitives/FlipCards.astro';
+---
+<Diagram
+  title="Ôn nhanh 5 nhầm tưởng về lợi khuẩn"
+  kicker="Thẻ lật"
+  icon="quiz"
+  hue="sage"
+  interactive
+  caption="Muốn có lợi khuẩn khỏe, đừng chỉ nghĩ “uống gì”. Hãy hỏi thêm: “Hôm nay mình đã nuôi lợi khuẩn bằng gì?”"
+  from={['06-loi-khuan-hieu-cho-dung']}
+>
+  <FlipCards
+    cards={[
+      {
+        icon: 'men-vi-sinh',
+        front: 'Cứ đầy bụng, khó tiêu là uống men vi sinh',
+        back: '**Không hẳn.** Đầy bụng, khó tiêu có thể liên quan đến rất nhiều yếu tố: ăn vội, nước có gas, đồ ngọt, táo bón, stress, ngủ kém, thuốc, bệnh lý tiêu hóa… Men vi sinh không phải là giải pháp lâu dài nếu chưa tìm ra nguyên nhân.',
+      },
+      {
+        icon: 'vien-thuoc',
+        front: 'Men vi sinh càng nhiều loại càng tốt',
+        back: '**Không đúng.** Probiotic cần đúng chủng, đúng liều, đúng tình huống. Không nên tự phối nhiều sản phẩm chỉ vì nghĩ “càng nhiều càng chắc”.',
+      },
+      {
+        icon: 'sua-chua',
+        front: 'Sữa chua nào cũng tốt cho đường ruột',
+        back: 'Không phải loại nào cũng giống nhau: ưu tiên loại không đường hoặc ít đường, dùng lượng vừa phải, theo dõi bụng. Một hộp sữa chua không thể thay thế việc bổ sung chất xơ trong rau, trái cây mỗi ngày.',
+      },
+      {
+        icon: 'kim-chi',
+        front: 'Thực phẩm lên men là probiotic hết',
+        back: '**Không hẳn.** Một số thực phẩm lên men có thể chứa vi sinh vật sống có lợi, nhưng không phải tất cả — thực phẩm đã bị xử lý nhiệt hoặc tiệt trùng sau lên men có thể không còn vi sinh vật sống đáng kể.',
+      },
+      {
+        icon: 'rau',
+        front: 'Muốn tăng lợi khuẩn chỉ cần uống men, không cần đổi thói quen',
+        back: '**Đây là nhầm tưởng lớn nhất.** Hệ vi sinh đường ruột chịu ảnh hưởng từ tổng thể lối sống: chất xơ, nước uống, vận động, stress, giấc ngủ, đồ ngọt và thức ăn siêu chế biến.',
+      },
+    ]}
+  />
+</Diagram>

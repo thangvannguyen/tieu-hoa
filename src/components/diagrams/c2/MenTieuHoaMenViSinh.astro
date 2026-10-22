@@ -1,0 +1,43 @@
+---
+/** So sánh men tiêu hóa và men vi sinh (theo bản tin #08, mục 1). */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Men tiêu hóa khác men vi sinh thế nào?"
+  kicker="So sánh"
+  icon="men-tieu-hoa"
+  hue="sage"
+  caption="Trong đời sống hằng ngày, nhiều người hay gọi chung là “men tiêu hóa”. Nhưng thực ra cần phân biệt."
+  from={['08-nuoi-duong-he-vi-sinh-ben-vung']}
+>
+  <Compare
+    vs
+    columns={[
+      {
+        title: 'Men tiêu hóa',
+        sub: 'thường là các enzyme',
+        icon: 'men-tieu-hoa',
+        hue: 'bo',
+        items: [
+          { icon: 'com', text: 'Hỗ trợ **phân giải thức ăn**: tinh bột, đạm, chất béo' },
+          { icon: 'bac-si', text: 'Một số trường hợp bệnh lý đặc biệt có thể cần dùng **theo chỉ định**' },
+          { icon: 'sai', text: 'Không nên tự xem là thứ uống thường xuyên sau mỗi bữa ăn no, ăn nhiều, ăn khó tiêu' },
+        ],
+        note: 'Ăn quá no, quá nhanh, quá nhiều dầu mỡ rồi uống men cho yên tâm là đang xử lý phần sau, chưa sửa phần trước.',
+      },
+      {
+        title: 'Men vi sinh',
+        sub: 'sản phẩm chứa vi sinh vật sống',
+        icon: 'men-vi-sinh',
+        hue: 'sage',
+        items: [
+          { icon: 'loi-khuan', text: 'Dùng với lượng phù hợp trong bối cảnh phù hợp **có thể** mang lại lợi ích sức khỏe' },
+          { icon: 'muc-tieu', text: 'Hiệu quả phụ thuộc vào **chủng, liều, sản phẩm và mục tiêu** sử dụng' },
+          { icon: 'sai', text: 'Không phải loại nào cũng giống nhau' },
+        ],
+        note: 'Và không phải vấn đề tiêu hóa nào cũng cần men vi sinh.',
+      },
+    ]}
+  />
+</Diagram>

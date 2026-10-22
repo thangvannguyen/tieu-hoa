@@ -1,0 +1,36 @@
+---
+/** Probiotic + Prebiotic = Synbiotic, kèm ví dụ trong bài (theo bản tin #06, mục 2). */
+import Diagram from '../primitives/Diagram.astro';
+import Equation from '../primitives/Equation.astro';
+---
+<Diagram
+  title="Probiotic + Prebiotic = Synbiotic"
+  icon="loi-khuan"
+  hue="sage"
+  kicker="Nhớ nhanh"
+  caption="Synbiotic là sự kết hợp giữa vi sinh vật sống và cơ chất được vi sinh vật sử dụng, nhằm mang lại lợi ích sức khỏe cho cơ thể. Ví dụ quen thuộc: sữa chua không đường ăn cùng chuối hoặc yến mạch có thể là một cách phối hợp khá thân thiện với đường ruột, nếu bạn dung nạp tốt."
+  from={['06-loi-khuan-hieu-cho-dung']}
+>
+  <Equation
+    terms={[
+      {
+        icon: 'men-vi-sinh',
+        title: 'Probiotic',
+        text: '**“Lợi khuẩn được đưa vào”** — vi sinh vật sống, khi dùng với lượng phù hợp có thể mang lại lợi ích sức khỏe. *Ví dụ: sữa chua không đường.*',
+        hue: 'ngoc',
+      },
+      {
+        icon: 'chuoi',
+        title: 'Prebiotic',
+        text: '**“Thức ăn nuôi lợi khuẩn”** — thành phần trong thực phẩm được hệ vi sinh sử dụng một cách chọn lọc. *Ví dụ: chuối hoặc yến mạch.*',
+        hue: 'bo',
+      },
+      {
+        icon: 'sua-chua',
+        title: 'Synbiotic',
+        text: '**Lợi khuẩn đi kèm “đồ ăn”** — sữa chua không đường ăn cùng chuối hoặc yến mạch, nếu bạn dung nạp tốt.',
+        hue: 'sage',
+      },
+    ]}
+  />
+</Diagram>

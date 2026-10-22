@@ -1,0 +1,41 @@
+---
+/** Stress → cortisol → 3 tác động; stress → ngủ kém → phục hồi bị cản trở (theo bản tin #05, mục 3). */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram
+  title="Stress tác động lên tiêu hóa qua hai ngả"
+  icon="may-stress"
+  hue="lav"
+  caption="Khi bạn căng thẳng kéo dài, sẽ làm giảm sức đề kháng của bản thân mình. Tình trạng stress, căng thẳng thường ảnh hưởng đến giấc ngủ nên quá trình phục hồi bị cản trở — một trong những nguyên nhân gián tiếp quan trọng tác động lên sự rối loạn tiêu hóa."
+  from={['05-vi-sao-dan-van-phong-roi-loan-tieu-hoa']}
+>
+  <div class="scg">
+    <p class="scg__lbl"><span class="dg-num">1</span> Ngả cortisol</p>
+    <Branches
+      root={{ icon: 'may-stress', title: 'Khi bạn căng thẳng nhiều', text: 'cơ thể của bạn sẽ tiết ra cortisol' }}
+      via="cortisol"
+      branches={[
+        { icon: 'da-day', title: 'Tăng tiết acid trong dạ dày', hue: 'dao' },
+        { icon: 'banh-ngot', title: 'Kích thích thèm ăn', text: 'đặc biệt thèm ngọt…', hue: 'bo' },
+        { icon: 'khien', title: 'Ức chế miễn dịch', text: 'nghĩa là làm sức đề kháng của chúng ta suy yếu', hue: 'do' },
+      ]}
+    />
+    <p class="scg__lbl"><span class="dg-num">2</span> Ngả giấc ngủ</p>
+    <Flow
+      steps={[
+        { icon: 'may-stress', title: 'Stress, căng thẳng' },
+        { icon: 'trang', title: 'Ảnh hưởng đến giấc ngủ', text: 'mà cơ thể được nghỉ ngơi, phục hồi trong giấc ngủ' },
+        { icon: 'lap-lai', title: 'Quá trình phục hồi bị cản trở' },
+        { icon: 'ruot', title: 'Tác động lên sự rối loạn tiêu hóa', text: 'một trong những nguyên nhân gián tiếp quan trọng', hue: 'dao' },
+      ]}
+    />
+  </div>
+</Diagram>
+
+<style>
+  .scg { display: grid; gap: 0.7rem; }
+  .scg__lbl { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-head); font-weight: 900; color: var(--h-ink); }
+  .scg__lbl:not(:first-child) { margin-top: 1rem !important; padding-top: 1rem; border-top: 2px dashed var(--line-2); }
+</style>

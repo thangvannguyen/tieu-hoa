@@ -1,0 +1,83 @@
+{
+  "lesson": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bản tin, vì sao ngồi lâu lại bất lợi cho tiêu hóa?",
+      "options": [
+        { "id": "a", "text": "Ngồi lâu làm đường ruột “hỏng” ngay trong một buổi sáng" },
+        { "id": "b", "text": "Ngồi lâu thường đi kèm những thói quen bất lợi: ít vận động, ít uống nước, ăn uống thất thường, dễ stress, ngủ muộn" },
+        { "id": "c", "text": "Ngồi lâu làm cơ thể hấp thu quá nhiều chất xơ" }
+      ],
+      "answer": ["b"],
+      "explain": "Ngồi lâu không làm đường ruột “hỏng” ngay trong một buổi sáng, nhưng nó **thường đi kèm những thói quen bất lợi** cho sự hoạt động của tiêu hóa như: ít vận động, ít uống nước, ăn uống thất thường, dễ stress, ngủ muộn…",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "nó thường đi kèm những thói quen bất lợi cho sự hoạt động của tiêu hóa" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "WHO khuyến cáo người trưởng thành nên đạt ít nhất bao nhiêu phút hoạt động thể lực cường độ vừa mỗi tuần?",
+      "options": [
+        { "id": "a", "text": "30–60 phút mỗi tuần" },
+        { "id": "b", "text": "75–150 phút mỗi tuần" },
+        { "id": "c", "text": "150–300 phút mỗi tuần" }
+      ],
+      "answer": ["c"],
+      "explain": "WHO khuyến cáo ít nhất **150–300 phút** hoạt động thể lực cường độ vừa mỗi tuần, hoặc **75–150 phút** hoạt động thể lực cường độ mạnh mỗi tuần.",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "ít nhất 150–300 phút hoạt động thể lực cường độ vừa mỗi tuần" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Khoai tây, khoai lang, sắn cũng được tính vào 400 g rau quả mỗi ngày theo khuyến nghị của WHO.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "WHO khuyến nghị ăn ít nhất 400 g rau quả mỗi ngày, tương đương khoảng 5 phần rau quả, **không tính khoai tây, khoai lang, sắn và các loại củ nhiều tinh bột**.",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "không tính khoai tây, khoai lang, sắn và các loại củ nhiều tinh bột" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Vì sao ăn ít chất xơ lại khiến lợi khuẩn khó hoạt động tốt?",
+      "options": [
+        { "id": "a", "text": "Vì chất xơ là “thức ăn” của lợi khuẩn — ăn quá ít rau, trái cây nguyên miếng, đậu, ngũ cốc nguyên hạt thì lợi khuẩn thiếu nguyên liệu" },
+        { "id": "b", "text": "Vì chất xơ làm tăng tiết acid trong dạ dày" },
+        { "id": "c", "text": "Vì chất xơ chỉ có trong men vi sinh" }
+      ],
+      "answer": ["a"],
+      "explain": "Bạn biết không, **chất xơ là “thức ăn” của lợi khuẩn**. Nếu mình ăn quá ít rau, trái cây nguyên miếng, đậu và ngũ cốc nguyên hạt, lợi khuẩn sẽ thiếu nguyên liệu để hoạt động tốt.",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "lợi khuẩn sẽ thiếu nguyên liệu để hoạt động tốt" }
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "Theo bản tin, khi bạn căng thẳng nhiều, cortisol có thể gây ra những tác động nào?",
+      "options": [
+        { "id": "a", "text": "Kích thích làm tăng tiết acid trong dạ dày" },
+        { "id": "b", "text": "Kích thích thèm ăn, đặc biệt thèm ngọt" },
+        { "id": "c", "text": "Ức chế miễn dịch, làm sức đề kháng suy yếu" },
+        { "id": "d", "text": "Giúp quá trình phục hồi trong giấc ngủ tốt hơn" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Cortisol kích thích làm **tăng tiết acid** trong dạ dày, kích thích bạn **thèm ăn, đặc biệt thèm ngọt**, và **ức chế miễn dịch** làm sức đề kháng suy yếu. Stress còn ảnh hưởng đến giấc ngủ nên quá trình phục hồi **bị cản trở**.",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "cortisol kích thích làm tăng tiết acid trong dạ dày, kích thích bạn thèm ăn, đặc biệt thèm ngọt" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Phần thực hành của bản tin tuần này là gì?",
+      "options": [
+        { "id": "a", "text": "Uống thử một loại men vi sinh mới" },
+        { "id": "b", "text": "Ghi nhật ký 3 ngày để quan sát xem đường ruột đang phản ứng với điều gì" },
+        { "id": "c", "text": "Bỏ hẳn bữa trưa văn phòng" }
+      ],
+      "answer": ["b"],
+      "explain": "Muốn chăm đường ruột tốt, trước hết cần biết đường ruột của chúng ta đang phản ứng với điều gì — bằng cách **ghi lại nhật ký 3 ngày**, chỉ tốn 3-5 phút.",
+      "source": { "bai": "05-vi-sao-dan-van-phong-roi-loan-tieu-hoa", "trich": "ghi lại nhật ký 3 ngày cho dân văn phòng, chỉ tốn 3-5 phút của bạn" }
+    }
+  ]
+}
