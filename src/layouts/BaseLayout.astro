@@ -1,10 +1,12 @@
 ---
+// Chỉ tải 2 độ đậm (400, 700) của Be Vietnam Pro + Nunito variable để trang nhẹ; nghiêng do trình duyệt tự tạo.
 import '@fontsource/be-vietnam-pro/400.css';
-import '@fontsource/be-vietnam-pro/500.css';
-import '@fontsource/be-vietnam-pro/600.css';
 import '@fontsource/be-vietnam-pro/700.css';
-import '@fontsource/be-vietnam-pro/400-italic.css';
 import '@fontsource-variable/nunito/index.css';
+import nunitoVi from '@fontsource-variable/nunito/files/nunito-vietnamese-wght-normal.woff2?url';
+import nunitoLatin from '@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2?url';
+import bodyVi from '@fontsource/be-vietnam-pro/files/be-vietnam-pro-vietnamese-400-normal.woff2?url';
+import bodyLatin from '@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-400-normal.woff2?url';
 import '~/styles/global.css';
 import Header from '~/components/ui/Header.astro';
 import Footer from '~/components/ui/Footer.astro';
@@ -33,6 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    {[nunitoVi, nunitoLatin, bodyVi, bodyLatin].map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
     <meta name="theme-color" content="#fff9f0" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1c1714" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content={fullTitle} />

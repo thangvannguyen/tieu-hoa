@@ -11,5 +11,7 @@ export default defineConfig({
   compressHTML: true,
   integrations: [mdx(), sitemap()],
   image: { layout: 'constrained', responsiveStyles: true },
+  // CSS nhỏ (~25KB) → nhúng thẳng vào HTML để không chặn hiển thị
+  build: { inlineStylesheets: 'always' },
   devToolbar: { enabled: false },
 });

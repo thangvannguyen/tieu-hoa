@@ -5,7 +5,7 @@ const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3)
 ---
 {items.length > 2 && (
   <nav class="toc" aria-label="Mục lục bài">
-    <details open>
+    <details>
       <summary><Icon name="menu" size={20} /> Mục lục</summary>
       <ol>
         {items.map((h) => <li class:list={[`d${h.depth}`]}><a href={`#${h.slug}`}>{h.text}</a></li>)}
@@ -25,7 +25,8 @@ const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3)
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
   spy();
-  if (matchMedia('(max-width: 1100px)').matches) document.querySelector('.toc details')?.removeAttribute('open');
+  // trên màn hình rộng mục lục nằm ở cột bên nên mở sẵn (không làm xô lệch nội dung chính)
+  if (matchMedia('(min-width: 1100px)').matches) document.querySelector('.toc details')?.setAttribute('open', '');
 </script>
 <style>
   .toc { font-size: 0.92rem; }
