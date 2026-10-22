@@ -95,7 +95,7 @@ const isScale = (f: Field): f is Extract<Field, { type: 'scale' }> => f.type ===
                         {f.unit && <span>{f.unit}</span>}
                       </span>
                     ) : (
-                      <input type={f.type} data-day={d} data-field={f.id} placeholder={f.placeholder} />
+                      <input type={f.type === 'time' ? 'time' : 'text'} data-day={d} data-field={f.id} placeholder={'placeholder' in f ? f.placeholder : undefined} />
                     )}
                   </label>
                 )}

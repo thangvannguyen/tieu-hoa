@@ -2,7 +2,7 @@
 /** Thiết kế hai kịch bản ngủ (bản tin #11): A — ngày thường (có đồng hồ 24h tự vẽ), B — tăng ca / làm đêm. */
 import Icon from '~/components/ui/Icon.astro';
 const id = 'kich-ban-giac-ngu';
-const aFields = [
+const aFields: { id: string; label: string; type: 'time' | 'text'; icon: string }[] = [
   { id: 'thuc-day', label: 'Giờ thức dậy', type: 'time', icon: 'bao-thuc' },
   { id: 'anh-sang', label: 'Thời điểm tiếp xúc ánh sáng buổi sáng', type: 'time', icon: 'mat-troi' },
   { id: 'tap-trung-tu', label: 'Khung giờ tập trung cao nhất — từ', type: 'time', icon: 'muc-tieu' },
