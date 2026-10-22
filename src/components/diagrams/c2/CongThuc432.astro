@@ -1,0 +1,51 @@
+---
+/** Công thức bền vững "4 nuôi – 3 giảm – 2 theo dõi" (theo bản tin #08, mục 3). */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Công thức bền vững: 4 nuôi – 3 giảm – 2 theo dõi"
+  kicker="Công thức"
+  icon="loi-khuan"
+  hue="sage"
+  caption="Đường ruột khỏe bền đến từ cách mình ăn, uống, vận động, ngủ, kiểm soát stress và lắng nghe cơ thể mỗi ngày."
+  from={['08-nuoi-duong-he-vi-sinh-ben-vung']}
+>
+  <Compare
+    columns={[
+      {
+        title: '4 NUÔI',
+        sub: 'xây lại nền tảng cho hệ vi sinh',
+        icon: 'rau',
+        hue: 'sage',
+        items: [
+          { icon: 'chat-xo', text: 'Nuôi bằng **chất xơ**' },
+          { icon: 'dia', text: 'Nuôi bằng **sự đa dạng**' },
+          { icon: 'nuoc', text: 'Nuôi bằng **nước và vận động**' },
+          { icon: 'trang', text: 'Nuôi bằng **giấc ngủ và giảm stress**' },
+        ],
+      },
+      {
+        title: '3 GIẢM',
+        sub: 'giảm tần suất, không cần cấm tuyệt đối',
+        icon: 'mui-ten-xuong',
+        hue: 'bo',
+        items: [
+          { icon: 'tra-sua', text: 'Giảm **đồ ngọt và nước uống nhiều đường**' },
+          { icon: 'mi-goi', text: 'Giảm **thực phẩm siêu chế biến**' },
+          { icon: 'men-vi-sinh', text: 'Giảm **tự ý dùng men tiêu hóa/men vi sinh** khi chưa rõ lý do' },
+        ],
+      },
+      {
+        title: '2 THEO DÕI',
+        sub: 'lắng nghe cơ thể',
+        icon: 'nhat-ky',
+        hue: 'lav',
+        items: [
+          { icon: 'ruot', text: 'Theo dõi **phản ứng của bụng**' },
+          { icon: 'co-do', text: 'Theo dõi **dấu hiệu cần đi khám**' },
+        ],
+      },
+    ]}
+  />
+</Diagram>

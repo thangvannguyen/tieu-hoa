@@ -1,0 +1,122 @@
+[
+  {
+    "id": "loi-khuan",
+    "term": "Lợi khuẩn",
+    "aliases": ["lợi khuẩn đường ruột", "người làm vườn trong ruột"],
+    "short": "Những vi khuẩn có vai trò có lợi hoặc hỗ trợ cân bằng hệ vi sinh đường ruột — như những “người làm vườn” trong ruột.",
+    "definition": "Khi nói “lợi khuẩn”, mình thường đang nói đến những vi khuẩn có vai trò có lợi hoặc hỗ trợ cân bằng hệ vi sinh đường ruột. Bạn có thể hình dung lợi khuẩn giống như những “người làm vườn” trong ruột: muốn khu vườn khỏe, không chỉ thả thêm người làm vườn vào là xong, mà cần có đất tốt, nước đủ, thức ăn phù hợp, “ít rác” và môi trường ổn định.",
+    "icon": "loi-khuan",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "những vi khuẩn có vai trò có lợi hoặc hỗ trợ cân bằng hệ vi sinh đường ruột" }
+  },
+  {
+    "id": "he-vi-sinh-duong-ruot",
+    "term": "Hệ vi sinh đường ruột",
+    "aliases": ["vi sinh vật đường ruột"],
+    "short": "Rất nhiều vi sinh vật khác nhau sống trong đường tiêu hóa, tham gia tiêu hóa, chuyển hóa chất xơ, hỗ trợ hàng rào niêm mạc ruột.",
+    "definition": "Trong đường tiêu hóa của chúng ta có rất nhiều vi sinh vật khác nhau. Nhiều loại trong số đó tham gia vào quá trình tiêu hóa, chuyển hóa chất xơ, hỗ trợ hàng rào niêm mạc ruột và liên quan đến hoạt động miễn dịch. Hệ vi sinh đường ruột chịu ảnh hưởng từ tổng thể lối sống: chất xơ, nước uống, vận động, stress, giấc ngủ, đồ ngọt và thức ăn siêu chế biến.",
+    "icon": "ruot",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Trong đường tiêu hóa của chúng ta có rất nhiều vi sinh vật khác nhau" }
+  },
+  {
+    "id": "probiotic",
+    "term": "Probiotic",
+    "aliases": ["lợi khuẩn bổ sung", "lợi khuẩn được đưa vào"],
+    "en": "Probiotic",
+    "short": "Vi sinh vật sống, khi dùng với lượng phù hợp có thể mang lại lợi ích sức khỏe — “lợi khuẩn được đưa vào”.",
+    "definition": "Probiotic là vi sinh vật sống, khi dùng với lượng phù hợp có thể mang lại lợi ích sức khỏe cho cơ thể. Khái niệm này thường được dùng cho các sản phẩm men vi sinh dạng viên, gói, ống uống hoặc một số thực phẩm có chứa vi sinh vật sống. Probiotic không phải loại nào cũng giống nhau: tác dụng phụ thuộc vào chủng vi sinh, sản phẩm, liều lượng, thời gian dùng, đối tượng dùng và mục tiêu sử dụng.",
+    "icon": "men-vi-sinh",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Probiotic là vi sinh vật sống, khi dùng với lượng phù hợp có thể mang lại lợi ích sức khỏe cho cơ thể" }
+  },
+  {
+    "id": "prebiotic",
+    "term": "Prebiotic",
+    "aliases": ["thức ăn cho lợi khuẩn", "thức ăn nuôi lợi khuẩn"],
+    "en": "Prebiotic",
+    "short": "Thành phần trong thực phẩm được hệ vi sinh sử dụng một cách chọn lọc — “thức ăn nuôi lợi khuẩn”.",
+    "definition": "Prebiotic là những thành phần trong thực phẩm được hệ vi sinh sử dụng một cách chọn lọc và mang lại lợi ích sức khỏe cho cơ thể. Nguồn prebiotic/chất xơ có thể đến từ rau xanh, chuối, các loại đậu, yến mạch, ngũ cốc nguyên hạt, khoai, hành, tỏi, trái cây nguyên miếng, rau thơm, gia vị thực vật.",
+    "icon": "rau",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Prebiotic là những thành phần trong thực phẩm được hệ vi sinh sử dụng một cách chọn lọc" }
+  },
+  {
+    "id": "synbiotic",
+    "term": "Synbiotic",
+    "aliases": ["lợi khuẩn đi kèm đồ ăn"],
+    "en": "Synbiotic",
+    "short": "Sự kết hợp giữa vi sinh vật sống và cơ chất được vi sinh vật sử dụng — lợi khuẩn đi kèm “đồ ăn”.",
+    "definition": "Synbiotic là sự kết hợp giữa vi sinh vật sống và cơ chất được vi sinh vật sử dụng, nhằm mang lại lợi ích sức khỏe cho cơ thể (ISAPP cập nhật định nghĩa này trong tuyên bố đồng thuận năm 2020). Có thể hiểu nhanh: probiotic + prebiotic. Ví dụ quen thuộc: sữa chua không đường ăn cùng chuối hoặc yến mạch, nếu bạn dung nạp tốt.",
+    "icon": "sua-chua",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Synbiotic là sự kết hợp giữa vi sinh vật sống và cơ chất được vi sinh vật sử dụng" }
+  },
+  {
+    "id": "acid-beo-chuoi-ngan",
+    "term": "Acid béo chuỗi ngắn",
+    "aliases": [],
+    "short": "Nhóm chất tạo ra khi chất xơ được hệ vi sinh lên men, có vai trò trong sức khỏe đường ruột và chuyển hóa.",
+    "definition": "Theo Harvard T.H. Chan School of Public Health, chất xơ có thể được hệ vi sinh lên men để tạo ra các acid béo chuỗi ngắn, nhóm chất có vai trò trong sức khỏe đường ruột và chuyển hóa.",
+    "icon": "chat-xo",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "chất xơ có thể được hệ vi sinh lên men để tạo ra các acid béo chuỗi ngắn, nhóm chất có vai trò trong sức khỏe đường ruột và chuyển hóa" }
+  },
+  {
+    "id": "thuc-pham-len-men",
+    "term": "Thực phẩm lên men",
+    "aliases": ["đồ lên men"],
+    "short": "Sữa chua, kefir, kim chi, dưa cải, tempeh, kombucha, miso… — một số có thể chứa vi sinh vật sống có lợi, nhưng không phải tất cả.",
+    "definition": "Một số thực phẩm lên men có thể chứa vi sinh vật sống có lợi, nhưng không phải tất cả. Những thực phẩm đã bị xử lý nhiệt hoặc tiệt trùng sau lên men có thể không còn vi sinh vật sống đáng kể. Ví dụ thường gặp: sữa chua, kefir, kim chi, dưa cải, tempeh, kombucha, miso. Cần nhớ: một số món lên men nhiều muối, một số đồ uống lên men có đường/gas, một số người ăn vào dễ đầy bụng hoặc khó chịu, và người có bệnh nền cần thận trọng hơn.",
+    "icon": "kim-chi",
+    "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Một số thực phẩm lên men có thể chứa vi sinh vật sống có lợi, nhưng không phải tất cả" }
+  },
+  {
+    "id": "men-tieu-hoa",
+    "term": "Men tiêu hóa",
+    "aliases": ["enzyme tiêu hóa"],
+    "short": "Thường là các enzyme hỗ trợ phân giải thức ăn (tinh bột, đạm, chất béo); khác với men vi sinh.",
+    "definition": "Men tiêu hóa thường là các enzyme hỗ trợ phân giải thức ăn, ví dụ phân giải tinh bột, đạm, chất béo. Một số trường hợp bệnh lý đặc biệt có thể cần dùng enzyme tiêu hóa theo chỉ định. Nhưng không nên tự xem men tiêu hóa là thứ uống thường xuyên sau mỗi bữa ăn no, ăn nhiều, ăn khó tiêu.",
+    "icon": "men-tieu-hoa",
+    "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Men tiêu hóa thường là các enzyme hỗ trợ phân giải thức ăn, ví dụ phân giải tinh bột, đạm, chất béo" }
+  },
+  {
+    "id": "men-vi-sinh",
+    "term": "Men vi sinh",
+    "aliases": ["sản phẩm probiotic"],
+    "short": "Sản phẩm chứa vi sinh vật sống; hiệu quả phụ thuộc vào chủng, liều, sản phẩm và mục tiêu sử dụng.",
+    "definition": "Men vi sinh là sản phẩm chứa vi sinh vật sống, khi dùng với lượng phù hợp trong bối cảnh phù hợp có thể mang lại lợi ích sức khỏe. Tuy nhiên, hiệu quả phụ thuộc vào chủng, liều, sản phẩm và mục tiêu sử dụng. Men vi sinh không phải loại nào cũng giống nhau, và không phải vấn đề tiêu hóa nào cũng cần men vi sinh.",
+    "icon": "men-vi-sinh",
+    "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Men vi sinh là sản phẩm chứa vi sinh vật sống" }
+  },
+  {
+    "id": "thuc-pham-sieu-che-bien",
+    "term": "Thực phẩm siêu chế biến",
+    "aliases": ["thức ăn siêu chế biến"],
+    "short": "Mì gói, snack, xúc xích, bánh kẹo, đồ chiên rán, thức ăn nhanh… — ăn quá thường xuyên dễ làm chế độ ăn nghèo chất xơ.",
+    "definition": "Mì gói, snack, xúc xích, bánh kẹo, đồ chiên rán, thức ăn nhanh… nếu lặp lại quá thường xuyên có thể làm chế độ ăn nghèo chất xơ, dư muối, dư đường hoặc chất béo không có lợi. Không cần bỏ ngay, chỉ cần giảm tần suất.",
+    "icon": "mi-goi",
+    "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Mì gói, snack, xúc xích, bánh kẹo, đồ chiên rán, thức ăn nhanh" }
+  },
+  {
+    "id": "phu-thuoc-san-pham-bo-sung",
+    "term": "Phụ thuộc vào sản phẩm bổ sung",
+    "aliases": ["phụ thuộc men tiêu hóa", "phụ thuộc men vi sinh"],
+    "short": "Cứ khó tiêu, đầy bụng, táo bón… là nghĩ ngay đến uống gì đó, thay vì nhìn lại nguyên nhân.",
+    "definition": "Phụ thuộc ở đây không có nghĩa là “không bao giờ được dùng”. Phụ thuộc nghĩa là: cứ khó tiêu, đầy bụng, táo bón, ăn nhiều, ăn sai… là mình nghĩ ngay đến uống gì đó, thay vì nhìn lại nguyên nhân. Điều này dễ dẫn đến bỏ qua nguyên nhân thật, trì hoãn việc đi khám, quên mất nền tảng ăn uống và kỳ vọng quá mức.",
+    "icon": "vien-thuoc",
+    "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "là mình nghĩ ngay đến uống gì đó, thay vì nhìn lại nguyên nhân" }
+  },
+  {
+    "id": "5-dung",
+    "term": "5 đúng",
+    "aliases": ["nguyên tắc 5 đúng", "5 đúng khi bổ sung lợi khuẩn"],
+    "short": "Nguyên tắc dễ nhớ khi bổ sung lợi khuẩn: đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách, đúng nền tảng.",
+    "definition": "Nguyên tắc dễ nhớ khi bổ sung lợi khuẩn: men vi sinh nên dùng đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách và đúng nền tảng. Trong đó “đúng nền tảng” — chất xơ, nước uống, vận động, giấc ngủ, stress, đồ ngọt và thức ăn siêu chế biến, thói quen đi cầu — là phần quan trọng nhất.",
+    "icon": "checklist",
+    "source": { "bai": "07-bo-sung-loi-khuan-dung-cach", "trich": "Men vi sinh nên dùng đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách và đúng nền tảng" }
+  },
+  {
+    "id": "4-nuoi-3-giam-2-theo-doi",
+    "term": "4 nuôi – 3 giảm – 2 theo dõi",
+    "aliases": ["công thức bền vững", "4 nuôi 3 giảm 2 theo dõi"],
+    "short": "Công thức nuôi dưỡng hệ vi sinh bền vững: 4 cách nuôi, 3 điều nên giảm, 2 điều cần theo dõi.",
+    "definition": "Công thức bền vững để nuôi dưỡng hệ vi sinh đường ruột, hạn chế phụ thuộc vào men bổ sung. 4 nuôi: nuôi bằng chất xơ, bằng sự đa dạng, bằng nước và vận động, bằng giấc ngủ và giảm stress. 3 giảm: giảm đồ ngọt và nước uống nhiều đường, giảm thực phẩm siêu chế biến, giảm tự ý dùng men tiêu hóa/men vi sinh khi chưa rõ lý do. 2 theo dõi: theo dõi phản ứng của bụng và theo dõi dấu hiệu cần đi khám.",
+    "icon": "loi-khuan",
+    "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Công thức bền vững: 4 nuôi – 3 giảm – 2 theo dõi" }
+  }
+]

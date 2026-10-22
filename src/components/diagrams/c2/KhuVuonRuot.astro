@@ -1,0 +1,134 @@
+---
+/** Minh họa vẽ tay: lợi khuẩn là những "người làm vườn" trong ruột (theo bản tin #06, mục 1). */
+import Diagram from '../primitives/Diagram.astro';
+const conditions = ['Đất tốt', 'Nước đủ', 'Thức ăn phù hợp', '“Ít rác”', 'Môi trường ổn định'];
+const DROP = 'M0 0c3.6 4.6 5.4 7.4 5.4 9.8a5.4 5.4 0 0 1-10.8 0c0-2.4 1.8-5.2 5.4-9.8z';
+---
+<Diagram
+  title="Lợi khuẩn — những “người làm vườn” trong ruột"
+  icon="bac-ha"
+  hue="sage"
+  kicker="Minh họa"
+  caption="Bạn có thể hình dung: Lợi khuẩn giống như những “người làm vườn” trong ruột."
+  from={['06-loi-khuan-hieu-cho-dung']}
+>
+  <div class="kvr">
+    <svg viewBox="0 0 360 270" role="img" aria-label="Khu vườn: hai lợi khuẩn có mặt cười đang làm vườn — một bạn đội nón tưới nước cho cây non, một bạn xách giỏ thức ăn; có đất tơi, ông mặt trời và thùng rác đậy kín. Năm số đánh dấu: 1 đất tốt, 2 nước đủ, 3 thức ăn phù hợp, 4 ít rác, 5 môi trường ổn định.">
+      <text x="16" y="34" class="kvr__name">Lợi khuẩn = “người làm vườn”</text>
+
+      <!-- mặt trời: môi trường ổn định -->
+      <g class="kvr__sunrays">
+        <path d="M320 14v-8M320 82v-8M346 44h8M286 44h8M339 25l6-6M295 69l6-6M339 63l6 6M295 19l6 6"></path>
+      </g>
+      <circle cx="320" cy="44" r="19" class="kvr__sun"></circle>
+      <circle cx="314" cy="41" r="2.4" class="kvr__ink"></circle>
+      <circle cx="326" cy="41" r="2.4" class="kvr__ink"></circle>
+      <path class="kvr__line kvr__line--thin" d="M316 48c2 2 6 2 8 0"></path>
+
+      <!-- đất -->
+      <path class="kvr__soil" d="M12 196C70 188 120 200 180 195S300 189 348 197V250Q348 260 338 260H22Q12 260 12 250Z"></path>
+      <g class="kvr__dot">
+        <circle cx="42" cy="214" r="2.6"></circle><circle cx="98" cy="232" r="2.6"></circle><circle cx="150" cy="215" r="2.6"></circle>
+        <circle cx="208" cy="240" r="2.6"></circle><circle cx="262" cy="216" r="2.6"></circle><circle cx="318" cy="236" r="2.6"></circle>
+        <circle cx="128" cy="248" r="2"></circle><circle cx="290" cy="250" r="2"></circle><circle cx="72" cy="250" r="2"></circle>
+      </g>
+      <path class="kvr__line kvr__line--thin" d="M186 196c-2 8-8 12-14 14M186 196c2 9 8 13 15 15M228 196c-1 6-5 9-10 10M228 196c1 6 5 9 10 10"></path>
+
+      <!-- cây non -->
+      <path class="kvr__stem" d="M186 196V140"></path>
+      <path class="kvr__leaf" d="M186 172c-18-2-28-14-26-26 14 2 24 12 26 26z"></path>
+      <path class="kvr__leaf" d="M186 158c16-4 26-16 24-28-14 2-24 14-24 28z"></path>
+      <circle cx="186" cy="136" r="7" class="kvr__bud"></circle>
+      <path class="kvr__stem" d="M228 196v-30"></path>
+      <path class="kvr__leaf" d="M228 180c-12-1-19-9-18-18 9 1 17 8 18 18z"></path>
+      <path class="kvr__leaf" d="M228 172c11-2 18-10 17-19-10 1-17 9-17 19z"></path>
+
+      <!-- người làm vườn 1: tưới nước -->
+      <rect x="58" y="118" width="56" height="76" rx="28" class="kvr__bac kvr__bac--a"></rect>
+      <path class="kvr__hat" d="M66 122c2-14 38-14 40 0z"></path>
+      <ellipse cx="86" cy="122" rx="34" ry="6.5" class="kvr__hat"></ellipse>
+      <circle cx="77" cy="148" r="3.2" class="kvr__ink"></circle>
+      <circle cx="95" cy="148" r="3.2" class="kvr__ink"></circle>
+      <path class="kvr__line" d="M81 156c3 3 7 3 10 0"></path>
+      <ellipse cx="68" cy="156" rx="5" ry="3" class="kvr__blush"></ellipse>
+      <ellipse cx="104" cy="156" rx="5" ry="3" class="kvr__blush"></ellipse>
+      <path class="kvr__line" d="M112 160l10-8"></path>
+      <!-- bình tưới -->
+      <rect x="118" y="136" width="30" height="22" rx="5" class="kvr__can"></rect>
+      <path class="kvr__line" d="M148 142l18-12"></path>
+      <path class="kvr__line kvr__line--thin" d="M122 136c0-12 22-12 22 0"></path>
+      <g class="kvr__drop">
+        <path transform="translate(170 132)" d={DROP}></path>
+        <path transform="translate(176 150)" d={DROP}></path>
+        <path transform="translate(167 164)" d={DROP}></path>
+      </g>
+
+      <!-- người làm vườn 2: xách giỏ thức ăn -->
+      <ellipse cx="252" cy="162" rx="25" ry="30" class="kvr__bac kvr__bac--b"></ellipse>
+      <circle cx="244" cy="157" r="3.2" class="kvr__ink"></circle>
+      <circle cx="260" cy="157" r="3.2" class="kvr__ink"></circle>
+      <path class="kvr__line" d="M247 165c3 3 7 3 10 0"></path>
+      <ellipse cx="236" cy="165" rx="4.5" ry="2.8" class="kvr__blush"></ellipse>
+      <ellipse cx="268" cy="165" rx="4.5" ry="2.8" class="kvr__blush"></ellipse>
+      <path class="kvr__line" d="M275 170l9 4"></path>
+      <path class="kvr__line kvr__line--thin" d="M234 136l-6-8M252 132v-9M270 136l6-8"></path>
+      <!-- giỏ -->
+      <ellipse cx="288" cy="166" rx="6" ry="3.8" class="kvr__leaf"></ellipse>
+      <circle cx="296" cy="165" r="4" class="kvr__bean"></circle>
+      <circle cx="302" cy="168" r="3.4" class="kvr__leaf"></circle>
+      <path class="kvr__basket" d="M280 170h28l-4 22h-20z"></path>
+      <path class="kvr__line kvr__line--thin" d="M283 177h22M285 184h18"></path>
+
+      <!-- thùng rác đậy kín: ít rác -->
+      <path class="kvr__bin" d="M319 168h22l-3 26h-16z"></path>
+      <rect x="315" y="161" width="30" height="6" rx="3" class="kvr__bin"></rect>
+      <path class="kvr__line kvr__line--thin" d="M326 173v15M334 173v15"></path>
+
+      <!-- số đánh dấu -->
+      <g class="kvr__mk"><circle cx="34" cy="232" r="11"></circle><text x="34" y="232">1</text></g>
+      <g class="kvr__mk"><circle cx="196" cy="110" r="11"></circle><text x="196" y="110">2</text></g>
+      <g class="kvr__mk"><circle cx="294" cy="146" r="11"></circle><text x="294" y="146">3</text></g>
+      <g class="kvr__mk"><circle cx="330" cy="140" r="11"></circle><text x="330" y="140">4</text></g>
+      <g class="kvr__mk"><circle cx="284" cy="72" r="11"></circle><text x="284" y="72">5</text></g>
+    </svg>
+    <div class="kvr__legend">
+      <p>Muốn khu vườn khỏe, không chỉ thả thêm người làm vườn vào là xong. Cần có:</p>
+      <ol>
+        {conditions.map((c, i) => <li><span class="kvr__n">{i + 1}</span><span>{c}</span></li>)}
+      </ol>
+    </div>
+  </div>
+</Diagram>
+
+<style>
+  .kvr { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .kvr { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+  .kvr svg { width: 100%; max-width: 440px; margin: 0 auto; display: block; overflow: visible; }
+  .kvr__name { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--ink); }
+  .kvr__ink { fill: var(--ink); }
+  .kvr__line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .kvr__line--thin { stroke-width: 2.5; }
+  .kvr__blush { fill: var(--cheek); opacity: 0.8; }
+  .kvr__sun { fill: var(--bo); stroke: var(--ink); stroke-width: 3; }
+  .kvr__sunrays path { fill: none; stroke: var(--bo-ink); stroke-width: 3; stroke-linecap: round; }
+  .kvr__soil { fill: var(--bo-fill); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .kvr__dot circle { fill: var(--bo); }
+  .kvr__stem { fill: none; stroke: var(--sage-ink); stroke-width: 4; stroke-linecap: round; }
+  .kvr__leaf { fill: var(--sage); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .kvr__bud { fill: var(--hong); stroke: var(--ink); stroke-width: 2.5; }
+  .kvr__bean { fill: var(--dao); stroke: var(--ink); stroke-width: 2.5; }
+  .kvr__bac { stroke: var(--ink); stroke-width: 3; }
+  .kvr__bac--a { fill: var(--ngoc-fill); }
+  .kvr__bac--b { fill: var(--lav-fill); }
+  .kvr__hat { fill: var(--bo); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .kvr__can { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 3; }
+  .kvr__drop path { fill: var(--ngoc); stroke: var(--ink); stroke-width: 2; }
+  .kvr__basket { fill: var(--bo); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .kvr__bin { fill: var(--surface); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .kvr__mk circle { fill: var(--ink); }
+  .kvr__mk text { fill: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 14px; text-anchor: middle; dominant-baseline: central; }
+  .kvr__legend { display: grid; gap: 0.5rem; font-size: 0.95rem; }
+  .kvr__legend ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+  .kvr__legend li { display: flex; align-items: center; gap: 0.55rem; margin: 0; padding: 0.45rem 0.7rem; border-radius: 12px; background: var(--surface); font-weight: 700; }
+  .kvr__n { display: grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 0.85rem; }
+</style>

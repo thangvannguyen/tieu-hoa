@@ -1,0 +1,45 @@
+---
+/** Ba lý do thường gặp → bụng dạ "biểu tình" (theo bản tin #05). */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+---
+<Diagram
+  title="Ba lý do làm dân văn phòng hay rối loạn tiêu hóa"
+  icon="laptop"
+  hue="sage"
+  caption="Một vài lý do thường gặp làm dân văn phòng tụi mình hay có những triệu chứng như: đầy hơi, chướng bụng, khó tiêu, táo bón, đi ngoài thất thường, thèm trà sữa, bánh ngọt, cà phê…"
+  from={['05-vi-sao-dan-van-phong-roi-loan-tieu-hoa']}
+>
+  <Branches
+    root={{ icon: 'laptop', title: 'Nhịp sống văn phòng', text: 'Công việc văn phòng thường gắn với việc ngồi lâu trước máy tính.' }}
+    branches={[
+      {
+        icon: 'ghe',
+        tag: 'Lý do 1',
+        title: 'Ngồi nhiều',
+        text: 'Cơ thể chậm, bụng cũng “ì” theo — kèm ít vận động, ít uống nước, ăn uống thất thường, dễ stress, ngủ muộn…',
+        hue: 'ngoc',
+      },
+      {
+        icon: 'chat-xo',
+        tag: 'Lý do 2',
+        title: 'Ăn ít chất xơ',
+        text: 'Lợi khuẩn thiếu “thức ăn” — bữa trưa nhiều cơm, nhiều món mặn, ít món rau, kèm nước uống ngọt, lặp lại ngày này qua ngày khác.',
+        hue: 'bo',
+      },
+      {
+        icon: 'may-stress',
+        tag: 'Lý do 3',
+        title: 'Stress và chất lượng giấc ngủ',
+        text: 'Căng thẳng kéo dài làm giảm sức đề kháng; giấc ngủ bị ảnh hưởng nên quá trình phục hồi bị cản trở.',
+        hue: 'lav',
+      },
+    ]}
+    result={{
+      icon: 'ruot',
+      title: 'Bụng dạ hay “biểu tình”',
+      text: 'Đầy hơi, chướng bụng, khó tiêu, táo bón, đi ngoài thất thường, thèm trà sữa, bánh ngọt, cà phê…',
+      hue: 'dao',
+    }}
+  />
+</Diagram>

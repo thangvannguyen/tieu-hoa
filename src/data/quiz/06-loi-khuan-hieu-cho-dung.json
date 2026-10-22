@@ -1,0 +1,83 @@
+{
+  "lesson": "06-loi-khuan-hieu-cho-dung",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo cách hiểu đơn giản trong bài, prebiotic là gì?",
+      "options": [
+        { "id": "a", "text": "“Lợi khuẩn được đưa vào”" },
+        { "id": "b", "text": "“Thức ăn nuôi lợi khuẩn”" },
+        { "id": "c", "text": "Một loại enzyme phân giải thức ăn" }
+      ],
+      "answer": ["b"],
+      "explain": "Probiotic là “lợi khuẩn được đưa vào”. **Prebiotic là “thức ăn nuôi lợi khuẩn”** — những thành phần trong thực phẩm được hệ vi sinh sử dụng một cách chọn lọc.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Prebiotic là “thức ăn nuôi lợi khuẩn”." }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Ví dụ nào trong bài là một cách phối hợp lợi khuẩn với “đồ ăn” của nó (synbiotic)?",
+      "options": [
+        { "id": "a", "text": "Trà sữa ăn cùng bánh ngọt" },
+        { "id": "b", "text": "Sữa chua không đường ăn cùng chuối hoặc yến mạch, nếu bạn dung nạp tốt" },
+        { "id": "c", "text": "Uống nhiều loại men vi sinh cùng lúc" }
+      ],
+      "answer": ["b"],
+      "explain": "Ví dụ quen thuộc: **sữa chua không đường ăn cùng chuối hoặc yến mạch** có thể là một cách phối hợp khá thân thiện với đường ruột, nếu bạn dung nạp tốt.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "sữa chua không đường ăn cùng chuối hoặc yến mạch có thể là một cách phối hợp khá thân thiện với đường ruột" }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "prompt": "Tác dụng của probiotic phụ thuộc vào những yếu tố nào?",
+      "options": [
+        { "id": "a", "text": "Chủng vi sinh cụ thể" },
+        { "id": "b", "text": "Liều lượng và thời gian dùng" },
+        { "id": "c", "text": "Màu sắc bao bì" },
+        { "id": "d", "text": "Đối tượng dùng và mục tiêu sử dụng" }
+      ],
+      "answer": ["a", "b", "d"],
+      "explain": "Tác dụng của probiotic phụ thuộc vào chủng vi sinh cụ thể, sản phẩm cụ thể, liều lượng, thời gian dùng, đối tượng dùng và mục tiêu sử dụng — **probiotic không phải loại nào cũng giống nhau**.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "probiotic không phải loại nào cũng giống nhau" }
+    },
+    {
+      "id": "q4",
+      "type": "dung-sai",
+      "prompt": "“Thực phẩm lên men nào cũng là probiotic.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Không hẳn. Một số thực phẩm lên men có thể chứa vi sinh vật sống có lợi, **nhưng không phải tất cả** — những thực phẩm đã bị xử lý nhiệt hoặc tiệt trùng sau lên men có thể không còn vi sinh vật sống đáng kể.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Một số thực phẩm lên men có thể chứa vi sinh vật sống có lợi, nhưng không phải tất cả" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Theo bài, đâu là nhầm tưởng lớn nhất về lợi khuẩn?",
+      "options": [
+        { "id": "a", "text": "Sữa chua nào cũng tốt cho đường ruột" },
+        { "id": "b", "text": "Muốn tăng lợi khuẩn chỉ cần uống men, không cần đổi thói quen" },
+        { "id": "c", "text": "Men vi sinh càng nhiều loại càng tốt" }
+      ],
+      "answer": ["b"],
+      "explain": "“Muốn tăng lợi khuẩn chỉ cần uống men, không cần đổi thói quen” — **đây là nhầm tưởng lớn nhất**, vì hệ vi sinh đường ruột chịu ảnh hưởng từ tổng thể lối sống.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "Hệ vi sinh đường ruột chịu ảnh hưởng từ tổng thể lối sống" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Chất xơ có thể được hệ vi sinh lên men để tạo ra nhóm chất nào?",
+      "options": [
+        { "id": "a", "text": "Các acid béo chuỗi ngắn" },
+        { "id": "b", "text": "Enzyme tiêu hóa" },
+        { "id": "c", "text": "Cortisol" }
+      ],
+      "answer": ["a"],
+      "explain": "Chất xơ có thể được hệ vi sinh lên men để tạo ra **các acid béo chuỗi ngắn**, nhóm chất có vai trò trong sức khỏe đường ruột và chuyển hóa.",
+      "source": { "bai": "06-loi-khuan-hieu-cho-dung", "trich": "chất xơ có thể được hệ vi sinh lên men để tạo ra các acid béo chuỗi ngắn" }
+    }
+  ]
+}

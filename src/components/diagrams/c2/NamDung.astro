@@ -1,0 +1,25 @@
+---
+/** Kim tự tháp "5 đúng" khi bổ sung lợi khuẩn — "Đúng nền tảng" là nền móng (theo bản tin #07, mục 3). */
+import Diagram from '../primitives/Diagram.astro';
+import Layers from '../primitives/Layers.astro';
+---
+<Diagram
+  title="5 đúng khi bổ sung lợi khuẩn"
+  icon="men-vi-sinh"
+  hue="sage"
+  caption="Men vi sinh nên dùng đúng người, đúng mục tiêu, đúng sản phẩm, đúng cách và đúng nền tảng. Đúng nền tảng nằm ở đáy kim tự tháp vì đây là phần quan trọng nhất."
+  from={['07-bo-sung-loi-khuan-dung-cach']}
+>
+  <Layers
+    shape="pyramid"
+    highlight={4}
+    baseLabel="Nền móng: đây là phần quan trọng nhất"
+    layers={[
+      { icon: 'nguoi', title: '1. Đúng người', text: 'Người khỏe mạnh, triệu chứng nhẹ có thể bắt đầu từ thực phẩm và thói quen trước; một số nhóm cần hỏi nhân viên y tế trước khi dùng.', hue: 'ngoc' },
+      { icon: 'muc-tieu', title: '2. Đúng mục tiêu', text: '“Mình dùng để làm gì?” — mục tiêu không rõ thì rất dễ dùng sai hoặc kỳ vọng quá mức.', hue: 'lav' },
+      { icon: 'nhan', title: '3. Đúng sản phẩm', text: 'Ghi rõ chủng vi sinh, liều dùng, thời gian dùng, hạn sử dụng, bảo quản, nhà sản xuất; không quá nhiều đường.', hue: 'bo' },
+      { icon: 'checklist', title: '4. Đúng cách', text: 'Theo hướng dẫn trên nhãn hoặc của nhân viên y tế; không tự phối nhiều loại, không tự tăng liều.', hue: 'dao' },
+      { icon: 'rau', title: '5. Đúng nền tảng', text: 'Chất xơ, nước uống, vận động, ngủ đủ, stress, đồ ngọt – thức ăn siêu chế biến, không nhịn đi cầu.', hue: 'sage' },
+    ]}
+  />
+</Diagram>

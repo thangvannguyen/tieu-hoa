@@ -1,0 +1,113 @@
+---
+/** Cây quyết định "Mình có thật sự cần bổ sung lợi khuẩn không?" — chỉ dựng từ logic trong bản tin #07. */
+import Diagram from '../primitives/Diagram.astro';
+import StepTree from '../primitives/StepTree.astro';
+---
+<Diagram
+  title="Mình có thật sự cần bổ sung lợi khuẩn không?"
+  kicker="Thực hành"
+  icon="suy-nghi"
+  hue="sage"
+  interactive
+  caption="Rà soát theo “5 đúng” và Việc 1 trong bài. Nếu triệu chứng nhẹ và không có dấu hiệu cảnh báo, hãy ưu tiên chỉnh nền tảng trước. Nếu triệu chứng kéo dài, nặng lên hoặc có dấu hiệu bất thường, nên đi khám."
+  from={['07-bo-sung-loi-khuan-dung-cach']}
+>
+  <div class="st-fix">
+  <StepTree
+    start="canhbao"
+    nodes={{
+      canhbao: {
+        q: 'Bạn có dấu hiệu cảnh báo nào không?',
+        hint: 'Đau bụng kéo dài hoặc đau tăng dần · tiêu chảy kéo dài · tiêu chảy kèm sốt · dấu hiệu mất nước · đi cầu ra máu hoặc phân đen bất thường · sụt cân không rõ nguyên nhân · nôn ói nhiều · táo bón nặng, kéo dài · thiếu máu, mệt bất thường.',
+        options: [
+          { label: 'Có', to: 'kham' },
+          { label: 'Không', to: 'nhom' },
+        ],
+      },
+      nhom: {
+        q: 'Bạn có thuộc nhóm nên thận trọng hơn không?',
+        hint: 'Người suy giảm miễn dịch · đang bệnh nặng · đang điều trị ung thư hoặc dùng thuốc ức chế miễn dịch · người lớn tuổi yếu, nhiều bệnh nền · trẻ nhỏ có bệnh nền · phụ nữ mang thai có vấn đề sức khỏe đặc biệt · người có catheter, đang nằm viện hoặc có tình trạng y khoa phức tạp.',
+        options: [
+          { label: 'Có', to: 'hoi' },
+          { label: 'Không', to: 'trieuchung' },
+        ],
+      },
+      trieuchung: {
+        q: 'Mình đang gặp tình trạng nào?',
+        options: [
+          { label: 'Triệu chứng kéo dài, nặng lên', to: 'kham' },
+          { label: 'Triệu chứng nhẹ', to: 'nentang' },
+          { label: 'Không có triệu chứng, chỉ muốn phòng ngừa', to: 'phongngua' },
+        ],
+      },
+      nentang: {
+        q: 'Mình đã thử chỉnh chất xơ, nước uống, vận động, giấc ngủ chưa?',
+        options: [
+          { label: 'Chưa', to: 'chinhnen' },
+          { label: 'Rồi', to: 'muctieu' },
+        ],
+      },
+      muctieu: {
+        q: '“Mình dùng để làm gì?” — mục tiêu đã rõ chưa?',
+        hint: 'Vì đang tiêu chảy sau dùng kháng sinh? Vì hay đầy bụng? Vì táo bón? Vì bác sĩ/chuyên gia dinh dưỡng khuyên dùng? Hay chỉ vì thấy quảng cáo thuyết phục quá?',
+        options: [
+          { label: 'Chưa rõ / vì quảng cáo', to: 'xacdinh' },
+          { label: 'Đã rõ, vì nhu cầu thật', to: 'traodoi' },
+        ],
+      },
+      kham: {
+        result: {
+          tone: 'stop',
+          title: 'Nên đi khám, không nên tự bổ sung lợi khuẩn',
+          text: 'Khi cơ thể bật đèn đỏ, đừng chỉ “dỗ bụng” bằng men vi sinh. Cần tìm đúng nguyên nhân.',
+        },
+      },
+      hoi: {
+        result: {
+          tone: 'warn',
+          icon: 'bac-si',
+          title: 'Hỏi nhân viên y tế trước khi dùng',
+          text: 'Một số nhóm nên thận trọng hơn và cần hỏi nhân viên y tế trước khi dùng.',
+        },
+      },
+      phongngua: {
+        result: {
+          tone: 'ok',
+          icon: 'rau',
+          title: 'Bắt đầu từ thực phẩm và thói quen trước',
+          text: 'Không phải ai cũng cần bổ sung lợi khuẩn mỗi ngày. Hướng “nuôi lợi khuẩn sẵn có” — ăn đủ chất xơ, đa dạng thực phẩm thực vật, uống nước hợp lý, vận động và ngủ tốt hơn — là nền tảng quan trọng.',
+        },
+      },
+      chinhnen: {
+        result: {
+          tone: 'ok',
+          icon: 'rau',
+          title: 'Ưu tiên chỉnh nền tảng trước',
+          text: 'Nếu triệu chứng nhẹ và không có dấu hiệu cảnh báo, hãy ưu tiên chỉnh nền tảng trước — mỗi ngày chọn 1 việc nhỏ “nuôi lợi khuẩn” từ bữa ăn (Việc 2).',
+        },
+      },
+      xacdinh: {
+        result: {
+          tone: 'warn',
+          icon: 'muc-tieu',
+          title: 'Xác định rõ mục tiêu trước đã',
+          text: 'Nếu mục tiêu không rõ, rất dễ dùng sai hoặc kỳ vọng quá mức.',
+        },
+      },
+      traodoi: {
+        result: {
+          tone: 'ok',
+          icon: 'bac-si',
+          title: 'Có thể cân nhắc trao đổi với nhân viên y tế hoặc chuyên gia dinh dưỡng',
+          text: 'Nếu dùng: chọn đúng sản phẩm, dùng đúng cách theo hướng dẫn trên nhãn hoặc của nhân viên y tế, giữ đúng nền tảng — và theo dõi 5 ngày xem bụng phản ứng thế nào (Việc 3).',
+        },
+      },
+    }}
+  />
+  </div>
+</Diagram>
+
+<style>
+  /* StepTree: số thứ tự câu hỏi bị co lại khi câu hỏi dài (thiếu flex: none trong primitive) */
+  .st-fix :global(.st__qt .dg-num) { flex: none; }
+</style>

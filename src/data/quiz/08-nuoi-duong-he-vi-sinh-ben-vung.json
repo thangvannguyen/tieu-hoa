@@ -1,0 +1,83 @@
+{
+  "lesson": "08-nuoi-duong-he-vi-sinh-ben-vung",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Men tiêu hóa thường là gì?",
+      "options": [
+        { "id": "a", "text": "Sản phẩm chứa vi sinh vật sống" },
+        { "id": "b", "text": "Các enzyme hỗ trợ phân giải thức ăn, ví dụ phân giải tinh bột, đạm, chất béo" },
+        { "id": "c", "text": "Chất xơ nuôi lợi khuẩn" }
+      ],
+      "answer": ["b"],
+      "explain": "**Men tiêu hóa** thường là các enzyme hỗ trợ phân giải thức ăn. Còn **men vi sinh** là sản phẩm chứa vi sinh vật sống — hai thứ cần phân biệt.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Men tiêu hóa thường là các enzyme hỗ trợ phân giải thức ăn" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Công thức bền vững của bản tin tuần này là gì?",
+      "options": [
+        { "id": "a", "text": "4 nuôi – 3 giảm – 2 theo dõi" },
+        { "id": "b", "text": "3 nuôi – 4 giảm – 2 uống men" },
+        { "id": "c", "text": "5 đúng – 3 sai – 1 thử" }
+      ],
+      "answer": ["a"],
+      "explain": "Công thức dễ nhớ là: **4 nuôi – 3 giảm – 2 theo dõi**.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Công thức dễ nhớ là: 4 nuôi – 3 giảm – 2 theo dõi" }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "prompt": "Đâu là những việc thuộc “3 giảm”? (chọn tất cả ý đúng)",
+      "options": [
+        { "id": "a", "text": "Giảm đồ ngọt và nước uống nhiều đường" },
+        { "id": "b", "text": "Giảm thực phẩm siêu chế biến" },
+        { "id": "c", "text": "Giảm rau xanh và trái cây" },
+        { "id": "d", "text": "Giảm tự ý dùng men tiêu hóa/men vi sinh khi chưa rõ lý do" }
+      ],
+      "answer": ["a", "b", "d"],
+      "explain": "3 giảm gồm: **giảm đồ ngọt và nước uống nhiều đường**, **giảm thực phẩm siêu chế biến** và **giảm tự ý dùng men tiêu hóa/men vi sinh khi chưa rõ lý do**. Rau xanh và trái cây thuộc phần “nuôi bằng chất xơ”.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Giảm tự ý dùng men tiêu hóa/men vi sinh khi chưa rõ lý do" }
+    },
+    {
+      "id": "q4",
+      "type": "dung-sai",
+      "prompt": "“Không phụ thuộc vào sản phẩm bổ sung nghĩa là không bao giờ được dùng men.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Phụ thuộc ở đây **không có nghĩa là “không bao giờ được dùng”**. Phụ thuộc nghĩa là: cứ khó tiêu, đầy bụng, táo bón, ăn nhiều, ăn sai… là mình nghĩ ngay đến uống gì đó, thay vì nhìn lại nguyên nhân.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Phụ thuộc ở đây không có nghĩa là “không bao giờ được dùng”." }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "“Bữa trưa nuôi lợi khuẩn” trong Việc 1 cần đủ 3 thành phần nào?",
+      "options": [
+        { "id": "a", "text": "Có rau hoặc canh rau; có nguồn đạm phù hợp; có nước lọc thay vì nước ngọt/trà sữa" },
+        { "id": "b", "text": "Có cơm trắng; có đồ chiên; có trà sữa" },
+        { "id": "c", "text": "Có men tiêu hóa; có men vi sinh; có nước ép" }
+      ],
+      "answer": ["a"],
+      "explain": "Trong ít nhất 3 ngày tuần này, hãy làm cho bữa trưa có đủ 3 thành phần: **rau hoặc canh rau**, **nguồn đạm phù hợp** (cá, thịt nạc, trứng, đậu hũ, đậu) và **nước lọc** thay vì nước ngọt/trà sữa.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "hãy làm cho bữa trưa có đủ 3 thành phần" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Khi bụng hơi khó chịu nhẹ, chưa có dấu hiệu cảnh báo, bản tin gợi ý làm gì trước?",
+      "options": [
+        { "id": "a", "text": "Uống men tiêu hóa ngay cho yên tâm" },
+        { "id": "b", "text": "Nhìn lại thói quen (ăn quá nhanh? quá nhiều dầu mỡ? uống ít nước?…) rồi chọn một hành động nền tảng" },
+        { "id": "c", "text": "Mua thêm một loại men vi sinh mới" }
+      ],
+      "answer": ["b"],
+      "explain": "Hãy thử nhìn lại trước, **sau đó chọn một hành động nền tảng** như uống nước từng ngụm, đi bộ nhẹ, ăn chậm hơn… Nếu triệu chứng kéo dài, nặng hoặc lặp lại nhiều lần, nên đi khám thay vì tự xử lý.",
+      "source": { "bai": "08-nuoi-duong-he-vi-sinh-ben-vung", "trich": "Sau đó chọn một hành động nền tảng" }
+    }
+  ]
+}
