@@ -1,0 +1,290 @@
+---
+/**
+ * Minh họa vẽ tay: 3 tư thế tập giúp giảm đầy hơi, chướng bụng (bài thêm BT01).
+ * Cùng một nhân vật (đầu tròn, băng đô, mặt kawaii) ở cả 3 thẻ. Chữ chỉ lấy từ bài.
+ * Tay chân vẽ bằng 2 nét chồng nhau: nét mực dày (viền) + nét màu mảnh hơn (ruột).
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+
+type Limb = { d: string; c: 'skin' | 'shirt' | 'pants'; w?: 'arm' | 'leg' | 'thigh' | 'torso' };
+type Breath = { kind: 'hit' | 'tho' | 'giu' | 'nhe'; label: string; text?: string };
+interface Card {
+  num: number;
+  hue: Hue;
+  title: string;
+  tag: string;
+  aria: string;
+  steps: string[];
+  breath: Breath[];
+  rep?: string;
+  benefit: string;
+}
+
+const cards: Card[] = [
+  {
+    num: 1, hue: 'dao', title: 'Đầu gối - ngực', tag: 'Nằm ngửa',
+    aria: 'Nhân vật nằm ngửa trên thảm, hai tay ôm đầu gối phải co về phía ngực, gót chân sát mông, chân kia duỗi thẳng; trán hướng về phía đầu gối, mắt nhắm thư giãn.',
+    steps: [
+      'Đưa **đầu gối phải** về phía ngực (ấn vào đại tràng phải), gót chân sát mông.',
+      'Trong vài nhịp thở: ấn nội tạng về phía cột sống, nâng đáy chậu lên.',
+    ],
+    breath: [
+      { kind: 'tho', label: 'Thở ra', text: 'hướng trán về phía đầu gối' },
+      { kind: 'giu', label: 'Giữ vài giây, không nín thở', text: 'thư giãn khuôn mặt' },
+    ],
+    rep: 'Sau đó đổi bên',
+    benefit: 'Nén và xoa bóp dạ dày, kích hoạt tiêu hóa, loại bỏ không khí dư thừa.',
+  },
+  {
+    num: 2, hue: 'lav', title: 'Tư thế em bé', tag: 'Ngồi quỳ',
+    aria: 'Nhân vật ngồi quỳ, mông gần gót chân, gập người về phía trước, trán chạm sàn, hai cánh tay duỗi thẳng về phía trước trên thảm, mắt nhắm thư giãn.',
+    steps: [
+      'Ngồi quỳ, trán chạm sàn, cơ mông gần gót chân.',
+      'Đưa cánh tay về phía trước, hóp cơ bụng; hai đầu gối rộng bằng hông.',
+      'Vai cách xa tai, thu gọn cằm; duỗi lưng, đưa ngực gần sàn hơn.',
+    ],
+    breath: [{ kind: 'nhe', label: 'Hơi thở nhẹ nhàng', text: 'tư thế thoải mái' }],
+    benefit: 'Tạo không gian ở vùng bụng và lưng; có lợi cho hệ phó giao cảm.',
+  },
+  {
+    num: 3, hue: 'sage', title: 'Kéo giãn hai bên', tag: 'Đứng',
+    aria: 'Nhân vật đứng dang hai chân, các ngón tay đan vào nhau sau đầu, đang nghiêng người sang bên phải của mình; mũi tên cong phía trên đầu chỉ hai chiều nghiêng phải và trái.',
+    steps: [
+      'Đứng dang hai chân ra hoặc khép lại, thở chậm.',
+      'Các ngón tay đan vào nhau sau đầu, cằm đưa vào.',
+    ],
+    breath: [
+      { kind: 'hit', label: 'Hít vào', text: 'đẩy chân xuống sàn' },
+      { kind: 'tho', label: 'Thở ra', text: 'nghiêng người sang phải' },
+      { kind: 'hit', label: 'Hít vào', text: 'quay lại' },
+      { kind: 'tho', label: 'Thở ra', text: 'sang trái' },
+    ],
+    rep: 'Thực hiện 8 lần',
+    benefit: 'Tạo không gian, nén và xoa bóp bên trong cơ thể; săn chắc cơ bụng.',
+  },
+];
+
+const breathHue: Record<Breath['kind'], Hue> = { hit: 'lav', tho: 'sage', giu: 'bo', nhe: 'ngoc' };
+const breathIcon: Record<Breath['kind'], string> = { hit: 'hoi-tho', tho: 'hoi-tho', giu: 'dong-ho-cat', nhe: 'hoi-tho' };
+
+// --- các tư thế (viewBox 240×160, thảm ở y = 140) ---
+const pose1: Limb[] = [
+  { d: 'M132 128 L198 128', c: 'pants', w: 'leg' },
+  { d: 'M200 128 L207 113', c: 'skin', w: 'arm' },
+];
+const pose1b: Limb[] = [
+  { d: 'M130 120 L104 86', c: 'pants', w: 'thigh' },
+  { d: 'M104 86 L128 62', c: 'pants', w: 'leg' },
+  { d: 'M129 62 L140 67', c: 'skin', w: 'arm' },
+  { d: 'M76 115 Q86 94 108 84', c: 'skin', w: 'arm' },
+];
+const pose2: Limb[] = [
+  { d: 'M140 131 L194 131', c: 'pants', w: 'leg' },
+  { d: 'M196 132 L212 134', c: 'skin', w: 'arm' },
+  { d: 'M138 128 L180 110', c: 'pants', w: 'thigh' },
+  { d: 'M178 102 Q148 82 108 112', c: 'shirt', w: 'torso' },
+  { d: 'M104 120 Q70 128 32 131', c: 'skin', w: 'arm' },
+];
+const pose3legs: Limb[] = [
+  { d: 'M112 104 L102 134', c: 'pants', w: 'leg' },
+  { d: 'M128 104 L138 134', c: 'pants', w: 'leg' },
+];
+const pose3arms: Limb[] = [
+  { d: 'M106 70 L84 54 L108 36', c: 'skin', w: 'arm' },
+  { d: 'M134 70 L156 54 L132 36', c: 'skin', w: 'arm' },
+];
+---
+<Diagram
+  title="Ba tư thế giúp giảm đầy hơi, chướng bụng"
+  icon="gian-co"
+  hue="ngoc"
+  kicker="Minh họa"
+  caption="Mỗi thẻ tóm tắt các bước, nhịp thở và số lần theo bài; hướng dẫn đầy đủ của từng bài tập ở ngay bên dưới. Nhớ tập xa các bữa ăn."
+  from={['bt-01-bai-tap-thuc-day-tieu-hoa']}
+>
+  <div class="btt">
+    {cards.map((c) => (
+      <article class="btt__card" data-hue={c.hue} aria-label={`Bài tập ${c.num}: ${c.title}`}>
+        <header class="btt__head">
+          <span class="dg-num">{c.num}</span>
+          <span class="btt__t">{c.title}</span>
+        </header>
+
+        <div class="btt__art">
+          <span class="btt__tag">{c.tag}</span>
+          <svg viewBox="0 0 240 160" role="img" aria-label={c.aria}>
+            <rect class="btt-mat" x="8" y="139" width="224" height="10" rx="5"></rect>
+
+            {c.num === 1 && (
+              <g>
+                {pose1.map((l) => <><path class={`btt-o btt-o--${l.w}`} d={l.d}></path><path class={`btt-i btt-i--${l.w} btt-${l.c}`} d={l.d}></path></>)}
+                <rect class="btt-shirt btt-body" x="54" y="108" width="84" height="30" rx="15"></rect>
+                {pose1b.map((l) => <><path class={`btt-o btt-o--${l.w}`} d={l.d}></path><path class={`btt-i btt-i--${l.w} btt-${l.c}`} d={l.d}></path></>)}
+                <circle class="btt-skin btt-body" cx="109" cy="83" r="6"></circle>
+                <g transform="translate(40 110) rotate(-16)">
+                  <circle class="btt-skin btt-body" r="21"></circle>
+                  <path class="btt-band" d="M-14.7 -15 L14.7 -15 A21 21 0 0 1 18.97 -9 L-18.97 -9 A21 21 0 0 1 -14.7 -15 Z"></path>
+                  <path class="btt-line" d="M-1 -21c-2-6 1-9 6-9"></path>
+                  <path class="btt-line" d="M-11 1.5c2-2.6 5-2.6 7 0M4 1.5c2-2.6 5-2.6 7 0"></path>
+                  <path class="btt-line" d="M-3.5 8c2.2 2.4 4.8 2.4 7 0"></path>
+                  <ellipse class="btt-blush" cx="-12.5" cy="8" rx="4.2" ry="2.6"></ellipse>
+                  <ellipse class="btt-blush" cx="12.5" cy="8" rx="4.2" ry="2.6"></ellipse>
+                </g>
+                <path class="btt-arrow" d="M50 78 Q62 50 88 58"></path>
+                <path class="btt-head" d="M80 52.5l9 5.4-7.4 6.8"></path>
+              </g>
+            )}
+
+            {c.num === 2 && (
+              <g>
+                <path class="btt-o btt-o--leg" d="M140 131 L194 131"></path>
+                {pose2.map((l) => <><path class={`btt-o btt-o--${l.w}`} d={l.d}></path><path class={`btt-i btt-i--${l.w} btt-${l.c}`} d={l.d}></path></>)}
+                <circle class="btt-pants btt-body" cx="184" cy="106" r="15"></circle>
+                <path class="btt-line btt-thin" d="M172 98 q-3 8 2 16"></path>
+                <circle class="btt-skin btt-body" cx="28" cy="131" r="6"></circle>
+                <g transform="translate(84 119) rotate(-24)">
+                  <circle class="btt-skin btt-body" r="20"></circle>
+                  <path class="btt-band" d="M-14 -14.3 L14 -14.3 A20 20 0 0 1 18.1 -8.6 L-18.1 -8.6 A20 20 0 0 1 -14 -14.3 Z"></path>
+                  <path class="btt-line" d="M-1 -20c-2-6 1-9 6-9"></path>
+                  <path class="btt-line" d="M-10.5 2.5c2-2.6 5-2.6 7 0M3.5 2.5c2-2.6 5-2.6 7 0"></path>
+                  <path class="btt-line" d="M-3 8.5c2 2.2 4.2 2.2 6 0"></path>
+                  <ellipse class="btt-blush" cx="-12" cy="8.5" rx="4" ry="2.5"></ellipse>
+                  <ellipse class="btt-blush" cx="12" cy="8.5" rx="4" ry="2.5"></ellipse>
+                </g>
+                <path class="btt-air" d="M104 84c5-4 10-1 15-4M110 74c4-3 8-1 12-3"></path>
+                <path class="btt-spark" d="M206 54c.8 5 3 7.2 8 8-5 .8-7.2 3-8 8-.8-5-3-7.2-8-8 5-.8 7.2-3 8-8z"></path>
+              </g>
+            )}
+
+            {c.num === 3 && (
+              <g>
+                {pose3legs.map((l) => <><path class={`btt-o btt-o--${l.w}`} d={l.d}></path><path class={`btt-i btt-i--${l.w} btt-${l.c}`} d={l.d}></path></>)}
+                <ellipse class="btt-skin btt-body" cx="98" cy="137" rx="10" ry="5"></ellipse>
+                <ellipse class="btt-skin btt-body" cx="142" cy="137" rx="10" ry="5"></ellipse>
+                <g transform="rotate(-13 120 104)">
+                  <rect class="btt-pants btt-body" x="102" y="92" width="36" height="18" rx="9"></rect>
+                  {pose3arms.map((l) => <><path class={`btt-o btt-o--${l.w}`} d={l.d}></path><path class={`btt-i btt-i--${l.w} btt-${l.c}`} d={l.d}></path></>)}
+                  <rect class="btt-shirt btt-body" x="101" y="60" width="38" height="42" rx="16"></rect>
+                  <g transform="translate(120 38)">
+                    <circle class="btt-skin btt-body" r="21"></circle>
+                    <path class="btt-band" d="M-14.7 -15 L14.7 -15 A21 21 0 0 1 18.97 -9 L-18.97 -9 A21 21 0 0 1 -14.7 -15 Z"></path>
+                    <path class="btt-line" d="M-1 -21c-2-6 1-9 6-9"></path>
+                    <circle class="btt-ink" cx="-7" cy="1.5" r="2.9"></circle>
+                    <circle class="btt-ink" cx="7" cy="1.5" r="2.9"></circle>
+                    <circle class="btt-shine" cx="-8" cy="0.4" r="1"></circle>
+                    <circle class="btt-shine" cx="6" cy="0.4" r="1"></circle>
+                    <path class="btt-line" d="M-3.5 7.5c2.2 2.6 4.8 2.6 7 0"></path>
+                    <ellipse class="btt-blush" cx="-12.5" cy="8" rx="4.2" ry="2.6"></ellipse>
+                    <ellipse class="btt-blush" cx="12.5" cy="8" rx="4.2" ry="2.6"></ellipse>
+                  </g>
+                </g>
+                <path class="btt-arrow" d="M56 46 Q66 18 92 10"></path>
+                <path class="btt-head" d="M50 38l6 9 6-8"></path>
+                <path class="btt-arrow btt-arrow--soft" d="M184 46 Q174 18 148 10"></path>
+                <path class="btt-head btt-head--soft" d="M178 39l6 8 6-9"></path>
+                <rect class="btt-badge" x="184" y="92" width="44" height="28" rx="14"></rect>
+                <text class="btt-badge__t" x="206" y="106" text-anchor="middle" dominant-baseline="central">8 lần</text>
+              </g>
+            )}
+          </svg>
+        </div>
+
+        <ul class="btt__steps">
+          {c.steps.map((s) => <li set:html={inline(s)} />)}
+        </ul>
+
+        <div class="btt__bwrap">
+          <p class="btt__bk">Nhịp thở</p>
+          <ol class="btt__breath">
+            {c.breath.map((b) => (
+              <li data-hue={breathHue[b.kind]}>
+                <span class="btt__bic"><Icon name={breathIcon[b.kind]} size={18} /></span>
+                <span><strong>{b.label}</strong>{b.text && <> · {b.text}</>}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {c.rep && (
+          <p class="btt__rep"><Icon name="lap-lai" size={20} /> <strong>{c.rep}</strong></p>
+        )}
+        <p class="btt__benefit"><strong>Lợi ích:</strong> {c.benefit}</p>
+      </article>
+    ))}
+  </div>
+</Diagram>
+
+<style>
+  .btt { display: grid; gap: 1rem; }
+  @container (min-width: 660px) { .btt { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; } }
+  .btt__card {
+    display: grid; align-content: start; gap: 0.6rem; padding: 0.8rem; border-radius: 18px;
+    background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+  }
+  .btt__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
+  .btt__t { font-family: var(--font-head); font-weight: 900; font-size: 1.05rem; line-height: 1.2; }
+  .btt__art { position: relative; border-radius: 14px; background: var(--h-fill); padding: 1.4rem 0.2rem 0; }
+  .btt__tag {
+    position: absolute; top: 0.45rem; left: 0.5rem; padding: 0.05rem 0.55rem; border-radius: 999px;
+    background: var(--surface); border: 2px solid var(--h); color: var(--h-ink); font-size: 0.78rem; font-weight: 700;
+  }
+  .btt__art svg { display: block; width: 100%; max-width: 360px; margin: 0 auto; overflow: visible; }
+
+  .btt__steps { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; line-height: 1.45; display: grid; gap: 0.25rem; }
+  .btt__steps li { margin: 0; }
+  .btt__steps li::marker { color: var(--h); }
+  .btt__bwrap { display: grid; gap: 0.3rem; padding: 0.5rem 0.55rem 0.55rem; border-radius: 14px; background: var(--surface-2); border: 2px dashed var(--line-2); }
+  .btt__bk { margin: 0; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .btt__breath { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; position: relative; }
+  .btt__breath li {
+    position: relative; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.45rem; margin: 0;
+    font-size: 0.86rem; line-height: 1.3; color: var(--ink);
+  }
+  .btt__breath li + li::before {
+    content: ''; position: absolute; left: 13px; top: -0.45rem; height: 0.6rem; border-left: 2px dotted var(--ink-3);
+  }
+  .btt__bic {
+    display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--h-fill); border: 2px solid var(--h); color: var(--ink); --ic-fill: var(--surface);
+  }
+  .btt__breath li strong { color: var(--h-ink); }
+  .btt__rep { display: inline-flex; align-items: center; gap: 0.35rem; justify-self: start; margin: 0; padding: 0.2rem 0.65rem 0.2rem 0.45rem; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 0.88rem; }
+  .btt__rep :global(.icon) { color: var(--bg); --ic-fill: transparent; }
+  .btt__benefit { margin: 0; font-size: 0.86rem; color: var(--ink-2); line-height: 1.45; }
+
+  /* ---- nét vẽ ---- */
+  .btt-mat { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .btt-o, .btt-i { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .btt-o { stroke: var(--ink); }
+  .btt-o--arm { stroke-width: 15; }
+  .btt-i--arm { stroke-width: 8; }
+  .btt-o--leg { stroke-width: 18; }
+  .btt-i--leg { stroke-width: 11; }
+  .btt-o--thigh { stroke-width: 22; }
+  .btt-i--thigh { stroke-width: 15; }
+  .btt-o--torso { stroke-width: 34; }
+  .btt-i--torso { stroke-width: 27; }
+  .btt-i.btt-skin { stroke: var(--dao-fill); }
+  .btt-i.btt-shirt { stroke: var(--ngoc); }
+  .btt-i.btt-pants { stroke: var(--lav); }
+  .btt-body { stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; }
+  .btt-skin.btt-body { fill: var(--dao-fill); }
+  .btt-shirt.btt-body { fill: var(--ngoc); }
+  .btt-pants.btt-body { fill: var(--lav); }
+  .btt-band { fill: var(--bo); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .btt-line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .btt-thin { stroke-width: 2.5; opacity: 0.55; }
+  .btt-ink { fill: var(--ink); }
+  .btt-shine { fill: var(--surface); }
+  .btt-blush { fill: var(--cheek); opacity: 0.8; }
+  .btt-arrow { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 7; }
+  .btt-head { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .btt-arrow--soft, .btt-head--soft { opacity: 0.45; }
+  .btt-air { fill: none; stroke: var(--lav-ink); stroke-width: 3; stroke-linecap: round; opacity: 0.7; }
+  .btt-spark { fill: var(--bo-fill); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .btt-badge { fill: var(--ink); }
+  .btt-badge__t { font-family: var(--font-head); font-weight: 900; font-size: 14px; fill: var(--bg); }
+</style>

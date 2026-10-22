@@ -1,0 +1,69 @@
+{
+  "lesson": "bt-01-bai-tap-thuc-day-tieu-hoa",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Theo bài, nên tập ba bài tập giảm đầy hơi, chướng bụng vào lúc nào?",
+      "options": [
+        { "id": "a", "text": "Ngay sau bữa ăn để thức ăn xuống nhanh hơn" },
+        { "id": "b", "text": "Xa các bữa ăn" },
+        { "id": "c", "text": "Vừa ăn vừa tập" }
+      ],
+      "answer": ["b"],
+      "explain": "Bài dặn rõ: **mình nên tập xa các bữa ăn**.",
+      "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "mình nên tập xa các bữa ăn" }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Bài tập 1 “Đầu gối - ngực” được thực hiện ở tư thế nào?",
+      "options": [
+        { "id": "a", "text": "Nằm ngửa, đưa đầu gối phải về phía ngực" },
+        { "id": "b", "text": "Ngồi quỳ, trán chạm sàn" },
+        { "id": "c", "text": "Đứng, các ngón tay đan vào nhau sau đầu" }
+      ],
+      "answer": ["a"],
+      "explain": "**Nằm ngửa, đưa đầu gối phải về phía ngực** bằng cách ấn vào đại tràng phải, gót chân sát mông; sau đó đổi bên. Ngồi quỳ là tư thế em bé, còn đứng đan tay sau đầu là bài kéo giãn hai bên.",
+      "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Nằm ngửa, đưa đầu gối phải về phía ngực bằng cách ấn vào đại tràng phải, gót chân sát mông" }
+    },
+    {
+      "id": "q3",
+      "type": "dung-sai",
+      "prompt": "“Khi giữ tư thế đầu gối - ngực trong vài giây, nên nín thở để nén bụng tốt hơn.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "Bài hướng dẫn: giữ trong vài giây, **không nín thở**, thư giãn khuôn mặt.",
+      "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Giữ trong vài giây, không nín thở, thư giãn khuôn mặt" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Theo bài, hơi thở nhẹ nhàng và tư thế thoải mái của tư thế em bé có lợi cho hệ nào, liên quan trực tiếp đến tiêu hóa?",
+      "options": [
+        { "id": "a", "text": "Hệ phó giao cảm" },
+        { "id": "b", "text": "Hệ xương khớp" },
+        { "id": "c", "text": "Hệ tuần hoàn" }
+      ],
+      "answer": ["a"],
+      "explain": "Hơi thở nhẹ nhàng và tư thế thoải mái có lợi cho **hệ phó giao cảm**, liên quan trực tiếp đến tiêu hóa.",
+      "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Hơi thở nhẹ nhàng và tư thế thoải mái có lợi cho hệ phó giao cảm, liên quan trực tiếp đến tiêu hóa" }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Trong bài “Kéo giãn hai bên”, khi thở ra nghiêng người sang phải thì bạn cảm nhận điều gì?",
+      "options": [
+        { "id": "a", "text": "Nội tạng bên phải được nén, bên trái có khoảng trống" },
+        { "id": "b", "text": "Nội tạng bên trái được nén, bên phải có khoảng trống" },
+        { "id": "c", "text": "Không cảm nhận gì, chỉ cần giữ nín thở" }
+      ],
+      "answer": ["a"],
+      "explain": "Cảm nhận **sự nén của nội tạng ở bên phải** và **tạo ra khoảng trống ở bên trái**. Khi hít vào, quay lại, thở ra sang trái — thực hiện như vậy 8 lần.",
+      "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Cảm nhận sự nén của nội tạng ở bên phải và tạo ra khoảng trống ở bên trái" }
+    }
+  ]
+}

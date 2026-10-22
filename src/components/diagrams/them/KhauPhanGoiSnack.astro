@@ -1,0 +1,86 @@
+---
+/** Minh họa vẽ tay: "4 serving size" = nguyên gói có 4 khẩu phần; bảng dinh dưỡng tính trên 1 khẩu phần (bài thêm BT02). */
+import Diagram from '../primitives/Diagram.astro';
+const zig = (n: number, dx: number, dy: number) => Array.from({ length: n }, (_, i) => `l${dx} ${i % 2 ? -dy : dy}`).join(' ');
+const BAG = `M30 34 ${zig(12, 8, -8)} Q137 100 126 166 ${zig(12, -8, 8)} Q19 100 30 34 Z`;
+const plates = [
+  { n: 1, x: 222, y: 60 },
+  { n: 2, x: 304, y: 60 },
+  { n: 3, x: 222, y: 140 },
+  { n: 4, x: 304, y: 140 },
+];
+---
+<Diagram
+  title="“4 serving size”: nguyên gói có 4 khẩu phần"
+  icon="dia"
+  hue="bo"
+  kicker="Minh họa"
+  caption="Nắm rõ điều này sẽ tránh nguy cơ tiêu thụ quá mức nhu cầu."
+  from={['bt-02-doc-nhan-thuc-pham']}
+>
+  <div class="kpg">
+    <svg viewBox="0 0 360 214" role="img" aria-label="Một gói snack mặt cười ghi “4 serving size”, bằng bốn đĩa snack nhỏ đánh số 1 đến 4; đĩa số 1 được khoanh lại: 1 khẩu phần.">
+      <!-- gói snack -->
+      <path class="kpg-shadow" transform="translate(5 5)" d={BAG}></path>
+      <path class="kpg-bag" d={BAG}></path>
+      <rect class="kpg-win" x="42" y="96" width="72" height="50" rx="11"></rect>
+      <text class="kpg-win__t" x="78" y="116" text-anchor="middle">4 serving</text>
+      <text class="kpg-win__t" x="78" y="134" text-anchor="middle">size</text>
+      <circle class="kpg-ink" cx="64" cy="68" r="3.6"></circle>
+      <circle class="kpg-ink" cx="92" cy="68" r="3.6"></circle>
+      <circle class="kpg-shine" cx="62.8" cy="66.8" r="1.2"></circle>
+      <circle class="kpg-shine" cx="90.8" cy="66.8" r="1.2"></circle>
+      <path class="kpg-line" d="M73 76 c2.8 3 7.2 3 10 0"></path>
+      <ellipse class="kpg-blush" cx="54" cy="77" rx="5" ry="3"></ellipse>
+      <ellipse class="kpg-blush" cx="102" cy="77" rx="5" ry="3"></ellipse>
+      <text class="kpg-lbl" x="78" y="200" text-anchor="middle">Nguyên gói</text>
+
+      <!-- dấu bằng -->
+      <path class="kpg-eq" d="M152 94 H172M152 108 H172"></path>
+
+      <!-- 4 khẩu phần -->
+      <rect class="kpg-ring" x="184" y="28" width="78" height="64" rx="16"></rect>
+      <text class="kpg-one" x="223" y="20" text-anchor="middle">1 khẩu phần</text>
+      {plates.map((p) => (
+        <g>
+          <ellipse class="kpg-plate" cx={p.x} cy={p.y + 16} rx="30" ry="9"></ellipse>
+          <ellipse class="kpg-chip" cx={p.x - 11} cy={p.y + 7} rx="11" ry="6.5" transform={`rotate(-12 ${p.x - 11} ${p.y + 7})`}></ellipse>
+          <ellipse class="kpg-chip" cx={p.x + 10} cy={p.y + 7} rx="11" ry="6.5" transform={`rotate(14 ${p.x + 10} ${p.y + 7})`}></ellipse>
+          <ellipse class="kpg-chip" cx={p.x} cy={p.y - 2} rx="11" ry="6.5" transform={`rotate(-4 ${p.x} ${p.y - 2})`}></ellipse>
+          <circle class="kpg-num" cx={p.x - 28} cy={p.y - 12} r="11"></circle>
+          <text class="kpg-num__t" x={p.x - 28} y={p.y - 12} text-anchor="middle" dominant-baseline="central">{p.n}</text>
+        </g>
+      ))}
+      <text class="kpg-lbl" x="263" y="200" text-anchor="middle">4 khẩu phần</text>
+    </svg>
+    <ul class="kpg__legend">
+      <li data-hue="bo"><span class="kpg__sw" aria-hidden="true">4</span><span>Trên sản phẩm ghi <strong>4 serving size</strong> có nghĩa là nguyên gói đó có <strong>4 khẩu phần</strong>.</span></li>
+      <li data-hue="sage"><span class="kpg__sw" aria-hidden="true">1</span><span>Bảng thành phần dinh dưỡng hay tính trên <strong>1 khẩu phần</strong> thôi.</span></li>
+    </ul>
+  </div>
+</Diagram>
+
+<style>
+  .kpg { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .kpg { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+  .kpg svg { width: 100%; max-width: 420px; margin: 0 auto; display: block; overflow: visible; }
+  .kpg-shadow { fill: var(--line); }
+  .kpg-bag { fill: var(--bo); stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+  .kpg-win { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .kpg-win__t { font-family: var(--font-head); font-weight: 900; font-size: 14px; fill: var(--ink); }
+  .kpg-ink { fill: var(--ink); }
+  .kpg-shine { fill: var(--surface); }
+  .kpg-line { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; }
+  .kpg-blush { fill: var(--cheek); opacity: 0.85; }
+  .kpg-lbl { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .kpg-eq { stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+  .kpg-ring { fill: none; stroke: var(--sage-ink); stroke-width: 3; stroke-dasharray: 2 7; stroke-linecap: round; }
+  .kpg-one { font-family: var(--font-head); font-weight: 900; font-size: 14px; fill: var(--sage-ink); }
+  .kpg-plate { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .kpg-chip { fill: var(--bo-fill); stroke: var(--ink); stroke-width: 2.6; }
+  .kpg-num { fill: var(--ink); }
+  .kpg-num__t { font-family: var(--font-head); font-weight: 900; font-size: 14px; fill: var(--bg); }
+  .kpg__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-size: 0.93rem; }
+  .kpg__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); }
+  .kpg__sw { width: 24px; height: 24px; margin-top: 0.05rem; border-radius: 50%; border: 2px solid var(--ink); background: var(--h); display: grid; place-items: center; font-family: var(--font-head); font-weight: 900; font-size: 0.82rem; }
+</style>

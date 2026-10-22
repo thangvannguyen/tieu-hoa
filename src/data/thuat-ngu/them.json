@@ -1,0 +1,86 @@
+[
+  {
+    "id": "nutrition-facts",
+    "term": "Bảng Thông tin dinh dưỡng",
+    "aliases": ["Nutrition Facts", "bảng thành phần dinh dưỡng", "nhãn dinh dưỡng"],
+    "en": "Nutrition Facts",
+    "short": "Bảng trên nhãn cho biết lượng năng lượng và các chất dinh dưỡng có trong mỗi khẩu phần.",
+    "definition": "Bảng này cho biết lượng năng lượng và các chất dinh dưỡng có trong mỗi khẩu phần, giúp bạn biết mình đang ăn gì và nạp bao nhiêu calo mỗi ngày.",
+    "icon": "nhan",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "bảng này cho biết lượng năng lượng và các chất dinh dưỡng có trong mỗi khẩu phần" }
+  },
+  {
+    "id": "serving-size",
+    "term": "Khẩu phần",
+    "aliases": ["Serving size", "serving"],
+    "en": "Serving size",
+    "short": "Lượng thực phẩm cho một khẩu phần mà mỗi sản phẩm quy định; bảng dinh dưỡng hay tính trên 1 khẩu phần.",
+    "definition": "Mỗi sản phẩm đều quy định lượng thực phẩm cho một khẩu phần. Nếu trên sản phẩm ghi 4 serving size có nghĩa là nguyên gói đó có 4 khẩu phần. Bảng thành phần dinh dưỡng hay tính trên 1 khẩu phần thôi — nắm rõ điều này sẽ tránh nguy cơ tiêu thụ quá mức nhu cầu.",
+    "icon": "dia",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "mỗi sản phẩm đều quy định lượng thực phẩm cho một khẩu phần" }
+  },
+  {
+    "id": "calories",
+    "term": "Năng lượng (Calories)",
+    "aliases": ["Calories", "calo", "kcal"],
+    "en": "Calories",
+    "short": "Cho biết lượng calo mà cơ thể nhận được từ thực phẩm.",
+    "definition": "Cho biết lượng calo mà cơ thể nhận được; có những thực phẩm năng lượng cao nhưng lượng chất dinh dưỡng ít. Ví dụ, nếu nhu cầu năng lượng mỗi ngày là 1500 kcal, một gói snack 250 kcal đã chiếm khoảng một phần sáu tổng nhu cầu.",
+    "icon": "lua",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "cho biết lượng calo mà cơ thể nhận được, có những thực phẩm năng lượng cao nhưng lượng chất dinh dưỡng ít" }
+  },
+  {
+    "id": "phan-tram-dv",
+    "term": "% giá trị dinh dưỡng hàng ngày",
+    "aliases": ["%DV", "DV", "phần trăm giá trị dinh dưỡng hàng ngày"],
+    "short": "Chỉ số cho biết khẩu phần đó cung cấp bao nhiêu phần trăm nhu cầu cơ thể; dưới 5% là thấp, trên 20% là cao.",
+    "definition": "Chỉ số cho biết khẩu phần đó cung cấp bao nhiêu phần trăm nhu cầu cơ thể. Thực phẩm có %DV dưới 5% là thấp, trên 20% là cao. Hãy chọn thực phẩm có %DV cao với dưỡng chất có lợi (chất xơ, vitamin, khoáng chất) và thấp với những chất nên hạn chế (đường, muối, chất béo bão hòa).",
+    "icon": "bieu-do",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "chỉ số cho biết khẩu phần đó cung cấp bao nhiêu phần trăm nhu cầu cơ thể" }
+  },
+  {
+    "id": "chat-beo-bao-hoa-chuyen-hoa",
+    "term": "Chất béo bão hòa và chất béo chuyển hóa",
+    "aliases": ["chất béo bão hòa", "chất béo chuyển hóa", "Fat", "chất béo"],
+    "short": "Hai loại chất béo làm tăng nguy cơ tim mạch — khi đọc nhãn, nên chọn sản phẩm có ít hai loại này.",
+    "definition": "Ở mục Chất béo (Fat) trên nhãn: nên chọn sản phẩm có ít chất béo bão hòa và chất béo chuyển hóa, vì hai loại này làm tăng nguy cơ tim mạch.",
+    "icon": "dau-an",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "nên chọn sản phẩm có ít chất béo bão hòa và chất béo chuyển hóa, vì hai loại này làm tăng nguy cơ tim mạch" }
+  },
+  {
+    "id": "duong-an",
+    "term": "Đường ẩn",
+    "aliases": ["đường", "Carbohydrate", "chất tạo ngọt nhân tạo"],
+    "short": "Đường có trong cả một số sản phẩm ghi “không đường” — cần đọc mục Đường (Carbohydrate) trên nhãn.",
+    "definition": "Một số sản phẩm “không đường” vẫn có chất tạo ngọt nhân tạo hay đường ẩn. Theo khuyến nghị của WHO, người trưởng thành không nên tiêu thụ quá 50g đường mỗi ngày, tốt nhất là dưới 25g để phòng ngừa béo phì và tiểu đường.",
+    "icon": "duong",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "một số sản phẩm “không đường” vẫn có chất tạo ngọt nhân tạo hay đường ẩn" }
+  },
+  {
+    "id": "muoi-an",
+    "term": "Muối ẩn",
+    "aliases": ["natri", "Sodium", "muối"],
+    "short": "Muối khó nhận ra trên thực phẩm — nhiều loại có lượng muối rất cao, kể cả thực phẩm cho trẻ em; cần nhận diện để giảm nguy cơ tim mạch.",
+    "definition": "Trên thực phẩm có nhiều loại có lượng muối rất cao (kể cả thực phẩm cho trẻ em), việc nhận diện và phát hiện muối ẩn rất quan trọng để giảm thiểu nguy cơ tim mạch. Khi đọc nhãn, mục Muối (Natri/Sodium): ưu tiên sản phẩm có dưới 140mg natri mỗi khẩu phần.",
+    "icon": "muoi",
+    "source": { "bai": "bt-02-doc-nhan-thuc-pham", "trich": "việc nhận diện và phát hiện muối ẩn rất quan trọng để giảm thiểu nguy cơ tim mạch" }
+  },
+  {
+    "id": "he-pho-giao-cam",
+    "term": "Hệ phó giao cảm",
+    "aliases": ["phó giao cảm"],
+    "short": "Theo bài: hệ liên quan trực tiếp đến tiêu hóa; hơi thở nhẹ nhàng và tư thế thoải mái có lợi cho hệ này.",
+    "definition": "Bài viết nhắc đến hệ phó giao cảm khi nói về tư thế em bé: hơi thở nhẹ nhàng và tư thế thoải mái có lợi cho hệ phó giao cảm, liên quan trực tiếp đến tiêu hóa.",
+    "icon": "hoi-tho",
+    "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Hơi thở nhẹ nhàng và tư thế thoải mái có lợi cho hệ phó giao cảm, liên quan trực tiếp đến tiêu hóa" }
+  },
+  {
+    "id": "tu-the-em-be",
+    "term": "Tư thế em bé",
+    "aliases": ["bài tập 2"],
+    "short": "Ngồi quỳ, trán chạm sàn, cơ mông gần gót chân, hai tay đưa về phía trước — một trong ba bài tập giảm đầy hơi.",
+    "definition": "Ngồi quỳ, trán chạm sàn, đưa cơ mông đến gần gót chân. Đưa cánh tay về phía trước, hóp cơ bụng và đưa các đầu ngón tay về phía trước cho đến khi hông thẳng hàng với đầu gối. Động tác này giúp tạo không gian ở vùng bụng và lưng.",
+    "icon": "gian-co",
+    "source": { "bai": "bt-01-bai-tap-thuc-day-tieu-hoa", "trich": "Ngồi quỳ, trán chạm sàn, đưa cơ mông đến gần gót chân" }
+  }
+]

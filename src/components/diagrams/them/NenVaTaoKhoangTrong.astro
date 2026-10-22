@@ -1,0 +1,128 @@
+---
+/**
+ * Minh họa vẽ tay: bài "Kéo giãn hai bên" (bài thêm BT01) — nghiêng sang bên nào thì nội tạng bên đó được nén,
+ * bên kia có khoảng trống. Cùng nhân vật với BaTuTheTapTieuHoa. Phải/trái tính theo người tập (nhân vật đối diện bạn).
+ */
+import Diagram from '../primitives/Diagram.astro';
+// một người tập, toạ độ gốc ở giữa hông (0,0); nghiêng sang bên phải của nhân vật (= bên trái màn hình)
+const TORSO = 'M-18 -6 Q-9 -34 -16 -64 Q0 -75 16 -64 Q33 -34 20 -6 Q0 4 -18 -6 Z';
+const BAND = 'M-16.8 -17 L16.8 -17 A24 24 0 0 1 21.7 -10.3 L-21.7 -10.3 A24 24 0 0 1 -16.8 -17 Z';
+const figures = [
+  { x: 86, mirror: false },
+  { x: 274, mirror: true },
+];
+---
+<Diagram
+  title="Kéo giãn hai bên: nén bên này, tạo khoảng trống bên kia"
+  icon="gian-co"
+  hue="sage"
+  kicker="Minh họa"
+  caption="Nhân vật trong hình đứng đối diện bạn: “phải”, “trái” tính theo người tập (xem nhãn dưới chân)."
+  from={['bt-01-bai-tap-thuc-day-tieu-hoa']}
+>
+  <div class="nkt">
+    <svg viewBox="0 0 360 262" role="img" aria-label="Hai hình cùng một người tập đứng đối diện bạn, tay đan sau đầu. Hình trái: thở ra, nghiêng sang bên phải của người tập — bên phải được nén, bên trái có khoảng trống. Hình phải: thở ra, nghiêng sang trái — ngược lại. Ở giữa: hít vào, quay lại.">
+      <rect class="nkt-floor" x="14" y="226" width="332" height="8" rx="4"></rect>
+
+      {figures.map((f) => (
+        <g transform={`translate(${f.x} 192)${f.mirror ? ' scale(-1 1)' : ''}`}>
+          <path class="nkt-o nkt-o--leg" d="M-8 0 L-17 30M8 0 L17 30"></path>
+          <path class="nkt-i nkt-i--leg nkt-pants" d="M-8 0 L-17 30M8 0 L17 30"></path>
+          <ellipse class="nkt-skin nkt-b" cx="-21" cy="33" rx="10" ry="5"></ellipse>
+          <ellipse class="nkt-skin nkt-b" cx="21" cy="33" rx="10" ry="5"></ellipse>
+          <g transform="rotate(-14)">
+            <rect class="nkt-pants nkt-b" x="-20" y="-14" width="40" height="20" rx="10"></rect>
+            <path class="nkt-o nkt-o--arm" d="M-15 -56 L-40 -76 L-14 -97M15 -56 L40 -76 L14 -97"></path>
+            <path class="nkt-i nkt-i--arm nkt-skin" d="M-15 -56 L-40 -76 L-14 -97M15 -56 L40 -76 L14 -97"></path>
+            <path class="nkt-shirt nkt-b" d={TORSO}></path>
+            <path class="nkt-line nkt-crease" d="M-12 -24q5 2.4 9 0M-13 -36q5 2.4 9 0M-12 -48q5 2.4 9 0"></path>
+            <path class="nkt-squeeze" d="M-36 -46l7 6-7 6M-36 -26l7 6-7 6"></path>
+            <path class="nkt-space" d="M31 -58 Q50 -34 31 -8"></path>
+            <path class="nkt-spark" d="M47 -66c.7 4.4 2.6 6.3 7 7-4.4.7-6.3 2.6-7 7-.7-4.4-2.6-6.3-7-7 4.4-.7 6.3-2.6 7-7z"></path>
+            <g transform="translate(0 -92)">
+              <circle class="nkt-skin nkt-b" r="24"></circle>
+              <path class="nkt-band" d={BAND}></path>
+              <path class="nkt-line" d="M-1 -24c-2-7 1-10 7-10"></path>
+              <circle class="nkt-ink" cx="-8" cy="2" r="3.2"></circle>
+              <circle class="nkt-ink" cx="8" cy="2" r="3.2"></circle>
+              <circle class="nkt-shine" cx="-9" cy="0.8" r="1.1"></circle>
+              <circle class="nkt-shine" cx="7" cy="0.8" r="1.1"></circle>
+              <path class="nkt-line" d="M-4 8.5c2.4 2.8 5.6 2.8 8 0"></path>
+              <ellipse class="nkt-blush" cx="-14" cy="9" rx="4.6" ry="2.8"></ellipse>
+              <ellipse class="nkt-blush" cx="14" cy="9" rx="4.6" ry="2.8"></ellipse>
+            </g>
+          </g>
+        </g>
+      ))}
+
+      <!-- nhãn hình trái: nghiêng sang phải -->
+      <text class="nkt-h" x="86" y="30" text-anchor="middle">Thở ra · sang phải</text>
+      <text class="nkt-lbl nkt-lbl--nen" x="20" y="172" text-anchor="middle">nén</text>
+      <text class="nkt-lbl nkt-lbl--tr" x="150" y="140" text-anchor="middle">khoảng</text>
+      <text class="nkt-lbl nkt-lbl--tr" x="150" y="157" text-anchor="middle">trống</text>
+      <!-- nhãn hình phải: nghiêng sang trái -->
+      <text class="nkt-h" x="274" y="30" text-anchor="middle">Thở ra · sang trái</text>
+      <text class="nkt-lbl nkt-lbl--nen" x="340" y="172" text-anchor="middle">nén</text>
+      <text class="nkt-lbl nkt-lbl--tr" x="210" y="140" text-anchor="middle">khoảng</text>
+      <text class="nkt-lbl nkt-lbl--tr" x="210" y="157" text-anchor="middle">trống</text>
+      <!-- giữa: hít vào, quay lại -->
+      <path class="nkt-arrow" d="M146 186 H214"></path>
+      <path class="nkt-head" d="M153 179l-7 7 7 7M207 179l7 7-7 7"></path>
+      <text class="nkt-mid" x="180" y="206" text-anchor="middle">Hít vào</text>
+      <text class="nkt-mid nkt-mid--sub" x="180" y="222" text-anchor="middle">quay lại</text>
+      <!-- phải / trái của người tập -->
+      <text class="nkt-side" x="65" y="252" text-anchor="middle">phải</text>
+      <text class="nkt-side" x="107" y="252" text-anchor="middle">trái</text>
+      <text class="nkt-side" x="253" y="252" text-anchor="middle">phải</text>
+      <text class="nkt-side" x="295" y="252" text-anchor="middle">trái</text>
+    </svg>
+    <ul class="nkt__legend">
+      <li data-hue="do"><span class="nkt__sw nkt__sw--nen" aria-hidden="true"></span><span><strong>Thở ra, nghiêng người sang phải:</strong> cảm nhận sự nén của nội tạng ở bên phải và tạo ra khoảng trống ở bên trái.</span></li>
+      <li data-hue="lav"><span class="nkt__sw nkt__sw--hit" aria-hidden="true"></span><span><strong>Khi hít vào, quay lại</strong> — thở ra sang trái.</span></li>
+      <li data-hue="sage"><span class="nkt__sw nkt__sw--rep" aria-hidden="true">8</span><span>Thực hiện như vậy <strong>8 lần</strong>.</span></li>
+    </ul>
+  </div>
+</Diagram>
+
+<style>
+  .nkt { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .nkt { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+  .nkt svg { width: 100%; max-width: 440px; margin: 0 auto; display: block; overflow: visible; }
+  .nkt-floor { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .nkt-o, .nkt-i { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .nkt-o { stroke: var(--ink); }
+  .nkt-o--arm { stroke-width: 15; }
+  .nkt-i--arm { stroke-width: 8; }
+  .nkt-o--leg { stroke-width: 18; }
+  .nkt-i--leg { stroke-width: 11; }
+  .nkt-i.nkt-skin { stroke: var(--dao-fill); }
+  .nkt-i.nkt-pants { stroke: var(--lav); }
+  .nkt-b { stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; }
+  .nkt-skin.nkt-b { fill: var(--dao-fill); }
+  .nkt-shirt.nkt-b { fill: var(--ngoc); }
+  .nkt-pants.nkt-b { fill: var(--lav); }
+  .nkt-band { fill: var(--bo); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .nkt-line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .nkt-crease { stroke-width: 2.5; opacity: 0.6; }
+  .nkt-ink { fill: var(--ink); }
+  .nkt-shine { fill: var(--surface); }
+  .nkt-blush { fill: var(--cheek); opacity: 0.8; }
+  .nkt-squeeze { fill: none; stroke: var(--do); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .nkt-space { fill: none; stroke: var(--sage-ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 7; }
+  .nkt-spark { fill: var(--bo-fill); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  .nkt-arrow { fill: none; stroke: var(--lav-ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 7; }
+  .nkt-head { fill: none; stroke: var(--lav-ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .nkt-h { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .nkt-lbl { font-family: var(--font-head); font-weight: 900; font-size: 15px; }
+  .nkt-lbl--nen { fill: var(--do-ink); }
+  .nkt-lbl--tr { fill: var(--sage-ink); font-size: 14px; }
+  .nkt-mid { font-family: var(--font-head); font-weight: 900; font-size: 15px; fill: var(--lav-ink); }
+  .nkt-mid--sub { font-weight: 700; font-size: 14px; }
+  .nkt-side { font-family: var(--font-head); font-weight: 700; font-size: 14px; fill: var(--ink-3); }
+  .nkt__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-size: 0.93rem; }
+  .nkt__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); }
+  .nkt__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--ink); display: grid; place-items: center; font-family: var(--font-head); font-weight: 900; font-size: 0.78rem; }
+  .nkt__sw--nen { background: var(--do); }
+  .nkt__sw--hit { background: var(--lav); }
+  .nkt__sw--rep { background: var(--sage); color: var(--ink); }
+</style>
