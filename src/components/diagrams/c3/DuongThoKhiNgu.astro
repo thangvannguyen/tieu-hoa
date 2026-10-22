@@ -1,0 +1,108 @@
+---
+/** Minh họa vẽ tay (bản tin #10): ngưng thở tắc nghẽn khi ngủ — đường thở mở so với hẹp/tắc. */
+import Diagram from '../primitives/Diagram.astro';
+import Icon from '~/components/ui/Icon.astro';
+const L = 92; // tâm panel trái
+const R = 268; // tâm panel phải
+const pinch = (c: number) =>
+  `M${c - 12} 108Q${c - 12} 96 ${c} 96Q${c + 12} 96 ${c + 12} 108L${c + 12} 118C${c + 12} 128 ${c + 2} 128 ${c + 2} 136C${c + 2} 144 ${c + 12} 144 ${c + 12} 154L${c + 12} 164Q${c + 12} 176 ${c} 176Q${c - 12} 176 ${c - 12} 164L${c - 12} 154C${c - 12} 144 ${c - 2} 144 ${c - 2} 136C${c - 2} 128 ${c - 12} 128 ${c - 12} 118Z`;
+const bulge = (c: number, s: 1 | -1) =>
+  `M${c + s * 14} 114C${c + s * 14} 128 ${c + s * 2} 127 ${c + s * 2} 136C${c + s * 2} 145 ${c + s * 14} 144 ${c + s * 14} 158Z`;
+---
+<Diagram
+  title="Ngưng thở tắc nghẽn khi ngủ: ngáy chỉ là phần dễ nhận thấy"
+  icon="hoi-tho"
+  hue="lav"
+  kicker="Minh họa"
+  caption="Không phải ai ngáy cũng có ngưng thở khi ngủ, nhưng ngáy to, kèm cơn ngưng thở, nghẹt thở hoặc buồn ngủ ban ngày thì cần đi khám."
+  from={['10-ngu-khong-du-hay-roi-loan']}
+>
+  <div class="dt">
+    <svg class="dt__svg" viewBox="0 0 360 278" role="img" aria-label="Hai người đang ngủ. Bên trái: đường thở mở, không khí đi qua dễ dàng. Bên phải: đường thở trên bị hẹp hoặc tắc, người đó ngáy, oxy giảm và não bộ tạo ra những lần thức giấc rất ngắn để mở lại đường thở.">
+      <path class="dt__div" d="M180 24V250"></path>
+
+      <!-- ===== trái: đường thở mở ===== -->
+      <rect class="dt__shadow" x={L - 26} y="92" width="60" height="96" rx="20"></rect>
+      <rect class="dt__neck" x={L - 30} y="88" width="60" height="96" rx="20"></rect>
+      <circle class="dt__shadow" cx={L + 4} cy="62" r="34"></circle>
+      <circle class="dt__head" cx={L} cy="58" r="34"></circle>
+      <path class="dt__line" d={`M${L - 17} 56c2.4 2.6 7.6 2.6 10 0M${L + 7} 56c2.4 2.6 7.6 2.6 10 0`}></path>
+      <path class="dt__line" d={`M${L - 5} 70c3 2.6 7 2.6 10 0`}></path>
+      <ellipse class="dt__blush" cx={L - 21} cy="67" rx="5" ry="3"></ellipse>
+      <ellipse class="dt__blush" cx={L + 21} cy="67" rx="5" ry="3"></ellipse>
+      <text x={L + 30} y="30" class="dt__z">z</text>
+      <text x={L + 42} y="17" class="dt__z dt__z--sm">z</text>
+      <rect class="dt__air" x={L - 12} y="96" width="24" height="80" rx="12"></rect>
+      {[110, 126, 142, 158].map((y) => <circle class="dt__dot" cx={L} cy={y} r="3.4"></circle>)}
+      <Icon name="phoi" size={50} x={L - 25} y={178} />
+      <text x={L} y="268" class="dt__name" text-anchor="middle">Đường thở mở</text>
+
+      <!-- ===== phải: hẹp hoặc tắc ===== -->
+      <rect class="dt__shadow" x={R - 26} y="92" width="60" height="96" rx="20"></rect>
+      <rect class="dt__neck" x={R - 30} y="88" width="60" height="96" rx="20"></rect>
+      <path class="dt__bulge" d={bulge(R, -1)}></path>
+      <path class="dt__bulge" d={bulge(R, 1)}></path>
+      <circle class="dt__shadow" cx={R + 4} cy="62" r="34"></circle>
+      <circle class="dt__head" cx={R} cy="58" r="34"></circle>
+      <path class="dt__line" d={`M${R - 17} 56c2.4 2.6 7.6 2.6 10 0M${R + 7} 56c2.4 2.6 7.6 2.6 10 0`}></path>
+      <path class="dt__line dt__line--thin" d={`M${R - 18} 45l8 3M${R + 18} 45l-8 3`}></path>
+      <ellipse class="dt__mouth" cx={R} cy="72" rx="5" ry="4.2"></ellipse>
+      <ellipse class="dt__blush" cx={R - 21} cy="67" rx="5" ry="3"></ellipse>
+      <ellipse class="dt__blush" cx={R + 21} cy="67" rx="5" ry="3"></ellipse>
+      <!-- tiếng ngáy -->
+      <path class="dt__wave" d={`M${R + 40} 62c4 4 4 10 0 14M${R + 48} 57c7 7 7 17 0 24`}></path>
+      <text x={R + 54} y="100" class="dt__small" text-anchor="middle">ngáy</text>
+      <path class="dt__air" d={pinch(R)}></path>
+      {[106, 119].map((y) => <circle class="dt__dot" cx={R} cy={y} r="3.4"></circle>)}
+      <Icon name="phoi" size={50} x={R - 25} y={178} />
+      <!-- thức giấc rất ngắn -->
+      <path class="dt__spark" d={`M${R + 30} 22l-6 9h6l-5 9`}></path>
+      <text x={R - 4} y="16" class="dt__small dt__small--b" text-anchor="middle">thức giấc rất ngắn</text>
+      <!-- oxy giảm -->
+      <path class="dt__line dt__line--thin" d={`M${R - 30} 232v12M${R - 34} 240l4 4 4-4`}></path>
+      <text x={R + 6} y="244" class="dt__small dt__small--b" text-anchor="middle">oxy giảm</text>
+      <!-- số chú giải -->
+      <g class="dt__badge"><circle cx={R + 46} cy="136" r="11"></circle><text x={R + 46} y="136" text-anchor="middle" dominant-baseline="central">1</text></g>
+      <g class="dt__badge"><circle cx={R - 48} cy="238" r="11"></circle><text x={R - 48} y="238" text-anchor="middle" dominant-baseline="central">2</text></g>
+      <g class="dt__badge"><circle cx={R - 80} cy="11" r="11"></circle><text x={R - 80} y="11" text-anchor="middle" dominant-baseline="central">3</text></g>
+      <text x={R} y="268" class="dt__name" text-anchor="middle">Hẹp hoặc tắc</text>
+    </svg>
+
+    <ol class="dt__legend">
+      <li><span class="dt__num">1</span><span>Ngưng thở tắc nghẽn khi ngủ xảy ra khi <strong>đường thở trên bị hẹp hoặc tắc lặp đi lặp lại</strong> trong lúc ngủ.</span></li>
+      <li><span class="dt__num">2</span><span>Mỗi lần như vậy có thể làm <strong>giảm oxy</strong>…</span></li>
+      <li><span class="dt__num">3</span><span>…hoặc khiến não bộ phải tạo ra những <strong>lần thức giấc rất ngắn</strong> để mở lại đường thở.</span></li>
+      <li><span class="dt__num dt__num--ic"><Icon name="thong-tin" size={20} /></span><span>Người bệnh thường không nhớ các lần thức giấc này. Họ chỉ nhận thấy hậu quả vào ngày hôm sau.</span></li>
+    </ol>
+  </div>
+</Diagram>
+
+<style>
+  .dt { display: grid; gap: 1rem; align-items: center; }
+  @container (min-width: 620px) { .dt { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+  .dt__svg { width: 100%; max-width: 420px; margin: 0 auto; display: block; overflow: visible; color: var(--ink); --ic-fill: var(--ngoc-fill); }
+  .dt__div { stroke: var(--line-2); stroke-width: 2.5; stroke-dasharray: 4 7; stroke-linecap: round; }
+  .dt__shadow { fill: var(--line); stroke: none; }
+  .dt__neck { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 3.5; }
+  .dt__head { fill: var(--dao-fill); stroke: var(--ink); stroke-width: 3.5; }
+  .dt__bulge { fill: var(--do); opacity: 0.55; stroke: none; }
+  .dt__air { fill: var(--surface); stroke: var(--ink); stroke-width: 2.6; stroke-linejoin: round; }
+  .dt__dot { fill: var(--ngoc); stroke: var(--ink); stroke-width: 1.6; }
+  .dt__line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .dt__line--thin { stroke-width: 2.5; }
+  .dt__mouth { fill: var(--ink); }
+  .dt__blush { fill: var(--cheek); opacity: 0.8; }
+  .dt__wave { fill: none; stroke: var(--lav-ink); stroke-width: 3; stroke-linecap: round; }
+  .dt__spark { fill: none; stroke: var(--do-ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .dt__z { font-family: var(--font-head); font-weight: 900; font-size: 18px; fill: var(--lav-ink); }
+  .dt__z--sm { font-size: 14px; }
+  .dt__small { font-family: var(--font-head); font-weight: 800; font-size: 14px; fill: var(--ink-2); }
+  .dt__small--b { fill: var(--ink); }
+  .dt__name { font-family: var(--font-head); font-weight: 900; font-size: 16px; fill: var(--ink); }
+  .dt__badge circle { fill: var(--ink); }
+  .dt__badge text { font-family: var(--font-head); font-weight: 900; font-size: 14px; fill: var(--bg); }
+  .dt__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-size: 0.93rem; }
+  .dt__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.5rem 0.7rem; border-radius: 12px; background: var(--surface); }
+  .dt__num { display: grid; place-items: center; width: 24px; height: 24px; margin-top: 0.05rem; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--font-head); font-weight: 900; font-size: 0.82rem; }
+  .dt__num--ic { background: var(--lav-fill); color: var(--ink); --ic-fill: var(--surface); }
+</style>

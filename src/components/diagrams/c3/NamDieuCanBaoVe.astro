@@ -1,0 +1,24 @@
+---
+/** Sơ đồ (bản tin #11, mục 8): kế hoạch tối thiểu trong tuần tăng ca — năm điểm cần bảo vệ. */
+import Diagram from '../primitives/Diagram.astro';
+import Layers from '../primitives/Layers.astro';
+---
+<Diagram
+  title="Kế hoạch tối thiểu: năm điểm cần bảo vệ"
+  icon="khien"
+  hue="lav"
+  caption="Khi không thể thực hiện mọi khuyến nghị, hãy bảo vệ năm điểm sau."
+  from={['11-bo-cong-cu-bao-ve-giac-ngu']}
+>
+  <Layers
+    shape="stack"
+    topLabel="Trong tuần tăng ca"
+    layers={[
+      { icon: 'bao-thuc', title: 'Giữ giờ thức tương đối ổn định', text: 'Ra khỏi giường, tiếp xúc với ánh sáng, vận động nhẹ', hue: 'bo' },
+      { icon: 'thien', title: 'Tạo khoảng thư giãn trước khi ngủ', text: '“Đường băng hạ cánh” khoảng 30–60 phút', hue: 'lav' },
+      { icon: 'giuong', title: 'Không làm việc trên giường', text: 'Giường dành cho ngủ', hue: 'ngoc' },
+      { icon: 'ca-phe', title: 'Quản lý thời điểm dùng caffeine', text: 'Giảm hoặc ngừng caffeine đủ sớm trước thời điểm dự kiến ngủ', hue: 'dao' },
+      { icon: 'canh-bao', title: 'Không lái xe khi buồn ngủ', hue: 'do' },
+    ]}
+  />
+</Diagram>

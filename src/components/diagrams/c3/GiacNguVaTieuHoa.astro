@@ -1,0 +1,28 @@
+---
+/** Sơ đồ (bản tin #09): giấc ngủ và hệ tiêu hóa liên kết qua hệ thần kinh, hormone và nhịp sinh học. */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+---
+<Diagram
+  title="Giấc ngủ và hệ tiêu hóa liên kết với nhau"
+  icon="lien-ket"
+  hue="lav"
+  caption="Hiểu được mối liên hệ này là bước đầu tiên để cải thiện cả giấc ngủ lẫn sức khỏe đường ruột."
+  from={['09-giac-ngu-khong-lang-phi']}
+>
+  <Branches
+    root={{ icon: 'trang', title: 'Giấc ngủ', hue: 'lav' }}
+    via="liên kết thông qua"
+    branches={[
+      { icon: 'nao', title: 'Hệ thần kinh', hue: 'lav' },
+      { icon: 'dau-an', title: 'Hormone', hue: 'dao' },
+      { icon: 'dong-ho', title: 'Nhịp sinh học', text: '“đồng hồ sinh học” của cơ thể', hue: 'bo' },
+    ]}
+    result={{
+      icon: 'ruot',
+      title: 'Hệ tiêu hóa',
+      text: 'Khi giấc ngủ bị rối loạn, toàn bộ “đồng hồ sinh học” của cơ thể, bao gồm cả hệ tiêu hóa, cũng có thể bị ảnh hưởng.',
+      hue: 'sage',
+    }}
+  />
+</Diagram>

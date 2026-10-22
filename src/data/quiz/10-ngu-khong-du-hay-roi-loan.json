@@ -1,0 +1,83 @@
+{
+  "lesson": "10-ngu-khong-du-hay-roi-loan",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "dung-sai",
+      "prompt": "“Tự đánh giá theo bản tin là đủ để thay cho việc đi khám chuyên khoa.” — Đúng hay sai?",
+      "options": [
+        { "id": "d", "text": "Đúng" },
+        { "id": "s", "text": "Sai" }
+      ],
+      "answer": ["s"],
+      "explain": "**Tự đánh giá không thay thế cho chẩn đoán chuyên khoa.** Nhận diện đúng tín hiệu chỉ giúp bạn biết đã đến lúc nên điều chỉnh thói quen, theo dõi thêm hay chủ động đi khám ở bác sĩ chuyên khoa.",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Tự đánh giá không thay thế cho chẩn đoán chuyên khoa." }
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Theo bản tin, điểm quan trọng khi nhận diện mất ngủ là gì?",
+      "options": [
+        { "id": "a", "text": "Chỉ cần có một vài đêm khó ngủ" },
+        { "id": "b", "text": "Vấn đề ban đêm đi kèm hậu quả ban ngày" },
+        { "id": "c", "text": "Chỉ khi khó đi vào giấc ngủ, còn thức dậy quá sớm thì không tính" }
+      ],
+      "answer": ["b"],
+      "explain": "Mất ngủ có thể là khó bắt đầu giấc ngủ, thức giấc nhiều lần và khó ngủ lại, hoặc thức dậy quá sớm. Điểm quan trọng là **vấn đề ban đêm đi kèm hậu quả ban ngày**; không phải một vài đêm khó ngủ đã được xem là mất ngủ mạn tính.",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Điểm quan trọng là vấn đề ban đêm đi kèm hậu quả ban ngày" }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "prompt": "Đâu là các tín hiệu cần lưu ý của ngưng thở tắc nghẽn khi ngủ?",
+      "options": [
+        { "id": "a", "text": "Người ngủ cùng nhận thấy có lúc ngưng thở" },
+        { "id": "b", "text": "Ngủ đủ thời gian nhưng vẫn không sảng khoái" },
+        { "id": "c", "text": "Khô miệng hoặc đau đầu khi thức dậy" },
+        { "id": "d", "text": "Ngáy to nghĩa là đang ngủ ngon" }
+      ],
+      "answer": ["a", "b", "c"],
+      "explain": "Ngáy chỉ là phần dễ nhận thấy. Nhiều người cho rằng ngáy là biểu hiện ngủ ngon — nhưng **ngáy to, kèm cơn ngưng thở, nghẹt thở hoặc buồn ngủ ban ngày thì cần đi khám**.",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Người ngủ cùng nhận thấy có lúc ngưng thở" }
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Buồn ngủ khác với mệt mỏi như thế nào?",
+      "options": [
+        { "id": "a", "text": "Buồn ngủ là xu hướng có thể ngủ thiếp đi; mệt mỏi là thiếu năng lượng, kiệt sức nhưng chưa chắc có thể ngủ được" },
+        { "id": "b", "text": "Hai khái niệm này giống nhau, chỉ khác tên gọi" },
+        { "id": "c", "text": "Mệt mỏi là xu hướng ngủ thiếp đi khi ngồi yên, còn buồn ngủ là không muốn hoạt động" }
+      ],
+      "answer": ["a"],
+      "explain": "**Buồn ngủ** là xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích. **Mệt mỏi** là cảm giác thiếu năng lượng, kiệt sức hoặc không muốn hoạt động, nhưng chưa chắc có thể ngủ được.",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Buồn ngủ là xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích." }
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Nếu thường buồn ngủ khi lái xe, bản tin khuyên gì?",
+      "options": [
+        { "id": "a", "text": "Mở nhạc, hạ kính xe hoặc uống thêm cà phê là đủ" },
+        { "id": "b", "text": "Đây là tín hiệu an toàn nghiêm trọng — hãy đi khám khi cơn buồn ngủ khó cưỡng lại" },
+        { "id": "c", "text": "Cố gắng lái tiếp, quen dần sẽ hết" }
+      ],
+      "answer": ["b"],
+      "explain": "Buồn ngủ khi lái xe là một **tín hiệu an toàn nghiêm trọng**, không nên được xử lý chỉ bằng cách mở nhạc, hạ kính xe hoặc uống thêm cà phê. **Hãy đi khám khi cơn buồn ngủ khó cưỡng lại!**",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Hãy đi khám khi cơn buồn ngủ khó cưỡng lại!" }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Đặc điểm nào thuộc hội chứng chân không yên?",
+      "options": [
+        { "id": "a", "text": "Nặng hơn khi đi lại, giảm khi nằm nghỉ" },
+        { "id": "b", "text": "Chỉ là một thói quen “rung chân” vô hại" },
+        { "id": "c", "text": "Giảm khi đi lại, duỗi chân hoặc cử động; thường rõ hơn vào buổi tối hoặc ban đêm" }
+      ],
+      "answer": ["c"],
+      "explain": "Hội chứng chân không yên: cảm giác khó chịu trong chân kèm thôi thúc phải cử động, xuất hiện hoặc nặng hơn khi ngồi hoặc nằm nghỉ, **giảm khi đi lại, duỗi chân hoặc cử động**, thường rõ hơn vào buổi tối hoặc ban đêm. Đây không đơn thuần là một thói quen “rung chân”.",
+      "source": { "bai": "10-ngu-khong-du-hay-roi-loan", "trich": "Giảm khi đi lại, duỗi chân hoặc cử động" }
+    }
+  ]
+}

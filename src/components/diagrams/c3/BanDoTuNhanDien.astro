@@ -1,0 +1,142 @@
+---
+/**
+ * Bản đồ tự nhận diện (bản tin #10): 3 câu hỏi (thời lượng / chất lượng / thời điểm) → 6 nhóm vấn đề giấc ngủ
+ * với dấu hiệu chính (nguyên văn, rút gọn). Bấm một câu hỏi để làm nổi các nhóm nên đọc lại.
+ * Ánh xạ câu hỏi ↔ nhóm là gợi ý biên tập (ghi trong sổ biên tập c3) — dựa trên chính câu chữ của bài.
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Icon from '~/components/ui/Icon.astro';
+import { inline } from '~/lib/inline';
+import type { Hue } from '~/lib/types';
+
+type Q = 'thoi-luong' | 'chat-luong' | 'thoi-diem';
+const questions: { id: Q; icon: string; title: string; text: string; hue: Hue }[] = [
+  { id: 'thoi-luong', icon: 'dong-ho-cat', title: 'Thời lượng', text: 'Bạn thường ngủ được bao nhiêu giờ mỗi đêm?', hue: 'lav' },
+  { id: 'chat-luong', icon: 'giuong', title: 'Chất lượng', text: 'Ngủ có sâu? Người ngủ cùng có than phiền? Cảm giác có sảng khoái khi thức dậy? Ban ngày có buồn ngủ, mệt mỏi, kém tập trung?', hue: 'hong' },
+  { id: 'thoi-diem', icon: 'dong-ho', title: 'Thời điểm', text: 'Lịch ngủ có đều không? Quá sớm? Quá trễ?', hue: 'bo' },
+];
+const qTitle = Object.fromEntries(questions.map((q) => [q.id, q.title])) as Record<Q, string>;
+
+const groups: { icon: string; title: string; q: Q[]; items: string[]; anchor: string }[] = [
+  {
+    icon: 'trang', title: 'Mất ngủ', q: ['thoi-luong', 'chat-luong'], anchor: 'mat-ngu',
+    items: ['Khó bắt đầu giấc ngủ', 'Thức giấc nhiều lần và khó ngủ lại', 'Thức dậy quá sớm so với mong đợi', 'Vấn đề ban đêm **đi kèm hậu quả ban ngày**'],
+  },
+  {
+    icon: 'hoi-tho', title: 'Ngưng thở tắc nghẽn khi ngủ', q: ['chat-luong', 'thoi-luong'], anchor: 'ngung-tho',
+    items: ['Ngáy to, ngáy không đều', 'Người ngủ cùng nhận thấy có lúc ngưng thở', 'Thở hổn hển hoặc cảm giác nghẹt thở khi ngủ', 'Ngủ đủ thời gian nhưng vẫn không sảng khoái'],
+  },
+  {
+    icon: 'ngu-trua', title: 'Buồn ngủ ban ngày (khác với mệt mỏi)', q: ['chat-luong'], anchor: 'buon-ngu',
+    items: ['Xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích', '**Buồn ngủ khi lái xe** là một tín hiệu an toàn nghiêm trọng'],
+  },
+  {
+    icon: 'dong-ho', title: 'Rối loạn nhịp ngủ – thức', q: ['thoi-diem'], anchor: 'nhip-ngu-thuc',
+    items: ['Tối không buồn ngủ, chỉ ngủ khi rất khuya, nhưng sáng cực kỳ khó thức', 'Buồn ngủ rất sớm vào buổi tối và thức quá sớm vào buổi sáng', 'Lịch ngủ thay đổi liên tục do tăng ca, trực đêm hoặc làm theo ca', 'Cuối tuần ngủ và thức muộn hơn ngày thường nhiều giờ'],
+  },
+  {
+    icon: 'chan', title: 'Hội chứng chân không yên', q: ['chat-luong'], anchor: 'chan-khong-yen',
+    items: ['Cảm giác khó chịu trong chân kèm thôi thúc phải cử động', 'Xuất hiện hoặc nặng hơn khi ngồi hoặc nằm nghỉ', 'Giảm khi đi lại, duỗi chân hoặc cử động', 'Thường rõ hơn vào buổi tối hoặc ban đêm'],
+  },
+  {
+    icon: 'suy-nghi', title: 'Biểu hiện bất thường trong lúc ngủ', q: ['chat-luong'], anchor: 'bat-thuong',
+    items: ['Đang ngủ nhưng đi lại, nói chuyện hoặc có hành vi giống như thức', 'La hét, vung tay chân hoặc thể hiện nội dung giấc mơ', 'Gặp ác mộng lặp lại · nghiến răng', 'Cử động chân tay lặp lại trong khi ngủ'],
+  },
+];
+---
+<Diagram
+  title="Bản đồ tự nhận diện: 3 câu hỏi → 6 nhóm vấn đề giấc ngủ"
+  icon="tim-kiem"
+  hue="lav"
+  kicker="Thực hành"
+  interactive
+  caption="Sau khi trả lời ba câu hỏi trong nhật ký giấc ngủ, hãy đọc lại các nhóm có dấu hiệu giống mình. Cách nối câu hỏi với nhóm chỉ là gợi ý để đọc lại bài, không phải công cụ chẩn đoán."
+  from={['10-ngu-khong-du-hay-roi-loan']}
+>
+  <bev-ban-do-ngu class="bd">
+    <div class="bd__qs" role="group" aria-label="Ba câu hỏi ngắn về giấc ngủ">
+      {questions.map((q, i) => (
+        <button type="button" class="bd__q" data-q={q.id} data-hue={q.hue} aria-pressed="false">
+          <span class="bd__qh"><span class="dg-num">{i + 1}</span><Icon name={q.icon} size={26} /> <strong>{q.title}</strong></span>
+          <span class="bd__qx">{q.text}</span>
+        </button>
+      ))}
+    </div>
+    <p class="bd__hint" hidden>Bấm một câu hỏi để làm nổi các nhóm nên đọc lại.</p>
+    <ol class="bd__groups">
+      {groups.map((g, i) => (
+        <li class="bd__g" data-q={g.q.join(' ')} data-anchor={g.anchor}>
+          <div class="bd__gh">
+            <span class="dg-num">{i + 1}</span>
+            <span class="bd__gic"><Icon name={g.icon} size={26} /></span>
+            <span class="bd__gt">{g.title}</span>
+          </div>
+          <ul class="bd__items">{g.items.map((it) => <li set:html={inline(it)} />)}</ul>
+          <p class="bd__tags">{g.q.map((q) => <span class="dg-tag" data-hue={questions.find((x) => x.id === q)!.hue}>{qTitle[q]}</span>)}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="bd__note"><Icon name="thong-tin" size={24} /> <span><strong>Tự đánh giá không thay thế cho chẩn đoán chuyên khoa.</strong> Nhận diện đúng tín hiệu có thể giúp bạn biết đã đến lúc nên điều chỉnh thói quen, theo dõi thêm hay chủ động đi khám ở bác sĩ chuyên khoa.</span></p>
+  </bev-ban-do-ngu>
+</Diagram>
+
+<script>
+  class BevBanDoNgu extends HTMLElement {
+    connectedCallback() {
+      const qs = [...this.querySelectorAll<HTMLButtonElement>('.bd__q')];
+      const gs = [...this.querySelectorAll<HTMLElement>('.bd__g')];
+      this.querySelector<HTMLElement>('.bd__hint')!.hidden = false;
+      this.classList.add('is-js');
+      qs.forEach((b) =>
+        b.addEventListener('click', () => {
+          const on = b.getAttribute('aria-pressed') !== 'true';
+          qs.forEach((x) => x.setAttribute('aria-pressed', String(on && x === b)));
+          const q = on ? b.dataset.q! : '';
+          this.dataset.q = q;
+          gs.forEach((g) => {
+            const hit = !q || (g.dataset.q ?? '').split(' ').includes(q);
+            g.classList.toggle('is-dim', !hit);
+            g.classList.toggle('is-hit', !!q && hit);
+          });
+        }),
+      );
+    }
+  }
+  customElements.define('bev-ban-do-ngu', BevBanDoNgu);
+</script>
+
+<style>
+  .bd { display: block; }
+  .bd__qs { display: grid; gap: 0.55rem; }
+  @container (min-width: 640px) { .bd__qs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .bd__q {
+    display: grid; gap: 0.35rem; align-content: start; text-align: left; cursor: pointer;
+    padding: 0.7rem 0.8rem; border-radius: 16px; background: var(--h-fill); color: var(--ink);
+    border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface);
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .bd__q:hover { transform: translateY(-1px); }
+  .bd__q[aria-pressed='true'] { background: var(--h); box-shadow: 0 1px 0 var(--ink); transform: translateY(2px); }
+  .bd__q:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .bd__qh { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-head); font-size: 1.05rem; }
+  .bd__qh .dg-num { width: 24px; height: 24px; font-size: 0.8rem; }
+  .bd__qx { font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
+  .bd__q[aria-pressed='true'] .bd__qx { color: var(--ink); }
+  .bd__hint { margin: 0.7rem 0 0 !important; font-size: 0.88rem; color: var(--ink-2); text-align: center; }
+
+  .bd__groups { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); }
+  .bd__g {
+    margin: 0; display: grid; gap: 0.4rem; align-content: start; padding: 0.75rem 0.8rem; border-radius: 16px;
+    background: var(--surface); border: 2px solid var(--line-2); transition: opacity 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .bd__g.is-dim { opacity: 0.38; }
+  .bd__g.is-hit { border-color: var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .bd__gh { display: flex; align-items: center; gap: 0.45rem; }
+  .bd__gh .dg-num { width: 24px; height: 24px; font-size: 0.8rem; flex: none; }
+  .bd__gic { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 12px; background: var(--lav-fill); --ic-fill: var(--surface); }
+  .bd__gt { font-family: var(--font-head); font-weight: 900; line-height: 1.25; }
+  .bd__items { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
+  .bd__items li { margin: 0.12rem 0; }
+  .bd__tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.1rem 0 0 !important; }
+  .bd__note { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0.9rem 0 0 !important; padding: 0.7rem 0.85rem; border-radius: 14px; background: var(--bo-fill); font-size: 0.92rem; line-height: 1.5; --ic-fill: var(--surface); }
+</style>

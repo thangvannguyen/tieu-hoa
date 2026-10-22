@@ -1,0 +1,41 @@
+---
+/** So sánh (bản tin #10, dấu hiệu bổ sung từ #11): buồn ngủ khác với mệt mỏi. Dùng ở bài 10 và bài 11. */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="Buồn ngủ khác với mệt mỏi"
+  icon="can-bang"
+  hue="lav"
+  kicker="So sánh"
+  caption="Hai khái niệm này thường bị nhầm lẫn. Buổi tối, hãy tự hỏi: “Tôi đang buồn ngủ, hay chỉ đang kiệt sức?”"
+  from={['10-ngu-khong-du-hay-roi-loan', '11-bo-cong-cu-bao-ve-giac-ngu']}
+>
+  <Compare
+    vs
+    columns={[
+      {
+        title: 'Buồn ngủ',
+        sub: 'xu hướng có thể ngủ thiếp đi, đặc biệt khi ngồi yên hoặc ít bị kích thích',
+        icon: 'ngu-trua',
+        hue: 'lav',
+        items: [
+          { icon: 'giuong', text: 'Dấu hiệu: mí mắt nặng, ngáp, khó giữ mắt mở hoặc đầu gật xuống (#11)' },
+          { icon: 'hoi-tho', text: 'Người có ngưng thở khi ngủ có thể ngủ gật rất nhanh khi ngồi yên' },
+          { icon: 'canh-bao', text: '**Buồn ngủ khi lái xe** là một tín hiệu an toàn nghiêm trọng' },
+        ],
+      },
+      {
+        title: 'Mệt mỏi',
+        sub: 'cảm giác thiếu năng lượng, kiệt sức hoặc không muốn hoạt động, nhưng chưa chắc có thể ngủ được',
+        icon: 'dong-ho-cat',
+        hue: 'dao',
+        items: [
+          { icon: 'may-stress', text: 'Có thể đi kèm căng thẳng, bồn chồn và đầu óc vẫn hoạt động mạnh (#11)' },
+          { icon: 'trang', text: 'Một người mất ngủ có thể cảm thấy rất mệt nhưng không dễ ngủ vào ban ngày' },
+          { icon: 'nha', text: 'Khi chỉ mệt nhưng chưa buồn ngủ: thực hiện một hoạt động chuyển tiếp nhẹ nhàng bên ngoài giường ngủ (#11)' },
+        ],
+      },
+    ]}
+  />
+</Diagram>
