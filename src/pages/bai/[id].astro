@@ -34,6 +34,8 @@ const minutes = readingMinutes(lesson.body);
 const quiz = quizzes[lesson.id];
 const related = d.related.map((id) => all.find((l) => l.id === id)).filter(Boolean) as Lesson[];
 const label = lessonLabel(lesson);
+// công cụ đã có thẻ <ToolLink> ngay trong bài thì không lặp lại ở cuối
+const endTools = d.tools.filter((t) => !new RegExp(`<ToolLink[^>]*tool=["']${t}["']`).test(lesson.body ?? ''));
 ---
 <BaseLayout title={d.title} description={d.summary} hue={chapter.hue}>
   <article class="lesson" data-pagefind-body data-pagefind-filter={`chuong:${chapter.title}`}>
@@ -70,9 +72,9 @@ const label = lessonLabel(lesson);
           <Content components={mdxComponents} />
         </div>
 
-        {d.tools.length > 0 && (
+        {endTools.length > 0 && (
           <section class="tools" data-pagefind-ignore>
-            {d.tools.map((t) => <ToolLink tool={t} />)}
+            {endTools.map((t) => <ToolLink tool={t} />)}
           </section>
         )}
 

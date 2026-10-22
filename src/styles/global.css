@@ -124,6 +124,9 @@ hr { border: 0; height: 12px; margin: 2.5rem 0; background: url("data:image/svg+
 }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.5rem 0; font-size: 0.95rem; }
+/* bảng Markdown đứng trực tiếp trong bài: cuộn ngang trên màn hình hẹp */
+.prose > table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.prose > table th, .prose > table td { min-width: 7.5rem; }
 .prose th, .prose td { padding: 0.6rem 0.75rem; text-align: left; vertical-align: top; border-bottom: 1.5px solid var(--line); }
 .prose th { font-family: var(--font-head); background: var(--h-fill); color: var(--h-ink); }
 .prose th:first-child { border-top-left-radius: var(--radius-sm); }
