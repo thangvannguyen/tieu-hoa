@@ -38,7 +38,8 @@ function walk(obj, where) {
   if (Array.isArray(obj)) obj.forEach((o, i) => walk(o, `${where}[${i}]`));
   else if (obj && typeof obj === 'object') {
     if ('source' in obj) checkSource(obj.source, where);
-    for (const [k, v] of Object.entries(obj)) if (k !== 'source') walk(v, `${where}.${k}`);
+    if (Array.isArray(obj.sources)) obj.sources.forEach((src, i) => checkSource(src, `${where}.sources[${i}]`));
+    for (const [k, v] of Object.entries(obj)) if (k !== 'source' && k !== 'sources') walk(v, `${where}.${k}`);
   }
 }
 

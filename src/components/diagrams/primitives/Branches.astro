@@ -5,7 +5,7 @@ import type { Node } from './types';
 interface Props { root: Node; branches: Node[]; result?: Node; via?: string }
 const { root, branches, result, via } = Astro.props;
 ---
-<div class="br" style={`--n:${branches.length}`}>
+<div class="br" data-n={branches.length} style={`--n:${branches.length}`}>
   <div class="br__root"><Card node={root} variant="fill" /></div>
   <div class="br__fan" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18" /><path d="M6.5 15.5 12 21l5.5-5.5" /></svg>
@@ -33,6 +33,9 @@ const { root, branches, result, via } = Astro.props;
   .br__list li { margin: 0; }
   .br__list :global(.dg-card) { height: 100%; }
   @container (min-width: 600px) {
+    .br[data-n='4'] .br__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .br:is([data-n='4'], [data-n='5'], [data-n='6'], [data-n='7'], [data-n='8'], [data-n='9']) .br__list::before,
+    .br:is([data-n='4'], [data-n='5'], [data-n='6'], [data-n='7'], [data-n='8'], [data-n='9']) .br__list li::before { display: none; }
     .br__list { grid-template-columns: repeat(min(var(--n), 3), minmax(0, 1fr)); position: relative; padding-top: 0.9rem; }
     .br__list::before { content: ''; position: absolute; top: 0; left: calc(100% / (2 * min(var(--n), 3))); right: calc(100% / (2 * min(var(--n), 3))); height: 2px; background: var(--h); }
     .br__list li { position: relative; }

@@ -112,11 +112,11 @@ const groups: { icon: string; title: string; q: Q[]; items: string[]; anchor: st
   .bd__q {
     display: grid; gap: 0.35rem; align-content: start; text-align: left; cursor: pointer;
     padding: 0.7rem 0.8rem; border-radius: 16px; background: var(--h-fill); color: var(--ink);
-    border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); --ic-fill: var(--surface);
+    border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); --ic-fill: var(--surface);
     transition: transform 0.12s, box-shadow 0.12s;
   }
   .bd__q:hover { transform: translateY(-1px); }
-  .bd__q[aria-pressed='true'] { background: var(--h); box-shadow: 0 1px 0 var(--ink); transform: translateY(2px); }
+  .bd__q[aria-pressed='true'] { background: var(--h); box-shadow: 0 1px 0 var(--edge-shadow); transform: translateY(2px); }
   .bd__q:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
   .bd__qh { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-head); font-size: 1.05rem; }
   .bd__qh .dg-num { width: 24px; height: 24px; font-size: 0.8rem; }
@@ -130,7 +130,7 @@ const groups: { icon: string; title: string; q: Q[]; items: string[]; anchor: st
     background: var(--surface); border: 2px solid var(--line-2); transition: opacity 0.25s, border-color 0.25s, transform 0.25s;
   }
   .bd__g.is-dim { opacity: 0.38; }
-  .bd__g.is-hit { border-color: var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .bd__g.is-hit { border-color: var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .bd__gh { display: flex; align-items: center; gap: 0.45rem; }
   .bd__gh .dg-num { width: 24px; height: 24px; font-size: 0.8rem; flex: none; }
   .bd__gic { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 12px; background: var(--lav-fill); --ic-fill: var(--surface); }

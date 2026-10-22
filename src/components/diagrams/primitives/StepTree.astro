@@ -89,13 +89,13 @@ const qIndex = Object.fromEntries(order.filter((id) => isQ(nodes[id])).map((id, 
       live.hidden = false;
       stat.classList.add('is-print-only');
       const history: { id: string; label: string }[] = [];
-      const show = (id: string) => {
+      const show = (id: string, focus = true) => {
         this.querySelectorAll<HTMLElement>('.st__q, .st__r').forEach((el) => (el.hidden = el.dataset.id !== id));
         trail.replaceChildren(...history.map((h) => { const li = document.createElement('li'); li.textContent = h.label; return li; }));
         back.hidden = history.length === 0;
         reset.hidden = history.length === 0;
         const cur = this.querySelector<HTMLElement>(`[data-id="${id}"]`);
-        cur?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+        if (focus) cur?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
       };
       let current = this.dataset.start!;
       this.querySelectorAll<HTMLButtonElement>('.st__opts button').forEach((b) =>
@@ -107,7 +107,7 @@ const qIndex = Object.fromEntries(order.filter((id) => isQ(nodes[id])).map((id, 
       );
       back.addEventListener('click', () => { const h = history.pop(); if (h) { current = h.id; show(current); } });
       reset.addEventListener('click', () => { history.length = 0; current = this.dataset.start!; show(current); });
-      show(current);
+      show(current, false);
     }
   }
   customElements.define('bev-steptree', BevStepTree);

@@ -17,7 +17,7 @@ const { node, variant = 'default', num, as: Tag = 'div', class: cls } = Astro.pr
   </div>
   {node.text && <span class="dg-card__x" set:html={inline(node.text)} />}
   {node.items && node.items.length > 0 && (
-    <span class="dg-card__x"><ul>{node.items.map((it) => <li set:html={inline(it)} />)}</ul></span>
+    <div class="dg-card__x"><ul>{node.items.map((it) => <li set:html={inline(it)} />)}</ul></div>
   )}
   <slot />
 </Tag>

@@ -27,13 +27,13 @@ const groups: { icon: string; label: string; hue: Hue }[] = [
     {groups.map((g) => (
       <li data-hue={g.hue}><Icon name={g.icon} size={26} /> <span>{g.label}</span></li>
     ))}
-    <li class="bb__more" aria-label="và các yếu tố khác">…</li>
+    <li class="bb__more"><span aria-hidden="true">…</span><span class="visually-hidden">và các yếu tố khác</span></li>
   </ul>
 </Diagram>
 
 <style>
   .bb__k { margin: 1rem 0 0.5rem !important; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; color: var(--h-ink); }
   .bb__groups { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
-  .bb__groups li { margin: 0; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem 0.3rem 0.4rem; border-radius: 999px; background: var(--h-fill); border: 2px solid var(--ink); font-family: var(--font-head); font-weight: 800; font-size: 0.92rem; --ic-fill: var(--surface); }
+  .bb__groups li { margin: 0; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem 0.3rem 0.4rem; border-radius: 999px; background: var(--h-fill); border: 2px solid var(--edge); font-family: var(--font-head); font-weight: 800; font-size: 0.92rem; --ic-fill: var(--surface); }
   .bb__groups .bb__more { padding: 0.3rem 0.8rem; background: var(--surface); }
 </style>

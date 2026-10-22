@@ -36,12 +36,7 @@ const label = (id: string) => (id.startsWith('bt-') ? 'bài thêm' : id.startsWi
       {from.length > 0 && (
         <span class="dg__src">
           Theo{' '}
-          {from.map((id, i) => (
-            <>
-              {i > 0 && ', '}
-              <a href={url(`/bai/${id}/`)}>{id.startsWith('00') || id.startsWith('bt-') ? label(id) : `bản tin ${label(id)}`}</a>
-            </>
-          ))}
+          {from.map((id, i) => <>{i > 0 ? ', ' : ''}<a href={url(`/bai/${id}/`)}>{id.startsWith('00') || id.startsWith('bt-') ? label(id) : `bản tin ${label(id)}`}</a></>)}
         </span>
       )}
     </figcaption>

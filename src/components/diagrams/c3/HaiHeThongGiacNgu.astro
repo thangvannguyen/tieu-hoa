@@ -286,12 +286,12 @@ const uid = 'hh-' + Math.random().toString(36).slice(2, 8);
 
   .hh__legend { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.4rem; font-size: 0.92rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
   .hh__legend li { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: start; margin: 0; padding: 0.45rem 0.65rem; border-radius: 12px; background: var(--surface); --ic-fill: var(--lav-fill); }
-  .hh__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--ink); }
+  .hh__sw { width: 22px; height: 22px; margin-top: 0.1rem; border-radius: 7px; border: 2px solid var(--edge); }
   .hh__sw--jar { background: var(--lav); }
   .hh__sw--clock { background: linear-gradient(180deg, var(--bo-fill) 50%, var(--lav-fill) 50%); }
   .hh__ic { width: 22px; display: grid; place-items: center; }
 
-  .hh__ctrl { padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .hh__ctrl { padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .hh__lbl { display: block; font-family: var(--font-head); font-weight: 900; margin-bottom: 0.35rem; }
   .hh__range { width: 100%; accent-color: var(--lav-ink); height: 28px; cursor: pointer; }
   .hh__ticks { position: relative; height: 1.3rem; margin: 0.1rem 11px 0; font-size: 0.85rem; font-weight: 800; color: var(--ink-2); }
@@ -304,7 +304,7 @@ const uid = 'hh-' + Math.random().toString(36).slice(2, 8);
   .hh__grp { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
   .hh__grp-t { flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 800; font-size: 0.9rem; margin-right: 0.2rem; --ic-fill: var(--lav-fill); }
   .hh__opt { padding: 0.3rem 0.75rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; line-height: 1.3; }
-  .hh__opt[aria-pressed='true'] { background: var(--lav-fill); border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+  .hh__opt[aria-pressed='true'] { background: var(--lav-fill); border-color: var(--edge); box-shadow: 0 2px 0 var(--edge-shadow); }
   .hh__opt:focus-visible, .hh__range:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
   .hh__panel { display: grid; gap: 0.45rem; padding: 0.9rem 1rem; border-radius: 18px; background: var(--surface); border: 2px dashed var(--line-2); }

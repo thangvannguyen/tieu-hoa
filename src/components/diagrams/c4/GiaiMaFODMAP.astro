@@ -50,7 +50,7 @@ const letters: { l: string; word: string; hue: Hue; soft?: boolean }[] = [
   .fod { display: grid; gap: 0.9rem; }
   .fod__letters { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @container (min-width: 480px) { .fod__letters { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .fod__tile { margin: 0; display: grid; justify-items: center; text-align: center; gap: 0.3rem; padding: 0.55rem 0.4rem; border-radius: 14px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+  .fod__tile { margin: 0; display: grid; justify-items: center; text-align: center; gap: 0.3rem; padding: 0.55rem 0.4rem; border-radius: 14px; background: var(--surface); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); }
   .fod__tile--soft { border-style: dashed; box-shadow: none; }
   .fod__l { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--h-fill); border: 2px solid var(--h); font-family: var(--font-head); font-weight: 900; font-size: 1.35rem; color: var(--h-ink); }
   .fod__w { font-size: 0.84rem; font-weight: 600; line-height: 1.3; overflow-wrap: break-word; min-width: 0; max-width: 100%; }

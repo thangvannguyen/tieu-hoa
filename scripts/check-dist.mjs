@@ -24,7 +24,7 @@ const htmlFiles = [];
 if (total > MAX_TOTAL) errors.push(`dist quá lớn: ${(total / 1e6).toFixed(1)}MB`);
 
 const banned = [
-  [/fbclid|utm_source|l\.facebook\.com|ths\.bs/, 'link theo dõi / link rác'],
+  [/fbclid|utm_source|l\.facebook\.com|href="https?:\/\/ths\.bs/i, 'link theo dõi / link rác'],
   [/alt="TODO"/, 'ảnh thiếu alt'],
   [/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u, 'còn emoji (hãy dùng icon tự vẽ)'],
 ];

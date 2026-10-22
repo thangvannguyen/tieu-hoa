@@ -62,9 +62,9 @@ const Arrow = 'M4 12h15M13.5 6.5 19 12l-5.5 5.5';
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={Arrow} /></svg>
             <span class="visually-hidden">→ có thể chọn điều chỉnh:</span>
           </span>
-          <span class="tqdc__changes">
+          <div class="tqdc__changes">
             {p.change.map((c) => <Card node={{ ...c, hue: 'sage' }} class="tqdc__change" />)}
-          </span>
+          </div>
         </li>
       ))}
       <li class="tqdc__row">
@@ -73,20 +73,20 @@ const Arrow = 'M4 12h15M13.5 6.5 19 12l-5.5 5.5';
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={Arrow} /></svg>
           <span class="visually-hidden">→ xem thêm:</span>
         </span>
-        <span class="tqdc__changes">
+        <div class="tqdc__changes">
           <Card
             node={{ icon: 'thien', hue: 'lav', title: 'Xem thêm bản tin #04', text: '[Các bài thực hành chăm sóc sức khỏe tinh thần](/bai/04-suc-khoe-tinh-than-ban-do-co-the/)' }}
             variant="soft"
             class="tqdc__change"
           />
-        </span>
+        </div>
       </li>
     </ul>
     <div class="tqdc__more" data-hue="sage">
       <p class="tqdc__more-t">Và thêm hai thói quen nữa bạn có thể chọn:</p>
-      <span class="tqdc__changes tqdc__changes--more">
+      <div class="tqdc__changes tqdc__changes--more">
         {more.map((c) => <Card node={{ ...c, hue: 'sage' }} class="tqdc__change" />)}
-      </span>
+      </div>
     </div>
   </div>
 </Diagram>

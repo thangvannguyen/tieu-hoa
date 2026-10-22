@@ -132,6 +132,7 @@ hr { border: 0; height: 12px; margin: 2.5rem 0; background: url("data:image/svg+
 .prose th:first-child { border-top-left-radius: var(--radius-sm); }
 .prose th:last-child { border-top-right-radius: var(--radius-sm); }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll > table { min-width: 40rem; }
 .prose :is(figure, .dg, .callout, .yt, .video) { margin-block: 1.75rem; }
 
 /* ---------- print ---------- */

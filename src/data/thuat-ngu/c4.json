@@ -1,97 +1,154 @@
 [
   {
-    "id": "gerd",
-    "term": "Trào ngược dạ dày - thực quản (GERD)",
-    "aliases": ["GERD", "trào ngược dạ dày thực quản", "bệnh trào ngược dạ dày thực quản"],
+    "id": "gerd-trieu-chung-bien-chung",
+    "term": "GERD — triệu chứng và biến chứng",
+    "aliases": [
+      "trào ngược dạ dày thực quản",
+      "bệnh trào ngược dạ dày thực quản"
+    ],
     "en": "Gastroesophageal reflux disease",
     "short": "Bệnh xảy ra khi axít từ dạ dày trào ngược lên thực quản, gây ợ chua, ợ nóng; có người viêm họng, hôi miệng kéo dài, tức ngực, khó thở.",
     "definition": "Bệnh trào ngược dạ dày thực quản (GERD: Gastroesophageal reflux disease) xảy ra khi có hiện tượng axít từ dạ dày trào ngược lên thực quản, gây ra các triệu chứng như ợ chua, ợ nóng, có người bị viêm họng, hôi miệng kéo dài, cũng có những người tức ngực, khó thở vì có thể kèm theo tổn thương niêm mạc thực quản. Nếu không được tìm cách khắc phục, có thể gây các biến chứng như viêm loét thực quản, Barrett thực quản, gây hẹp thực quản và thậm chí ung thư thực quản.",
     "icon": "thuc-quan",
-    "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "xảy ra khi có hiện tượng axít từ dạ dày trào ngược lên thực quản" }
+    "source": {
+      "bai": "13-dinh-duong-trao-nguoc",
+      "trich": "xảy ra khi có hiện tượng axít từ dạ dày trào ngược lên thực quản"
+    }
   },
   {
     "id": "les",
     "term": "Cơ thắt thực quản dưới (LES)",
-    "aliases": ["LES", "cơ thắt dưới thực quản", "cơ vòng thực quản dưới"],
+    "aliases": [
+      "LES",
+      "cơ thắt dưới thực quản",
+      "cơ vòng thực quản dưới"
+    ],
     "en": "Lower Esophageal Sphincter",
     "short": "Cơ thắt mà khi bị giảm áp lực hoặc bị giãn (do chất béo, cà phê, rượu bia, hút thuốc) sẽ dễ gây trào ngược dạ dày thực quản.",
     "definition": "Cơ thắt thực quản dưới (LES – Lower Esophageal Sphincter). Thực phẩm béo làm chậm quá trình rỗng dạ dày và giảm áp lực cơ thắt thực quản dưới, do đó kéo dài thời gian tiếp xúc của thực quản với axít dạ dày; cà phê làm giảm áp lực cơ thắt thực quản dưới dễ gây trào ngược; rượu, bia, đồ uống có cồn làm tăng giãn cơ thắt; hút thuốc làm giãn cơ vòng thực quản dưới.",
     "icon": "thuc-quan",
-    "source": { "bai": "13-dinh-duong-trao-nguoc", "trich": "giảm áp lực cơ thắt thực quản dưới (LES – Lower Esophageal Sphincter)" }
+    "source": {
+      "bai": "13-dinh-duong-trao-nguoc",
+      "trich": "giảm áp lực cơ thắt thực quản dưới (LES – Lower Esophageal Sphincter)"
+    }
   },
   {
     "id": "ibs",
     "term": "Hội chứng ruột kích thích (IBS)",
-    "aliases": ["IBS", "ruột kích thích"],
+    "aliases": [
+      "IBS",
+      "ruột kích thích"
+    ],
     "en": "Irritable Bowel Syndrome",
     "short": "Rối loạn chức năng ruột mạn tính: đau bụng tái phát, trung bình ít nhất 1 ngày mỗi tuần trong 3 tháng gần đây, kèm triệu chứng liên quan đến đại tiện.",
     "definition": "Hội chứng ruột kích thích (IBS - Irritable Bowel Syndrome) là một rối loạn chức năng ruột mạn tính chủ yếu là các triệu chứng của đại tràng bao gồm các triệu chứng đau bụng tái phát, trung bình ít nhất 1 ngày mỗi tuần kéo dài trong 3 tháng gần đây, kết hợp với 2 hoặc 3 triệu chứng: liên quan đến đại tiện; liên quan đến thay đổi số lần đại tiện; liên quan đến thay đổi tính chất của phân. Các triệu chứng xảy ra ≥ 3 tháng gần nhất với triệu chứng khởi phát ít nhất 6 tháng trước khi được chẩn đoán.",
     "icon": "ruot",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "là một rối loạn chức năng ruột mạn tính chủ yếu là các triệu chứng của đại tràng" }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "là một rối loạn chức năng ruột mạn tính chủ yếu là các triệu chứng của đại tràng"
+    }
   },
   {
     "id": "ibs-d",
     "term": "IBS-D",
-    "aliases": ["IBS bị tiêu chảy"],
+    "aliases": [
+      "IBS bị tiêu chảy"
+    ],
     "short": "IBS bị tiêu chảy — một trong bốn loại IBS.",
     "definition": "IBS-D (IBS bị tiêu chảy) là một trong bốn loại mà IBS được chia thành: IBS-D, IBS-C, IBS-M, IBS-U.",
     "icon": "ruot",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "IBS-D (IBS bị tiêu chảy)." }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "IBS-D (IBS bị tiêu chảy)."
+    }
   },
   {
     "id": "ibs-c",
     "term": "IBS-C",
-    "aliases": ["IBS bị táo bón"],
+    "aliases": [
+      "IBS bị táo bón"
+    ],
     "short": "IBS bị táo bón — một trong bốn loại IBS.",
     "definition": "IBS-C (IBS bị táo bón) là một trong bốn loại mà IBS được chia thành: IBS-D, IBS-C, IBS-M, IBS-U.",
     "icon": "ruot",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "IBS-C (IBS bị táo bón)." }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "IBS-C (IBS bị táo bón)."
+    }
   },
   {
     "id": "ibs-m",
     "term": "IBS-M",
-    "aliases": ["IBS với các triệu chứng hỗn hợp"],
+    "aliases": [
+      "IBS với các triệu chứng hỗn hợp"
+    ],
     "short": "IBS với các triệu chứng hỗn hợp — một trong bốn loại IBS.",
     "definition": "IBS-M (IBS với các triệu chứng hỗn hợp) là một trong bốn loại mà IBS được chia thành: IBS-D, IBS-C, IBS-M, IBS-U.",
     "icon": "ruot",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "IBS-M (IBS với các triệu chứng hỗn hợp)." }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "IBS-M (IBS với các triệu chứng hỗn hợp)."
+    }
   },
   {
     "id": "ibs-u",
     "term": "IBS-U",
-    "aliases": ["IBS không phân loại"],
+    "aliases": [
+      "IBS không phân loại"
+    ],
     "short": "IBS không phân loại — một trong bốn loại IBS.",
     "definition": "IBS-U (IBS không phân loại) là một trong bốn loại mà IBS được chia thành: IBS-D, IBS-C, IBS-M, IBS-U.",
     "icon": "ruot",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "IBS-U (IBS không phân loại)." }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "IBS-U (IBS không phân loại)."
+    }
   },
   {
     "id": "fodmap",
     "term": "FODMAP",
-    "aliases": ["FODMAPs", "chế độ ăn thấp FODMAPs"],
+    "aliases": [
+      "FODMAPs",
+      "chế độ ăn thấp FODMAPs"
+    ],
     "en": "Fermentable Oligosaccharides Disaccharides Monosaccharides and Polyols",
     "short": "Các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau.",
     "definition": "FODMAPs (Fermentable Oligosaccharides Disaccharides Monosaccharides and Polyols): chế độ ăn FODMAPs bao gồm các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau. Ngược lại, chế độ ăn thấp FODMAPs giúp cải thiện các triệu chứng tiêu hoá trong IBS. Thực phẩm chứa nhiều FODMAPs: táo, quả cherry, đào, một số rau quả xanh như đậu Hà Lan, bắp cải, bông cải xanh, chất làm ngọt nhân tạo và thực phẩm nhiều lactose.",
     "icon": "tim-kiem",
-    "source": { "bai": "15-dinh-duong-ibs", "trich": "bao gồm các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau" }
+    "source": {
+      "bai": "15-dinh-duong-ibs",
+      "trich": "bao gồm các carbohydrate chuỗi ngắn, không được hấp thu tại ruột non, sản sinh khí, gây chướng bụng và đau"
+    }
   },
   {
     "id": "chat-xo-hoa-tan",
     "term": "Chất xơ hòa tan",
-    "aliases": ["xơ tan", "chất xơ hòa tan trong nước"],
+    "aliases": [
+      "xơ tan",
+      "chất xơ hòa tan trong nước"
+    ],
     "short": "Loại chất xơ hòa tan trong nước: hấp thụ độ ẩm, giúp phân mềm hơn và dễ đi ngoài hơn.",
     "definition": "Chất xơ hòa tan trong nước sẽ hấp thụ độ ẩm, giúp phân mềm hơn và dễ đi ngoài hơn (bản tin #16). Chất xơ hòa tan có tác dụng làm tăng độ nhớt trong thành phần ruột (bản tin #14); chất xơ tan có nhiều trong yến mạch, lúa mạch, hạt chia… (bản tin #15).",
     "icon": "chat-xo",
-    "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Chất xơ hòa tan trong nước sẽ hấp thụ độ ẩm, giúp phân mềm hơn và dễ đi ngoài hơn" }
+    "source": {
+      "bai": "16-dinh-duong-tao-bon",
+      "trich": "Chất xơ hòa tan trong nước sẽ hấp thụ độ ẩm, giúp phân mềm hơn và dễ đi ngoài hơn"
+    }
   },
   {
     "id": "chat-xo-khong-hoa-tan",
     "term": "Chất xơ không hòa tan",
-    "aliases": ["xơ không tan", "chất xơ không tan trong nước"],
+    "aliases": [
+      "xơ không tan",
+      "chất xơ không tan trong nước"
+    ],
     "short": "Loại chất xơ không tan trong nước: hút nước, tăng khối lượng chất bã, tăng tốc độ di chuyển thức ăn qua ruột.",
     "definition": "Chất xơ không hòa tan trong nước hút nước, tăng khối lượng chất bã khiến quá trình thải cặn bã mau hơn; tăng tốc độ di chuyển thức ăn qua ruột (bản tin #16). Chất xơ không hòa tan (ngũ cốc nguyên hạt, granola, hạt lanh) làm tăng khối lượng phân, giảm thời gian vận chuyển trong ruột già (bản tin #14).",
     "icon": "chat-xo",
-    "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Chất xơ không hòa tan trong nước hút nước, tăng khối lượng chất bã khiến quá trình thải cặn bã mau hơn" }
+    "source": {
+      "bai": "16-dinh-duong-tao-bon",
+      "trich": "Chất xơ không hòa tan trong nước hút nước, tăng khối lượng chất bã khiến quá trình thải cặn bã mau hơn"
+    }
   },
   {
     "id": "tao-bon",
@@ -100,6 +157,9 @@
     "short": "Tình trạng đi đại tiện khó khăn, nhiều ngày mới đi một lần, mỗi lần đại tiện phải rặn nhiều.",
     "definition": "Táo bón là một trong những bệnh lý đường tiêu hóa rất phổ biến, xảy ra ở nhiều đối tượng từ trẻ nhỏ đến người lớn tuổi. Người bị táo bón sẽ gặp phải tình trạng đi đại tiện khó khăn, nhiều ngày mới đi một lần, mỗi lần đại tiện phải rặn nhiều. Nguyên nhân chính gây táo bón chức năng là do chế độ ăn không hợp lý (thiếu nước, thiếu chất xơ…), ít vận động, mất phản xạ đại tiện (do thường xuyên nhịn đại tiện), stress tâm lý…",
     "icon": "ruot",
-    "source": { "bai": "16-dinh-duong-tao-bon", "trich": "Người bị táo bón sẽ gặp phải tình trạng đi đại tiện khó khăn, nhiều ngày mới đi một lần, mỗi lần đại tiện phải rặn nhiều." }
+    "source": {
+      "bai": "16-dinh-duong-tao-bon",
+      "trich": "Người bị táo bón sẽ gặp phải tình trạng đi đại tiện khó khăn, nhiều ngày mới đi một lần, mỗi lần đại tiện phải rặn nhiều."
+    }
   }
 ]
