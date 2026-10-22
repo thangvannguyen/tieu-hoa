@@ -1,0 +1,22 @@
+---
+/** Ba điều chương trình sẽ giúp bạn → kết quả (theo thư chào mừng). */
+import Diagram from '../primitives/Diagram.astro';
+import Flow from '../primitives/Flow.astro';
+---
+<Diagram
+  title="Chúng tôi sẽ giúp bạn…"
+  kicker="Mục tiêu"
+  icon="muc-tieu"
+  hue="sage"
+  caption="Chúng tôi không hứa sẽ giúp bạn “trở thành chuyên gia dinh dưỡng trị liệu trong 30 ngày”."
+>
+  <Flow
+    numbered
+    steps={[
+      { icon: 'bong-den', title: 'Hiểu rõ hơn', text: 'về dinh dưỡng và cách tác động của nó đến tình trạng bệnh tiêu hóa thường gặp ở dân văn phòng' },
+      { icon: 'can-bang', title: 'Hiểu rõ những điều nên - không nên', text: 'trong những thực hành dinh dưỡng nhằm giúp cải thiện sức khỏe hệ tiêu hóa tại nhà' },
+      { icon: 'ban-do', title: 'Định hướng các thực hành', text: 'về dinh dưỡng tại nhà hoặc trong nhịp sống để giúp cải thiện hệ tiêu hóa' },
+      { icon: 'khien', hue: 'sage', title: 'Từ đó', text: 'cải thiện sức khỏe hệ tiêu hóa, sức đề kháng chung và **giảm dần sự phụ thuộc vào thuốc**' },
+    ]}
+  />
+</Diagram>

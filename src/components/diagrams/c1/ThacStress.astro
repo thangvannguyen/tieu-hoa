@@ -1,0 +1,24 @@
+---
+/** “Thác” cơ chế: stress → cortisol, adrenaline → tác động lên dạ dày – ruột → bệnh quay trở lại (theo bản tin #04). */
+import Diagram from '../primitives/Diagram.astro';
+import Branches from '../primitives/Branches.astro';
+---
+<Diagram
+  title="Stress tác động lên dạ dày và ống tiêu hóa như thế nào?"
+  kicker="Sơ đồ"
+  icon="may-stress"
+  hue="hong"
+  caption="Nếu bạn có stress và căng thẳng kéo dài thì các liệu pháp điều trị bằng thuốc có thể giúp bạn giải quyết triệu chứng lúc đó, nhưng nếu không có cách chăm sóc sức khỏe tinh thần phù hợp và giải quyết vấn đề căng thẳng thì bệnh vẫn quay trở lại."
+  from={['04-suc-khoe-tinh-than-ban-do-co-the']}
+>
+  <Branches
+    root={{ icon: 'may-stress', title: 'Khi stress', text: 'cơ thể sẽ tăng tiết **cortisol, adrenaline**' }}
+    via="những chất này kích thích khiến…"
+    branches={[
+      { icon: 'lua', hue: 'do', title: 'Acid dạ dày tăng lên', text: 'làm mất cân bằng giữa yếu tố bảo vệ - tấn công' },
+      { icon: 'ruot', hue: 'bo', title: 'Dạ dày - ruột rối loạn co bóp' },
+      { icon: 'loi-khuan', hue: 'sage', title: 'Ảnh hưởng đến môi trường bên trong', text: 'khiến hệ vi sinh đường ruột suy yếu, giảm sức đề kháng…' },
+    ]}
+    result={{ icon: 'lap-lai', title: 'Bệnh vẫn quay trở lại', text: 'nếu không có cách chăm sóc sức khỏe tinh thần phù hợp và giải quyết vấn đề căng thẳng' }}
+  />
+</Diagram>

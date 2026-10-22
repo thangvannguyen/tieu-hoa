@@ -1,0 +1,56 @@
+---
+/** 3 nguyên tắc ăn uống giúp bảo vệ và phòng bệnh dạ dày — gõ lại từ infographic của bản tin #03 thành thẻ dễ đọc trên điện thoại. */
+import Diagram from '../primitives/Diagram.astro';
+import Compare from '../primitives/Compare.astro';
+---
+<Diagram
+  title="3 nguyên tắc ăn uống giúp bảo vệ và phòng bệnh dạ dày"
+  kicker="Sơ đồ"
+  icon="dia"
+  hue="sage"
+  caption="Thói quen ăn uống khoa học hôm nay – Lá chắn bảo vệ dạ dày khỏe mạnh ngày mai!"
+  from={['03-dinh-duong-phong-viem-loet-trao-nguoc']}
+>
+  <Compare
+    columns={[
+      {
+        title: '1. Chế độ ăn nhiều thực phẩm chứa chất xơ',
+        icon: 'chat-xo',
+        hue: 'sage',
+        sub: 'Chất xơ gồm chất xơ hòa tan và chất xơ không hòa tan',
+        items: [
+          { icon: 'ruot', text: '**Lợi ích:** giúp đỡ táo bón, nuôi hệ lợi khuẩn và cải thiện quá trình hấp thu; kiểm soát đường huyết; kiểm soát cân nặng; giảm nguy cơ tim mạch' },
+          { icon: 'can-nang', text: 'Người lớn nên tiêu thụ **25–35g** chất xơ mỗi ngày' },
+          { icon: 'dung', text: 'Thay thế các thực phẩm ít chất xơ thành thực phẩm có nhiều chất xơ hơn trong khẩu phần ăn' },
+          { icon: 'dung', text: 'Lưu ý gia tăng chất xơ ở bất kỳ đâu dù ăn ở nhà hay ăn bên ngoài' },
+        ],
+        note: '**Thực phẩm giàu chất xơ:** rau xanh, trái cây, ngũ cốc nguyên hạt, các loại đậu, hạt.',
+      },
+      {
+        title: '2. Tăng cường thực phẩm chứa probiotic',
+        icon: 'men-vi-sinh',
+        hue: 'lav',
+        sub: 'Để bổ sung hệ lợi khuẩn lưu ý là những thực phẩm lên men tự nhiên:',
+        items: [
+          { icon: 'sua-chua', text: 'Sữa chua' },
+          { icon: 'kim-chi', text: 'Kim chi' },
+          { icon: 'rau', text: 'Dưa cải' },
+          { icon: 'nuoc', text: 'Kombucha' },
+        ],
+        note: 'Lưu ý đến sự đa dạng và cân bằng giữa các nhóm thực phẩm.',
+      },
+      {
+        title: '3. Hạn chế thực phẩm cay, nóng, dầu mỡ, có nhiều acid',
+        icon: 'ot',
+        hue: 'do',
+        items: [
+          { icon: 'ot', text: 'Đồ cay, đồ nóng' },
+          { icon: 'do-chien', text: 'Đồ chiên rán, nhiều dầu mỡ' },
+          { icon: 'cam', text: 'Thực phẩm có nhiều acid (cam, chanh, cà chua…)' },
+          { icon: 'nuoc-co-gas', text: 'Đồ uống có gas, cà phê, rượu bia' },
+        ],
+        note: 'Những thực phẩm này có thể gây kích ứng niêm mạc dạ dày, tăng tiết acid, dẫn đến đầy hơi, khó tiêu, ợ nóng, đau dạ dày hoặc làm bệnh nặng hơn.',
+      },
+    ]}
+  />
+</Diagram>

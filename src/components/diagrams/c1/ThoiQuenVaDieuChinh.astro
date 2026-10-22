@@ -1,0 +1,116 @@
+---
+/**
+ * Sáu thói quen thường nhật (video bản tin #02) ↔ tám thói quen bạn có thể chọn điều chỉnh (bảng “trái tim động lực”).
+ * Chỉ ghép cặp khi câu chữ hai bên rõ ràng tương ứng; phần còn lại để riêng.
+ */
+import Diagram from '../primitives/Diagram.astro';
+import Card from '../primitives/Card.astro';
+import type { Node } from '../primitives/types';
+
+interface Pair { habit: Node; change: Node[] }
+const pairs: Pair[] = [
+  {
+    habit: { icon: 'dien-thoai', title: 'Vừa ăn, vừa xem điện thoại, đọc sách, làm việc' },
+    change: [{ icon: 'com', title: 'Ăn uống chú tâm hơn (cất điện thoại khi ăn)' }],
+  },
+  {
+    habit: { icon: 'cam', title: 'Ăn trái cây chua khi bụng đói' },
+    change: [{ icon: 'ot', title: 'Giảm ăn đồ chua, cay, mặn, béo' }],
+  },
+  {
+    habit: { icon: 'lich', title: 'Bỏ bữa/ Ăn không đúng bữa' },
+    change: [{ icon: 'dong-ho', title: 'Ăn uống điều độ' }],
+  },
+  {
+    habit: { icon: 'trang', title: 'Thức khuya, ăn khuya' },
+    change: [
+      { icon: 'giuong', title: 'Ngủ sớm hơn' },
+      { icon: 'mi-goi', title: 'Hạn chế ăn khuya' },
+    ],
+  },
+  {
+    habit: { icon: 'dong-ho-cat', title: 'Ăn nhanh, nhai không kỹ' },
+    change: [{ icon: 'sua-chua', title: 'Ăn chậm, nhai kỹ hơn' }],
+  },
+];
+const alone: Node = { icon: 'may-stress', title: 'Căng thẳng, lo âu, stress' };
+const more: Node[] = [
+  { icon: 'ghe', title: 'Thiết kế những khoảng thời gian nghỉ ngắn trong ngày' },
+  { icon: 'di-bo', title: 'Vận động tại chỗ thêm 5 phút mỗi ngày' },
+];
+const Arrow = 'M4 12h15M13.5 6.5 19 12l-5.5 5.5';
+---
+<Diagram
+  title="Từ thói quen “không sao” đến thói quen bạn chọn điều chỉnh"
+  kicker="So sánh"
+  icon="lap-lai"
+  hue="dao"
+  caption="Ô màu hồng: những thói quen tưởng chừng “không sao” được giải mã qua các video trong bản tin. Ô màu trắng: những thói quen bạn có thể chọn điều chỉnh — tuần này hãy bắt đầu từ một thói quen có nhiều trái tim động lực nhất."
+  from={['02-giai-ma-thoi-quen']}
+>
+  <div class="tqdc">
+    <div class="tqdc__head" aria-hidden="true">
+      <span data-hue="do">Thói quen thường nhật</span>
+      <span></span>
+      <span data-hue="sage">Thói quen bạn có thể chọn điều chỉnh</span>
+    </div>
+    <ul class="tqdc__rows">
+      {pairs.map((p) => (
+        <li class="tqdc__row">
+          <Card node={{ ...p.habit, hue: 'do' }} variant="fill" class="tqdc__habit" />
+          <span class="tqdc__arrow dg-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={Arrow} /></svg>
+            <span class="visually-hidden">→ có thể chọn điều chỉnh:</span>
+          </span>
+          <span class="tqdc__changes">
+            {p.change.map((c) => <Card node={{ ...c, hue: 'sage' }} class="tqdc__change" />)}
+          </span>
+        </li>
+      ))}
+      <li class="tqdc__row">
+        <Card node={{ ...alone, hue: 'do' }} variant="fill" class="tqdc__habit" />
+        <span class="tqdc__arrow dg-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={Arrow} /></svg>
+          <span class="visually-hidden">→ xem thêm:</span>
+        </span>
+        <span class="tqdc__changes">
+          <Card
+            node={{ icon: 'thien', hue: 'lav', title: 'Xem thêm bản tin #04', text: '[Các bài thực hành chăm sóc sức khỏe tinh thần](/bai/04-suc-khoe-tinh-than-ban-do-co-the/)' }}
+            variant="soft"
+            class="tqdc__change"
+          />
+        </span>
+      </li>
+    </ul>
+    <div class="tqdc__more" data-hue="sage">
+      <p class="tqdc__more-t">Và thêm hai thói quen nữa bạn có thể chọn:</p>
+      <span class="tqdc__changes tqdc__changes--more">
+        {more.map((c) => <Card node={{ ...c, hue: 'sage' }} class="tqdc__change" />)}
+      </span>
+    </div>
+  </div>
+</Diagram>
+
+<style>
+  .tqdc { display: grid; gap: 0.8rem; }
+  .tqdc__head { display: none; }
+  .tqdc__rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .tqdc__row { margin: 0; display: grid; gap: 0.25rem; justify-items: stretch; padding: 0.6rem; border-radius: 20px; background: color-mix(in srgb, var(--surface) 70%, transparent); border: 2px dashed var(--line-2); }
+  .tqdc__arrow { transform: rotate(90deg); height: 30px; }
+  .tqdc__changes { display: grid; gap: 0.45rem; }
+  .tqdc__changes :global(.dg-card) { height: 100%; }
+  .tqdc__more { display: grid; gap: 0.5rem; padding: 0.8rem; border-radius: 18px; border: 2px dashed var(--h); background: var(--surface); }
+  .tqdc__more-t { font-family: var(--font-head); font-weight: 800; color: var(--h-ink); }
+  @container (min-width: 560px) {
+    .tqdc__head {
+      display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr); gap: 0.4rem;
+      font-family: var(--font-head); font-weight: 900; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .tqdc__head span { color: var(--h-ink); }
+    .tqdc__row { grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr); align-items: center; gap: 0.4rem; padding: 0.5rem; }
+    .tqdc__head { padding: 0 0.6rem; }
+    .tqdc__arrow { transform: none; height: auto; }
+    .tqdc__row > :global(.dg-card) { height: 100%; }
+    .tqdc__changes--more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
