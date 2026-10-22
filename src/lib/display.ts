@@ -1,4 +1,4 @@
-/** Giao diện (data-style), cỡ chữ (data-size), chế độ màu (data-theme), thanh tiện ích (data-bottombar) trên <html>. */
+/** Giao diện (data-style), cỡ chữ (data-size), chế độ màu (data-theme), thanh tiện ích (data-bottombar), nút lên đầu trang trên di động (data-totop-mobile) trên <html>. */
 export type StyleId = 'mac-dinh' | 'de-doc' | 'don-gian' | 'tuong-phan';
 export type SizeId = 'nho' | 'vua' | 'to';
 
@@ -15,7 +15,7 @@ export const SIZES: { value: SizeId; label: string; scale: number }[] = [
   { value: 'to', label: 'To', scale: 1.125 },
 ];
 
-export function applyDisplay(p: { style?: StyleId; size?: SizeId; theme?: 'light' | 'dark'; bottomBar?: boolean }) {
+export function applyDisplay(p: { style?: StyleId; size?: SizeId; theme?: 'light' | 'dark'; bottomBar?: boolean; totopMobile?: boolean }) {
   const root = document.documentElement;
   if (p.style && p.style !== 'mac-dinh') root.dataset.style = p.style;
   else delete root.dataset.style;
@@ -25,5 +25,7 @@ export function applyDisplay(p: { style?: StyleId; size?: SizeId; theme?: 'light
   else delete root.dataset.theme;
   if (p.bottomBar === false) root.dataset.bottombar = 'off';
   else delete root.dataset.bottombar;
+  if (p.totopMobile === true) root.dataset.totopMobile = 'on';
+  else delete root.dataset.totopMobile;
   document.dispatchEvent(new CustomEvent('bev:display-changed'));
 }

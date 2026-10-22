@@ -63,13 +63,21 @@ const modes = [
   </fieldset>
 
   <fieldset class="st__group">
-    <legend>Thanh tiện ích</legend>
+    <legend>Trên điện thoại &amp; máy tính bảng</legend>
     <label class="st__switch">
       <input type="checkbox" role="switch" name="bev-bottombar" />
       <span class="st__track" aria-hidden="true"><span class="st__thumb"></span></span>
       <span class="st__swtx">
         <span class="st__swt">Hiện thanh tiện ích ở cuối màn hình</span>
-        <span class="st__swd">Trên điện thoại và máy tính bảng: Trang chủ · Bài học · Tìm kiếm · Ôn tập · Công cụ. Tắt đi thì thanh không hiện nữa.</span>
+        <span class="st__swd">Trang chủ · Bài học · Tìm kiếm · Ôn tập · Công cụ. Tắt đi thì thanh không hiện nữa.</span>
+      </span>
+    </label>
+    <label class="st__switch">
+      <input type="checkbox" role="switch" name="bev-totop" />
+      <span class="st__track" aria-hidden="true"><span class="st__thumb"></span></span>
+      <span class="st__swtx">
+        <span class="st__swt">Hiện nút “Lên đầu trang”</span>
+        <span class="st__swd">Nút tròn ở góc dưới bên phải khi cuộn xuống. Mặc định tắt trên điện thoại và máy tính bảng (trên máy tính luôn hiện).</span>
       </span>
     </label>
   </fieldset>
@@ -90,6 +98,7 @@ const modes = [
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-style]').forEach((i) => (i.checked = i.value === (p.style ?? 'mac-dinh')));
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-mode]').forEach((i) => (i.checked = i.value === (p.theme ?? 'auto')));
     dialog.querySelector<HTMLInputElement>('input[name=bev-bottombar]')!.checked = p.bottomBar !== false;
+    dialog.querySelector<HTMLInputElement>('input[name=bev-totop]')!.checked = p.totopMobile === true;
     dialog.querySelectorAll<HTMLInputElement>('input[name=bev-size]').forEach((i) => (i.checked = i.value === (p.size === 'nho' || p.size === 'to' ? p.size : 'vua')));
   };
   document.querySelectorAll('[data-open-settings]').forEach((b) =>
@@ -107,6 +116,7 @@ const modes = [
     if (t.name === 'bev-mode') p.theme = t.value === 'auto' ? undefined : (t.value as 'light' | 'dark');
     if (t.name === 'bev-size') p.size = t.value as SizeId;
     if (t.name === 'bev-bottombar') { if (t.checked) delete p.bottomBar; else p.bottomBar = false; }
+    if (t.name === 'bev-totop') { if (t.checked) p.totopMobile = true; else delete p.totopMobile; }
     prefs.set(p);
     applyDisplay(p);
   });
@@ -116,6 +126,7 @@ const modes = [
     delete p.size;
     delete p.theme;
     delete p.bottomBar;
+    delete p.totopMobile;
     prefs.set(p);
     applyDisplay(p);
     sync();
@@ -192,6 +203,7 @@ const modes = [
   .st__mode span { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.9rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); font-family: var(--font-head); font-weight: 800; --ic-fill: var(--h-fill); }
   .st__mode input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .st__mode input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__switch + .st__switch { margin-top: 0.5rem; }
   .st__switch { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: center; padding: 0.7rem 0.9rem; border-radius: var(--radius); border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; position: relative; }
   .st__switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
   .st__track { position: relative; width: 52px; height: 30px; border-radius: 999px; background: var(--line-2); border: 2px solid var(--edge); transition: background 0.15s; }

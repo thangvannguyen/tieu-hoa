@@ -130,6 +130,8 @@ export interface Prefs {
   size?: 'nho' | 'vua' | 'to';
   /** thanh tiện ích ở đáy màn hình (điện thoại / máy tính bảng); mặc định bật */
   bottomBar?: boolean;
+  /** nút Lên đầu trang trên điện thoại / máy tính bảng; mặc định tắt */
+  totopMobile?: boolean;
   lastBackup?: string;
   lastLesson?: string;
 }

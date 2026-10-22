@@ -77,10 +77,11 @@ Lưu trong `bev:v1:prefs` (localStorage), áp dụng sớm trong `<head>` để 
 | `data-size` | `nho` (87,5%) · *(không có)* = **Vừa** (100%, mặc định) · `to` (112,5%) | Cỡ chữ cho mọi giao diện — mọi kích thước dùng `rem` nên co giãn đều. |
 | `data-theme` | *(không có)* = theo máy · `light` · `dark` | Chế độ màu, kết hợp được với mọi giao diện. |
 | `data-bottombar` | *(không có)* = bật (mặc định) · `off` | Thanh tiện ích cố định ở đáy màn hình trên điện thoại / máy tính bảng (≤ 1060px hoặc màn hình cảm ứng ≤ 1366px): Trang chủ · Bài học · Tìm kiếm · Ôn tập · Công cụ. Tự ẩn khi đang gõ chữ. |
+| `data-totop-mobile` | *(không có)* = ẩn (mặc định) · `on` | Nút Lên đầu trang trên điện thoại / máy tính bảng. Trên máy tính luôn hiện. |
 
 - **Dễ đọc**: trang "học chữ là chính" — nền trắng (tối: xám đen trung tính), chữ đen rõ, tiêu đề cùng font thân bài, không chữ nghiêng,
   icon chỉ còn nét, bỏ hình trang trí ở hero, bỏ bóng sticker.
 - **Đơn giản**: giữ bảng màu kem + pastel và icon sticker, nhưng bỏ bóng đổ, họa tiết chấm, hình trang trí và chuyển động.
 - **Tương phản cao**: đen/trắng, viền đậm, link nội dung gạch chân, focus vàng/đen dày.
-- Nút **Lên đầu trang** (góc dưới bên phải, vòng tròn = tiến độ đọc) tự nhích lên trên thanh tiện ích khi thanh đang hiện.
+- Nút **Lên đầu trang** (góc dưới bên phải, vòng tròn = tiến độ đọc): luôn có trên máy tính; trên điện thoại / máy tính bảng mặc định ẩn, bật được trong cài đặt; tự nhích lên trên thanh tiện ích khi thanh đang hiện.
 - Khi thêm component mới: chỉ dùng token (`--bg`, `--surface`, `--ink…`, `--edge`, `--edge-shadow`, `--h…`) và `rem` thì tự đúng cho mọi giao diện và cỡ chữ.

@@ -54,6 +54,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           if (p.style === 'de-doc' || p.style === 'don-gian' || p.style === 'tuong-phan') document.documentElement.dataset.style = p.style;
           if (p.size === 'nho' || p.size === 'to') document.documentElement.dataset.size = p.size;
           if (p.bottomBar === false) document.documentElement.dataset.bottombar = 'off';
+          if (p.totopMobile === true) document.documentElement.dataset.totopMobile = 'on';
         } catch (e) {}
       })();
     </script>
