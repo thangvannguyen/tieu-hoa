@@ -124,7 +124,13 @@ export function formatDateVi(iso: string): string {
 }
 
 // ---------- tiện ích theo chủ đề ----------
-export interface Prefs { theme?: 'light' | 'dark'; lastBackup?: string; lastLesson?: string }
+export interface Prefs {
+  theme?: 'light' | 'dark';
+  style?: 'mac-dinh' | 'de-doc' | 'don-gian' | 'tuong-phan';
+  size?: 'nho' | 'vua' | 'to';
+  lastBackup?: string;
+  lastLesson?: string;
+}
 export const prefs = {
   get: () => read<Prefs>('prefs', {}),
   set: (p: Prefs) => write('prefs', p, { immediate: true }),

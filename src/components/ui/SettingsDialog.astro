@@ -1,0 +1,176 @@
+---
+/** Cài đặt hiển thị: 4 giao diện + 4 cỡ chữ (dùng chung cho mọi giao diện) + chế độ màu (theo máy / sáng / tối). */
+import Icon from './Icon.astro';
+import { STYLES, SIZES } from '~/lib/display';
+const modes = [
+  { value: 'auto', label: 'Theo máy', icon: 'laptop' },
+  { value: 'light', label: 'Sáng', icon: 'mat-troi' },
+  { value: 'dark', label: 'Tối', icon: 'trang' },
+];
+---
+<dialog class="settings" aria-labelledby="settings-title">
+  <div class="st__head">
+    <h2 id="settings-title"><Icon name="cai-dat" size={26} /> Cài đặt hiển thị</h2>
+    <form method="dialog"><button type="submit" class="btn btn--ghost btn--sm" aria-label="Đóng cài đặt"><Icon name="dong" size={18} /> Đóng</button></form>
+  </div>
+
+  <fieldset class="st__group">
+    <legend>Giao diện</legend>
+    <div class="st__styles">
+      {STYLES.map((s) => (
+        <label class="st__style">
+          <input type="radio" name="bev-style" value={s.value} />
+          <span class:list={['st__preview', `st__preview--${s.value}`]} aria-hidden="true">
+            <span class="pv__bar"></span>
+            <span class="pv__title">Aa</span>
+            <span class="pv__line"></span>
+            <span class="pv__line pv__line--short"></span>
+            <span class="pv__card"></span>
+          </span>
+          <span class="st__name">{s.label}{s.value === 'mac-dinh' && <span class="st__badge">Mặc định</span>}</span>
+          <span class="st__desc">{s.desc}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset class="st__group">
+    <legend>Cỡ chữ <span class="st__hint">— áp dụng cho mọi giao diện</span></legend>
+    <div class="st__sizes">
+      {SIZES.map((z) => (
+        <label class="st__size">
+          <input type="radio" name="bev-size" value={z.value} />
+          <span>
+            <span class="st__aa" style={`font-size:${(1.15 * z.scale).toFixed(3)}rem`} aria-hidden="true">Aa</span>
+            {z.label}{z.value === 'vua' && <span class="st__badge">Mặc định</span>}
+          </span>
+        </label>
+      ))}
+    </div>
+    <p class="st__sample">Ví dụ: “Chỉ cần nhận ra 1 điểm ‘lệch’ lặp lại nhiều nhất, bạn đã có điểm bắt đầu.”</p>
+  </fieldset>
+
+  <fieldset class="st__group">
+    <legend>Chế độ màu</legend>
+    <div class="st__modes">
+      {modes.map((m) => (
+        <label class="st__mode">
+          <input type="radio" name="bev-mode" value={m.value} />
+          <span><Icon name={m.icon} size={20} /> {m.label}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="st__foot">
+    <p>Lựa chọn được lưu trên máy này và áp dụng cho mọi trang.</p>
+    <button type="button" class="btn btn--sm btn--ghost" data-reset-display><Icon name="lap-lai" size={18} /> Khôi phục mặc định</button>
+  </div>
+</dialog>
+
+<script>
+  import { prefs } from '~/lib/storage';
+  import { applyDisplay, type StyleId, type SizeId } from '~/lib/display';
+
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.settings')!;
+  const sync = () => {
+    const p = prefs.get();
+    dialog.querySelectorAll<HTMLInputElement>('input[name=bev-style]').forEach((i) => (i.checked = i.value === (p.style ?? 'mac-dinh')));
+    dialog.querySelectorAll<HTMLInputElement>('input[name=bev-mode]').forEach((i) => (i.checked = i.value === (p.theme ?? 'auto')));
+    dialog.querySelectorAll<HTMLInputElement>('input[name=bev-size]').forEach((i) => (i.checked = i.value === (p.size === 'nho' || p.size === 'to' ? p.size : 'vua')));
+  };
+  document.querySelectorAll('[data-open-settings]').forEach((b) =>
+    b.addEventListener('click', () => {
+      sync();
+      dialog.showModal();
+      dialog.querySelector<HTMLInputElement>('input[name=bev-style]:checked')?.focus();
+    }),
+  );
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  dialog.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    const p = prefs.get();
+    if (t.name === 'bev-style') p.style = t.value as StyleId;
+    if (t.name === 'bev-mode') p.theme = t.value === 'auto' ? undefined : (t.value as 'light' | 'dark');
+    if (t.name === 'bev-size') p.size = t.value as SizeId;
+    prefs.set(p);
+    applyDisplay(p);
+  });
+  dialog.querySelector('[data-reset-display]')!.addEventListener('click', () => {
+    const p = prefs.get();
+    delete p.style;
+    delete p.size;
+    delete p.theme;
+    prefs.set(p);
+    applyDisplay(p);
+    sync();
+  });
+  document.addEventListener('bev:display-changed', sync);
+</script>
+
+<style>
+  .settings {
+    width: min(760px, calc(100% - 24px)); max-height: min(88vh, 860px); padding: 1.1rem 1.2rem 1.2rem; border: 2px solid var(--edge);
+    border-radius: var(--radius-lg); background: var(--bg); color: var(--ink); box-shadow: 0 6px 0 var(--edge-shadow), var(--shadow-lg);
+  }
+  .settings::backdrop { background: rgb(40 30 25 / 0.45); backdrop-filter: blur(3px); }
+  .st__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; }
+  .st__head h2 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.35rem; }
+  .st__head form { margin: 0; }
+  .st__group { border: 0; padding: 0; margin: 0.8rem 0 0; min-width: 0; }
+  .st__group legend { font-family: var(--font-head); font-weight: 900; font-size: 1.02rem; padding: 0; margin-bottom: 0.5rem; }
+  .st__styles { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); }
+  .st__style { position: relative; display: grid; gap: 0.3rem; align-content: start; padding: 0.6rem; border-radius: var(--radius); border: 2px solid var(--line-2); background: var(--surface); cursor: pointer; }
+  .st__style:has(input:checked) { border-color: var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); background: var(--h-fill); }
+  .st__style:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__style input, .st__mode input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .st__name { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; font-family: var(--font-head); font-weight: 900; }
+  .st__badge { font-size: 0.7rem; font-weight: 800; padding: 0.05rem 0.45rem; border-radius: 999px; background: var(--ink); color: var(--bg); }
+  .st__desc { font-size: 0.82rem; line-height: 1.4; color: var(--ink-2); }
+
+  /* hình xem trước: màu cố định, không phụ thuộc giao diện đang chọn */
+  .st__preview { display: grid; gap: 5px; padding: 8px; height: 86px; border-radius: 10px; overflow: hidden; align-content: start; }
+  .pv__bar { height: 8px; border-radius: 4px; }
+  .pv__title { font-family: 'Nunito Variable', sans-serif; font-weight: 900; font-size: 20px; line-height: 1; }
+  .pv__line { height: 6px; border-radius: 3px; width: 90%; }
+  .pv__line--short { width: 60%; }
+  .pv__card { height: 14px; border-radius: 6px; width: 70%; }
+  .st__preview--mac-dinh { background: #fff9f0; color: #4a3b35; border: 2px solid #4a3b35; }
+  .st__preview--mac-dinh .pv__bar { background: #f4a988; }
+  .st__preview--mac-dinh .pv__line { background: #dcc7b0; }
+  .st__preview--mac-dinh .pv__card { background: #ddf0e2; border: 2px solid #4a3b35; box-shadow: 0 2px 0 #4a3b35; }
+  .st__preview--de-doc { background: #ffffff; color: #1c1c1c; border: 1.5px solid #d4d4d4; gap: 6px; }
+  .st__preview--de-doc .pv__title { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 700; }
+  .st__preview--de-doc .pv__bar { display: none; }
+  .st__preview--de-doc .pv__line { background: #3a3a3a; height: 5px; }
+  .st__preview--de-doc .pv__line--short { width: 75%; }
+  .st__preview--de-doc .pv__card { background: transparent; height: 5px; width: 85%; border-radius: 3px; box-shadow: inset 0 0 0 100px #3a3a3a; }
+  .st__preview--don-gian { background: #ffffff; color: #4a3b35; border: 1.5px solid #dcc7b0; }
+  .st__preview--don-gian .pv__bar { background: #eddfcd; }
+  .st__preview--don-gian .pv__line { background: #eddfcd; }
+  .st__preview--don-gian .pv__card { background: #fff7ec; border: 1.5px solid #dcc7b0; }
+  .st__preview--tuong-phan { background: #000000; color: #ffffff; border: 2px solid #000; }
+  .st__preview--tuong-phan .pv__bar { background: #ffd23f; }
+  .st__preview--tuong-phan .pv__line { background: #ffffff; }
+  .st__preview--tuong-phan .pv__card { background: #000; border: 2px solid #fff; }
+
+  .st__hint { font-family: var(--font-body); font-weight: 400; font-size: 0.85rem; color: var(--ink-2); }
+  .st__sizes { display: grid; gap: 0.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .st__size { position: relative; cursor: pointer; }
+  .st__size input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .st__size > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem; padding: 0.5rem 0.8rem; border-radius: var(--radius); border: 2px solid var(--line-2); background: var(--surface); font-family: var(--font-head); font-weight: 800; }
+  .st__size input:checked + span { border-color: var(--edge); background: var(--h-fill); box-shadow: 0 3px 0 var(--edge-shadow); }
+  .st__size input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__aa { font-weight: 900; line-height: 1; }
+  .st__size .st__badge { position: absolute; top: -9px; right: 10px; }
+  .st__size > span { min-height: 100%; }
+  .st__sizes { padding-top: 6px; }
+  .st__sample { margin: 0.6rem 0 0; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); background: var(--surface-2); font-size: 1rem; }
+  .st__modes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .st__mode { position: relative; cursor: pointer; }
+  .st__mode span { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.9rem; border-radius: 999px; border: 2px solid var(--line-2); background: var(--surface); font-family: var(--font-head); font-weight: 800; --ic-fill: var(--h-fill); }
+  .st__mode input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .st__mode input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .st__foot { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; margin-top: 1.1rem; padding-top: 0.8rem; border-top: 2px dashed var(--line); }
+  .st__foot p { margin: 0; font-size: 0.85rem; color: var(--ink-2); }
+</style>

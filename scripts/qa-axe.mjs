@@ -1,5 +1,5 @@
 // Kiểm tra trợ năng bằng axe-core trên các trang đã build (chạy với `npm run preview` đang mở).
-// node scripts/qa-axe.mjs [baseUrl] [light|dark]
+// node scripts/qa-axe.mjs [baseUrl] [light|dark] [giao diện: mac-dinh|de-doc|don-gian|tuong-phan]
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { readdirSync, statSync } from 'node:fs';
@@ -7,6 +7,7 @@ import { join } from 'node:path';
 
 const base = process.argv[2] ?? 'http://localhost:4321/tieu-hoa';
 const scheme = process.argv[3] ?? 'light';
+const style = process.argv[4] ?? 'mac-dinh';
 const pages = [];
 (function walk(dir, rel = '') {
   for (const n of readdirSync(dir)) {
@@ -18,6 +19,7 @@ const pages = [];
 
 const browser = await chromium.launch({ channel: 'chrome' });
 const ctx = await browser.newContext({ colorScheme: scheme, viewport: { width: 1280, height: 900 } });
+await ctx.addInitScript(([s]) => { try { localStorage.setItem('bev:v1:prefs', JSON.stringify({ style: s })); } catch (e) {} }, [style]);
 let total = 0;
 for (const rel of pages) {
   const page = await ctx.newPage();
@@ -35,5 +37,5 @@ for (const rel of pages) {
   await page.close();
 }
 await browser.close();
-console.log(`\naxe (${scheme}): ${pages.length} trang, ${total} lỗi nghiêm trọng`);
+console.log(`\naxe (${scheme}, ${style}): ${pages.length} trang, ${total} lỗi nghiêm trọng`);
 process.exit(total ? 1 : 0);

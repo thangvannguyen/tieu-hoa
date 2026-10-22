@@ -31,11 +31,12 @@ const n = layers.length;
   /* stairs: bậc đầu tiên (thấp nhất / nền tảng) nằm DƯỚI CÙNG, càng lên càng hẹp */
   .ly--stairs ol { display: flex; flex-direction: column-reverse; }
   .ly li { margin: 0; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.6rem; padding: 0.7rem 0.9rem; border-radius: 16px; background: var(--h-fill); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); --ic-fill: var(--surface); }
-  .ly li.is-hl { background: var(--h); color: #2b201b; }
+  .ly li.is-hl { background: var(--h-fill); box-shadow: 0 0 0 3px var(--h), 0 3px 0 3px var(--edge-shadow); }
   .ly__ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--surface); }
   .ly__t { display: block; font-family: var(--font-head); font-weight: 900; line-height: 1.25; }
   .ly__x { display: block; font-size: 0.9rem; color: var(--ink-2); line-height: 1.4; margin-top: 0.1rem; }
-  .ly li.is-hl .ly__x { color: #2b201b; }
+  .ly li.is-hl .ly__t { color: var(--h-ink); }
+  .ly li.is-hl .ly__x { color: var(--ink); }
   .ly__label { margin: 0.5rem 0 0; text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--h-ink); }
   .ly__label--top { margin: 0 0 0.5rem; }
   @container (min-width: 520px) {

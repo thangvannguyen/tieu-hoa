@@ -39,7 +39,10 @@ const isActive = (href: string) => path.startsWith(url(href));
       <button class="icon-btn" type="button" data-open-search aria-label="Tìm kiếm (phím /)" title="Tìm kiếm (phím /)">
         <Icon name="tim-kiem" size={22} />
       </button>
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Đổi giao diện sáng / tối" title="Đổi giao diện sáng / tối">
+      <button class="icon-btn" type="button" data-open-settings aria-label="Cài đặt hiển thị: giao diện, chế độ màu" title="Cài đặt hiển thị">
+        <Icon name="cai-dat" size={22} />
+      </button>
+      <button class="icon-btn icon-btn--theme" type="button" data-theme-toggle aria-label="Đổi chế độ sáng / tối" title="Đổi chế độ sáng / tối">
         <span class="t-sun"><Icon name="mat-troi" size={22} /></span>
         <span class="t-moon"><Icon name="trang" size={22} /></span>
       </button>
@@ -53,6 +56,7 @@ const isActive = (href: string) => path.startsWith(url(href));
 
 <script>
   import { prefs } from '~/lib/storage';
+  import { applyDisplay } from '~/lib/display';
 
   const root = document.documentElement;
   const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
@@ -60,8 +64,9 @@ const isActive = (href: string) => path.startsWith(url(href));
     root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   toggle?.addEventListener('click', () => {
     const next = current() === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    prefs.set({ ...prefs.get(), theme: next });
+    const p = { ...prefs.get(), theme: next as 'light' | 'dark' };
+    prefs.set(p);
+    applyDisplay(p);
   });
 
   const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
@@ -131,6 +136,7 @@ const isActive = (href: string) => path.startsWith(url(href));
     .nav ul { flex-direction: column; gap: 0.15rem; }
     .nav a { display: flex; padding: 0.7rem 0.9rem; font-size: 1.02rem; }
   }
+  @media (max-width: 520px) { .icon-btn--theme { display: none; } }
   @media (max-width: 400px) {
     .brand__name { font-size: 1rem; }
     .brand__logo { width: 40px; height: 40px; }

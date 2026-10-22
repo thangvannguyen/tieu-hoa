@@ -65,3 +65,20 @@ Chiếc dạ dày tròn, 6 biểu cảm: `vui`, `khoe`, `suy-nghi`, `lo-lang`, `
 - Tương phản chữ ≥ 4.5:1, focus ring 3px rõ ràng, mọi thao tác bấm bằng `<button>`/input thật, dùng được bằng bàn phím.
 - Sơ đồ tĩnh có tiêu đề + chú thích; sơ đồ tương tác có trạng thái `aria-pressed` / `aria-live`.
 - Tôn trọng `prefers-reduced-motion`.
+
+## Cài đặt hiển thị (nút ⚙ trên thanh đầu trang)
+
+Lưu trong `bev:v1:prefs` (localStorage), áp dụng sớm trong `<head>` để không nháy giao diện. Code: `src/lib/display.ts`,
+`src/components/ui/SettingsDialog.astro`, CSS: `src/styles/themes.css`.
+
+| Thuộc tính trên `<html>` | Giá trị | Ý nghĩa |
+|---|---|---|
+| `data-style` | *(không có)* = **Dễ thương** (mặc định) · `de-doc` · `don-gian` · `tuong-phan` | Phong cách. Không giao diện nào đổi cỡ chữ. |
+| `data-size` | `nho` (87,5%) · *(không có)* = **Vừa** (100%, mặc định) · `to` (112,5%) | Cỡ chữ cho mọi giao diện — mọi kích thước dùng `rem` nên co giãn đều. |
+| `data-theme` | *(không có)* = theo máy · `light` · `dark` | Chế độ màu, kết hợp được với mọi giao diện. |
+
+- **Dễ đọc**: trang "học chữ là chính" — nền trắng (tối: xám đen trung tính), chữ đen rõ, tiêu đề cùng font thân bài, không chữ nghiêng,
+  icon chỉ còn nét, bỏ hình trang trí ở hero, bỏ bóng sticker.
+- **Đơn giản**: giữ bảng màu kem + pastel và icon sticker, nhưng bỏ bóng đổ, họa tiết chấm, hình trang trí và chuyển động.
+- **Tương phản cao**: đen/trắng, viền đậm, link nội dung gạch chân, focus vàng/đen dày.
+- Khi thêm component mới: chỉ dùng token (`--bg`, `--surface`, `--ink…`, `--edge`, `--edge-shadow`, `--h…`) và `rem` thì tự đúng cho mọi giao diện và cỡ chữ.
